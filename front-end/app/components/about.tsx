@@ -1,6 +1,6 @@
 import Image from "next/image"
 import pfp from "@/myPhoto.jpeg"
-export function About() {
+export function About(props:{content:{bio:string,image:string}}) {
   return (
     <div className="py-16 md:py-24 mx-10">
       <div className="container md:px-6">
@@ -17,16 +17,8 @@ export function About() {
           <div className="s-y-4">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl py-3">About Me</h2>
             <p className="text-gray-500 md:text-lg">
-              I&apos;m a passionate developer with expertise in building modern web applications. With a strong foundation in
-              both frontend and backend technologies, I create solutions that are not only functional but also provide
-              exceptional user experiences.
+              {props.content.bio}
             </p>
-            <p className="text-gray-500 md:text-lg">
-              My journey in technology began with [your background] and I&apos;ve since worked on various projects ranging
-              from [types of projects]. I&apos;m constantly learning and exploring new technologies to stay at the forefront
-              of the industry.
-            </p>
-            <p className="text-gray-500 md:text-lg">When I&apos;m not coding, you can find me [your hobbies/interests].</p>
           </div>
           </div>
         </div>

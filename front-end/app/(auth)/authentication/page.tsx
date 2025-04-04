@@ -26,6 +26,7 @@ export default function Signup() {
         }
       } catch (error) {
         toast.error("Signup failed. Please try again.");
+        console.log(error)
       } finally {
         setLoading(false);
       }
@@ -78,12 +79,12 @@ export default function Signup() {
               className="w-full px-4 py-2 border border-gray-300 text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
             />
-            <span
+            <div
               className="absolute right-3 top-1/2 cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <Eye size={20} color="#555" /> : <EyeClosed size={20} color="#555" />}
-            </span>
+            </div>
           </div>
           <button
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"

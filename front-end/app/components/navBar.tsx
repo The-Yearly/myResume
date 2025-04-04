@@ -21,7 +21,7 @@ export function Navbar() {
         </Link>
         <button className="md:hidden" onClick={toggleMenu}>
           {isMenuOpen ? <X className="mr-5 h-6 w-6" /> : <Menu className="mr-5 h-6 w-6" />}
-          <span className="sr-only">Toggle menu</span>
+          <div className="sr-only">Toggle menu</div>
         </button>
         <nav className="hidden md:flex gap-6">
           <button

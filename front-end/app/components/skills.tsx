@@ -1,38 +1,10 @@
-import { Code, Database, Globe, Layout, Server, Smartphone } from "lucide-react"
-export function Skills() {
-  const skills = [
-    {
-      category: "Frontend",
-      icon: <Layout className="h-8 w-8 mb-2 text-primary" />,
-      items: ["HTML/CSS", "JavaScript", "React", "Next.js", "Tailwind CSS"],
-    },
-    {
-      category: "Backend",
-      icon: <Server className="h-8 w-8 mb-2 text-primary" />,
-      items: ["Node.js", "Express"]
-    },
-    {
-      category: "Database",
-      icon: <Database className="h-8 w-8 mb-2 text-primary" />,
-      items: ["PostgreSQL", "MySQL", "SQLite", "Prisma"],
-    },
-    {
-      category: "Mobile",
-      icon: <Smartphone className="h-8 w-8 mb-2 text-primary" />,
-      items: ["React Native", "Flutter","Lynx"],
-    },
-    {
-      category: "Other",
-      icon: <Code className="h-8 w-8 mb-2 text-primary" />,
-      items: ["Git", "Docker", "Arduino"],
-    },
-    {
-      category: "Languages",
-      icon: <Globe className="h-8 w-8 mb-2 text-primary" />,
-      items: ["Java","C","Python","Go","Haskel","JavaScript","TypeScript"],
-    },
-  ]
+export interface SkillI {
+  category: string
+  icon: React.ReactNode
+  items: string[]
+}
 
+export function Skills(props:{skills:SkillI[]}){
   return (
     <div className="bg-gray-50 w-full">
     <div id="skills" className="py-16 md:py-24 relative w-full">
@@ -46,7 +18,7 @@ export function Skills() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 mx-10">
-          {skills.map((skill, index) => (
+          {props.skills.map((skill, index) => (
             <div key={index} className="overflow-hidden bg-white rounded-lg">
               <div className="p-6">
                 <div className="flex flex-col items-center text-center">

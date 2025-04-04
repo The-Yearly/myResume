@@ -11,7 +11,7 @@ export function Footer() {
         <div className="flex items-center gap-4">
           <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
             <Github className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
-            <span className="sr-only">GitHub</span>
+            <div className="sr-only">GitHub</div>
           </Link>
           <Link href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
             <Linkedin className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
