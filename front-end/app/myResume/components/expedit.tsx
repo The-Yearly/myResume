@@ -94,7 +94,9 @@ export default function ExperienceEdit() {
                     ? new Date(education.endDate).toLocaleDateString("en-US", { year: "numeric", month: "short" })
                     : "Present"}
                 </p>
+                <p className="text-gray-700">{education.description}</p>
               </div>
+
               <div className="flex space-x-2">
                 <button
                   onClick={() => openEditExpModal(education)}
@@ -186,6 +188,15 @@ export default function ExperienceEdit() {
                   />
                 </div>
               </div>
+              <div>
+                  <label className="w-full mb-1">Description</label>
+                  <textarea
+                    name="description"
+                    value={currentExp.description}
+                    onChange={handleInputChange}
+                    className="w-full border px-3 py-2 rounded"
+                  />
+                </div>
 
               <div className="flex justify-end space-x-4 pt-4">
                 <button

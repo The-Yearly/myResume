@@ -2,7 +2,7 @@
 import pfp from "@/myPhoto.jpeg"
 import React, { useState } from "react"
 import Image from "next/image"
-
+import { Theme } from "@/app/themes/styles"
 interface Project {
   title: string
   description: string
@@ -14,6 +14,7 @@ interface Project {
 export default function ProjectsEditor() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editIndex, setEditIndex] = useState<number | null>(null)
+  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("style1");
   const [newProject, setNewProject] = useState<Project>({
     title: "",
     description: "",
@@ -22,6 +23,10 @@ export default function ProjectsEditor() {
     github: "",
     link: "",
   })
+  const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedStyle(e.target.value as keyof typeof Theme)
+  }
+  const SelectedProject = Theme[selectedStyle]?.projects;
   const [projects, setProjects] = useState<Project[]>([
     {
       title: "Project One",
@@ -97,6 +102,17 @@ export default function ProjectsEditor() {
 
   return (
     <div className="p-4">
+       <div>
+              <label className="block text-sm font-medium text-gray-700">Select Style</label>
+              <select
+                value={selectedStyle}
+                onChange={handleStyleChange}
+                className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="style1">Style 1</option>
+                <option value="style2">Style 2</option>
+              </select>
+            </div>
       <h2 className="text-2xl font-bold mb-4">Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {projects.map((project, index) => (
@@ -239,6 +255,12 @@ export default function ProjectsEditor() {
           </div>
         </div>
       )}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="text-lg font-medium">Preview</h2>
+        </div>
+        {SelectedProject ? <SelectedProject content={projects}/>:<p>Style not found.</p>}
+      </div>
     </div>
   )
 }

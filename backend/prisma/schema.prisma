@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  uid             Int               @id @default(autoincrement())
+  username        String            @unique
+  password        String
+  user_project    user_project[]
+  user_experience user_experience[]
+  user_education  user_education[]
+  skills          skills[]
+  contact         contact[]
+
+  @@map("User")
+}
+
+model project {
+  pid          Int            @id @default(autoincrement())
+  title        String
+  image        String
+  desc         String
+  tags         String[]
+  github       String
+  Link         String
+  user_project user_project[]
+}
+
+model user_project {
+  pid     Int
+  uid     Int
+  project project @relation(fields: [pid], references: [pid])
+  user    user    @relation(fields: [uid], references: [uid])
+
+  @@id([pid, uid])
+}
+
+model experience {
+  eid             Int               @id @default(autoincrement())
+  title           String
+  corp            String
+  startdate       DateTime
+  enddate         DateTime
+  desc            String
+  user_experience user_experience[]
+}
+
+model user_experience {
+  eid        Int
+  uid        Int
+  experience experience @relation(fields: [eid], references: [eid])
+  user       user       @relation(fields: [uid], references: [uid])
+
+  @@id([eid, uid])
+}
+
+model education {
+  edid           Int              @id @default(autoincrement())
+  inst           String
+  degree         String
+  startdate      DateTime
+  endDate        DateTime
+  user_education user_education[]
+}
+
+model user_education {
+  edid      Int
+  uid       Int
+  education education @relation(fields: [edid], references: [edid])
+  user      user      @relation(fields: [uid], references: [uid])
+
+  @@id([edid, uid])
+}
+
+model skills {
+  sid       Int      @default(autoincrement())
+  uid       Int      @unique
+  frontend  String[]
+  backend   String[]
+  database  String[]
+  mobile    String[]
+  other     String[]
+  languages String[]
+  user      user     @relation(fields: [uid], references: [uid])
+
+  @@id([uid, sid])
+}
+
+model contact {
+  cid      Int    @default(autoincrement())
+  uid      Int
+  email    String
+  phone    Int
+  location String
+  linkedin String
+  user     user   @relation(fields: [uid], references: [uid])
+
+  @@id([cid, uid])
+}

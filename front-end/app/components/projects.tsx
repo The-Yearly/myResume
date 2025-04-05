@@ -2,42 +2,15 @@ import Image from "next/image"
 import pfp from "@/myPhoto.jpeg"
 import Link from "next/link"
 import { ExternalLink, Github } from "lucide-react"
-export function Projects() {
-  const projects = [
-    {
-      title: "Project One",
-      description: "A web application that allows users to track their daily habits and set goals.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["React", "Node.js", "MongoDB"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      title: "Project Two",
-      description: "An e-commerce platform with product management, cart functionality, and payment integration.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["Next.js", "Stripe", "Tailwind CSS"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      title: "Project Three",
-      description: "A mobile app for finding and booking fitness classes in your area.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["React Native", "Firebase", "Google Maps API"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      title: "Project Four",
-      description: "A dashboard for monitoring and visualizing data from IoT devices.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["Vue.js", "D3.js", "Express"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-  ]
-
+export interface ProjectsI{
+  title: string
+  description:string,
+  image:string
+  tags: string[]
+  github: string,
+  link:string,
+}
+export function Projects(props:{content:ProjectsI[]}) {
   return (
     <section id="projects" className="relative w-full py-16 md:py-24">
       <div className=" px-4 md:px-6">
@@ -50,7 +23,7 @@ export function Projects() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 mx-10">
-          {projects.map((project, index) => (
+          {props.content.map((project, index) => (
             <div key={index} className="overflow-hidden border-gray-100 border-2 ">
               <div className="relative aspect-video">
                 <Image
@@ -69,13 +42,13 @@ export function Projects() {
                 </div>
                 <div className="flex gap-4 mt-3">
                   <button>
-                    <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <Link href={project.link} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Live Demo
                     </Link>
                   </button>
                   <button>
-                    <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <Link href={project.github} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
                       Code
                     </Link>

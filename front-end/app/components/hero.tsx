@@ -1,11 +1,5 @@
 "use client"
 export function Hero(props:{content:{title:string,subtitle:string}}) {
-  const scrollToProjects = () => {
-    const element = document.getElementById("projects")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
 
   return (
     <div className="z-0 py-24 md:py-32 w-full bg-gray-50">
@@ -20,7 +14,7 @@ export function Hero(props:{content:{title:string,subtitle:string}}) {
             </p>
           </div>
           <div className="space-x-4">
-            <button className="bg-gray-800 p-3 rounded-lg text-md text-white" onClick={scrollToProjects}>View My Work</button>
+            <button className="bg-gray-800 p-3 rounded-lg text-md text-white"  onClick={()=> document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}>View My Work</button>
             <button className="bg-white border-2 border-gray-100 p-3 rounded-lg text-md"
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             >

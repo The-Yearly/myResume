@@ -2,9 +2,10 @@
 import { SkillI } from "@/app/components/skills"
 import type React from "react"
 import { useState } from "react"
-import { Skills } from "@/app/components/skills"
 import { Code, Database, Globe, Layout, Server, Smartphone,Plus,Edit,Trash2 } from "lucide-react"
+import { Theme } from "../../themes/styles"
 export default function SkillsEditor() {
+  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("style1");
   const [skills, setSkills] = useState<SkillI[]>([
     {
       category: "Frontend",
@@ -42,6 +43,10 @@ export default function SkillsEditor() {
   const [currentSkillName, setCurrentSkillName] = useState("")
   const [currentCategory, setCurrentCategory] = useState("")
   const [isEditing, setIsEditing] = useState(false)
+  const SelectedSkills = Theme[selectedStyle]?.skills;
+  const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedStyle(e.target.value as keyof typeof Theme)
+    }
 
   const openNewSkillModal = (category?: string) => {
     setCurrentSkillName("")
@@ -95,6 +100,17 @@ export default function SkillsEditor() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
+      <div>
+              <label className="block text-sm font-medium text-gray-700">Select Style</label>
+              <select
+                value={selectedStyle}
+                onChange={handleStyleChange}
+                className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="style1">Style 1</option>
+                <option value="style2">Style 2</option>
+              </select>
+            </div>
         <h1 className="text-2xl font-bold text-gray-800">Manage Skills</h1>
         <button
           onClick={() => openNewSkillModal()}
@@ -155,7 +171,7 @@ export default function SkillsEditor() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center bg-opacity-40 bg-black">
+        <div className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center bg-opacity-40 ">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4">
               {isEditing ? "Edit Skill" : "Add New Skill"}
@@ -213,7 +229,7 @@ export default function SkillsEditor() {
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg font-medium">Preview</h2>
         </div>
-        <Skills skills={skills}/>
+        {SelectedSkills?<SelectedSkills skills={skills}></SelectedSkills>:<p>Style Not Found</p>}
       </div>
     </div>
   )
