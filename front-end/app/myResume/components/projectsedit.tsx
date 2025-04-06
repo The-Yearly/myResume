@@ -14,7 +14,7 @@ interface Project {
 export default function ProjectsEditor() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editIndex, setEditIndex] = useState<number | null>(null)
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("style1");
+  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
   const [newProject, setNewProject] = useState<Project>({
     title: "",
     description: "",
@@ -102,6 +102,7 @@ export default function ProjectsEditor() {
 
   return (
     <div className="p-4">
+      
        <div>
               <label className="block text-sm font-medium text-gray-700">Select Style</label>
               <select
@@ -109,18 +110,19 @@ export default function ProjectsEditor() {
                 onChange={handleStyleChange}
                 className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                <option value="style1">Style 1</option>
-                <option value="style2">Style 2</option>
+                <option value="1">Style 1</option>
+                <option value="2">Style 2</option>
               </select>
             </div>
       <h2 className="text-2xl font-bold mb-4">Projects</h2>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {projects.map((project, index) => (
           <div key={index} className="rounded-2xl shadow-md border p-4">
             <Image
               src={pfp}
               alt={project.title}
-              className="w-full h-40 object-cover rounded-xl mb-2"
+              className="w-full h-80 object-cover rounded-xl mb-2"
             />
             <div>
               <h3 className="text-lg font-semibold">{project.title}</h3>
@@ -163,7 +165,9 @@ export default function ProjectsEditor() {
             </div>
           </div>
         ))}
+
       </div>
+
 
       <button
         onClick={() => {
@@ -178,11 +182,10 @@ export default function ProjectsEditor() {
           setEditIndex(null)
           setModalOpen(true)
         }}
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        className="my-4 right-10 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
       >
         Add Project
       </button>
-
       {modalOpen && (
         <div className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-full max-w-lg space-y-4">

@@ -4,7 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { Theme } from "../../themes/styles"
 export default function HeroEditor() {
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("style1");
+  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
   const [heroData, setHeroData] = useState({
     title:"Hello, I'm ...",
     subtitle:"A passionate .......",
@@ -33,8 +33,8 @@ export default function HeroEditor() {
                 onChange={handleStyleChange}
                 className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                <option value="style1">Style 1</option>
-                <option value="style2">Style 2</option>
+                <option value="1">Style 1</option>
+                <option value="2">Style 2</option>
               </select>
             </div>
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">

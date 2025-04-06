@@ -1,11 +1,11 @@
 "use client"
-import { SkillI } from "@/app/components/skills"
+import { SkillI } from "@/app/themes/style1/components/skills"
 import type React from "react"
 import { useState } from "react"
 import { Code, Database, Globe, Layout, Server, Smartphone,Plus,Edit,Trash2 } from "lucide-react"
 import { Theme } from "../../themes/styles"
 export default function SkillsEditor() {
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("style1");
+  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
   const [skills, setSkills] = useState<SkillI[]>([
     {
       category: "Frontend",
@@ -107,8 +107,8 @@ export default function SkillsEditor() {
                 onChange={handleStyleChange}
                 className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                <option value="style1">Style 1</option>
-                <option value="style2">Style 2</option>
+                <option value="1">Style 1</option>
+                <option value="2">Style 2</option>
               </select>
             </div>
         <h1 className="text-2xl font-bold text-gray-800">Manage Skills</h1>

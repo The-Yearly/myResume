@@ -6,7 +6,7 @@ import { useState } from "react"
 import pfp from "@/myPhoto.jpeg"
 export default function AboutEditor() {
   const [about, setAbout] = useState("I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding, you can find me [your hobbies/interests].",)
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("style1");
+  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
   const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       setSelectedStyle(e.target.value as keyof typeof Theme)
   }
@@ -31,8 +31,8 @@ export default function AboutEditor() {
                 onChange={handleStyleChange}
                 className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                <option value="style1">Style 1</option>
-                <option value="style2">Style 2</option>
+                <option value="1">Style 1</option>
+                <option value="2">Style 2</option>
               </select>
             </div>
       <div className="bg-white rounded-lg border-gray-200 overflow-hidden">

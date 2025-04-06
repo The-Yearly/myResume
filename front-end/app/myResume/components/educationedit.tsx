@@ -3,8 +3,8 @@
 import type React from "react"
 import { useState } from "react"
 import { Plus, Edit, Trash2 } from "lucide-react"
-import Education from "@/app/components/education"
-import { EducationI } from "@/app/components/education"
+import Education from "@/app/themes/style1/components/education"
+import { EducationI } from "@/app/themes/style1/components/education"
 export default function EducationEditor() {
   const [educations, setEducations] = useState<EducationI[]>([
     {

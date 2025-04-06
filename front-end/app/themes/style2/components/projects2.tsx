@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ProjectsI } from "@/app/components/projects"
+import { ProjectsI } from "@/app/themes/style1/components/projects"
 import { ExternalLink, Github } from "lucide-react"
 import pfp from "@/myPhoto.jpeg"
 export function Projects2(props:{content:ProjectsI[]}){ 

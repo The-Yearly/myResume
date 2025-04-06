@@ -2,9 +2,9 @@
 
 import type React from "react"
 import { useState } from "react"
-import Experience from "@/app/components/experience"
+import Experience from "@/app/themes/style1/components/experience"
 import { Plus, Edit, Trash2 } from "lucide-react"
-import { ExpI } from "@/app/components/experience"
+import { ExpI } from "@/app/themes/style1/components/experience"
 export default function ExperienceEdit() {
   const [experence, setExp] = useState<ExpI[]>([
     {
