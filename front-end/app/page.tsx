@@ -13,7 +13,7 @@ import { about,hero } from "@/utils/types"
 export default function Home() {
   const [hero,setHero]=useState<hero|null>(null)
   const [about,setAbout]=useState<about|null>(null)
-
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
   useEffect(()=>{const getHero=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
     const data=res.data.hero
