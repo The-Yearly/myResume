@@ -6,7 +6,6 @@ import { Theme } from "../../themes/styles"
 import { useState,useEffect } from "react"
 import pfp from "@/myPhoto.jpeg"
 import axios from "axios"
-import { a } from "framer-motion/client"
 import { toast } from "react-toastify"
 export default function AboutEditor() {
   const [about, setAbout] = useState<about>(
