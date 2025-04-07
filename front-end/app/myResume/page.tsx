@@ -11,7 +11,6 @@ import ExperienceEdit from "./components/expedit"
 import { ToastContainer } from "react-toastify"
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("hero")
-
   return (
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />

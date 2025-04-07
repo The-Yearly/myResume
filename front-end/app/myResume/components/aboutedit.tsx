@@ -19,6 +19,7 @@ export default function AboutEditor() {
   
   useEffect(()=>{const fetchData=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")
+    
     const data=res.data.about
     setAbout({about:data.about,image:data.image,style:data.style,uid:1})
   }
