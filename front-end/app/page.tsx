@@ -17,6 +17,7 @@ export default function Home() {
   useEffect(()=>{const getHero=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
     const data=res.data.hero
+    console.log(data)
     setHero({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
   }
   getHero()},[])

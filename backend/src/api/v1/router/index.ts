@@ -5,7 +5,7 @@ const client=new PrismaClient()
 router.get("/getHero/:uid",async(req,res)=>{
     const data=req.params.uid
     console.log(data)
-    const response=await client.user.findFirst(
+    const response=await client.hero.findFirst(
         {
             where:{
                 uid:parseInt(data)
