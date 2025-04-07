@@ -19,7 +19,7 @@ export default function AboutEditor() {
   const [data,setData]=useState<about|null>(null)
   
   useEffect(()=>{const fetchData=async()=>{
-    const res=await axios.get("http://localhost:3001/api/v1/getAbout/1")
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")
     const data=res.data.about
     setAbout({about:data.about,image:data.image,style:data.style,uid:1})
   }
@@ -27,7 +27,7 @@ export default function AboutEditor() {
 
   useEffect(()=>{const sendData=async()=>{
     if(data!=null){
-      const res=await axios.post("http://localhost:3001/api/v1/setAbout",data)
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/setAbout",data)
       toast(res.data.message)
     }
   }

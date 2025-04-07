@@ -15,7 +15,7 @@ export default function HeroEditor() {
   })
 
   useEffect(()=>{const fetchHero=async()=>{
-    const res=await axios.get("http://localhost:3001/api/v1/getHero/1")
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
     const data=res.data.hero
     setHeroData({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
   }
@@ -23,7 +23,7 @@ export default function HeroEditor() {
   
   useEffect(()=>{const setData=async()=>{
     if(data!=null){
-      const res=await axios.post("http://localhost:3001/api/v1/setHero",data)
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/setHero",data)
       toast(res.data.message)
     }
     }

@@ -15,24 +15,24 @@ export default function Home() {
   const [about,setAbout]=useState<about|null>(null)
 
   useEffect(()=>{const getHero=async()=>{
-    const res=await axios.get("http://localhost:3001/api/v1/getHero/1")
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
     const data=res.data.hero
     setHero({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
   }
   getHero()},[])
 
   useEffect(()=>{const getAbout=async()=>{
-    const res=await axios.get("http://localhost:3001/api/v1/getAbout/1")
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")
     const data=res.data.about
     setAbout({about:data.about,image:data.image,style:data.style,uid:1})
   }
   getAbout()},[])
   
-  const styles:(keyof typeof Theme)[]=["1","1","2","1"]
+  const styles:(keyof typeof Theme)[]=["2","1"]
   const SelectedHero=Theme[hero?.style as keyof typeof Theme]?.hero
   const SelectedAbout=Theme[about?.style as keyof typeof Theme]?.about
-  const SelectedSkills=Theme[styles[2]]?.skills
-  const SelectedProjects=Theme[styles[3]]?.projects
+  const SelectedSkills=Theme[styles[0]]?.skills
+  const SelectedProjects=Theme[styles[1]]?.projects
 
   const exp=[
     {
