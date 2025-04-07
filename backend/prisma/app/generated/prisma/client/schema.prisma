@@ -10,84 +10,68 @@ datasource db {
 }
 
 model user {
-  uid             Int               @id @default(autoincrement())
-  username        String            @unique
-  password        String
-  style           String
-  hero            String
-  subhero         String
-  skills          skills?
-  user_education  user_education[]
-  user_experience user_experience[]
-  user_project    user_project[]
-  contact         contact[]
-  About           About[]
+  uid        Int          @id @default(autoincrement())
+  username   String       @unique
+  password   String
+  skills     skills[]
+  contact    contact[]
+  About      About[]
+  project    project[]
+  experience experience[]
+  education  education[]
+  hero       hero[]
 
   @@map("User")
 }
 
-model project {
-  pid          Int            @id @default(autoincrement())
-  title        String
-  image        String
-  desc         String
-  tags         String[]
-  github       String
-  Link         String
-  style        String
-  user_project user_project[]
+model hero {
+  hid     Int    @id @default(autoincrement())
+  uid     Int
+  style   String
+  hero    String
+  subhero String
+  user    user   @relation(fields: [uid], references: [uid])
 }
 
-model user_project {
-  pid     Int
-  uid     Int
-  project project @relation(fields: [pid], references: [pid])
-  user    user    @relation(fields: [uid], references: [uid])
-
-  @@id([pid, uid])
+model project {
+  pid    Int      @id @default(autoincrement())
+  uid    Int
+  title  String
+  image  String
+  desc   String
+  tags   String[]
+  github String
+  Link   String
+  style  String
+  user   user     @relation(fields: [uid], references: [uid])
 }
 
 model experience {
-  eid             Int               @id @default(autoincrement())
-  title           String
-  corp            String
-  style           String
-  startdate       DateTime
-  enddate         DateTime
-  desc            String
-  user_experience user_experience[]
-}
-
-model user_experience {
-  eid        Int
-  uid        Int
-  experience experience @relation(fields: [eid], references: [eid])
-  user       user       @relation(fields: [uid], references: [uid])
-
-  @@id([eid, uid])
+  exid      Int      @id @default(autoincrement())
+  title     String
+  corp      String
+  style     String
+  startdate DateTime
+  enddate   DateTime
+  desc      String
+  uid       Int
+  user      user     @relation(fields: [uid], references: [uid])
 }
 
 model education {
-  edid           Int              @id @default(autoincrement())
-  inst           String
-  degree         String
-  startdate      DateTime
-  enddate        DateTime
-  style          String
-  user_education user_education[]
-}
-
-model user_education {
-  edid      Int
+  edid      Int      @id @default(autoincrement())
+  inst      String
+  degree    String
+  startdate DateTime
+  enddate   DateTime
+  style     String
   uid       Int
-  education education @relation(fields: [edid], references: [edid])
-  user      user      @relation(fields: [uid], references: [uid])
-
-  @@id([edid, uid])
+  user      user     @relation(fields: [uid], references: [uid])
 }
 
 model skills {
-  uid       Int      @id @unique
+  sid       Int      @id @default(autoincrement())
+  uid       Int
   frontend  String[]
   style     String
   backend   String[]
@@ -99,7 +83,8 @@ model skills {
 }
 
 model contact {
-  uid      Int    @id
+  cid      Int    @id @default(autoincrement())
+  uid      Int
   email    String
   phone    String
   location String
@@ -108,7 +93,8 @@ model contact {
 }
 
 model About {
-  uid   Int    @id
+  aid   Int    @id @default(autoincrement())
+  uid   Int
   image String
   about String
   style String

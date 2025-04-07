@@ -19,35 +19,25 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type user = $Result.DefaultSelection<Prisma.$userPayload>
 /**
+ * Model hero
+ * 
+ */
+export type hero = $Result.DefaultSelection<Prisma.$heroPayload>
+/**
  * Model project
  * 
  */
 export type project = $Result.DefaultSelection<Prisma.$projectPayload>
-/**
- * Model user_project
- * 
- */
-export type user_project = $Result.DefaultSelection<Prisma.$user_projectPayload>
 /**
  * Model experience
  * 
  */
 export type experience = $Result.DefaultSelection<Prisma.$experiencePayload>
 /**
- * Model user_experience
- * 
- */
-export type user_experience = $Result.DefaultSelection<Prisma.$user_experiencePayload>
-/**
  * Model education
  * 
  */
 export type education = $Result.DefaultSelection<Prisma.$educationPayload>
-/**
- * Model user_education
- * 
- */
-export type user_education = $Result.DefaultSelection<Prisma.$user_educationPayload>
 /**
  * Model skills
  * 
@@ -200,6 +190,16 @@ export class PrismaClient<
   get user(): Prisma.userDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.hero`: Exposes CRUD operations for the **hero** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Heroes
+    * const heroes = await prisma.hero.findMany()
+    * ```
+    */
+  get hero(): Prisma.heroDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.project`: Exposes CRUD operations for the **project** model.
     * Example usage:
     * ```ts
@@ -208,16 +208,6 @@ export class PrismaClient<
     * ```
     */
   get project(): Prisma.projectDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.user_project`: Exposes CRUD operations for the **user_project** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more User_projects
-    * const user_projects = await prisma.user_project.findMany()
-    * ```
-    */
-  get user_project(): Prisma.user_projectDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.experience`: Exposes CRUD operations for the **experience** model.
@@ -230,16 +220,6 @@ export class PrismaClient<
   get experience(): Prisma.experienceDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.user_experience`: Exposes CRUD operations for the **user_experience** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more User_experiences
-    * const user_experiences = await prisma.user_experience.findMany()
-    * ```
-    */
-  get user_experience(): Prisma.user_experienceDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.education`: Exposes CRUD operations for the **education** model.
     * Example usage:
     * ```ts
@@ -248,16 +228,6 @@ export class PrismaClient<
     * ```
     */
   get education(): Prisma.educationDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.user_education`: Exposes CRUD operations for the **user_education** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more User_educations
-    * const user_educations = await prisma.user_education.findMany()
-    * ```
-    */
-  get user_education(): Prisma.user_educationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.skills`: Exposes CRUD operations for the **skills** model.
@@ -729,12 +699,10 @@ export namespace Prisma {
 
   export const ModelName: {
     user: 'user',
+    hero: 'hero',
     project: 'project',
-    user_project: 'user_project',
     experience: 'experience',
-    user_experience: 'user_experience',
     education: 'education',
-    user_education: 'user_education',
     skills: 'skills',
     contact: 'contact',
     About: 'About'
@@ -756,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "project" | "user_project" | "experience" | "user_experience" | "education" | "user_education" | "skills" | "contact" | "about"
+      modelProps: "user" | "hero" | "project" | "experience" | "education" | "skills" | "contact" | "about"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -834,6 +802,80 @@ export namespace Prisma {
           }
         }
       }
+      hero: {
+        payload: Prisma.$heroPayload<ExtArgs>
+        fields: Prisma.heroFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.heroFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.heroFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>
+          }
+          findFirst: {
+            args: Prisma.heroFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.heroFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>
+          }
+          findMany: {
+            args: Prisma.heroFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>[]
+          }
+          create: {
+            args: Prisma.heroCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>
+          }
+          createMany: {
+            args: Prisma.heroCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.heroCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>[]
+          }
+          delete: {
+            args: Prisma.heroDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>
+          }
+          update: {
+            args: Prisma.heroUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>
+          }
+          deleteMany: {
+            args: Prisma.heroDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.heroUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.heroUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>[]
+          }
+          upsert: {
+            args: Prisma.heroUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$heroPayload>
+          }
+          aggregate: {
+            args: Prisma.HeroAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHero>
+          }
+          groupBy: {
+            args: Prisma.heroGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HeroGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.heroCountArgs<ExtArgs>
+            result: $Utils.Optional<HeroCountAggregateOutputType> | number
+          }
+        }
+      }
       project: {
         payload: Prisma.$projectPayload<ExtArgs>
         fields: Prisma.projectFieldRefs
@@ -905,80 +947,6 @@ export namespace Prisma {
           count: {
             args: Prisma.projectCountArgs<ExtArgs>
             result: $Utils.Optional<ProjectCountAggregateOutputType> | number
-          }
-        }
-      }
-      user_project: {
-        payload: Prisma.$user_projectPayload<ExtArgs>
-        fields: Prisma.user_projectFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.user_projectFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.user_projectFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>
-          }
-          findFirst: {
-            args: Prisma.user_projectFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.user_projectFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>
-          }
-          findMany: {
-            args: Prisma.user_projectFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>[]
-          }
-          create: {
-            args: Prisma.user_projectCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>
-          }
-          createMany: {
-            args: Prisma.user_projectCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.user_projectCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>[]
-          }
-          delete: {
-            args: Prisma.user_projectDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>
-          }
-          update: {
-            args: Prisma.user_projectUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>
-          }
-          deleteMany: {
-            args: Prisma.user_projectDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.user_projectUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.user_projectUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>[]
-          }
-          upsert: {
-            args: Prisma.user_projectUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_projectPayload>
-          }
-          aggregate: {
-            args: Prisma.User_projectAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser_project>
-          }
-          groupBy: {
-            args: Prisma.user_projectGroupByArgs<ExtArgs>
-            result: $Utils.Optional<User_projectGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.user_projectCountArgs<ExtArgs>
-            result: $Utils.Optional<User_projectCountAggregateOutputType> | number
           }
         }
       }
@@ -1056,80 +1024,6 @@ export namespace Prisma {
           }
         }
       }
-      user_experience: {
-        payload: Prisma.$user_experiencePayload<ExtArgs>
-        fields: Prisma.user_experienceFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.user_experienceFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.user_experienceFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>
-          }
-          findFirst: {
-            args: Prisma.user_experienceFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.user_experienceFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>
-          }
-          findMany: {
-            args: Prisma.user_experienceFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>[]
-          }
-          create: {
-            args: Prisma.user_experienceCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>
-          }
-          createMany: {
-            args: Prisma.user_experienceCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.user_experienceCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>[]
-          }
-          delete: {
-            args: Prisma.user_experienceDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>
-          }
-          update: {
-            args: Prisma.user_experienceUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>
-          }
-          deleteMany: {
-            args: Prisma.user_experienceDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.user_experienceUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.user_experienceUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>[]
-          }
-          upsert: {
-            args: Prisma.user_experienceUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_experiencePayload>
-          }
-          aggregate: {
-            args: Prisma.User_experienceAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser_experience>
-          }
-          groupBy: {
-            args: Prisma.user_experienceGroupByArgs<ExtArgs>
-            result: $Utils.Optional<User_experienceGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.user_experienceCountArgs<ExtArgs>
-            result: $Utils.Optional<User_experienceCountAggregateOutputType> | number
-          }
-        }
-      }
       education: {
         payload: Prisma.$educationPayload<ExtArgs>
         fields: Prisma.educationFieldRefs
@@ -1201,80 +1095,6 @@ export namespace Prisma {
           count: {
             args: Prisma.educationCountArgs<ExtArgs>
             result: $Utils.Optional<EducationCountAggregateOutputType> | number
-          }
-        }
-      }
-      user_education: {
-        payload: Prisma.$user_educationPayload<ExtArgs>
-        fields: Prisma.user_educationFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.user_educationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.user_educationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>
-          }
-          findFirst: {
-            args: Prisma.user_educationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.user_educationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>
-          }
-          findMany: {
-            args: Prisma.user_educationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>[]
-          }
-          create: {
-            args: Prisma.user_educationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>
-          }
-          createMany: {
-            args: Prisma.user_educationCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.user_educationCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>[]
-          }
-          delete: {
-            args: Prisma.user_educationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>
-          }
-          update: {
-            args: Prisma.user_educationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>
-          }
-          deleteMany: {
-            args: Prisma.user_educationDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.user_educationUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.user_educationUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>[]
-          }
-          upsert: {
-            args: Prisma.user_educationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$user_educationPayload>
-          }
-          aggregate: {
-            args: Prisma.User_educationAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser_education>
-          }
-          groupBy: {
-            args: Prisma.user_educationGroupByArgs<ExtArgs>
-            result: $Utils.Optional<User_educationGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.user_educationCountArgs<ExtArgs>
-            result: $Utils.Optional<User_educationCountAggregateOutputType> | number
           }
         }
       }
@@ -1585,12 +1405,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: userOmit
+    hero?: heroOmit
     project?: projectOmit
-    user_project?: user_projectOmit
     experience?: experienceOmit
-    user_experience?: user_experienceOmit
     education?: educationOmit
-    user_education?: user_educationOmit
     skills?: skillsOmit
     contact?: contactOmit
     about?: AboutOmit
@@ -1688,19 +1506,23 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    user_education: number
-    user_experience: number
-    user_project: number
+    skills: number
     contact: number
     About: number
+    project: number
+    experience: number
+    education: number
+    hero: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_education?: boolean | UserCountOutputTypeCountUser_educationArgs
-    user_experience?: boolean | UserCountOutputTypeCountUser_experienceArgs
-    user_project?: boolean | UserCountOutputTypeCountUser_projectArgs
+    skills?: boolean | UserCountOutputTypeCountSkillsArgs
     contact?: boolean | UserCountOutputTypeCountContactArgs
     About?: boolean | UserCountOutputTypeCountAboutArgs
+    project?: boolean | UserCountOutputTypeCountProjectArgs
+    experience?: boolean | UserCountOutputTypeCountExperienceArgs
+    education?: boolean | UserCountOutputTypeCountEducationArgs
+    hero?: boolean | UserCountOutputTypeCountHeroArgs
   }
 
   // Custom InputTypes
@@ -1717,22 +1539,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUser_educationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_educationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountUser_experienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_experienceWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountUser_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_projectWhereInput
+  export type UserCountOutputTypeCountSkillsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: skillsWhereInput
   }
 
   /**
@@ -1749,97 +1557,32 @@ export namespace Prisma {
     where?: AboutWhereInput
   }
 
-
   /**
-   * Count Type ProjectCountOutputType
+   * UserCountOutputType without action
    */
-
-  export type ProjectCountOutputType = {
-    user_project: number
-  }
-
-  export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_project?: boolean | ProjectCountOutputTypeCountUser_projectArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ProjectCountOutputType without action
-   */
-  export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProjectCountOutputType
-     */
-    select?: ProjectCountOutputTypeSelect<ExtArgs> | null
+  export type UserCountOutputTypeCountProjectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: projectWhereInput
   }
 
   /**
-   * ProjectCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type ProjectCountOutputTypeCountUser_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_projectWhereInput
-  }
-
-
-  /**
-   * Count Type ExperienceCountOutputType
-   */
-
-  export type ExperienceCountOutputType = {
-    user_experience: number
-  }
-
-  export type ExperienceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_experience?: boolean | ExperienceCountOutputTypeCountUser_experienceArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ExperienceCountOutputType without action
-   */
-  export type ExperienceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ExperienceCountOutputType
-     */
-    select?: ExperienceCountOutputTypeSelect<ExtArgs> | null
+  export type UserCountOutputTypeCountExperienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: experienceWhereInput
   }
 
   /**
-   * ExperienceCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type ExperienceCountOutputTypeCountUser_experienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_experienceWhereInput
-  }
-
-
-  /**
-   * Count Type EducationCountOutputType
-   */
-
-  export type EducationCountOutputType = {
-    user_education: number
-  }
-
-  export type EducationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_education?: boolean | EducationCountOutputTypeCountUser_educationArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * EducationCountOutputType without action
-   */
-  export type EducationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EducationCountOutputType
-     */
-    select?: EducationCountOutputTypeSelect<ExtArgs> | null
+  export type UserCountOutputTypeCountEducationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: educationWhereInput
   }
 
   /**
-   * EducationCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type EducationCountOutputTypeCountUser_educationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_educationWhereInput
+  export type UserCountOutputTypeCountHeroArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: heroWhereInput
   }
 
 
@@ -1871,27 +1614,18 @@ export namespace Prisma {
     uid: number | null
     username: string | null
     password: string | null
-    style: string | null
-    hero: string | null
-    subhero: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     uid: number | null
     username: string | null
     password: string | null
-    style: string | null
-    hero: string | null
-    subhero: string | null
   }
 
   export type UserCountAggregateOutputType = {
     uid: number
     username: number
     password: number
-    style: number
-    hero: number
-    subhero: number
     _all: number
   }
 
@@ -1908,27 +1642,18 @@ export namespace Prisma {
     uid?: true
     username?: true
     password?: true
-    style?: true
-    hero?: true
-    subhero?: true
   }
 
   export type UserMaxAggregateInputType = {
     uid?: true
     username?: true
     password?: true
-    style?: true
-    hero?: true
-    subhero?: true
   }
 
   export type UserCountAggregateInputType = {
     uid?: true
     username?: true
     password?: true
-    style?: true
-    hero?: true
-    subhero?: true
     _all?: true
   }
 
@@ -2022,9 +1747,6 @@ export namespace Prisma {
     uid: number
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2050,15 +1772,13 @@ export namespace Prisma {
     uid?: boolean
     username?: boolean
     password?: boolean
-    style?: boolean
-    hero?: boolean
-    subhero?: boolean
     skills?: boolean | user$skillsArgs<ExtArgs>
-    user_education?: boolean | user$user_educationArgs<ExtArgs>
-    user_experience?: boolean | user$user_experienceArgs<ExtArgs>
-    user_project?: boolean | user$user_projectArgs<ExtArgs>
     contact?: boolean | user$contactArgs<ExtArgs>
     About?: boolean | user$AboutArgs<ExtArgs>
+    project?: boolean | user$projectArgs<ExtArgs>
+    experience?: boolean | user$experienceArgs<ExtArgs>
+    education?: boolean | user$educationArgs<ExtArgs>
+    hero?: boolean | user$heroArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2066,37 +1786,29 @@ export namespace Prisma {
     uid?: boolean
     username?: boolean
     password?: boolean
-    style?: boolean
-    hero?: boolean
-    subhero?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     uid?: boolean
     username?: boolean
     password?: boolean
-    style?: boolean
-    hero?: boolean
-    subhero?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectScalar = {
     uid?: boolean
     username?: boolean
     password?: boolean
-    style?: boolean
-    hero?: boolean
-    subhero?: boolean
   }
 
-  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "username" | "password" | "style" | "hero" | "subhero", ExtArgs["result"]["user"]>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "username" | "password", ExtArgs["result"]["user"]>
   export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     skills?: boolean | user$skillsArgs<ExtArgs>
-    user_education?: boolean | user$user_educationArgs<ExtArgs>
-    user_experience?: boolean | user$user_experienceArgs<ExtArgs>
-    user_project?: boolean | user$user_projectArgs<ExtArgs>
     contact?: boolean | user$contactArgs<ExtArgs>
     About?: boolean | user$AboutArgs<ExtArgs>
+    project?: boolean | user$projectArgs<ExtArgs>
+    experience?: boolean | user$experienceArgs<ExtArgs>
+    education?: boolean | user$educationArgs<ExtArgs>
+    hero?: boolean | user$heroArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type userIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2105,20 +1817,18 @@ export namespace Prisma {
   export type $userPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "user"
     objects: {
-      skills: Prisma.$skillsPayload<ExtArgs> | null
-      user_education: Prisma.$user_educationPayload<ExtArgs>[]
-      user_experience: Prisma.$user_experiencePayload<ExtArgs>[]
-      user_project: Prisma.$user_projectPayload<ExtArgs>[]
+      skills: Prisma.$skillsPayload<ExtArgs>[]
       contact: Prisma.$contactPayload<ExtArgs>[]
       About: Prisma.$AboutPayload<ExtArgs>[]
+      project: Prisma.$projectPayload<ExtArgs>[]
+      experience: Prisma.$experiencePayload<ExtArgs>[]
+      education: Prisma.$educationPayload<ExtArgs>[]
+      hero: Prisma.$heroPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       uid: number
       username: string
       password: string
-      style: string
-      hero: string
-      subhero: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2513,12 +2223,13 @@ export namespace Prisma {
    */
   export interface Prisma__userClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    skills<T extends user$skillsArgs<ExtArgs> = {}>(args?: Subset<T, user$skillsArgs<ExtArgs>>): Prisma__skillsClient<$Result.GetResult<Prisma.$skillsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    user_education<T extends user$user_educationArgs<ExtArgs> = {}>(args?: Subset<T, user$user_educationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user_experience<T extends user$user_experienceArgs<ExtArgs> = {}>(args?: Subset<T, user$user_experienceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user_project<T extends user$user_projectArgs<ExtArgs> = {}>(args?: Subset<T, user$user_projectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    skills<T extends user$skillsArgs<ExtArgs> = {}>(args?: Subset<T, user$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$skillsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contact<T extends user$contactArgs<ExtArgs> = {}>(args?: Subset<T, user$contactArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     About<T extends user$AboutArgs<ExtArgs> = {}>(args?: Subset<T, user$AboutArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    project<T extends user$projectArgs<ExtArgs> = {}>(args?: Subset<T, user$projectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    experience<T extends user$experienceArgs<ExtArgs> = {}>(args?: Subset<T, user$experienceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    education<T extends user$educationArgs<ExtArgs> = {}>(args?: Subset<T, user$educationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$educationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    hero<T extends user$heroArgs<ExtArgs> = {}>(args?: Subset<T, user$heroArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2551,9 +2262,6 @@ export namespace Prisma {
     readonly uid: FieldRef<"user", 'Int'>
     readonly username: FieldRef<"user", 'String'>
     readonly password: FieldRef<"user", 'String'>
-    readonly style: FieldRef<"user", 'String'>
-    readonly hero: FieldRef<"user", 'String'>
-    readonly subhero: FieldRef<"user", 'String'>
   }
     
 
@@ -2958,78 +2666,11 @@ export namespace Prisma {
      */
     include?: skillsInclude<ExtArgs> | null
     where?: skillsWhereInput
-  }
-
-  /**
-   * user.user_education
-   */
-  export type user$user_educationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    where?: user_educationWhereInput
-    orderBy?: user_educationOrderByWithRelationInput | user_educationOrderByWithRelationInput[]
-    cursor?: user_educationWhereUniqueInput
+    orderBy?: skillsOrderByWithRelationInput | skillsOrderByWithRelationInput[]
+    cursor?: skillsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: User_educationScalarFieldEnum | User_educationScalarFieldEnum[]
-  }
-
-  /**
-   * user.user_experience
-   */
-  export type user$user_experienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    where?: user_experienceWhereInput
-    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
-    cursor?: user_experienceWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: User_experienceScalarFieldEnum | User_experienceScalarFieldEnum[]
-  }
-
-  /**
-   * user.user_project
-   */
-  export type user$user_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    where?: user_projectWhereInput
-    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
-    cursor?: user_projectWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: User_projectScalarFieldEnum | User_projectScalarFieldEnum[]
+    distinct?: SkillsScalarFieldEnum | SkillsScalarFieldEnum[]
   }
 
   /**
@@ -3081,6 +2722,102 @@ export namespace Prisma {
   }
 
   /**
+   * user.project
+   */
+  export type user$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the project
+     */
+    select?: projectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the project
+     */
+    omit?: projectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projectInclude<ExtArgs> | null
+    where?: projectWhereInput
+    orderBy?: projectOrderByWithRelationInput | projectOrderByWithRelationInput[]
+    cursor?: projectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
+  }
+
+  /**
+   * user.experience
+   */
+  export type user$experienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the experience
+     */
+    select?: experienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the experience
+     */
+    omit?: experienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: experienceInclude<ExtArgs> | null
+    where?: experienceWhereInput
+    orderBy?: experienceOrderByWithRelationInput | experienceOrderByWithRelationInput[]
+    cursor?: experienceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExperienceScalarFieldEnum | ExperienceScalarFieldEnum[]
+  }
+
+  /**
+   * user.education
+   */
+  export type user$educationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the education
+     */
+    select?: educationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the education
+     */
+    omit?: educationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: educationInclude<ExtArgs> | null
+    where?: educationWhereInput
+    orderBy?: educationOrderByWithRelationInput | educationOrderByWithRelationInput[]
+    cursor?: educationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EducationScalarFieldEnum | EducationScalarFieldEnum[]
+  }
+
+  /**
+   * user.hero
+   */
+  export type user$heroArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    where?: heroWhereInput
+    orderBy?: heroOrderByWithRelationInput | heroOrderByWithRelationInput[]
+    cursor?: heroWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HeroScalarFieldEnum | HeroScalarFieldEnum[]
+  }
+
+  /**
    * user without action
    */
   export type userDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3100,6 +2837,1102 @@ export namespace Prisma {
 
 
   /**
+   * Model hero
+   */
+
+  export type AggregateHero = {
+    _count: HeroCountAggregateOutputType | null
+    _avg: HeroAvgAggregateOutputType | null
+    _sum: HeroSumAggregateOutputType | null
+    _min: HeroMinAggregateOutputType | null
+    _max: HeroMaxAggregateOutputType | null
+  }
+
+  export type HeroAvgAggregateOutputType = {
+    hid: number | null
+    uid: number | null
+  }
+
+  export type HeroSumAggregateOutputType = {
+    hid: number | null
+    uid: number | null
+  }
+
+  export type HeroMinAggregateOutputType = {
+    hid: number | null
+    uid: number | null
+    style: string | null
+    hero: string | null
+    subhero: string | null
+  }
+
+  export type HeroMaxAggregateOutputType = {
+    hid: number | null
+    uid: number | null
+    style: string | null
+    hero: string | null
+    subhero: string | null
+  }
+
+  export type HeroCountAggregateOutputType = {
+    hid: number
+    uid: number
+    style: number
+    hero: number
+    subhero: number
+    _all: number
+  }
+
+
+  export type HeroAvgAggregateInputType = {
+    hid?: true
+    uid?: true
+  }
+
+  export type HeroSumAggregateInputType = {
+    hid?: true
+    uid?: true
+  }
+
+  export type HeroMinAggregateInputType = {
+    hid?: true
+    uid?: true
+    style?: true
+    hero?: true
+    subhero?: true
+  }
+
+  export type HeroMaxAggregateInputType = {
+    hid?: true
+    uid?: true
+    style?: true
+    hero?: true
+    subhero?: true
+  }
+
+  export type HeroCountAggregateInputType = {
+    hid?: true
+    uid?: true
+    style?: true
+    hero?: true
+    subhero?: true
+    _all?: true
+  }
+
+  export type HeroAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which hero to aggregate.
+     */
+    where?: heroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of heroes to fetch.
+     */
+    orderBy?: heroOrderByWithRelationInput | heroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: heroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` heroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` heroes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned heroes
+    **/
+    _count?: true | HeroCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HeroAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HeroSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HeroMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HeroMaxAggregateInputType
+  }
+
+  export type GetHeroAggregateType<T extends HeroAggregateArgs> = {
+        [P in keyof T & keyof AggregateHero]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHero[P]>
+      : GetScalarType<T[P], AggregateHero[P]>
+  }
+
+
+
+
+  export type heroGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: heroWhereInput
+    orderBy?: heroOrderByWithAggregationInput | heroOrderByWithAggregationInput[]
+    by: HeroScalarFieldEnum[] | HeroScalarFieldEnum
+    having?: heroScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HeroCountAggregateInputType | true
+    _avg?: HeroAvgAggregateInputType
+    _sum?: HeroSumAggregateInputType
+    _min?: HeroMinAggregateInputType
+    _max?: HeroMaxAggregateInputType
+  }
+
+  export type HeroGroupByOutputType = {
+    hid: number
+    uid: number
+    style: string
+    hero: string
+    subhero: string
+    _count: HeroCountAggregateOutputType | null
+    _avg: HeroAvgAggregateOutputType | null
+    _sum: HeroSumAggregateOutputType | null
+    _min: HeroMinAggregateOutputType | null
+    _max: HeroMaxAggregateOutputType | null
+  }
+
+  type GetHeroGroupByPayload<T extends heroGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HeroGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HeroGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HeroGroupByOutputType[P]>
+            : GetScalarType<T[P], HeroGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type heroSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    hid?: boolean
+    uid?: boolean
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hero"]>
+
+  export type heroSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    hid?: boolean
+    uid?: boolean
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hero"]>
+
+  export type heroSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    hid?: boolean
+    uid?: boolean
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hero"]>
+
+  export type heroSelectScalar = {
+    hid?: boolean
+    uid?: boolean
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
+  }
+
+  export type heroOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"hid" | "uid" | "style" | "hero" | "subhero", ExtArgs["result"]["hero"]>
+  export type heroInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type heroIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type heroIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+
+  export type $heroPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "hero"
+    objects: {
+      user: Prisma.$userPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      hid: number
+      uid: number
+      style: string
+      hero: string
+      subhero: string
+    }, ExtArgs["result"]["hero"]>
+    composites: {}
+  }
+
+  type heroGetPayload<S extends boolean | null | undefined | heroDefaultArgs> = $Result.GetResult<Prisma.$heroPayload, S>
+
+  type heroCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<heroFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HeroCountAggregateInputType | true
+    }
+
+  export interface heroDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['hero'], meta: { name: 'hero' } }
+    /**
+     * Find zero or one Hero that matches the filter.
+     * @param {heroFindUniqueArgs} args - Arguments to find a Hero
+     * @example
+     * // Get one Hero
+     * const hero = await prisma.hero.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends heroFindUniqueArgs>(args: SelectSubset<T, heroFindUniqueArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Hero that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {heroFindUniqueOrThrowArgs} args - Arguments to find a Hero
+     * @example
+     * // Get one Hero
+     * const hero = await prisma.hero.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends heroFindUniqueOrThrowArgs>(args: SelectSubset<T, heroFindUniqueOrThrowArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Hero that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {heroFindFirstArgs} args - Arguments to find a Hero
+     * @example
+     * // Get one Hero
+     * const hero = await prisma.hero.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends heroFindFirstArgs>(args?: SelectSubset<T, heroFindFirstArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Hero that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {heroFindFirstOrThrowArgs} args - Arguments to find a Hero
+     * @example
+     * // Get one Hero
+     * const hero = await prisma.hero.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends heroFindFirstOrThrowArgs>(args?: SelectSubset<T, heroFindFirstOrThrowArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Heroes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {heroFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Heroes
+     * const heroes = await prisma.hero.findMany()
+     * 
+     * // Get first 10 Heroes
+     * const heroes = await prisma.hero.findMany({ take: 10 })
+     * 
+     * // Only select the `hid`
+     * const heroWithHidOnly = await prisma.hero.findMany({ select: { hid: true } })
+     * 
+     */
+    findMany<T extends heroFindManyArgs>(args?: SelectSubset<T, heroFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Hero.
+     * @param {heroCreateArgs} args - Arguments to create a Hero.
+     * @example
+     * // Create one Hero
+     * const Hero = await prisma.hero.create({
+     *   data: {
+     *     // ... data to create a Hero
+     *   }
+     * })
+     * 
+     */
+    create<T extends heroCreateArgs>(args: SelectSubset<T, heroCreateArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Heroes.
+     * @param {heroCreateManyArgs} args - Arguments to create many Heroes.
+     * @example
+     * // Create many Heroes
+     * const hero = await prisma.hero.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends heroCreateManyArgs>(args?: SelectSubset<T, heroCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Heroes and returns the data saved in the database.
+     * @param {heroCreateManyAndReturnArgs} args - Arguments to create many Heroes.
+     * @example
+     * // Create many Heroes
+     * const hero = await prisma.hero.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Heroes and only return the `hid`
+     * const heroWithHidOnly = await prisma.hero.createManyAndReturn({
+     *   select: { hid: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends heroCreateManyAndReturnArgs>(args?: SelectSubset<T, heroCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Hero.
+     * @param {heroDeleteArgs} args - Arguments to delete one Hero.
+     * @example
+     * // Delete one Hero
+     * const Hero = await prisma.hero.delete({
+     *   where: {
+     *     // ... filter to delete one Hero
+     *   }
+     * })
+     * 
+     */
+    delete<T extends heroDeleteArgs>(args: SelectSubset<T, heroDeleteArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Hero.
+     * @param {heroUpdateArgs} args - Arguments to update one Hero.
+     * @example
+     * // Update one Hero
+     * const hero = await prisma.hero.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends heroUpdateArgs>(args: SelectSubset<T, heroUpdateArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Heroes.
+     * @param {heroDeleteManyArgs} args - Arguments to filter Heroes to delete.
+     * @example
+     * // Delete a few Heroes
+     * const { count } = await prisma.hero.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends heroDeleteManyArgs>(args?: SelectSubset<T, heroDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Heroes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {heroUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Heroes
+     * const hero = await prisma.hero.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends heroUpdateManyArgs>(args: SelectSubset<T, heroUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Heroes and returns the data updated in the database.
+     * @param {heroUpdateManyAndReturnArgs} args - Arguments to update many Heroes.
+     * @example
+     * // Update many Heroes
+     * const hero = await prisma.hero.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Heroes and only return the `hid`
+     * const heroWithHidOnly = await prisma.hero.updateManyAndReturn({
+     *   select: { hid: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends heroUpdateManyAndReturnArgs>(args: SelectSubset<T, heroUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Hero.
+     * @param {heroUpsertArgs} args - Arguments to update or create a Hero.
+     * @example
+     * // Update or create a Hero
+     * const hero = await prisma.hero.upsert({
+     *   create: {
+     *     // ... data to create a Hero
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Hero we want to update
+     *   }
+     * })
+     */
+    upsert<T extends heroUpsertArgs>(args: SelectSubset<T, heroUpsertArgs<ExtArgs>>): Prisma__heroClient<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Heroes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {heroCountArgs} args - Arguments to filter Heroes to count.
+     * @example
+     * // Count the number of Heroes
+     * const count = await prisma.hero.count({
+     *   where: {
+     *     // ... the filter for the Heroes we want to count
+     *   }
+     * })
+    **/
+    count<T extends heroCountArgs>(
+      args?: Subset<T, heroCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HeroCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Hero.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HeroAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HeroAggregateArgs>(args: Subset<T, HeroAggregateArgs>): Prisma.PrismaPromise<GetHeroAggregateType<T>>
+
+    /**
+     * Group by Hero.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {heroGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends heroGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: heroGroupByArgs['orderBy'] }
+        : { orderBy?: heroGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, heroGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHeroGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the hero model
+   */
+  readonly fields: heroFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for hero.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__heroClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the hero model
+   */ 
+  interface heroFieldRefs {
+    readonly hid: FieldRef<"hero", 'Int'>
+    readonly uid: FieldRef<"hero", 'Int'>
+    readonly style: FieldRef<"hero", 'String'>
+    readonly hero: FieldRef<"hero", 'String'>
+    readonly subhero: FieldRef<"hero", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * hero findUnique
+   */
+  export type heroFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * Filter, which hero to fetch.
+     */
+    where: heroWhereUniqueInput
+  }
+
+  /**
+   * hero findUniqueOrThrow
+   */
+  export type heroFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * Filter, which hero to fetch.
+     */
+    where: heroWhereUniqueInput
+  }
+
+  /**
+   * hero findFirst
+   */
+  export type heroFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * Filter, which hero to fetch.
+     */
+    where?: heroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of heroes to fetch.
+     */
+    orderBy?: heroOrderByWithRelationInput | heroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for heroes.
+     */
+    cursor?: heroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` heroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` heroes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of heroes.
+     */
+    distinct?: HeroScalarFieldEnum | HeroScalarFieldEnum[]
+  }
+
+  /**
+   * hero findFirstOrThrow
+   */
+  export type heroFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * Filter, which hero to fetch.
+     */
+    where?: heroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of heroes to fetch.
+     */
+    orderBy?: heroOrderByWithRelationInput | heroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for heroes.
+     */
+    cursor?: heroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` heroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` heroes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of heroes.
+     */
+    distinct?: HeroScalarFieldEnum | HeroScalarFieldEnum[]
+  }
+
+  /**
+   * hero findMany
+   */
+  export type heroFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * Filter, which heroes to fetch.
+     */
+    where?: heroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of heroes to fetch.
+     */
+    orderBy?: heroOrderByWithRelationInput | heroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing heroes.
+     */
+    cursor?: heroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` heroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` heroes.
+     */
+    skip?: number
+    distinct?: HeroScalarFieldEnum | HeroScalarFieldEnum[]
+  }
+
+  /**
+   * hero create
+   */
+  export type heroCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * The data needed to create a hero.
+     */
+    data: XOR<heroCreateInput, heroUncheckedCreateInput>
+  }
+
+  /**
+   * hero createMany
+   */
+  export type heroCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many heroes.
+     */
+    data: heroCreateManyInput | heroCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * hero createManyAndReturn
+   */
+  export type heroCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * The data used to create many heroes.
+     */
+    data: heroCreateManyInput | heroCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * hero update
+   */
+  export type heroUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * The data needed to update a hero.
+     */
+    data: XOR<heroUpdateInput, heroUncheckedUpdateInput>
+    /**
+     * Choose, which hero to update.
+     */
+    where: heroWhereUniqueInput
+  }
+
+  /**
+   * hero updateMany
+   */
+  export type heroUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update heroes.
+     */
+    data: XOR<heroUpdateManyMutationInput, heroUncheckedUpdateManyInput>
+    /**
+     * Filter which heroes to update
+     */
+    where?: heroWhereInput
+    /**
+     * Limit how many heroes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * hero updateManyAndReturn
+   */
+  export type heroUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * The data used to update heroes.
+     */
+    data: XOR<heroUpdateManyMutationInput, heroUncheckedUpdateManyInput>
+    /**
+     * Filter which heroes to update
+     */
+    where?: heroWhereInput
+    /**
+     * Limit how many heroes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * hero upsert
+   */
+  export type heroUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * The filter to search for the hero to update in case it exists.
+     */
+    where: heroWhereUniqueInput
+    /**
+     * In case the hero found by the `where` argument doesn't exist, create a new hero with this data.
+     */
+    create: XOR<heroCreateInput, heroUncheckedCreateInput>
+    /**
+     * In case the hero was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<heroUpdateInput, heroUncheckedUpdateInput>
+  }
+
+  /**
+   * hero delete
+   */
+  export type heroDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+    /**
+     * Filter which hero to delete.
+     */
+    where: heroWhereUniqueInput
+  }
+
+  /**
+   * hero deleteMany
+   */
+  export type heroDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which heroes to delete
+     */
+    where?: heroWhereInput
+    /**
+     * Limit how many heroes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * hero without action
+   */
+  export type heroDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the hero
+     */
+    select?: heroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the hero
+     */
+    omit?: heroOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: heroInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model project
    */
 
@@ -3113,14 +3946,17 @@ export namespace Prisma {
 
   export type ProjectAvgAggregateOutputType = {
     pid: number | null
+    uid: number | null
   }
 
   export type ProjectSumAggregateOutputType = {
     pid: number | null
+    uid: number | null
   }
 
   export type ProjectMinAggregateOutputType = {
     pid: number | null
+    uid: number | null
     title: string | null
     image: string | null
     desc: string | null
@@ -3131,6 +3967,7 @@ export namespace Prisma {
 
   export type ProjectMaxAggregateOutputType = {
     pid: number | null
+    uid: number | null
     title: string | null
     image: string | null
     desc: string | null
@@ -3141,6 +3978,7 @@ export namespace Prisma {
 
   export type ProjectCountAggregateOutputType = {
     pid: number
+    uid: number
     title: number
     image: number
     desc: number
@@ -3154,14 +3992,17 @@ export namespace Prisma {
 
   export type ProjectAvgAggregateInputType = {
     pid?: true
+    uid?: true
   }
 
   export type ProjectSumAggregateInputType = {
     pid?: true
+    uid?: true
   }
 
   export type ProjectMinAggregateInputType = {
     pid?: true
+    uid?: true
     title?: true
     image?: true
     desc?: true
@@ -3172,6 +4013,7 @@ export namespace Prisma {
 
   export type ProjectMaxAggregateInputType = {
     pid?: true
+    uid?: true
     title?: true
     image?: true
     desc?: true
@@ -3182,6 +4024,7 @@ export namespace Prisma {
 
   export type ProjectCountAggregateInputType = {
     pid?: true
+    uid?: true
     title?: true
     image?: true
     desc?: true
@@ -3280,6 +4123,7 @@ export namespace Prisma {
 
   export type ProjectGroupByOutputType = {
     pid: number
+    uid: number
     title: string
     image: string
     desc: string
@@ -3310,6 +4154,7 @@ export namespace Prisma {
 
   export type projectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     pid?: boolean
+    uid?: boolean
     title?: boolean
     image?: boolean
     desc?: boolean
@@ -3317,12 +4162,12 @@ export namespace Prisma {
     github?: boolean
     Link?: boolean
     style?: boolean
-    user_project?: boolean | project$user_projectArgs<ExtArgs>
-    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type projectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     pid?: boolean
+    uid?: boolean
     title?: boolean
     image?: boolean
     desc?: boolean
@@ -3330,10 +4175,12 @@ export namespace Prisma {
     github?: boolean
     Link?: boolean
     style?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type projectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     pid?: boolean
+    uid?: boolean
     title?: boolean
     image?: boolean
     desc?: boolean
@@ -3341,10 +4188,12 @@ export namespace Prisma {
     github?: boolean
     Link?: boolean
     style?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type projectSelectScalar = {
     pid?: boolean
+    uid?: boolean
     title?: boolean
     image?: boolean
     desc?: boolean
@@ -3354,21 +4203,25 @@ export namespace Prisma {
     style?: boolean
   }
 
-  export type projectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "title" | "image" | "desc" | "tags" | "github" | "Link" | "style", ExtArgs["result"]["project"]>
+  export type projectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "uid" | "title" | "image" | "desc" | "tags" | "github" | "Link" | "style", ExtArgs["result"]["project"]>
   export type projectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_project?: boolean | project$user_projectArgs<ExtArgs>
-    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
+    user?: boolean | userDefaultArgs<ExtArgs>
   }
-  export type projectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type projectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type projectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type projectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
 
   export type $projectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "project"
     objects: {
-      user_project: Prisma.$user_projectPayload<ExtArgs>[]
+      user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       pid: number
+      uid: number
       title: string
       image: string
       desc: string
@@ -3770,7 +4623,7 @@ export namespace Prisma {
    */
   export interface Prisma__projectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user_project<T extends project$user_projectArgs<ExtArgs> = {}>(args?: Subset<T, project$user_projectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3801,6 +4654,7 @@ export namespace Prisma {
    */ 
   interface projectFieldRefs {
     readonly pid: FieldRef<"project", 'Int'>
+    readonly uid: FieldRef<"project", 'Int'>
     readonly title: FieldRef<"project", 'String'>
     readonly image: FieldRef<"project", 'String'>
     readonly desc: FieldRef<"project", 'String'>
@@ -4057,6 +4911,10 @@ export namespace Prisma {
      */
     data: projectCreateManyInput | projectCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projectIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4127,6 +4985,10 @@ export namespace Prisma {
      * Limit how many projects to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projectIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4196,30 +5058,6 @@ export namespace Prisma {
   }
 
   /**
-   * project.user_project
-   */
-  export type project$user_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    where?: user_projectWhereInput
-    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
-    cursor?: user_projectWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: User_projectScalarFieldEnum | User_projectScalarFieldEnum[]
-  }
-
-  /**
    * project without action
    */
   export type projectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4239,1071 +5077,6 @@ export namespace Prisma {
 
 
   /**
-   * Model user_project
-   */
-
-  export type AggregateUser_project = {
-    _count: User_projectCountAggregateOutputType | null
-    _avg: User_projectAvgAggregateOutputType | null
-    _sum: User_projectSumAggregateOutputType | null
-    _min: User_projectMinAggregateOutputType | null
-    _max: User_projectMaxAggregateOutputType | null
-  }
-
-  export type User_projectAvgAggregateOutputType = {
-    pid: number | null
-    uid: number | null
-  }
-
-  export type User_projectSumAggregateOutputType = {
-    pid: number | null
-    uid: number | null
-  }
-
-  export type User_projectMinAggregateOutputType = {
-    pid: number | null
-    uid: number | null
-  }
-
-  export type User_projectMaxAggregateOutputType = {
-    pid: number | null
-    uid: number | null
-  }
-
-  export type User_projectCountAggregateOutputType = {
-    pid: number
-    uid: number
-    _all: number
-  }
-
-
-  export type User_projectAvgAggregateInputType = {
-    pid?: true
-    uid?: true
-  }
-
-  export type User_projectSumAggregateInputType = {
-    pid?: true
-    uid?: true
-  }
-
-  export type User_projectMinAggregateInputType = {
-    pid?: true
-    uid?: true
-  }
-
-  export type User_projectMaxAggregateInputType = {
-    pid?: true
-    uid?: true
-  }
-
-  export type User_projectCountAggregateInputType = {
-    pid?: true
-    uid?: true
-    _all?: true
-  }
-
-  export type User_projectAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which user_project to aggregate.
-     */
-    where?: user_projectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_projects to fetch.
-     */
-    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: user_projectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_projects.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned user_projects
-    **/
-    _count?: true | User_projectCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: User_projectAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: User_projectSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: User_projectMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: User_projectMaxAggregateInputType
-  }
-
-  export type GetUser_projectAggregateType<T extends User_projectAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser_project]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUser_project[P]>
-      : GetScalarType<T[P], AggregateUser_project[P]>
-  }
-
-
-
-
-  export type user_projectGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_projectWhereInput
-    orderBy?: user_projectOrderByWithAggregationInput | user_projectOrderByWithAggregationInput[]
-    by: User_projectScalarFieldEnum[] | User_projectScalarFieldEnum
-    having?: user_projectScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: User_projectCountAggregateInputType | true
-    _avg?: User_projectAvgAggregateInputType
-    _sum?: User_projectSumAggregateInputType
-    _min?: User_projectMinAggregateInputType
-    _max?: User_projectMaxAggregateInputType
-  }
-
-  export type User_projectGroupByOutputType = {
-    pid: number
-    uid: number
-    _count: User_projectCountAggregateOutputType | null
-    _avg: User_projectAvgAggregateOutputType | null
-    _sum: User_projectSumAggregateOutputType | null
-    _min: User_projectMinAggregateOutputType | null
-    _max: User_projectMaxAggregateOutputType | null
-  }
-
-  type GetUser_projectGroupByPayload<T extends user_projectGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<User_projectGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof User_projectGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], User_projectGroupByOutputType[P]>
-            : GetScalarType<T[P], User_projectGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type user_projectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pid?: boolean
-    uid?: boolean
-    project?: boolean | projectDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_project"]>
-
-  export type user_projectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pid?: boolean
-    uid?: boolean
-    project?: boolean | projectDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_project"]>
-
-  export type user_projectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pid?: boolean
-    uid?: boolean
-    project?: boolean | projectDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_project"]>
-
-  export type user_projectSelectScalar = {
-    pid?: boolean
-    uid?: boolean
-  }
-
-  export type user_projectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "uid", ExtArgs["result"]["user_project"]>
-  export type user_projectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | projectDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-  export type user_projectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | projectDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-  export type user_projectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | projectDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-
-  export type $user_projectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "user_project"
-    objects: {
-      project: Prisma.$projectPayload<ExtArgs>
-      user: Prisma.$userPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      pid: number
-      uid: number
-    }, ExtArgs["result"]["user_project"]>
-    composites: {}
-  }
-
-  type user_projectGetPayload<S extends boolean | null | undefined | user_projectDefaultArgs> = $Result.GetResult<Prisma.$user_projectPayload, S>
-
-  type user_projectCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<user_projectFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: User_projectCountAggregateInputType | true
-    }
-
-  export interface user_projectDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['user_project'], meta: { name: 'user_project' } }
-    /**
-     * Find zero or one User_project that matches the filter.
-     * @param {user_projectFindUniqueArgs} args - Arguments to find a User_project
-     * @example
-     * // Get one User_project
-     * const user_project = await prisma.user_project.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends user_projectFindUniqueArgs>(args: SelectSubset<T, user_projectFindUniqueArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one User_project that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {user_projectFindUniqueOrThrowArgs} args - Arguments to find a User_project
-     * @example
-     * // Get one User_project
-     * const user_project = await prisma.user_project.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends user_projectFindUniqueOrThrowArgs>(args: SelectSubset<T, user_projectFindUniqueOrThrowArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User_project that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_projectFindFirstArgs} args - Arguments to find a User_project
-     * @example
-     * // Get one User_project
-     * const user_project = await prisma.user_project.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends user_projectFindFirstArgs>(args?: SelectSubset<T, user_projectFindFirstArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User_project that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_projectFindFirstOrThrowArgs} args - Arguments to find a User_project
-     * @example
-     * // Get one User_project
-     * const user_project = await prisma.user_project.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends user_projectFindFirstOrThrowArgs>(args?: SelectSubset<T, user_projectFindFirstOrThrowArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more User_projects that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_projectFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all User_projects
-     * const user_projects = await prisma.user_project.findMany()
-     * 
-     * // Get first 10 User_projects
-     * const user_projects = await prisma.user_project.findMany({ take: 10 })
-     * 
-     * // Only select the `pid`
-     * const user_projectWithPidOnly = await prisma.user_project.findMany({ select: { pid: true } })
-     * 
-     */
-    findMany<T extends user_projectFindManyArgs>(args?: SelectSubset<T, user_projectFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a User_project.
-     * @param {user_projectCreateArgs} args - Arguments to create a User_project.
-     * @example
-     * // Create one User_project
-     * const User_project = await prisma.user_project.create({
-     *   data: {
-     *     // ... data to create a User_project
-     *   }
-     * })
-     * 
-     */
-    create<T extends user_projectCreateArgs>(args: SelectSubset<T, user_projectCreateArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many User_projects.
-     * @param {user_projectCreateManyArgs} args - Arguments to create many User_projects.
-     * @example
-     * // Create many User_projects
-     * const user_project = await prisma.user_project.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends user_projectCreateManyArgs>(args?: SelectSubset<T, user_projectCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many User_projects and returns the data saved in the database.
-     * @param {user_projectCreateManyAndReturnArgs} args - Arguments to create many User_projects.
-     * @example
-     * // Create many User_projects
-     * const user_project = await prisma.user_project.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many User_projects and only return the `pid`
-     * const user_projectWithPidOnly = await prisma.user_project.createManyAndReturn({
-     *   select: { pid: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends user_projectCreateManyAndReturnArgs>(args?: SelectSubset<T, user_projectCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a User_project.
-     * @param {user_projectDeleteArgs} args - Arguments to delete one User_project.
-     * @example
-     * // Delete one User_project
-     * const User_project = await prisma.user_project.delete({
-     *   where: {
-     *     // ... filter to delete one User_project
-     *   }
-     * })
-     * 
-     */
-    delete<T extends user_projectDeleteArgs>(args: SelectSubset<T, user_projectDeleteArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one User_project.
-     * @param {user_projectUpdateArgs} args - Arguments to update one User_project.
-     * @example
-     * // Update one User_project
-     * const user_project = await prisma.user_project.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends user_projectUpdateArgs>(args: SelectSubset<T, user_projectUpdateArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more User_projects.
-     * @param {user_projectDeleteManyArgs} args - Arguments to filter User_projects to delete.
-     * @example
-     * // Delete a few User_projects
-     * const { count } = await prisma.user_project.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends user_projectDeleteManyArgs>(args?: SelectSubset<T, user_projectDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more User_projects.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_projectUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many User_projects
-     * const user_project = await prisma.user_project.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends user_projectUpdateManyArgs>(args: SelectSubset<T, user_projectUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more User_projects and returns the data updated in the database.
-     * @param {user_projectUpdateManyAndReturnArgs} args - Arguments to update many User_projects.
-     * @example
-     * // Update many User_projects
-     * const user_project = await prisma.user_project.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more User_projects and only return the `pid`
-     * const user_projectWithPidOnly = await prisma.user_project.updateManyAndReturn({
-     *   select: { pid: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends user_projectUpdateManyAndReturnArgs>(args: SelectSubset<T, user_projectUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one User_project.
-     * @param {user_projectUpsertArgs} args - Arguments to update or create a User_project.
-     * @example
-     * // Update or create a User_project
-     * const user_project = await prisma.user_project.upsert({
-     *   create: {
-     *     // ... data to create a User_project
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the User_project we want to update
-     *   }
-     * })
-     */
-    upsert<T extends user_projectUpsertArgs>(args: SelectSubset<T, user_projectUpsertArgs<ExtArgs>>): Prisma__user_projectClient<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of User_projects.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_projectCountArgs} args - Arguments to filter User_projects to count.
-     * @example
-     * // Count the number of User_projects
-     * const count = await prisma.user_project.count({
-     *   where: {
-     *     // ... the filter for the User_projects we want to count
-     *   }
-     * })
-    **/
-    count<T extends user_projectCountArgs>(
-      args?: Subset<T, user_projectCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], User_projectCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a User_project.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {User_projectAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends User_projectAggregateArgs>(args: Subset<T, User_projectAggregateArgs>): Prisma.PrismaPromise<GetUser_projectAggregateType<T>>
-
-    /**
-     * Group by User_project.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_projectGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends user_projectGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: user_projectGroupByArgs['orderBy'] }
-        : { orderBy?: user_projectGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, user_projectGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUser_projectGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the user_project model
-   */
-  readonly fields: user_projectFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for user_project.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__user_projectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    project<T extends projectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, projectDefaultArgs<ExtArgs>>): Prisma__projectClient<$Result.GetResult<Prisma.$projectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the user_project model
-   */ 
-  interface user_projectFieldRefs {
-    readonly pid: FieldRef<"user_project", 'Int'>
-    readonly uid: FieldRef<"user_project", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * user_project findUnique
-   */
-  export type user_projectFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * Filter, which user_project to fetch.
-     */
-    where: user_projectWhereUniqueInput
-  }
-
-  /**
-   * user_project findUniqueOrThrow
-   */
-  export type user_projectFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * Filter, which user_project to fetch.
-     */
-    where: user_projectWhereUniqueInput
-  }
-
-  /**
-   * user_project findFirst
-   */
-  export type user_projectFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * Filter, which user_project to fetch.
-     */
-    where?: user_projectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_projects to fetch.
-     */
-    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for user_projects.
-     */
-    cursor?: user_projectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_projects.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of user_projects.
-     */
-    distinct?: User_projectScalarFieldEnum | User_projectScalarFieldEnum[]
-  }
-
-  /**
-   * user_project findFirstOrThrow
-   */
-  export type user_projectFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * Filter, which user_project to fetch.
-     */
-    where?: user_projectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_projects to fetch.
-     */
-    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for user_projects.
-     */
-    cursor?: user_projectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_projects.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of user_projects.
-     */
-    distinct?: User_projectScalarFieldEnum | User_projectScalarFieldEnum[]
-  }
-
-  /**
-   * user_project findMany
-   */
-  export type user_projectFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * Filter, which user_projects to fetch.
-     */
-    where?: user_projectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_projects to fetch.
-     */
-    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing user_projects.
-     */
-    cursor?: user_projectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_projects.
-     */
-    skip?: number
-    distinct?: User_projectScalarFieldEnum | User_projectScalarFieldEnum[]
-  }
-
-  /**
-   * user_project create
-   */
-  export type user_projectCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * The data needed to create a user_project.
-     */
-    data: XOR<user_projectCreateInput, user_projectUncheckedCreateInput>
-  }
-
-  /**
-   * user_project createMany
-   */
-  export type user_projectCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many user_projects.
-     */
-    data: user_projectCreateManyInput | user_projectCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * user_project createManyAndReturn
-   */
-  export type user_projectCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * The data used to create many user_projects.
-     */
-    data: user_projectCreateManyInput | user_projectCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * user_project update
-   */
-  export type user_projectUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * The data needed to update a user_project.
-     */
-    data: XOR<user_projectUpdateInput, user_projectUncheckedUpdateInput>
-    /**
-     * Choose, which user_project to update.
-     */
-    where: user_projectWhereUniqueInput
-  }
-
-  /**
-   * user_project updateMany
-   */
-  export type user_projectUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update user_projects.
-     */
-    data: XOR<user_projectUpdateManyMutationInput, user_projectUncheckedUpdateManyInput>
-    /**
-     * Filter which user_projects to update
-     */
-    where?: user_projectWhereInput
-    /**
-     * Limit how many user_projects to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * user_project updateManyAndReturn
-   */
-  export type user_projectUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * The data used to update user_projects.
-     */
-    data: XOR<user_projectUpdateManyMutationInput, user_projectUncheckedUpdateManyInput>
-    /**
-     * Filter which user_projects to update
-     */
-    where?: user_projectWhereInput
-    /**
-     * Limit how many user_projects to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * user_project upsert
-   */
-  export type user_projectUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * The filter to search for the user_project to update in case it exists.
-     */
-    where: user_projectWhereUniqueInput
-    /**
-     * In case the user_project found by the `where` argument doesn't exist, create a new user_project with this data.
-     */
-    create: XOR<user_projectCreateInput, user_projectUncheckedCreateInput>
-    /**
-     * In case the user_project was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<user_projectUpdateInput, user_projectUncheckedUpdateInput>
-  }
-
-  /**
-   * user_project delete
-   */
-  export type user_projectDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-    /**
-     * Filter which user_project to delete.
-     */
-    where: user_projectWhereUniqueInput
-  }
-
-  /**
-   * user_project deleteMany
-   */
-  export type user_projectDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which user_projects to delete
-     */
-    where?: user_projectWhereInput
-    /**
-     * Limit how many user_projects to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * user_project without action
-   */
-  export type user_projectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_project
-     */
-    select?: user_projectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_project
-     */
-    omit?: user_projectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_projectInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model experience
    */
 
@@ -5316,81 +5089,91 @@ export namespace Prisma {
   }
 
   export type ExperienceAvgAggregateOutputType = {
-    eid: number | null
+    exid: number | null
+    uid: number | null
   }
 
   export type ExperienceSumAggregateOutputType = {
-    eid: number | null
+    exid: number | null
+    uid: number | null
   }
 
   export type ExperienceMinAggregateOutputType = {
-    eid: number | null
+    exid: number | null
     title: string | null
     corp: string | null
     style: string | null
     startdate: Date | null
     enddate: Date | null
     desc: string | null
+    uid: number | null
   }
 
   export type ExperienceMaxAggregateOutputType = {
-    eid: number | null
+    exid: number | null
     title: string | null
     corp: string | null
     style: string | null
     startdate: Date | null
     enddate: Date | null
     desc: string | null
+    uid: number | null
   }
 
   export type ExperienceCountAggregateOutputType = {
-    eid: number
+    exid: number
     title: number
     corp: number
     style: number
     startdate: number
     enddate: number
     desc: number
+    uid: number
     _all: number
   }
 
 
   export type ExperienceAvgAggregateInputType = {
-    eid?: true
+    exid?: true
+    uid?: true
   }
 
   export type ExperienceSumAggregateInputType = {
-    eid?: true
+    exid?: true
+    uid?: true
   }
 
   export type ExperienceMinAggregateInputType = {
-    eid?: true
+    exid?: true
     title?: true
     corp?: true
     style?: true
     startdate?: true
     enddate?: true
     desc?: true
+    uid?: true
   }
 
   export type ExperienceMaxAggregateInputType = {
-    eid?: true
+    exid?: true
     title?: true
     corp?: true
     style?: true
     startdate?: true
     enddate?: true
     desc?: true
+    uid?: true
   }
 
   export type ExperienceCountAggregateInputType = {
-    eid?: true
+    exid?: true
     title?: true
     corp?: true
     style?: true
     startdate?: true
     enddate?: true
     desc?: true
+    uid?: true
     _all?: true
   }
 
@@ -5481,13 +5264,14 @@ export namespace Prisma {
   }
 
   export type ExperienceGroupByOutputType = {
-    eid: number
+    exid: number
     title: string
     corp: string
     style: string
     startdate: Date
     enddate: Date
     desc: string
+    uid: number
     _count: ExperienceCountAggregateOutputType | null
     _avg: ExperienceAvgAggregateOutputType | null
     _sum: ExperienceSumAggregateOutputType | null
@@ -5510,68 +5294,77 @@ export namespace Prisma {
 
 
   export type experienceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    eid?: boolean
+    exid?: boolean
     title?: boolean
     corp?: boolean
     style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
-    user_experience?: boolean | experience$user_experienceArgs<ExtArgs>
-    _count?: boolean | ExperienceCountOutputTypeDefaultArgs<ExtArgs>
+    uid?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["experience"]>
 
   export type experienceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    eid?: boolean
+    exid?: boolean
     title?: boolean
     corp?: boolean
     style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
+    uid?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["experience"]>
 
   export type experienceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    eid?: boolean
+    exid?: boolean
     title?: boolean
     corp?: boolean
     style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
+    uid?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["experience"]>
 
   export type experienceSelectScalar = {
-    eid?: boolean
+    exid?: boolean
     title?: boolean
     corp?: boolean
     style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
+    uid?: boolean
   }
 
-  export type experienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"eid" | "title" | "corp" | "style" | "startdate" | "enddate" | "desc", ExtArgs["result"]["experience"]>
+  export type experienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"exid" | "title" | "corp" | "style" | "startdate" | "enddate" | "desc" | "uid", ExtArgs["result"]["experience"]>
   export type experienceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_experience?: boolean | experience$user_experienceArgs<ExtArgs>
-    _count?: boolean | ExperienceCountOutputTypeDefaultArgs<ExtArgs>
+    user?: boolean | userDefaultArgs<ExtArgs>
   }
-  export type experienceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type experienceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type experienceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type experienceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
 
   export type $experiencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "experience"
     objects: {
-      user_experience: Prisma.$user_experiencePayload<ExtArgs>[]
+      user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      eid: number
+      exid: number
       title: string
       corp: string
       style: string
       startdate: Date
       enddate: Date
       desc: string
+      uid: number
     }, ExtArgs["result"]["experience"]>
     composites: {}
   }
@@ -5655,8 +5448,8 @@ export namespace Prisma {
      * // Get first 10 Experiences
      * const experiences = await prisma.experience.findMany({ take: 10 })
      * 
-     * // Only select the `eid`
-     * const experienceWithEidOnly = await prisma.experience.findMany({ select: { eid: true } })
+     * // Only select the `exid`
+     * const experienceWithExidOnly = await prisma.experience.findMany({ select: { exid: true } })
      * 
      */
     findMany<T extends experienceFindManyArgs>(args?: SelectSubset<T, experienceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -5700,9 +5493,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Experiences and only return the `eid`
-     * const experienceWithEidOnly = await prisma.experience.createManyAndReturn({
-     *   select: { eid: true },
+     * // Create many Experiences and only return the `exid`
+     * const experienceWithExidOnly = await prisma.experience.createManyAndReturn({
+     *   select: { exid: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -5791,9 +5584,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Experiences and only return the `eid`
-     * const experienceWithEidOnly = await prisma.experience.updateManyAndReturn({
-     *   select: { eid: true },
+     * // Update zero or more Experiences and only return the `exid`
+     * const experienceWithExidOnly = await prisma.experience.updateManyAndReturn({
+     *   select: { exid: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5966,7 +5759,7 @@ export namespace Prisma {
    */
   export interface Prisma__experienceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user_experience<T extends experience$user_experienceArgs<ExtArgs> = {}>(args?: Subset<T, experience$user_experienceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5996,13 +5789,14 @@ export namespace Prisma {
    * Fields of the experience model
    */ 
   interface experienceFieldRefs {
-    readonly eid: FieldRef<"experience", 'Int'>
+    readonly exid: FieldRef<"experience", 'Int'>
     readonly title: FieldRef<"experience", 'String'>
     readonly corp: FieldRef<"experience", 'String'>
     readonly style: FieldRef<"experience", 'String'>
     readonly startdate: FieldRef<"experience", 'DateTime'>
     readonly enddate: FieldRef<"experience", 'DateTime'>
     readonly desc: FieldRef<"experience", 'String'>
+    readonly uid: FieldRef<"experience", 'Int'>
   }
     
 
@@ -6252,6 +6046,10 @@ export namespace Prisma {
      */
     data: experienceCreateManyInput | experienceCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: experienceIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6322,6 +6120,10 @@ export namespace Prisma {
      * Limit how many experiences to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: experienceIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6391,30 +6193,6 @@ export namespace Prisma {
   }
 
   /**
-   * experience.user_experience
-   */
-  export type experience$user_experienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    where?: user_experienceWhereInput
-    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
-    cursor?: user_experienceWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: User_experienceScalarFieldEnum | User_experienceScalarFieldEnum[]
-  }
-
-  /**
    * experience without action
    */
   export type experienceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6434,1071 +6212,6 @@ export namespace Prisma {
 
 
   /**
-   * Model user_experience
-   */
-
-  export type AggregateUser_experience = {
-    _count: User_experienceCountAggregateOutputType | null
-    _avg: User_experienceAvgAggregateOutputType | null
-    _sum: User_experienceSumAggregateOutputType | null
-    _min: User_experienceMinAggregateOutputType | null
-    _max: User_experienceMaxAggregateOutputType | null
-  }
-
-  export type User_experienceAvgAggregateOutputType = {
-    eid: number | null
-    uid: number | null
-  }
-
-  export type User_experienceSumAggregateOutputType = {
-    eid: number | null
-    uid: number | null
-  }
-
-  export type User_experienceMinAggregateOutputType = {
-    eid: number | null
-    uid: number | null
-  }
-
-  export type User_experienceMaxAggregateOutputType = {
-    eid: number | null
-    uid: number | null
-  }
-
-  export type User_experienceCountAggregateOutputType = {
-    eid: number
-    uid: number
-    _all: number
-  }
-
-
-  export type User_experienceAvgAggregateInputType = {
-    eid?: true
-    uid?: true
-  }
-
-  export type User_experienceSumAggregateInputType = {
-    eid?: true
-    uid?: true
-  }
-
-  export type User_experienceMinAggregateInputType = {
-    eid?: true
-    uid?: true
-  }
-
-  export type User_experienceMaxAggregateInputType = {
-    eid?: true
-    uid?: true
-  }
-
-  export type User_experienceCountAggregateInputType = {
-    eid?: true
-    uid?: true
-    _all?: true
-  }
-
-  export type User_experienceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which user_experience to aggregate.
-     */
-    where?: user_experienceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_experiences to fetch.
-     */
-    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: user_experienceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_experiences from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_experiences.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned user_experiences
-    **/
-    _count?: true | User_experienceCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: User_experienceAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: User_experienceSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: User_experienceMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: User_experienceMaxAggregateInputType
-  }
-
-  export type GetUser_experienceAggregateType<T extends User_experienceAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser_experience]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUser_experience[P]>
-      : GetScalarType<T[P], AggregateUser_experience[P]>
-  }
-
-
-
-
-  export type user_experienceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_experienceWhereInput
-    orderBy?: user_experienceOrderByWithAggregationInput | user_experienceOrderByWithAggregationInput[]
-    by: User_experienceScalarFieldEnum[] | User_experienceScalarFieldEnum
-    having?: user_experienceScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: User_experienceCountAggregateInputType | true
-    _avg?: User_experienceAvgAggregateInputType
-    _sum?: User_experienceSumAggregateInputType
-    _min?: User_experienceMinAggregateInputType
-    _max?: User_experienceMaxAggregateInputType
-  }
-
-  export type User_experienceGroupByOutputType = {
-    eid: number
-    uid: number
-    _count: User_experienceCountAggregateOutputType | null
-    _avg: User_experienceAvgAggregateOutputType | null
-    _sum: User_experienceSumAggregateOutputType | null
-    _min: User_experienceMinAggregateOutputType | null
-    _max: User_experienceMaxAggregateOutputType | null
-  }
-
-  type GetUser_experienceGroupByPayload<T extends user_experienceGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<User_experienceGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof User_experienceGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], User_experienceGroupByOutputType[P]>
-            : GetScalarType<T[P], User_experienceGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type user_experienceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    eid?: boolean
-    uid?: boolean
-    experience?: boolean | experienceDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_experience"]>
-
-  export type user_experienceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    eid?: boolean
-    uid?: boolean
-    experience?: boolean | experienceDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_experience"]>
-
-  export type user_experienceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    eid?: boolean
-    uid?: boolean
-    experience?: boolean | experienceDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_experience"]>
-
-  export type user_experienceSelectScalar = {
-    eid?: boolean
-    uid?: boolean
-  }
-
-  export type user_experienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"eid" | "uid", ExtArgs["result"]["user_experience"]>
-  export type user_experienceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    experience?: boolean | experienceDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-  export type user_experienceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    experience?: boolean | experienceDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-  export type user_experienceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    experience?: boolean | experienceDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-
-  export type $user_experiencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "user_experience"
-    objects: {
-      experience: Prisma.$experiencePayload<ExtArgs>
-      user: Prisma.$userPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      eid: number
-      uid: number
-    }, ExtArgs["result"]["user_experience"]>
-    composites: {}
-  }
-
-  type user_experienceGetPayload<S extends boolean | null | undefined | user_experienceDefaultArgs> = $Result.GetResult<Prisma.$user_experiencePayload, S>
-
-  type user_experienceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<user_experienceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: User_experienceCountAggregateInputType | true
-    }
-
-  export interface user_experienceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['user_experience'], meta: { name: 'user_experience' } }
-    /**
-     * Find zero or one User_experience that matches the filter.
-     * @param {user_experienceFindUniqueArgs} args - Arguments to find a User_experience
-     * @example
-     * // Get one User_experience
-     * const user_experience = await prisma.user_experience.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends user_experienceFindUniqueArgs>(args: SelectSubset<T, user_experienceFindUniqueArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one User_experience that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {user_experienceFindUniqueOrThrowArgs} args - Arguments to find a User_experience
-     * @example
-     * // Get one User_experience
-     * const user_experience = await prisma.user_experience.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends user_experienceFindUniqueOrThrowArgs>(args: SelectSubset<T, user_experienceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User_experience that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_experienceFindFirstArgs} args - Arguments to find a User_experience
-     * @example
-     * // Get one User_experience
-     * const user_experience = await prisma.user_experience.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends user_experienceFindFirstArgs>(args?: SelectSubset<T, user_experienceFindFirstArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User_experience that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_experienceFindFirstOrThrowArgs} args - Arguments to find a User_experience
-     * @example
-     * // Get one User_experience
-     * const user_experience = await prisma.user_experience.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends user_experienceFindFirstOrThrowArgs>(args?: SelectSubset<T, user_experienceFindFirstOrThrowArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more User_experiences that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_experienceFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all User_experiences
-     * const user_experiences = await prisma.user_experience.findMany()
-     * 
-     * // Get first 10 User_experiences
-     * const user_experiences = await prisma.user_experience.findMany({ take: 10 })
-     * 
-     * // Only select the `eid`
-     * const user_experienceWithEidOnly = await prisma.user_experience.findMany({ select: { eid: true } })
-     * 
-     */
-    findMany<T extends user_experienceFindManyArgs>(args?: SelectSubset<T, user_experienceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a User_experience.
-     * @param {user_experienceCreateArgs} args - Arguments to create a User_experience.
-     * @example
-     * // Create one User_experience
-     * const User_experience = await prisma.user_experience.create({
-     *   data: {
-     *     // ... data to create a User_experience
-     *   }
-     * })
-     * 
-     */
-    create<T extends user_experienceCreateArgs>(args: SelectSubset<T, user_experienceCreateArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many User_experiences.
-     * @param {user_experienceCreateManyArgs} args - Arguments to create many User_experiences.
-     * @example
-     * // Create many User_experiences
-     * const user_experience = await prisma.user_experience.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends user_experienceCreateManyArgs>(args?: SelectSubset<T, user_experienceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many User_experiences and returns the data saved in the database.
-     * @param {user_experienceCreateManyAndReturnArgs} args - Arguments to create many User_experiences.
-     * @example
-     * // Create many User_experiences
-     * const user_experience = await prisma.user_experience.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many User_experiences and only return the `eid`
-     * const user_experienceWithEidOnly = await prisma.user_experience.createManyAndReturn({
-     *   select: { eid: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends user_experienceCreateManyAndReturnArgs>(args?: SelectSubset<T, user_experienceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a User_experience.
-     * @param {user_experienceDeleteArgs} args - Arguments to delete one User_experience.
-     * @example
-     * // Delete one User_experience
-     * const User_experience = await prisma.user_experience.delete({
-     *   where: {
-     *     // ... filter to delete one User_experience
-     *   }
-     * })
-     * 
-     */
-    delete<T extends user_experienceDeleteArgs>(args: SelectSubset<T, user_experienceDeleteArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one User_experience.
-     * @param {user_experienceUpdateArgs} args - Arguments to update one User_experience.
-     * @example
-     * // Update one User_experience
-     * const user_experience = await prisma.user_experience.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends user_experienceUpdateArgs>(args: SelectSubset<T, user_experienceUpdateArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more User_experiences.
-     * @param {user_experienceDeleteManyArgs} args - Arguments to filter User_experiences to delete.
-     * @example
-     * // Delete a few User_experiences
-     * const { count } = await prisma.user_experience.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends user_experienceDeleteManyArgs>(args?: SelectSubset<T, user_experienceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more User_experiences.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_experienceUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many User_experiences
-     * const user_experience = await prisma.user_experience.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends user_experienceUpdateManyArgs>(args: SelectSubset<T, user_experienceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more User_experiences and returns the data updated in the database.
-     * @param {user_experienceUpdateManyAndReturnArgs} args - Arguments to update many User_experiences.
-     * @example
-     * // Update many User_experiences
-     * const user_experience = await prisma.user_experience.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more User_experiences and only return the `eid`
-     * const user_experienceWithEidOnly = await prisma.user_experience.updateManyAndReturn({
-     *   select: { eid: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends user_experienceUpdateManyAndReturnArgs>(args: SelectSubset<T, user_experienceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one User_experience.
-     * @param {user_experienceUpsertArgs} args - Arguments to update or create a User_experience.
-     * @example
-     * // Update or create a User_experience
-     * const user_experience = await prisma.user_experience.upsert({
-     *   create: {
-     *     // ... data to create a User_experience
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the User_experience we want to update
-     *   }
-     * })
-     */
-    upsert<T extends user_experienceUpsertArgs>(args: SelectSubset<T, user_experienceUpsertArgs<ExtArgs>>): Prisma__user_experienceClient<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of User_experiences.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_experienceCountArgs} args - Arguments to filter User_experiences to count.
-     * @example
-     * // Count the number of User_experiences
-     * const count = await prisma.user_experience.count({
-     *   where: {
-     *     // ... the filter for the User_experiences we want to count
-     *   }
-     * })
-    **/
-    count<T extends user_experienceCountArgs>(
-      args?: Subset<T, user_experienceCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], User_experienceCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a User_experience.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {User_experienceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends User_experienceAggregateArgs>(args: Subset<T, User_experienceAggregateArgs>): Prisma.PrismaPromise<GetUser_experienceAggregateType<T>>
-
-    /**
-     * Group by User_experience.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_experienceGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends user_experienceGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: user_experienceGroupByArgs['orderBy'] }
-        : { orderBy?: user_experienceGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, user_experienceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUser_experienceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the user_experience model
-   */
-  readonly fields: user_experienceFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for user_experience.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__user_experienceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    experience<T extends experienceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, experienceDefaultArgs<ExtArgs>>): Prisma__experienceClient<$Result.GetResult<Prisma.$experiencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the user_experience model
-   */ 
-  interface user_experienceFieldRefs {
-    readonly eid: FieldRef<"user_experience", 'Int'>
-    readonly uid: FieldRef<"user_experience", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * user_experience findUnique
-   */
-  export type user_experienceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * Filter, which user_experience to fetch.
-     */
-    where: user_experienceWhereUniqueInput
-  }
-
-  /**
-   * user_experience findUniqueOrThrow
-   */
-  export type user_experienceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * Filter, which user_experience to fetch.
-     */
-    where: user_experienceWhereUniqueInput
-  }
-
-  /**
-   * user_experience findFirst
-   */
-  export type user_experienceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * Filter, which user_experience to fetch.
-     */
-    where?: user_experienceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_experiences to fetch.
-     */
-    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for user_experiences.
-     */
-    cursor?: user_experienceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_experiences from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_experiences.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of user_experiences.
-     */
-    distinct?: User_experienceScalarFieldEnum | User_experienceScalarFieldEnum[]
-  }
-
-  /**
-   * user_experience findFirstOrThrow
-   */
-  export type user_experienceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * Filter, which user_experience to fetch.
-     */
-    where?: user_experienceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_experiences to fetch.
-     */
-    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for user_experiences.
-     */
-    cursor?: user_experienceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_experiences from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_experiences.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of user_experiences.
-     */
-    distinct?: User_experienceScalarFieldEnum | User_experienceScalarFieldEnum[]
-  }
-
-  /**
-   * user_experience findMany
-   */
-  export type user_experienceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * Filter, which user_experiences to fetch.
-     */
-    where?: user_experienceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_experiences to fetch.
-     */
-    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing user_experiences.
-     */
-    cursor?: user_experienceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_experiences from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_experiences.
-     */
-    skip?: number
-    distinct?: User_experienceScalarFieldEnum | User_experienceScalarFieldEnum[]
-  }
-
-  /**
-   * user_experience create
-   */
-  export type user_experienceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * The data needed to create a user_experience.
-     */
-    data: XOR<user_experienceCreateInput, user_experienceUncheckedCreateInput>
-  }
-
-  /**
-   * user_experience createMany
-   */
-  export type user_experienceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many user_experiences.
-     */
-    data: user_experienceCreateManyInput | user_experienceCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * user_experience createManyAndReturn
-   */
-  export type user_experienceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * The data used to create many user_experiences.
-     */
-    data: user_experienceCreateManyInput | user_experienceCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * user_experience update
-   */
-  export type user_experienceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * The data needed to update a user_experience.
-     */
-    data: XOR<user_experienceUpdateInput, user_experienceUncheckedUpdateInput>
-    /**
-     * Choose, which user_experience to update.
-     */
-    where: user_experienceWhereUniqueInput
-  }
-
-  /**
-   * user_experience updateMany
-   */
-  export type user_experienceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update user_experiences.
-     */
-    data: XOR<user_experienceUpdateManyMutationInput, user_experienceUncheckedUpdateManyInput>
-    /**
-     * Filter which user_experiences to update
-     */
-    where?: user_experienceWhereInput
-    /**
-     * Limit how many user_experiences to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * user_experience updateManyAndReturn
-   */
-  export type user_experienceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * The data used to update user_experiences.
-     */
-    data: XOR<user_experienceUpdateManyMutationInput, user_experienceUncheckedUpdateManyInput>
-    /**
-     * Filter which user_experiences to update
-     */
-    where?: user_experienceWhereInput
-    /**
-     * Limit how many user_experiences to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * user_experience upsert
-   */
-  export type user_experienceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * The filter to search for the user_experience to update in case it exists.
-     */
-    where: user_experienceWhereUniqueInput
-    /**
-     * In case the user_experience found by the `where` argument doesn't exist, create a new user_experience with this data.
-     */
-    create: XOR<user_experienceCreateInput, user_experienceUncheckedCreateInput>
-    /**
-     * In case the user_experience was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<user_experienceUpdateInput, user_experienceUncheckedUpdateInput>
-  }
-
-  /**
-   * user_experience delete
-   */
-  export type user_experienceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    /**
-     * Filter which user_experience to delete.
-     */
-    where: user_experienceWhereUniqueInput
-  }
-
-  /**
-   * user_experience deleteMany
-   */
-  export type user_experienceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which user_experiences to delete
-     */
-    where?: user_experienceWhereInput
-    /**
-     * Limit how many user_experiences to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * user_experience without action
-   */
-  export type user_experienceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model education
    */
 
@@ -7512,10 +6225,12 @@ export namespace Prisma {
 
   export type EducationAvgAggregateOutputType = {
     edid: number | null
+    uid: number | null
   }
 
   export type EducationSumAggregateOutputType = {
     edid: number | null
+    uid: number | null
   }
 
   export type EducationMinAggregateOutputType = {
@@ -7525,6 +6240,7 @@ export namespace Prisma {
     startdate: Date | null
     enddate: Date | null
     style: string | null
+    uid: number | null
   }
 
   export type EducationMaxAggregateOutputType = {
@@ -7534,6 +6250,7 @@ export namespace Prisma {
     startdate: Date | null
     enddate: Date | null
     style: string | null
+    uid: number | null
   }
 
   export type EducationCountAggregateOutputType = {
@@ -7543,16 +6260,19 @@ export namespace Prisma {
     startdate: number
     enddate: number
     style: number
+    uid: number
     _all: number
   }
 
 
   export type EducationAvgAggregateInputType = {
     edid?: true
+    uid?: true
   }
 
   export type EducationSumAggregateInputType = {
     edid?: true
+    uid?: true
   }
 
   export type EducationMinAggregateInputType = {
@@ -7562,6 +6282,7 @@ export namespace Prisma {
     startdate?: true
     enddate?: true
     style?: true
+    uid?: true
   }
 
   export type EducationMaxAggregateInputType = {
@@ -7571,6 +6292,7 @@ export namespace Prisma {
     startdate?: true
     enddate?: true
     style?: true
+    uid?: true
   }
 
   export type EducationCountAggregateInputType = {
@@ -7580,6 +6302,7 @@ export namespace Prisma {
     startdate?: true
     enddate?: true
     style?: true
+    uid?: true
     _all?: true
   }
 
@@ -7676,6 +6399,7 @@ export namespace Prisma {
     startdate: Date
     enddate: Date
     style: string
+    uid: number
     _count: EducationCountAggregateOutputType | null
     _avg: EducationAvgAggregateOutputType | null
     _sum: EducationSumAggregateOutputType | null
@@ -7704,8 +6428,8 @@ export namespace Prisma {
     startdate?: boolean
     enddate?: boolean
     style?: boolean
-    user_education?: boolean | education$user_educationArgs<ExtArgs>
-    _count?: boolean | EducationCountOutputTypeDefaultArgs<ExtArgs>
+    uid?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
 
   export type educationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7715,6 +6439,8 @@ export namespace Prisma {
     startdate?: boolean
     enddate?: boolean
     style?: boolean
+    uid?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
 
   export type educationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7724,6 +6450,8 @@ export namespace Prisma {
     startdate?: boolean
     enddate?: boolean
     style?: boolean
+    uid?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
 
   export type educationSelectScalar = {
@@ -7733,20 +6461,24 @@ export namespace Prisma {
     startdate?: boolean
     enddate?: boolean
     style?: boolean
+    uid?: boolean
   }
 
-  export type educationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"edid" | "inst" | "degree" | "startdate" | "enddate" | "style", ExtArgs["result"]["education"]>
+  export type educationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"edid" | "inst" | "degree" | "startdate" | "enddate" | "style" | "uid", ExtArgs["result"]["education"]>
   export type educationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_education?: boolean | education$user_educationArgs<ExtArgs>
-    _count?: boolean | EducationCountOutputTypeDefaultArgs<ExtArgs>
+    user?: boolean | userDefaultArgs<ExtArgs>
   }
-  export type educationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type educationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type educationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type educationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
 
   export type $educationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "education"
     objects: {
-      user_education: Prisma.$user_educationPayload<ExtArgs>[]
+      user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       edid: number
@@ -7755,6 +6487,7 @@ export namespace Prisma {
       startdate: Date
       enddate: Date
       style: string
+      uid: number
     }, ExtArgs["result"]["education"]>
     composites: {}
   }
@@ -8149,7 +6882,7 @@ export namespace Prisma {
    */
   export interface Prisma__educationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user_education<T extends education$user_educationArgs<ExtArgs> = {}>(args?: Subset<T, education$user_educationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8185,6 +6918,7 @@ export namespace Prisma {
     readonly startdate: FieldRef<"education", 'DateTime'>
     readonly enddate: FieldRef<"education", 'DateTime'>
     readonly style: FieldRef<"education", 'String'>
+    readonly uid: FieldRef<"education", 'Int'>
   }
     
 
@@ -8434,6 +7168,10 @@ export namespace Prisma {
      */
     data: educationCreateManyInput | educationCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: educationIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8504,6 +7242,10 @@ export namespace Prisma {
      * Limit how many educations to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: educationIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8573,30 +7315,6 @@ export namespace Prisma {
   }
 
   /**
-   * education.user_education
-   */
-  export type education$user_educationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    where?: user_educationWhereInput
-    orderBy?: user_educationOrderByWithRelationInput | user_educationOrderByWithRelationInput[]
-    cursor?: user_educationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: User_educationScalarFieldEnum | User_educationScalarFieldEnum[]
-  }
-
-  /**
    * education without action
    */
   export type educationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8616,1071 +7334,6 @@ export namespace Prisma {
 
 
   /**
-   * Model user_education
-   */
-
-  export type AggregateUser_education = {
-    _count: User_educationCountAggregateOutputType | null
-    _avg: User_educationAvgAggregateOutputType | null
-    _sum: User_educationSumAggregateOutputType | null
-    _min: User_educationMinAggregateOutputType | null
-    _max: User_educationMaxAggregateOutputType | null
-  }
-
-  export type User_educationAvgAggregateOutputType = {
-    edid: number | null
-    uid: number | null
-  }
-
-  export type User_educationSumAggregateOutputType = {
-    edid: number | null
-    uid: number | null
-  }
-
-  export type User_educationMinAggregateOutputType = {
-    edid: number | null
-    uid: number | null
-  }
-
-  export type User_educationMaxAggregateOutputType = {
-    edid: number | null
-    uid: number | null
-  }
-
-  export type User_educationCountAggregateOutputType = {
-    edid: number
-    uid: number
-    _all: number
-  }
-
-
-  export type User_educationAvgAggregateInputType = {
-    edid?: true
-    uid?: true
-  }
-
-  export type User_educationSumAggregateInputType = {
-    edid?: true
-    uid?: true
-  }
-
-  export type User_educationMinAggregateInputType = {
-    edid?: true
-    uid?: true
-  }
-
-  export type User_educationMaxAggregateInputType = {
-    edid?: true
-    uid?: true
-  }
-
-  export type User_educationCountAggregateInputType = {
-    edid?: true
-    uid?: true
-    _all?: true
-  }
-
-  export type User_educationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which user_education to aggregate.
-     */
-    where?: user_educationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_educations to fetch.
-     */
-    orderBy?: user_educationOrderByWithRelationInput | user_educationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: user_educationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_educations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_educations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned user_educations
-    **/
-    _count?: true | User_educationCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: User_educationAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: User_educationSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: User_educationMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: User_educationMaxAggregateInputType
-  }
-
-  export type GetUser_educationAggregateType<T extends User_educationAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser_education]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUser_education[P]>
-      : GetScalarType<T[P], AggregateUser_education[P]>
-  }
-
-
-
-
-  export type user_educationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_educationWhereInput
-    orderBy?: user_educationOrderByWithAggregationInput | user_educationOrderByWithAggregationInput[]
-    by: User_educationScalarFieldEnum[] | User_educationScalarFieldEnum
-    having?: user_educationScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: User_educationCountAggregateInputType | true
-    _avg?: User_educationAvgAggregateInputType
-    _sum?: User_educationSumAggregateInputType
-    _min?: User_educationMinAggregateInputType
-    _max?: User_educationMaxAggregateInputType
-  }
-
-  export type User_educationGroupByOutputType = {
-    edid: number
-    uid: number
-    _count: User_educationCountAggregateOutputType | null
-    _avg: User_educationAvgAggregateOutputType | null
-    _sum: User_educationSumAggregateOutputType | null
-    _min: User_educationMinAggregateOutputType | null
-    _max: User_educationMaxAggregateOutputType | null
-  }
-
-  type GetUser_educationGroupByPayload<T extends user_educationGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<User_educationGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof User_educationGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], User_educationGroupByOutputType[P]>
-            : GetScalarType<T[P], User_educationGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type user_educationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    edid?: boolean
-    uid?: boolean
-    education?: boolean | educationDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_education"]>
-
-  export type user_educationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    edid?: boolean
-    uid?: boolean
-    education?: boolean | educationDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_education"]>
-
-  export type user_educationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    edid?: boolean
-    uid?: boolean
-    education?: boolean | educationDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user_education"]>
-
-  export type user_educationSelectScalar = {
-    edid?: boolean
-    uid?: boolean
-  }
-
-  export type user_educationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"edid" | "uid", ExtArgs["result"]["user_education"]>
-  export type user_educationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    education?: boolean | educationDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-  export type user_educationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    education?: boolean | educationDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-  export type user_educationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    education?: boolean | educationDefaultArgs<ExtArgs>
-    user?: boolean | userDefaultArgs<ExtArgs>
-  }
-
-  export type $user_educationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "user_education"
-    objects: {
-      education: Prisma.$educationPayload<ExtArgs>
-      user: Prisma.$userPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      edid: number
-      uid: number
-    }, ExtArgs["result"]["user_education"]>
-    composites: {}
-  }
-
-  type user_educationGetPayload<S extends boolean | null | undefined | user_educationDefaultArgs> = $Result.GetResult<Prisma.$user_educationPayload, S>
-
-  type user_educationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<user_educationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: User_educationCountAggregateInputType | true
-    }
-
-  export interface user_educationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['user_education'], meta: { name: 'user_education' } }
-    /**
-     * Find zero or one User_education that matches the filter.
-     * @param {user_educationFindUniqueArgs} args - Arguments to find a User_education
-     * @example
-     * // Get one User_education
-     * const user_education = await prisma.user_education.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends user_educationFindUniqueArgs>(args: SelectSubset<T, user_educationFindUniqueArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one User_education that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {user_educationFindUniqueOrThrowArgs} args - Arguments to find a User_education
-     * @example
-     * // Get one User_education
-     * const user_education = await prisma.user_education.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends user_educationFindUniqueOrThrowArgs>(args: SelectSubset<T, user_educationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User_education that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_educationFindFirstArgs} args - Arguments to find a User_education
-     * @example
-     * // Get one User_education
-     * const user_education = await prisma.user_education.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends user_educationFindFirstArgs>(args?: SelectSubset<T, user_educationFindFirstArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User_education that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_educationFindFirstOrThrowArgs} args - Arguments to find a User_education
-     * @example
-     * // Get one User_education
-     * const user_education = await prisma.user_education.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends user_educationFindFirstOrThrowArgs>(args?: SelectSubset<T, user_educationFindFirstOrThrowArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more User_educations that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_educationFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all User_educations
-     * const user_educations = await prisma.user_education.findMany()
-     * 
-     * // Get first 10 User_educations
-     * const user_educations = await prisma.user_education.findMany({ take: 10 })
-     * 
-     * // Only select the `edid`
-     * const user_educationWithEdidOnly = await prisma.user_education.findMany({ select: { edid: true } })
-     * 
-     */
-    findMany<T extends user_educationFindManyArgs>(args?: SelectSubset<T, user_educationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a User_education.
-     * @param {user_educationCreateArgs} args - Arguments to create a User_education.
-     * @example
-     * // Create one User_education
-     * const User_education = await prisma.user_education.create({
-     *   data: {
-     *     // ... data to create a User_education
-     *   }
-     * })
-     * 
-     */
-    create<T extends user_educationCreateArgs>(args: SelectSubset<T, user_educationCreateArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many User_educations.
-     * @param {user_educationCreateManyArgs} args - Arguments to create many User_educations.
-     * @example
-     * // Create many User_educations
-     * const user_education = await prisma.user_education.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends user_educationCreateManyArgs>(args?: SelectSubset<T, user_educationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many User_educations and returns the data saved in the database.
-     * @param {user_educationCreateManyAndReturnArgs} args - Arguments to create many User_educations.
-     * @example
-     * // Create many User_educations
-     * const user_education = await prisma.user_education.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many User_educations and only return the `edid`
-     * const user_educationWithEdidOnly = await prisma.user_education.createManyAndReturn({
-     *   select: { edid: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends user_educationCreateManyAndReturnArgs>(args?: SelectSubset<T, user_educationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a User_education.
-     * @param {user_educationDeleteArgs} args - Arguments to delete one User_education.
-     * @example
-     * // Delete one User_education
-     * const User_education = await prisma.user_education.delete({
-     *   where: {
-     *     // ... filter to delete one User_education
-     *   }
-     * })
-     * 
-     */
-    delete<T extends user_educationDeleteArgs>(args: SelectSubset<T, user_educationDeleteArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one User_education.
-     * @param {user_educationUpdateArgs} args - Arguments to update one User_education.
-     * @example
-     * // Update one User_education
-     * const user_education = await prisma.user_education.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends user_educationUpdateArgs>(args: SelectSubset<T, user_educationUpdateArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more User_educations.
-     * @param {user_educationDeleteManyArgs} args - Arguments to filter User_educations to delete.
-     * @example
-     * // Delete a few User_educations
-     * const { count } = await prisma.user_education.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends user_educationDeleteManyArgs>(args?: SelectSubset<T, user_educationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more User_educations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_educationUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many User_educations
-     * const user_education = await prisma.user_education.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends user_educationUpdateManyArgs>(args: SelectSubset<T, user_educationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more User_educations and returns the data updated in the database.
-     * @param {user_educationUpdateManyAndReturnArgs} args - Arguments to update many User_educations.
-     * @example
-     * // Update many User_educations
-     * const user_education = await prisma.user_education.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more User_educations and only return the `edid`
-     * const user_educationWithEdidOnly = await prisma.user_education.updateManyAndReturn({
-     *   select: { edid: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends user_educationUpdateManyAndReturnArgs>(args: SelectSubset<T, user_educationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one User_education.
-     * @param {user_educationUpsertArgs} args - Arguments to update or create a User_education.
-     * @example
-     * // Update or create a User_education
-     * const user_education = await prisma.user_education.upsert({
-     *   create: {
-     *     // ... data to create a User_education
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the User_education we want to update
-     *   }
-     * })
-     */
-    upsert<T extends user_educationUpsertArgs>(args: SelectSubset<T, user_educationUpsertArgs<ExtArgs>>): Prisma__user_educationClient<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of User_educations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_educationCountArgs} args - Arguments to filter User_educations to count.
-     * @example
-     * // Count the number of User_educations
-     * const count = await prisma.user_education.count({
-     *   where: {
-     *     // ... the filter for the User_educations we want to count
-     *   }
-     * })
-    **/
-    count<T extends user_educationCountArgs>(
-      args?: Subset<T, user_educationCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], User_educationCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a User_education.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {User_educationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends User_educationAggregateArgs>(args: Subset<T, User_educationAggregateArgs>): Prisma.PrismaPromise<GetUser_educationAggregateType<T>>
-
-    /**
-     * Group by User_education.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {user_educationGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends user_educationGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: user_educationGroupByArgs['orderBy'] }
-        : { orderBy?: user_educationGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, user_educationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUser_educationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the user_education model
-   */
-  readonly fields: user_educationFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for user_education.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__user_educationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    education<T extends educationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, educationDefaultArgs<ExtArgs>>): Prisma__educationClient<$Result.GetResult<Prisma.$educationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the user_education model
-   */ 
-  interface user_educationFieldRefs {
-    readonly edid: FieldRef<"user_education", 'Int'>
-    readonly uid: FieldRef<"user_education", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * user_education findUnique
-   */
-  export type user_educationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * Filter, which user_education to fetch.
-     */
-    where: user_educationWhereUniqueInput
-  }
-
-  /**
-   * user_education findUniqueOrThrow
-   */
-  export type user_educationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * Filter, which user_education to fetch.
-     */
-    where: user_educationWhereUniqueInput
-  }
-
-  /**
-   * user_education findFirst
-   */
-  export type user_educationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * Filter, which user_education to fetch.
-     */
-    where?: user_educationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_educations to fetch.
-     */
-    orderBy?: user_educationOrderByWithRelationInput | user_educationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for user_educations.
-     */
-    cursor?: user_educationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_educations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_educations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of user_educations.
-     */
-    distinct?: User_educationScalarFieldEnum | User_educationScalarFieldEnum[]
-  }
-
-  /**
-   * user_education findFirstOrThrow
-   */
-  export type user_educationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * Filter, which user_education to fetch.
-     */
-    where?: user_educationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_educations to fetch.
-     */
-    orderBy?: user_educationOrderByWithRelationInput | user_educationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for user_educations.
-     */
-    cursor?: user_educationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_educations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_educations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of user_educations.
-     */
-    distinct?: User_educationScalarFieldEnum | User_educationScalarFieldEnum[]
-  }
-
-  /**
-   * user_education findMany
-   */
-  export type user_educationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * Filter, which user_educations to fetch.
-     */
-    where?: user_educationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of user_educations to fetch.
-     */
-    orderBy?: user_educationOrderByWithRelationInput | user_educationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing user_educations.
-     */
-    cursor?: user_educationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` user_educations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` user_educations.
-     */
-    skip?: number
-    distinct?: User_educationScalarFieldEnum | User_educationScalarFieldEnum[]
-  }
-
-  /**
-   * user_education create
-   */
-  export type user_educationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * The data needed to create a user_education.
-     */
-    data: XOR<user_educationCreateInput, user_educationUncheckedCreateInput>
-  }
-
-  /**
-   * user_education createMany
-   */
-  export type user_educationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many user_educations.
-     */
-    data: user_educationCreateManyInput | user_educationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * user_education createManyAndReturn
-   */
-  export type user_educationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * The data used to create many user_educations.
-     */
-    data: user_educationCreateManyInput | user_educationCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * user_education update
-   */
-  export type user_educationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * The data needed to update a user_education.
-     */
-    data: XOR<user_educationUpdateInput, user_educationUncheckedUpdateInput>
-    /**
-     * Choose, which user_education to update.
-     */
-    where: user_educationWhereUniqueInput
-  }
-
-  /**
-   * user_education updateMany
-   */
-  export type user_educationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update user_educations.
-     */
-    data: XOR<user_educationUpdateManyMutationInput, user_educationUncheckedUpdateManyInput>
-    /**
-     * Filter which user_educations to update
-     */
-    where?: user_educationWhereInput
-    /**
-     * Limit how many user_educations to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * user_education updateManyAndReturn
-   */
-  export type user_educationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * The data used to update user_educations.
-     */
-    data: XOR<user_educationUpdateManyMutationInput, user_educationUncheckedUpdateManyInput>
-    /**
-     * Filter which user_educations to update
-     */
-    where?: user_educationWhereInput
-    /**
-     * Limit how many user_educations to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * user_education upsert
-   */
-  export type user_educationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * The filter to search for the user_education to update in case it exists.
-     */
-    where: user_educationWhereUniqueInput
-    /**
-     * In case the user_education found by the `where` argument doesn't exist, create a new user_education with this data.
-     */
-    create: XOR<user_educationCreateInput, user_educationUncheckedCreateInput>
-    /**
-     * In case the user_education was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<user_educationUpdateInput, user_educationUncheckedUpdateInput>
-  }
-
-  /**
-   * user_education delete
-   */
-  export type user_educationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-    /**
-     * Filter which user_education to delete.
-     */
-    where: user_educationWhereUniqueInput
-  }
-
-  /**
-   * user_education deleteMany
-   */
-  export type user_educationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which user_educations to delete
-     */
-    where?: user_educationWhereInput
-    /**
-     * Limit how many user_educations to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * user_education without action
-   */
-  export type user_educationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_education
-     */
-    select?: user_educationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_education
-     */
-    omit?: user_educationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_educationInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model skills
    */
 
@@ -9693,24 +7346,29 @@ export namespace Prisma {
   }
 
   export type SkillsAvgAggregateOutputType = {
+    sid: number | null
     uid: number | null
   }
 
   export type SkillsSumAggregateOutputType = {
+    sid: number | null
     uid: number | null
   }
 
   export type SkillsMinAggregateOutputType = {
+    sid: number | null
     uid: number | null
     style: string | null
   }
 
   export type SkillsMaxAggregateOutputType = {
+    sid: number | null
     uid: number | null
     style: string | null
   }
 
   export type SkillsCountAggregateOutputType = {
+    sid: number
     uid: number
     frontend: number
     style: number
@@ -9724,24 +7382,29 @@ export namespace Prisma {
 
 
   export type SkillsAvgAggregateInputType = {
+    sid?: true
     uid?: true
   }
 
   export type SkillsSumAggregateInputType = {
+    sid?: true
     uid?: true
   }
 
   export type SkillsMinAggregateInputType = {
+    sid?: true
     uid?: true
     style?: true
   }
 
   export type SkillsMaxAggregateInputType = {
+    sid?: true
     uid?: true
     style?: true
   }
 
   export type SkillsCountAggregateInputType = {
+    sid?: true
     uid?: true
     frontend?: true
     style?: true
@@ -9840,6 +7503,7 @@ export namespace Prisma {
   }
 
   export type SkillsGroupByOutputType = {
+    sid: number
     uid: number
     frontend: string[]
     style: string
@@ -9870,6 +7534,7 @@ export namespace Prisma {
 
 
   export type skillsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    sid?: boolean
     uid?: boolean
     frontend?: boolean
     style?: boolean
@@ -9882,6 +7547,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    sid?: boolean
     uid?: boolean
     frontend?: boolean
     style?: boolean
@@ -9894,6 +7560,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    sid?: boolean
     uid?: boolean
     frontend?: boolean
     style?: boolean
@@ -9906,6 +7573,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectScalar = {
+    sid?: boolean
     uid?: boolean
     frontend?: boolean
     style?: boolean
@@ -9916,7 +7584,7 @@ export namespace Prisma {
     languages?: boolean
   }
 
-  export type skillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "frontend" | "style" | "backend" | "database" | "mobile" | "other" | "languages", ExtArgs["result"]["skills"]>
+  export type skillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sid" | "uid" | "frontend" | "style" | "backend" | "database" | "mobile" | "other" | "languages", ExtArgs["result"]["skills"]>
   export type skillsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -9933,6 +7601,7 @@ export namespace Prisma {
       user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      sid: number
       uid: number
       frontend: string[]
       style: string
@@ -10024,8 +7693,8 @@ export namespace Prisma {
      * // Get first 10 Skills
      * const skills = await prisma.skills.findMany({ take: 10 })
      * 
-     * // Only select the `uid`
-     * const skillsWithUidOnly = await prisma.skills.findMany({ select: { uid: true } })
+     * // Only select the `sid`
+     * const skillsWithSidOnly = await prisma.skills.findMany({ select: { sid: true } })
      * 
      */
     findMany<T extends skillsFindManyArgs>(args?: SelectSubset<T, skillsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$skillsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -10069,9 +7738,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Skills and only return the `uid`
-     * const skillsWithUidOnly = await prisma.skills.createManyAndReturn({
-     *   select: { uid: true },
+     * // Create many Skills and only return the `sid`
+     * const skillsWithSidOnly = await prisma.skills.createManyAndReturn({
+     *   select: { sid: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -10160,9 +7829,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Skills and only return the `uid`
-     * const skillsWithUidOnly = await prisma.skills.updateManyAndReturn({
-     *   select: { uid: true },
+     * // Update zero or more Skills and only return the `sid`
+     * const skillsWithSidOnly = await prisma.skills.updateManyAndReturn({
+     *   select: { sid: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10365,6 +8034,7 @@ export namespace Prisma {
    * Fields of the skills model
    */ 
   interface skillsFieldRefs {
+    readonly sid: FieldRef<"skills", 'Int'>
     readonly uid: FieldRef<"skills", 'Int'>
     readonly frontend: FieldRef<"skills", 'String[]'>
     readonly style: FieldRef<"skills", 'String'>
@@ -10800,14 +8470,17 @@ export namespace Prisma {
   }
 
   export type ContactAvgAggregateOutputType = {
+    cid: number | null
     uid: number | null
   }
 
   export type ContactSumAggregateOutputType = {
+    cid: number | null
     uid: number | null
   }
 
   export type ContactMinAggregateOutputType = {
+    cid: number | null
     uid: number | null
     email: string | null
     phone: string | null
@@ -10816,6 +8489,7 @@ export namespace Prisma {
   }
 
   export type ContactMaxAggregateOutputType = {
+    cid: number | null
     uid: number | null
     email: string | null
     phone: string | null
@@ -10824,6 +8498,7 @@ export namespace Prisma {
   }
 
   export type ContactCountAggregateOutputType = {
+    cid: number
     uid: number
     email: number
     phone: number
@@ -10834,14 +8509,17 @@ export namespace Prisma {
 
 
   export type ContactAvgAggregateInputType = {
+    cid?: true
     uid?: true
   }
 
   export type ContactSumAggregateInputType = {
+    cid?: true
     uid?: true
   }
 
   export type ContactMinAggregateInputType = {
+    cid?: true
     uid?: true
     email?: true
     phone?: true
@@ -10850,6 +8528,7 @@ export namespace Prisma {
   }
 
   export type ContactMaxAggregateInputType = {
+    cid?: true
     uid?: true
     email?: true
     phone?: true
@@ -10858,6 +8537,7 @@ export namespace Prisma {
   }
 
   export type ContactCountAggregateInputType = {
+    cid?: true
     uid?: true
     email?: true
     phone?: true
@@ -10953,6 +8633,7 @@ export namespace Prisma {
   }
 
   export type ContactGroupByOutputType = {
+    cid: number
     uid: number
     email: string
     phone: string
@@ -10980,6 +8661,7 @@ export namespace Prisma {
 
 
   export type contactSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -10989,6 +8671,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["contact"]>
 
   export type contactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -10998,6 +8681,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["contact"]>
 
   export type contactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -11007,6 +8691,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["contact"]>
 
   export type contactSelectScalar = {
+    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -11014,7 +8699,7 @@ export namespace Prisma {
     linkedin?: boolean
   }
 
-  export type contactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "email" | "phone" | "location" | "linkedin", ExtArgs["result"]["contact"]>
+  export type contactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cid" | "uid" | "email" | "phone" | "location" | "linkedin", ExtArgs["result"]["contact"]>
   export type contactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -11031,6 +8716,7 @@ export namespace Prisma {
       user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      cid: number
       uid: number
       email: string
       phone: string
@@ -11119,8 +8805,8 @@ export namespace Prisma {
      * // Get first 10 Contacts
      * const contacts = await prisma.contact.findMany({ take: 10 })
      * 
-     * // Only select the `uid`
-     * const contactWithUidOnly = await prisma.contact.findMany({ select: { uid: true } })
+     * // Only select the `cid`
+     * const contactWithCidOnly = await prisma.contact.findMany({ select: { cid: true } })
      * 
      */
     findMany<T extends contactFindManyArgs>(args?: SelectSubset<T, contactFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -11164,9 +8850,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Contacts and only return the `uid`
-     * const contactWithUidOnly = await prisma.contact.createManyAndReturn({
-     *   select: { uid: true },
+     * // Create many Contacts and only return the `cid`
+     * const contactWithCidOnly = await prisma.contact.createManyAndReturn({
+     *   select: { cid: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -11255,9 +8941,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Contacts and only return the `uid`
-     * const contactWithUidOnly = await prisma.contact.updateManyAndReturn({
-     *   select: { uid: true },
+     * // Update zero or more Contacts and only return the `cid`
+     * const contactWithCidOnly = await prisma.contact.updateManyAndReturn({
+     *   select: { cid: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11460,6 +9146,7 @@ export namespace Prisma {
    * Fields of the contact model
    */ 
   interface contactFieldRefs {
+    readonly cid: FieldRef<"contact", 'Int'>
     readonly uid: FieldRef<"contact", 'Int'>
     readonly email: FieldRef<"contact", 'String'>
     readonly phone: FieldRef<"contact", 'String'>
@@ -11892,14 +9579,17 @@ export namespace Prisma {
   }
 
   export type AboutAvgAggregateOutputType = {
+    aid: number | null
     uid: number | null
   }
 
   export type AboutSumAggregateOutputType = {
+    aid: number | null
     uid: number | null
   }
 
   export type AboutMinAggregateOutputType = {
+    aid: number | null
     uid: number | null
     image: string | null
     about: string | null
@@ -11907,6 +9597,7 @@ export namespace Prisma {
   }
 
   export type AboutMaxAggregateOutputType = {
+    aid: number | null
     uid: number | null
     image: string | null
     about: string | null
@@ -11914,6 +9605,7 @@ export namespace Prisma {
   }
 
   export type AboutCountAggregateOutputType = {
+    aid: number
     uid: number
     image: number
     about: number
@@ -11923,14 +9615,17 @@ export namespace Prisma {
 
 
   export type AboutAvgAggregateInputType = {
+    aid?: true
     uid?: true
   }
 
   export type AboutSumAggregateInputType = {
+    aid?: true
     uid?: true
   }
 
   export type AboutMinAggregateInputType = {
+    aid?: true
     uid?: true
     image?: true
     about?: true
@@ -11938,6 +9633,7 @@ export namespace Prisma {
   }
 
   export type AboutMaxAggregateInputType = {
+    aid?: true
     uid?: true
     image?: true
     about?: true
@@ -11945,6 +9641,7 @@ export namespace Prisma {
   }
 
   export type AboutCountAggregateInputType = {
+    aid?: true
     uid?: true
     image?: true
     about?: true
@@ -12039,6 +9736,7 @@ export namespace Prisma {
   }
 
   export type AboutGroupByOutputType = {
+    aid: number
     uid: number
     image: string
     about: string
@@ -12065,6 +9763,7 @@ export namespace Prisma {
 
 
   export type AboutSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    aid?: boolean
     uid?: boolean
     image?: boolean
     about?: boolean
@@ -12073,6 +9772,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["about"]>
 
   export type AboutSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    aid?: boolean
     uid?: boolean
     image?: boolean
     about?: boolean
@@ -12081,6 +9781,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["about"]>
 
   export type AboutSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    aid?: boolean
     uid?: boolean
     image?: boolean
     about?: boolean
@@ -12089,13 +9790,14 @@ export namespace Prisma {
   }, ExtArgs["result"]["about"]>
 
   export type AboutSelectScalar = {
+    aid?: boolean
     uid?: boolean
     image?: boolean
     about?: boolean
     style?: boolean
   }
 
-  export type AboutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "image" | "about" | "style", ExtArgs["result"]["about"]>
+  export type AboutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"aid" | "uid" | "image" | "about" | "style", ExtArgs["result"]["about"]>
   export type AboutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -12112,6 +9814,7 @@ export namespace Prisma {
       user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      aid: number
       uid: number
       image: string
       about: string
@@ -12199,8 +9902,8 @@ export namespace Prisma {
      * // Get first 10 Abouts
      * const abouts = await prisma.about.findMany({ take: 10 })
      * 
-     * // Only select the `uid`
-     * const aboutWithUidOnly = await prisma.about.findMany({ select: { uid: true } })
+     * // Only select the `aid`
+     * const aboutWithAidOnly = await prisma.about.findMany({ select: { aid: true } })
      * 
      */
     findMany<T extends AboutFindManyArgs>(args?: SelectSubset<T, AboutFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -12244,9 +9947,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Abouts and only return the `uid`
-     * const aboutWithUidOnly = await prisma.about.createManyAndReturn({
-     *   select: { uid: true },
+     * // Create many Abouts and only return the `aid`
+     * const aboutWithAidOnly = await prisma.about.createManyAndReturn({
+     *   select: { aid: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -12335,9 +10038,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Abouts and only return the `uid`
-     * const aboutWithUidOnly = await prisma.about.updateManyAndReturn({
-     *   select: { uid: true },
+     * // Update zero or more Abouts and only return the `aid`
+     * const aboutWithAidOnly = await prisma.about.updateManyAndReturn({
+     *   select: { aid: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -12540,6 +10243,7 @@ export namespace Prisma {
    * Fields of the About model
    */ 
   interface AboutFieldRefs {
+    readonly aid: FieldRef<"About", 'Int'>
     readonly uid: FieldRef<"About", 'Int'>
     readonly image: FieldRef<"About", 'String'>
     readonly about: FieldRef<"About", 'String'>
@@ -12975,17 +10679,26 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     uid: 'uid',
     username: 'username',
-    password: 'password',
-    style: 'style',
-    hero: 'hero',
-    subhero: 'subhero'
+    password: 'password'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const HeroScalarFieldEnum: {
+    hid: 'hid',
+    uid: 'uid',
+    style: 'style',
+    hero: 'hero',
+    subhero: 'subhero'
+  };
+
+  export type HeroScalarFieldEnum = (typeof HeroScalarFieldEnum)[keyof typeof HeroScalarFieldEnum]
+
+
   export const ProjectScalarFieldEnum: {
     pid: 'pid',
+    uid: 'uid',
     title: 'title',
     image: 'image',
     desc: 'desc',
@@ -12998,33 +10711,18 @@ export namespace Prisma {
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
-  export const User_projectScalarFieldEnum: {
-    pid: 'pid',
-    uid: 'uid'
-  };
-
-  export type User_projectScalarFieldEnum = (typeof User_projectScalarFieldEnum)[keyof typeof User_projectScalarFieldEnum]
-
-
   export const ExperienceScalarFieldEnum: {
-    eid: 'eid',
+    exid: 'exid',
     title: 'title',
     corp: 'corp',
     style: 'style',
     startdate: 'startdate',
     enddate: 'enddate',
-    desc: 'desc'
-  };
-
-  export type ExperienceScalarFieldEnum = (typeof ExperienceScalarFieldEnum)[keyof typeof ExperienceScalarFieldEnum]
-
-
-  export const User_experienceScalarFieldEnum: {
-    eid: 'eid',
+    desc: 'desc',
     uid: 'uid'
   };
 
-  export type User_experienceScalarFieldEnum = (typeof User_experienceScalarFieldEnum)[keyof typeof User_experienceScalarFieldEnum]
+  export type ExperienceScalarFieldEnum = (typeof ExperienceScalarFieldEnum)[keyof typeof ExperienceScalarFieldEnum]
 
 
   export const EducationScalarFieldEnum: {
@@ -13033,21 +10731,15 @@ export namespace Prisma {
     degree: 'degree',
     startdate: 'startdate',
     enddate: 'enddate',
-    style: 'style'
+    style: 'style',
+    uid: 'uid'
   };
 
   export type EducationScalarFieldEnum = (typeof EducationScalarFieldEnum)[keyof typeof EducationScalarFieldEnum]
 
 
-  export const User_educationScalarFieldEnum: {
-    edid: 'edid',
-    uid: 'uid'
-  };
-
-  export type User_educationScalarFieldEnum = (typeof User_educationScalarFieldEnum)[keyof typeof User_educationScalarFieldEnum]
-
-
   export const SkillsScalarFieldEnum: {
+    sid: 'sid',
     uid: 'uid',
     frontend: 'frontend',
     style: 'style',
@@ -13062,6 +10754,7 @@ export namespace Prisma {
 
 
   export const ContactScalarFieldEnum: {
+    cid: 'cid',
     uid: 'uid',
     email: 'email',
     phone: 'phone',
@@ -13073,6 +10766,7 @@ export namespace Prisma {
 
 
   export const AboutScalarFieldEnum: {
+    aid: 'aid',
     uid: 'uid',
     image: 'image',
     about: 'about',
@@ -13169,30 +10863,26 @@ export namespace Prisma {
     uid?: IntFilter<"user"> | number
     username?: StringFilter<"user"> | string
     password?: StringFilter<"user"> | string
-    style?: StringFilter<"user"> | string
-    hero?: StringFilter<"user"> | string
-    subhero?: StringFilter<"user"> | string
-    skills?: XOR<SkillsNullableScalarRelationFilter, skillsWhereInput> | null
-    user_education?: User_educationListRelationFilter
-    user_experience?: User_experienceListRelationFilter
-    user_project?: User_projectListRelationFilter
+    skills?: SkillsListRelationFilter
     contact?: ContactListRelationFilter
     About?: AboutListRelationFilter
+    project?: ProjectListRelationFilter
+    experience?: ExperienceListRelationFilter
+    education?: EducationListRelationFilter
+    hero?: HeroListRelationFilter
   }
 
   export type userOrderByWithRelationInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    style?: SortOrder
-    hero?: SortOrder
-    subhero?: SortOrder
-    skills?: skillsOrderByWithRelationInput
-    user_education?: user_educationOrderByRelationAggregateInput
-    user_experience?: user_experienceOrderByRelationAggregateInput
-    user_project?: user_projectOrderByRelationAggregateInput
+    skills?: skillsOrderByRelationAggregateInput
     contact?: contactOrderByRelationAggregateInput
     About?: AboutOrderByRelationAggregateInput
+    project?: projectOrderByRelationAggregateInput
+    experience?: experienceOrderByRelationAggregateInput
+    education?: educationOrderByRelationAggregateInput
+    hero?: heroOrderByRelationAggregateInput
   }
 
   export type userWhereUniqueInput = Prisma.AtLeast<{
@@ -13202,24 +10892,19 @@ export namespace Prisma {
     OR?: userWhereInput[]
     NOT?: userWhereInput | userWhereInput[]
     password?: StringFilter<"user"> | string
-    style?: StringFilter<"user"> | string
-    hero?: StringFilter<"user"> | string
-    subhero?: StringFilter<"user"> | string
-    skills?: XOR<SkillsNullableScalarRelationFilter, skillsWhereInput> | null
-    user_education?: User_educationListRelationFilter
-    user_experience?: User_experienceListRelationFilter
-    user_project?: User_projectListRelationFilter
+    skills?: SkillsListRelationFilter
     contact?: ContactListRelationFilter
     About?: AboutListRelationFilter
+    project?: ProjectListRelationFilter
+    experience?: ExperienceListRelationFilter
+    education?: EducationListRelationFilter
+    hero?: HeroListRelationFilter
   }, "uid" | "username">
 
   export type userOrderByWithAggregationInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    style?: SortOrder
-    hero?: SortOrder
-    subhero?: SortOrder
     _count?: userCountOrderByAggregateInput
     _avg?: userAvgOrderByAggregateInput
     _max?: userMaxOrderByAggregateInput
@@ -13234,9 +10919,63 @@ export namespace Prisma {
     uid?: IntWithAggregatesFilter<"user"> | number
     username?: StringWithAggregatesFilter<"user"> | string
     password?: StringWithAggregatesFilter<"user"> | string
-    style?: StringWithAggregatesFilter<"user"> | string
-    hero?: StringWithAggregatesFilter<"user"> | string
-    subhero?: StringWithAggregatesFilter<"user"> | string
+  }
+
+  export type heroWhereInput = {
+    AND?: heroWhereInput | heroWhereInput[]
+    OR?: heroWhereInput[]
+    NOT?: heroWhereInput | heroWhereInput[]
+    hid?: IntFilter<"hero"> | number
+    uid?: IntFilter<"hero"> | number
+    style?: StringFilter<"hero"> | string
+    hero?: StringFilter<"hero"> | string
+    subhero?: StringFilter<"hero"> | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }
+
+  export type heroOrderByWithRelationInput = {
+    hid?: SortOrder
+    uid?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
+    user?: userOrderByWithRelationInput
+  }
+
+  export type heroWhereUniqueInput = Prisma.AtLeast<{
+    hid?: number
+    AND?: heroWhereInput | heroWhereInput[]
+    OR?: heroWhereInput[]
+    NOT?: heroWhereInput | heroWhereInput[]
+    uid?: IntFilter<"hero"> | number
+    style?: StringFilter<"hero"> | string
+    hero?: StringFilter<"hero"> | string
+    subhero?: StringFilter<"hero"> | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }, "hid">
+
+  export type heroOrderByWithAggregationInput = {
+    hid?: SortOrder
+    uid?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
+    _count?: heroCountOrderByAggregateInput
+    _avg?: heroAvgOrderByAggregateInput
+    _max?: heroMaxOrderByAggregateInput
+    _min?: heroMinOrderByAggregateInput
+    _sum?: heroSumOrderByAggregateInput
+  }
+
+  export type heroScalarWhereWithAggregatesInput = {
+    AND?: heroScalarWhereWithAggregatesInput | heroScalarWhereWithAggregatesInput[]
+    OR?: heroScalarWhereWithAggregatesInput[]
+    NOT?: heroScalarWhereWithAggregatesInput | heroScalarWhereWithAggregatesInput[]
+    hid?: IntWithAggregatesFilter<"hero"> | number
+    uid?: IntWithAggregatesFilter<"hero"> | number
+    style?: StringWithAggregatesFilter<"hero"> | string
+    hero?: StringWithAggregatesFilter<"hero"> | string
+    subhero?: StringWithAggregatesFilter<"hero"> | string
   }
 
   export type projectWhereInput = {
@@ -13244,6 +10983,7 @@ export namespace Prisma {
     OR?: projectWhereInput[]
     NOT?: projectWhereInput | projectWhereInput[]
     pid?: IntFilter<"project"> | number
+    uid?: IntFilter<"project"> | number
     title?: StringFilter<"project"> | string
     image?: StringFilter<"project"> | string
     desc?: StringFilter<"project"> | string
@@ -13251,11 +10991,12 @@ export namespace Prisma {
     github?: StringFilter<"project"> | string
     Link?: StringFilter<"project"> | string
     style?: StringFilter<"project"> | string
-    user_project?: User_projectListRelationFilter
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
   export type projectOrderByWithRelationInput = {
     pid?: SortOrder
+    uid?: SortOrder
     title?: SortOrder
     image?: SortOrder
     desc?: SortOrder
@@ -13263,7 +11004,7 @@ export namespace Prisma {
     github?: SortOrder
     Link?: SortOrder
     style?: SortOrder
-    user_project?: user_projectOrderByRelationAggregateInput
+    user?: userOrderByWithRelationInput
   }
 
   export type projectWhereUniqueInput = Prisma.AtLeast<{
@@ -13271,6 +11012,7 @@ export namespace Prisma {
     AND?: projectWhereInput | projectWhereInput[]
     OR?: projectWhereInput[]
     NOT?: projectWhereInput | projectWhereInput[]
+    uid?: IntFilter<"project"> | number
     title?: StringFilter<"project"> | string
     image?: StringFilter<"project"> | string
     desc?: StringFilter<"project"> | string
@@ -13278,11 +11020,12 @@ export namespace Prisma {
     github?: StringFilter<"project"> | string
     Link?: StringFilter<"project"> | string
     style?: StringFilter<"project"> | string
-    user_project?: User_projectListRelationFilter
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "pid">
 
   export type projectOrderByWithAggregationInput = {
     pid?: SortOrder
+    uid?: SortOrder
     title?: SortOrder
     image?: SortOrder
     desc?: SortOrder
@@ -13302,6 +11045,7 @@ export namespace Prisma {
     OR?: projectScalarWhereWithAggregatesInput[]
     NOT?: projectScalarWhereWithAggregatesInput | projectScalarWhereWithAggregatesInput[]
     pid?: IntWithAggregatesFilter<"project"> | number
+    uid?: IntWithAggregatesFilter<"project"> | number
     title?: StringWithAggregatesFilter<"project"> | string
     image?: StringWithAggregatesFilter<"project"> | string
     desc?: StringWithAggregatesFilter<"project"> | string
@@ -13311,79 +11055,35 @@ export namespace Prisma {
     style?: StringWithAggregatesFilter<"project"> | string
   }
 
-  export type user_projectWhereInput = {
-    AND?: user_projectWhereInput | user_projectWhereInput[]
-    OR?: user_projectWhereInput[]
-    NOT?: user_projectWhereInput | user_projectWhereInput[]
-    pid?: IntFilter<"user_project"> | number
-    uid?: IntFilter<"user_project"> | number
-    project?: XOR<ProjectScalarRelationFilter, projectWhereInput>
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }
-
-  export type user_projectOrderByWithRelationInput = {
-    pid?: SortOrder
-    uid?: SortOrder
-    project?: projectOrderByWithRelationInput
-    user?: userOrderByWithRelationInput
-  }
-
-  export type user_projectWhereUniqueInput = Prisma.AtLeast<{
-    pid_uid?: user_projectPidUidCompoundUniqueInput
-    AND?: user_projectWhereInput | user_projectWhereInput[]
-    OR?: user_projectWhereInput[]
-    NOT?: user_projectWhereInput | user_projectWhereInput[]
-    pid?: IntFilter<"user_project"> | number
-    uid?: IntFilter<"user_project"> | number
-    project?: XOR<ProjectScalarRelationFilter, projectWhereInput>
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "pid_uid">
-
-  export type user_projectOrderByWithAggregationInput = {
-    pid?: SortOrder
-    uid?: SortOrder
-    _count?: user_projectCountOrderByAggregateInput
-    _avg?: user_projectAvgOrderByAggregateInput
-    _max?: user_projectMaxOrderByAggregateInput
-    _min?: user_projectMinOrderByAggregateInput
-    _sum?: user_projectSumOrderByAggregateInput
-  }
-
-  export type user_projectScalarWhereWithAggregatesInput = {
-    AND?: user_projectScalarWhereWithAggregatesInput | user_projectScalarWhereWithAggregatesInput[]
-    OR?: user_projectScalarWhereWithAggregatesInput[]
-    NOT?: user_projectScalarWhereWithAggregatesInput | user_projectScalarWhereWithAggregatesInput[]
-    pid?: IntWithAggregatesFilter<"user_project"> | number
-    uid?: IntWithAggregatesFilter<"user_project"> | number
-  }
-
   export type experienceWhereInput = {
     AND?: experienceWhereInput | experienceWhereInput[]
     OR?: experienceWhereInput[]
     NOT?: experienceWhereInput | experienceWhereInput[]
-    eid?: IntFilter<"experience"> | number
+    exid?: IntFilter<"experience"> | number
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
     style?: StringFilter<"experience"> | string
     startdate?: DateTimeFilter<"experience"> | Date | string
     enddate?: DateTimeFilter<"experience"> | Date | string
     desc?: StringFilter<"experience"> | string
-    user_experience?: User_experienceListRelationFilter
+    uid?: IntFilter<"experience"> | number
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
   export type experienceOrderByWithRelationInput = {
-    eid?: SortOrder
+    exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
     style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
-    user_experience?: user_experienceOrderByRelationAggregateInput
+    uid?: SortOrder
+    user?: userOrderByWithRelationInput
   }
 
   export type experienceWhereUniqueInput = Prisma.AtLeast<{
-    eid?: number
+    exid?: number
     AND?: experienceWhereInput | experienceWhereInput[]
     OR?: experienceWhereInput[]
     NOT?: experienceWhereInput | experienceWhereInput[]
@@ -13393,17 +11093,19 @@ export namespace Prisma {
     startdate?: DateTimeFilter<"experience"> | Date | string
     enddate?: DateTimeFilter<"experience"> | Date | string
     desc?: StringFilter<"experience"> | string
-    user_experience?: User_experienceListRelationFilter
-  }, "eid">
+    uid?: IntFilter<"experience"> | number
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }, "exid">
 
   export type experienceOrderByWithAggregationInput = {
-    eid?: SortOrder
+    exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
     style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
+    uid?: SortOrder
     _count?: experienceCountOrderByAggregateInput
     _avg?: experienceAvgOrderByAggregateInput
     _max?: experienceMaxOrderByAggregateInput
@@ -13415,59 +11117,14 @@ export namespace Prisma {
     AND?: experienceScalarWhereWithAggregatesInput | experienceScalarWhereWithAggregatesInput[]
     OR?: experienceScalarWhereWithAggregatesInput[]
     NOT?: experienceScalarWhereWithAggregatesInput | experienceScalarWhereWithAggregatesInput[]
-    eid?: IntWithAggregatesFilter<"experience"> | number
+    exid?: IntWithAggregatesFilter<"experience"> | number
     title?: StringWithAggregatesFilter<"experience"> | string
     corp?: StringWithAggregatesFilter<"experience"> | string
     style?: StringWithAggregatesFilter<"experience"> | string
     startdate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
     enddate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
     desc?: StringWithAggregatesFilter<"experience"> | string
-  }
-
-  export type user_experienceWhereInput = {
-    AND?: user_experienceWhereInput | user_experienceWhereInput[]
-    OR?: user_experienceWhereInput[]
-    NOT?: user_experienceWhereInput | user_experienceWhereInput[]
-    eid?: IntFilter<"user_experience"> | number
-    uid?: IntFilter<"user_experience"> | number
-    experience?: XOR<ExperienceScalarRelationFilter, experienceWhereInput>
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }
-
-  export type user_experienceOrderByWithRelationInput = {
-    eid?: SortOrder
-    uid?: SortOrder
-    experience?: experienceOrderByWithRelationInput
-    user?: userOrderByWithRelationInput
-  }
-
-  export type user_experienceWhereUniqueInput = Prisma.AtLeast<{
-    eid_uid?: user_experienceEidUidCompoundUniqueInput
-    AND?: user_experienceWhereInput | user_experienceWhereInput[]
-    OR?: user_experienceWhereInput[]
-    NOT?: user_experienceWhereInput | user_experienceWhereInput[]
-    eid?: IntFilter<"user_experience"> | number
-    uid?: IntFilter<"user_experience"> | number
-    experience?: XOR<ExperienceScalarRelationFilter, experienceWhereInput>
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "eid_uid">
-
-  export type user_experienceOrderByWithAggregationInput = {
-    eid?: SortOrder
-    uid?: SortOrder
-    _count?: user_experienceCountOrderByAggregateInput
-    _avg?: user_experienceAvgOrderByAggregateInput
-    _max?: user_experienceMaxOrderByAggregateInput
-    _min?: user_experienceMinOrderByAggregateInput
-    _sum?: user_experienceSumOrderByAggregateInput
-  }
-
-  export type user_experienceScalarWhereWithAggregatesInput = {
-    AND?: user_experienceScalarWhereWithAggregatesInput | user_experienceScalarWhereWithAggregatesInput[]
-    OR?: user_experienceScalarWhereWithAggregatesInput[]
-    NOT?: user_experienceScalarWhereWithAggregatesInput | user_experienceScalarWhereWithAggregatesInput[]
-    eid?: IntWithAggregatesFilter<"user_experience"> | number
-    uid?: IntWithAggregatesFilter<"user_experience"> | number
+    uid?: IntWithAggregatesFilter<"experience"> | number
   }
 
   export type educationWhereInput = {
@@ -13480,7 +11137,8 @@ export namespace Prisma {
     startdate?: DateTimeFilter<"education"> | Date | string
     enddate?: DateTimeFilter<"education"> | Date | string
     style?: StringFilter<"education"> | string
-    user_education?: User_educationListRelationFilter
+    uid?: IntFilter<"education"> | number
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
   export type educationOrderByWithRelationInput = {
@@ -13490,7 +11148,8 @@ export namespace Prisma {
     startdate?: SortOrder
     enddate?: SortOrder
     style?: SortOrder
-    user_education?: user_educationOrderByRelationAggregateInput
+    uid?: SortOrder
+    user?: userOrderByWithRelationInput
   }
 
   export type educationWhereUniqueInput = Prisma.AtLeast<{
@@ -13503,7 +11162,8 @@ export namespace Prisma {
     startdate?: DateTimeFilter<"education"> | Date | string
     enddate?: DateTimeFilter<"education"> | Date | string
     style?: StringFilter<"education"> | string
-    user_education?: User_educationListRelationFilter
+    uid?: IntFilter<"education"> | number
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "edid">
 
   export type educationOrderByWithAggregationInput = {
@@ -13513,6 +11173,7 @@ export namespace Prisma {
     startdate?: SortOrder
     enddate?: SortOrder
     style?: SortOrder
+    uid?: SortOrder
     _count?: educationCountOrderByAggregateInput
     _avg?: educationAvgOrderByAggregateInput
     _max?: educationMaxOrderByAggregateInput
@@ -13530,58 +11191,14 @@ export namespace Prisma {
     startdate?: DateTimeWithAggregatesFilter<"education"> | Date | string
     enddate?: DateTimeWithAggregatesFilter<"education"> | Date | string
     style?: StringWithAggregatesFilter<"education"> | string
-  }
-
-  export type user_educationWhereInput = {
-    AND?: user_educationWhereInput | user_educationWhereInput[]
-    OR?: user_educationWhereInput[]
-    NOT?: user_educationWhereInput | user_educationWhereInput[]
-    edid?: IntFilter<"user_education"> | number
-    uid?: IntFilter<"user_education"> | number
-    education?: XOR<EducationScalarRelationFilter, educationWhereInput>
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }
-
-  export type user_educationOrderByWithRelationInput = {
-    edid?: SortOrder
-    uid?: SortOrder
-    education?: educationOrderByWithRelationInput
-    user?: userOrderByWithRelationInput
-  }
-
-  export type user_educationWhereUniqueInput = Prisma.AtLeast<{
-    edid_uid?: user_educationEdidUidCompoundUniqueInput
-    AND?: user_educationWhereInput | user_educationWhereInput[]
-    OR?: user_educationWhereInput[]
-    NOT?: user_educationWhereInput | user_educationWhereInput[]
-    edid?: IntFilter<"user_education"> | number
-    uid?: IntFilter<"user_education"> | number
-    education?: XOR<EducationScalarRelationFilter, educationWhereInput>
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "edid_uid">
-
-  export type user_educationOrderByWithAggregationInput = {
-    edid?: SortOrder
-    uid?: SortOrder
-    _count?: user_educationCountOrderByAggregateInput
-    _avg?: user_educationAvgOrderByAggregateInput
-    _max?: user_educationMaxOrderByAggregateInput
-    _min?: user_educationMinOrderByAggregateInput
-    _sum?: user_educationSumOrderByAggregateInput
-  }
-
-  export type user_educationScalarWhereWithAggregatesInput = {
-    AND?: user_educationScalarWhereWithAggregatesInput | user_educationScalarWhereWithAggregatesInput[]
-    OR?: user_educationScalarWhereWithAggregatesInput[]
-    NOT?: user_educationScalarWhereWithAggregatesInput | user_educationScalarWhereWithAggregatesInput[]
-    edid?: IntWithAggregatesFilter<"user_education"> | number
-    uid?: IntWithAggregatesFilter<"user_education"> | number
+    uid?: IntWithAggregatesFilter<"education"> | number
   }
 
   export type skillsWhereInput = {
     AND?: skillsWhereInput | skillsWhereInput[]
     OR?: skillsWhereInput[]
     NOT?: skillsWhereInput | skillsWhereInput[]
+    sid?: IntFilter<"skills"> | number
     uid?: IntFilter<"skills"> | number
     frontend?: StringNullableListFilter<"skills">
     style?: StringFilter<"skills"> | string
@@ -13594,6 +11211,7 @@ export namespace Prisma {
   }
 
   export type skillsOrderByWithRelationInput = {
+    sid?: SortOrder
     uid?: SortOrder
     frontend?: SortOrder
     style?: SortOrder
@@ -13606,10 +11224,11 @@ export namespace Prisma {
   }
 
   export type skillsWhereUniqueInput = Prisma.AtLeast<{
-    uid?: number
+    sid?: number
     AND?: skillsWhereInput | skillsWhereInput[]
     OR?: skillsWhereInput[]
     NOT?: skillsWhereInput | skillsWhereInput[]
+    uid?: IntFilter<"skills"> | number
     frontend?: StringNullableListFilter<"skills">
     style?: StringFilter<"skills"> | string
     backend?: StringNullableListFilter<"skills">
@@ -13618,9 +11237,10 @@ export namespace Prisma {
     other?: StringNullableListFilter<"skills">
     languages?: StringNullableListFilter<"skills">
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "uid" | "uid">
+  }, "sid">
 
   export type skillsOrderByWithAggregationInput = {
+    sid?: SortOrder
     uid?: SortOrder
     frontend?: SortOrder
     style?: SortOrder
@@ -13640,6 +11260,7 @@ export namespace Prisma {
     AND?: skillsScalarWhereWithAggregatesInput | skillsScalarWhereWithAggregatesInput[]
     OR?: skillsScalarWhereWithAggregatesInput[]
     NOT?: skillsScalarWhereWithAggregatesInput | skillsScalarWhereWithAggregatesInput[]
+    sid?: IntWithAggregatesFilter<"skills"> | number
     uid?: IntWithAggregatesFilter<"skills"> | number
     frontend?: StringNullableListFilter<"skills">
     style?: StringWithAggregatesFilter<"skills"> | string
@@ -13654,6 +11275,7 @@ export namespace Prisma {
     AND?: contactWhereInput | contactWhereInput[]
     OR?: contactWhereInput[]
     NOT?: contactWhereInput | contactWhereInput[]
+    cid?: IntFilter<"contact"> | number
     uid?: IntFilter<"contact"> | number
     email?: StringFilter<"contact"> | string
     phone?: StringFilter<"contact"> | string
@@ -13663,6 +11285,7 @@ export namespace Prisma {
   }
 
   export type contactOrderByWithRelationInput = {
+    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -13672,18 +11295,20 @@ export namespace Prisma {
   }
 
   export type contactWhereUniqueInput = Prisma.AtLeast<{
-    uid?: number
+    cid?: number
     AND?: contactWhereInput | contactWhereInput[]
     OR?: contactWhereInput[]
     NOT?: contactWhereInput | contactWhereInput[]
+    uid?: IntFilter<"contact"> | number
     email?: StringFilter<"contact"> | string
     phone?: StringFilter<"contact"> | string
     location?: StringFilter<"contact"> | string
     linkedin?: StringFilter<"contact"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "uid">
+  }, "cid">
 
   export type contactOrderByWithAggregationInput = {
+    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -13700,6 +11325,7 @@ export namespace Prisma {
     AND?: contactScalarWhereWithAggregatesInput | contactScalarWhereWithAggregatesInput[]
     OR?: contactScalarWhereWithAggregatesInput[]
     NOT?: contactScalarWhereWithAggregatesInput | contactScalarWhereWithAggregatesInput[]
+    cid?: IntWithAggregatesFilter<"contact"> | number
     uid?: IntWithAggregatesFilter<"contact"> | number
     email?: StringWithAggregatesFilter<"contact"> | string
     phone?: StringWithAggregatesFilter<"contact"> | string
@@ -13711,6 +11337,7 @@ export namespace Prisma {
     AND?: AboutWhereInput | AboutWhereInput[]
     OR?: AboutWhereInput[]
     NOT?: AboutWhereInput | AboutWhereInput[]
+    aid?: IntFilter<"About"> | number
     uid?: IntFilter<"About"> | number
     image?: StringFilter<"About"> | string
     about?: StringFilter<"About"> | string
@@ -13719,6 +11346,7 @@ export namespace Prisma {
   }
 
   export type AboutOrderByWithRelationInput = {
+    aid?: SortOrder
     uid?: SortOrder
     image?: SortOrder
     about?: SortOrder
@@ -13727,17 +11355,19 @@ export namespace Prisma {
   }
 
   export type AboutWhereUniqueInput = Prisma.AtLeast<{
-    uid?: number
+    aid?: number
     AND?: AboutWhereInput | AboutWhereInput[]
     OR?: AboutWhereInput[]
     NOT?: AboutWhereInput | AboutWhereInput[]
+    uid?: IntFilter<"About"> | number
     image?: StringFilter<"About"> | string
     about?: StringFilter<"About"> | string
     style?: StringFilter<"About"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "uid">
+  }, "aid">
 
   export type AboutOrderByWithAggregationInput = {
+    aid?: SortOrder
     uid?: SortOrder
     image?: SortOrder
     about?: SortOrder
@@ -13753,6 +11383,7 @@ export namespace Prisma {
     AND?: AboutScalarWhereWithAggregatesInput | AboutScalarWhereWithAggregatesInput[]
     OR?: AboutScalarWhereWithAggregatesInput[]
     NOT?: AboutScalarWhereWithAggregatesInput | AboutScalarWhereWithAggregatesInput[]
+    aid?: IntWithAggregatesFilter<"About"> | number
     uid?: IntWithAggregatesFilter<"About"> | number
     image?: StringWithAggregatesFilter<"About"> | string
     about?: StringWithAggregatesFilter<"About"> | string
@@ -13762,82 +11393,117 @@ export namespace Prisma {
   export type userCreateInput = {
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsCreateNestedOneWithoutUserInput
-    user_education?: user_educationCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
-    user_project?: user_projectCreateNestedManyWithoutUserInput
+    skills?: skillsCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
     About?: AboutCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
     uid?: number
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
-    user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
     About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    skills?: skillsUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
     About?: AboutUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
     About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
     uid?: number
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
   }
 
   export type userUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
   }
 
   export type userUncheckedUpdateManyInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type heroCreateInput = {
+    style: string
+    hero: string
+    subhero: string
+    user: userCreateNestedOneWithoutHeroInput
+  }
+
+  export type heroUncheckedCreateInput = {
+    hid?: number
+    uid: number
+    style: string
+    hero: string
+    subhero: string
+  }
+
+  export type heroUpdateInput = {
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    user?: userUpdateOneRequiredWithoutHeroNestedInput
+  }
+
+  export type heroUncheckedUpdateInput = {
+    hid?: IntFieldUpdateOperationsInput | number
+    uid?: IntFieldUpdateOperationsInput | number
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type heroCreateManyInput = {
+    hid?: number
+    uid: number
+    style: string
+    hero: string
+    subhero: string
+  }
+
+  export type heroUpdateManyMutationInput = {
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type heroUncheckedUpdateManyInput = {
+    hid?: IntFieldUpdateOperationsInput | number
+    uid?: IntFieldUpdateOperationsInput | number
     style?: StringFieldUpdateOperationsInput | string
     hero?: StringFieldUpdateOperationsInput | string
     subhero?: StringFieldUpdateOperationsInput | string
@@ -13851,11 +11517,12 @@ export namespace Prisma {
     github: string
     Link: string
     style: string
-    user_project?: user_projectCreateNestedManyWithoutProjectInput
+    user: userCreateNestedOneWithoutProjectInput
   }
 
   export type projectUncheckedCreateInput = {
     pid?: number
+    uid: number
     title: string
     image: string
     desc: string
@@ -13863,7 +11530,6 @@ export namespace Prisma {
     github: string
     Link: string
     style: string
-    user_project?: user_projectUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type projectUpdateInput = {
@@ -13874,11 +11540,12 @@ export namespace Prisma {
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
     style?: StringFieldUpdateOperationsInput | string
-    user_project?: user_projectUpdateManyWithoutProjectNestedInput
+    user?: userUpdateOneRequiredWithoutProjectNestedInput
   }
 
   export type projectUncheckedUpdateInput = {
     pid?: IntFieldUpdateOperationsInput | number
+    uid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -13886,11 +11553,11 @@ export namespace Prisma {
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
     style?: StringFieldUpdateOperationsInput | string
-    user_project?: user_projectUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type projectCreateManyInput = {
     pid?: number
+    uid: number
     title: string
     image: string
     desc: string
@@ -13912,6 +11579,7 @@ export namespace Prisma {
 
   export type projectUncheckedUpdateManyInput = {
     pid?: IntFieldUpdateOperationsInput | number
+    uid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -13921,40 +11589,6 @@ export namespace Prisma {
     style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_projectCreateInput = {
-    project: projectCreateNestedOneWithoutUser_projectInput
-    user: userCreateNestedOneWithoutUser_projectInput
-  }
-
-  export type user_projectUncheckedCreateInput = {
-    pid: number
-    uid: number
-  }
-
-  export type user_projectUpdateInput = {
-    project?: projectUpdateOneRequiredWithoutUser_projectNestedInput
-    user?: userUpdateOneRequiredWithoutUser_projectNestedInput
-  }
-
-  export type user_projectUncheckedUpdateInput = {
-    pid?: IntFieldUpdateOperationsInput | number
-    uid?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type user_projectCreateManyInput = {
-    pid: number
-    uid: number
-  }
-
-  export type user_projectUpdateManyMutationInput = {
-
-  }
-
-  export type user_projectUncheckedUpdateManyInput = {
-    pid?: IntFieldUpdateOperationsInput | number
-    uid?: IntFieldUpdateOperationsInput | number
-  }
-
   export type experienceCreateInput = {
     title: string
     corp: string
@@ -13962,18 +11596,18 @@ export namespace Prisma {
     startdate: Date | string
     enddate: Date | string
     desc: string
-    user_experience?: user_experienceCreateNestedManyWithoutExperienceInput
+    user: userCreateNestedOneWithoutExperienceInput
   }
 
   export type experienceUncheckedCreateInput = {
-    eid?: number
+    exid?: number
     title: string
     corp: string
     style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutExperienceInput
+    uid: number
   }
 
   export type experienceUpdateInput = {
@@ -13983,28 +11617,29 @@ export namespace Prisma {
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
-    user_experience?: user_experienceUpdateManyWithoutExperienceNestedInput
+    user?: userUpdateOneRequiredWithoutExperienceNestedInput
   }
 
   export type experienceUncheckedUpdateInput = {
-    eid?: IntFieldUpdateOperationsInput | number
+    exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
     style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
-    user_experience?: user_experienceUncheckedUpdateManyWithoutExperienceNestedInput
+    uid?: IntFieldUpdateOperationsInput | number
   }
 
   export type experienceCreateManyInput = {
-    eid?: number
+    exid?: number
     title: string
     corp: string
     style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
+    uid: number
   }
 
   export type experienceUpdateManyMutationInput = {
@@ -14017,46 +11652,13 @@ export namespace Prisma {
   }
 
   export type experienceUncheckedUpdateManyInput = {
-    eid?: IntFieldUpdateOperationsInput | number
+    exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
     style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type user_experienceCreateInput = {
-    experience: experienceCreateNestedOneWithoutUser_experienceInput
-    user: userCreateNestedOneWithoutUser_experienceInput
-  }
-
-  export type user_experienceUncheckedCreateInput = {
-    eid: number
-    uid: number
-  }
-
-  export type user_experienceUpdateInput = {
-    experience?: experienceUpdateOneRequiredWithoutUser_experienceNestedInput
-    user?: userUpdateOneRequiredWithoutUser_experienceNestedInput
-  }
-
-  export type user_experienceUncheckedUpdateInput = {
-    eid?: IntFieldUpdateOperationsInput | number
-    uid?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type user_experienceCreateManyInput = {
-    eid: number
-    uid: number
-  }
-
-  export type user_experienceUpdateManyMutationInput = {
-
-  }
-
-  export type user_experienceUncheckedUpdateManyInput = {
-    eid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
   }
 
@@ -14066,7 +11668,7 @@ export namespace Prisma {
     startdate: Date | string
     enddate: Date | string
     style: string
-    user_education?: user_educationCreateNestedManyWithoutEducationInput
+    user: userCreateNestedOneWithoutEducationInput
   }
 
   export type educationUncheckedCreateInput = {
@@ -14076,7 +11678,7 @@ export namespace Prisma {
     startdate: Date | string
     enddate: Date | string
     style: string
-    user_education?: user_educationUncheckedCreateNestedManyWithoutEducationInput
+    uid: number
   }
 
   export type educationUpdateInput = {
@@ -14085,7 +11687,7 @@ export namespace Prisma {
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     style?: StringFieldUpdateOperationsInput | string
-    user_education?: user_educationUpdateManyWithoutEducationNestedInput
+    user?: userUpdateOneRequiredWithoutEducationNestedInput
   }
 
   export type educationUncheckedUpdateInput = {
@@ -14095,7 +11697,7 @@ export namespace Prisma {
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     style?: StringFieldUpdateOperationsInput | string
-    user_education?: user_educationUncheckedUpdateManyWithoutEducationNestedInput
+    uid?: IntFieldUpdateOperationsInput | number
   }
 
   export type educationCreateManyInput = {
@@ -14105,6 +11707,7 @@ export namespace Prisma {
     startdate: Date | string
     enddate: Date | string
     style: string
+    uid: number
   }
 
   export type educationUpdateManyMutationInput = {
@@ -14122,39 +11725,6 @@ export namespace Prisma {
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     style?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type user_educationCreateInput = {
-    education: educationCreateNestedOneWithoutUser_educationInput
-    user: userCreateNestedOneWithoutUser_educationInput
-  }
-
-  export type user_educationUncheckedCreateInput = {
-    edid: number
-    uid: number
-  }
-
-  export type user_educationUpdateInput = {
-    education?: educationUpdateOneRequiredWithoutUser_educationNestedInput
-    user?: userUpdateOneRequiredWithoutUser_educationNestedInput
-  }
-
-  export type user_educationUncheckedUpdateInput = {
-    edid?: IntFieldUpdateOperationsInput | number
-    uid?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type user_educationCreateManyInput = {
-    edid: number
-    uid: number
-  }
-
-  export type user_educationUpdateManyMutationInput = {
-
-  }
-
-  export type user_educationUncheckedUpdateManyInput = {
-    edid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
   }
 
@@ -14170,6 +11740,7 @@ export namespace Prisma {
   }
 
   export type skillsUncheckedCreateInput = {
+    sid?: number
     uid: number
     frontend?: skillsCreatefrontendInput | string[]
     style: string
@@ -14192,6 +11763,7 @@ export namespace Prisma {
   }
 
   export type skillsUncheckedUpdateInput = {
+    sid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     frontend?: skillsUpdatefrontendInput | string[]
     style?: StringFieldUpdateOperationsInput | string
@@ -14203,6 +11775,7 @@ export namespace Prisma {
   }
 
   export type skillsCreateManyInput = {
+    sid?: number
     uid: number
     frontend?: skillsCreatefrontendInput | string[]
     style: string
@@ -14224,6 +11797,7 @@ export namespace Prisma {
   }
 
   export type skillsUncheckedUpdateManyInput = {
+    sid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     frontend?: skillsUpdatefrontendInput | string[]
     style?: StringFieldUpdateOperationsInput | string
@@ -14243,6 +11817,7 @@ export namespace Prisma {
   }
 
   export type contactUncheckedCreateInput = {
+    cid?: number
     uid: number
     email: string
     phone: string
@@ -14259,6 +11834,7 @@ export namespace Prisma {
   }
 
   export type contactUncheckedUpdateInput = {
+    cid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -14267,6 +11843,7 @@ export namespace Prisma {
   }
 
   export type contactCreateManyInput = {
+    cid?: number
     uid: number
     email: string
     phone: string
@@ -14282,6 +11859,7 @@ export namespace Prisma {
   }
 
   export type contactUncheckedUpdateManyInput = {
+    cid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -14297,6 +11875,7 @@ export namespace Prisma {
   }
 
   export type AboutUncheckedCreateInput = {
+    aid?: number
     uid: number
     image: string
     about: string
@@ -14311,6 +11890,7 @@ export namespace Prisma {
   }
 
   export type AboutUncheckedUpdateInput = {
+    aid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
@@ -14318,6 +11898,7 @@ export namespace Prisma {
   }
 
   export type AboutCreateManyInput = {
+    aid?: number
     uid: number
     image: string
     about: string
@@ -14331,6 +11912,7 @@ export namespace Prisma {
   }
 
   export type AboutUncheckedUpdateManyInput = {
+    aid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
@@ -14363,27 +11945,10 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type SkillsNullableScalarRelationFilter = {
-    is?: skillsWhereInput | null
-    isNot?: skillsWhereInput | null
-  }
-
-  export type User_educationListRelationFilter = {
-    every?: user_educationWhereInput
-    some?: user_educationWhereInput
-    none?: user_educationWhereInput
-  }
-
-  export type User_experienceListRelationFilter = {
-    every?: user_experienceWhereInput
-    some?: user_experienceWhereInput
-    none?: user_experienceWhereInput
-  }
-
-  export type User_projectListRelationFilter = {
-    every?: user_projectWhereInput
-    some?: user_projectWhereInput
-    none?: user_projectWhereInput
+  export type SkillsListRelationFilter = {
+    every?: skillsWhereInput
+    some?: skillsWhereInput
+    none?: skillsWhereInput
   }
 
   export type ContactListRelationFilter = {
@@ -14398,15 +11963,31 @@ export namespace Prisma {
     none?: AboutWhereInput
   }
 
-  export type user_educationOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type ProjectListRelationFilter = {
+    every?: projectWhereInput
+    some?: projectWhereInput
+    none?: projectWhereInput
   }
 
-  export type user_experienceOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type ExperienceListRelationFilter = {
+    every?: experienceWhereInput
+    some?: experienceWhereInput
+    none?: experienceWhereInput
   }
 
-  export type user_projectOrderByRelationAggregateInput = {
+  export type EducationListRelationFilter = {
+    every?: educationWhereInput
+    some?: educationWhereInput
+    none?: educationWhereInput
+  }
+
+  export type HeroListRelationFilter = {
+    every?: heroWhereInput
+    some?: heroWhereInput
+    none?: heroWhereInput
+  }
+
+  export type skillsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14418,13 +11999,26 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type projectOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type experienceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type educationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type heroOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type userCountOrderByAggregateInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    style?: SortOrder
-    hero?: SortOrder
-    subhero?: SortOrder
   }
 
   export type userAvgOrderByAggregateInput = {
@@ -14435,18 +12029,12 @@ export namespace Prisma {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    style?: SortOrder
-    hero?: SortOrder
-    subhero?: SortOrder
   }
 
   export type userMinOrderByAggregateInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    style?: SortOrder
-    hero?: SortOrder
-    subhero?: SortOrder
   }
 
   export type userSumOrderByAggregateInput = {
@@ -14487,6 +12075,45 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type UserScalarRelationFilter = {
+    is?: userWhereInput
+    isNot?: userWhereInput
+  }
+
+  export type heroCountOrderByAggregateInput = {
+    hid?: SortOrder
+    uid?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
+  }
+
+  export type heroAvgOrderByAggregateInput = {
+    hid?: SortOrder
+    uid?: SortOrder
+  }
+
+  export type heroMaxOrderByAggregateInput = {
+    hid?: SortOrder
+    uid?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
+  }
+
+  export type heroMinOrderByAggregateInput = {
+    hid?: SortOrder
+    uid?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
+  }
+
+  export type heroSumOrderByAggregateInput = {
+    hid?: SortOrder
+    uid?: SortOrder
+  }
+
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
@@ -14497,6 +12124,7 @@ export namespace Prisma {
 
   export type projectCountOrderByAggregateInput = {
     pid?: SortOrder
+    uid?: SortOrder
     title?: SortOrder
     image?: SortOrder
     desc?: SortOrder
@@ -14508,10 +12136,12 @@ export namespace Prisma {
 
   export type projectAvgOrderByAggregateInput = {
     pid?: SortOrder
+    uid?: SortOrder
   }
 
   export type projectMaxOrderByAggregateInput = {
     pid?: SortOrder
+    uid?: SortOrder
     title?: SortOrder
     image?: SortOrder
     desc?: SortOrder
@@ -14522,6 +12152,7 @@ export namespace Prisma {
 
   export type projectMinOrderByAggregateInput = {
     pid?: SortOrder
+    uid?: SortOrder
     title?: SortOrder
     image?: SortOrder
     desc?: SortOrder
@@ -14531,45 +12162,6 @@ export namespace Prisma {
   }
 
   export type projectSumOrderByAggregateInput = {
-    pid?: SortOrder
-  }
-
-  export type ProjectScalarRelationFilter = {
-    is?: projectWhereInput
-    isNot?: projectWhereInput
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: userWhereInput
-    isNot?: userWhereInput
-  }
-
-  export type user_projectPidUidCompoundUniqueInput = {
-    pid: number
-    uid: number
-  }
-
-  export type user_projectCountOrderByAggregateInput = {
-    pid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_projectAvgOrderByAggregateInput = {
-    pid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_projectMaxOrderByAggregateInput = {
-    pid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_projectMinOrderByAggregateInput = {
-    pid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_projectSumOrderByAggregateInput = {
     pid?: SortOrder
     uid?: SortOrder
   }
@@ -14586,41 +12178,46 @@ export namespace Prisma {
   }
 
   export type experienceCountOrderByAggregateInput = {
-    eid?: SortOrder
+    exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
     style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
+    uid?: SortOrder
   }
 
   export type experienceAvgOrderByAggregateInput = {
-    eid?: SortOrder
+    exid?: SortOrder
+    uid?: SortOrder
   }
 
   export type experienceMaxOrderByAggregateInput = {
-    eid?: SortOrder
+    exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
     style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
+    uid?: SortOrder
   }
 
   export type experienceMinOrderByAggregateInput = {
-    eid?: SortOrder
+    exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
     style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
+    uid?: SortOrder
   }
 
   export type experienceSumOrderByAggregateInput = {
-    eid?: SortOrder
+    exid?: SortOrder
+    uid?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -14637,41 +12234,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type ExperienceScalarRelationFilter = {
-    is?: experienceWhereInput
-    isNot?: experienceWhereInput
-  }
-
-  export type user_experienceEidUidCompoundUniqueInput = {
-    eid: number
-    uid: number
-  }
-
-  export type user_experienceCountOrderByAggregateInput = {
-    eid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_experienceAvgOrderByAggregateInput = {
-    eid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_experienceMaxOrderByAggregateInput = {
-    eid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_experienceMinOrderByAggregateInput = {
-    eid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_experienceSumOrderByAggregateInput = {
-    eid?: SortOrder
-    uid?: SortOrder
-  }
-
   export type educationCountOrderByAggregateInput = {
     edid?: SortOrder
     inst?: SortOrder
@@ -14679,10 +12241,12 @@ export namespace Prisma {
     startdate?: SortOrder
     enddate?: SortOrder
     style?: SortOrder
+    uid?: SortOrder
   }
 
   export type educationAvgOrderByAggregateInput = {
     edid?: SortOrder
+    uid?: SortOrder
   }
 
   export type educationMaxOrderByAggregateInput = {
@@ -14692,6 +12256,7 @@ export namespace Prisma {
     startdate?: SortOrder
     enddate?: SortOrder
     style?: SortOrder
+    uid?: SortOrder
   }
 
   export type educationMinOrderByAggregateInput = {
@@ -14701,48 +12266,16 @@ export namespace Prisma {
     startdate?: SortOrder
     enddate?: SortOrder
     style?: SortOrder
+    uid?: SortOrder
   }
 
   export type educationSumOrderByAggregateInput = {
-    edid?: SortOrder
-  }
-
-  export type EducationScalarRelationFilter = {
-    is?: educationWhereInput
-    isNot?: educationWhereInput
-  }
-
-  export type user_educationEdidUidCompoundUniqueInput = {
-    edid: number
-    uid: number
-  }
-
-  export type user_educationCountOrderByAggregateInput = {
-    edid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_educationAvgOrderByAggregateInput = {
-    edid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_educationMaxOrderByAggregateInput = {
-    edid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_educationMinOrderByAggregateInput = {
-    edid?: SortOrder
-    uid?: SortOrder
-  }
-
-  export type user_educationSumOrderByAggregateInput = {
     edid?: SortOrder
     uid?: SortOrder
   }
 
   export type skillsCountOrderByAggregateInput = {
+    sid?: SortOrder
     uid?: SortOrder
     frontend?: SortOrder
     style?: SortOrder
@@ -14754,24 +12287,29 @@ export namespace Prisma {
   }
 
   export type skillsAvgOrderByAggregateInput = {
+    sid?: SortOrder
     uid?: SortOrder
   }
 
   export type skillsMaxOrderByAggregateInput = {
+    sid?: SortOrder
     uid?: SortOrder
     style?: SortOrder
   }
 
   export type skillsMinOrderByAggregateInput = {
+    sid?: SortOrder
     uid?: SortOrder
     style?: SortOrder
   }
 
   export type skillsSumOrderByAggregateInput = {
+    sid?: SortOrder
     uid?: SortOrder
   }
 
   export type contactCountOrderByAggregateInput = {
+    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -14780,10 +12318,12 @@ export namespace Prisma {
   }
 
   export type contactAvgOrderByAggregateInput = {
+    cid?: SortOrder
     uid?: SortOrder
   }
 
   export type contactMaxOrderByAggregateInput = {
+    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -14792,6 +12332,7 @@ export namespace Prisma {
   }
 
   export type contactMinOrderByAggregateInput = {
+    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -14800,10 +12341,12 @@ export namespace Prisma {
   }
 
   export type contactSumOrderByAggregateInput = {
+    cid?: SortOrder
     uid?: SortOrder
   }
 
   export type AboutCountOrderByAggregateInput = {
+    aid?: SortOrder
     uid?: SortOrder
     image?: SortOrder
     about?: SortOrder
@@ -14811,10 +12354,12 @@ export namespace Prisma {
   }
 
   export type AboutAvgOrderByAggregateInput = {
+    aid?: SortOrder
     uid?: SortOrder
   }
 
   export type AboutMaxOrderByAggregateInput = {
+    aid?: SortOrder
     uid?: SortOrder
     image?: SortOrder
     about?: SortOrder
@@ -14822,6 +12367,7 @@ export namespace Prisma {
   }
 
   export type AboutMinOrderByAggregateInput = {
+    aid?: SortOrder
     uid?: SortOrder
     image?: SortOrder
     about?: SortOrder
@@ -14829,34 +12375,15 @@ export namespace Prisma {
   }
 
   export type AboutSumOrderByAggregateInput = {
+    aid?: SortOrder
     uid?: SortOrder
   }
 
-  export type skillsCreateNestedOneWithoutUserInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
-    connect?: skillsWhereUniqueInput
-  }
-
-  export type user_educationCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput> | user_educationCreateWithoutUserInput[] | user_educationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutUserInput | user_educationCreateOrConnectWithoutUserInput[]
-    createMany?: user_educationCreateManyUserInputEnvelope
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-  }
-
-  export type user_experienceCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-  }
-
-  export type user_projectCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+  export type skillsCreateNestedManyWithoutUserInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
+    createMany?: skillsCreateManyUserInputEnvelope
+    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
   }
 
   export type contactCreateNestedManyWithoutUserInput = {
@@ -14873,31 +12400,39 @@ export namespace Prisma {
     connect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
   }
 
-  export type skillsUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
-    connect?: skillsWhereUniqueInput
+  export type projectCreateNestedManyWithoutUserInput = {
+    create?: XOR<projectCreateWithoutUserInput, projectUncheckedCreateWithoutUserInput> | projectCreateWithoutUserInput[] | projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: projectCreateOrConnectWithoutUserInput | projectCreateOrConnectWithoutUserInput[]
+    createMany?: projectCreateManyUserInputEnvelope
+    connect?: projectWhereUniqueInput | projectWhereUniqueInput[]
   }
 
-  export type user_educationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput> | user_educationCreateWithoutUserInput[] | user_educationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutUserInput | user_educationCreateOrConnectWithoutUserInput[]
-    createMany?: user_educationCreateManyUserInputEnvelope
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
+  export type experienceCreateNestedManyWithoutUserInput = {
+    create?: XOR<experienceCreateWithoutUserInput, experienceUncheckedCreateWithoutUserInput> | experienceCreateWithoutUserInput[] | experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: experienceCreateOrConnectWithoutUserInput | experienceCreateOrConnectWithoutUserInput[]
+    createMany?: experienceCreateManyUserInputEnvelope
+    connect?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
   }
 
-  export type user_experienceUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+  export type educationCreateNestedManyWithoutUserInput = {
+    create?: XOR<educationCreateWithoutUserInput, educationUncheckedCreateWithoutUserInput> | educationCreateWithoutUserInput[] | educationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: educationCreateOrConnectWithoutUserInput | educationCreateOrConnectWithoutUserInput[]
+    createMany?: educationCreateManyUserInputEnvelope
+    connect?: educationWhereUniqueInput | educationWhereUniqueInput[]
   }
 
-  export type user_projectUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+  export type heroCreateNestedManyWithoutUserInput = {
+    create?: XOR<heroCreateWithoutUserInput, heroUncheckedCreateWithoutUserInput> | heroCreateWithoutUserInput[] | heroUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: heroCreateOrConnectWithoutUserInput | heroCreateOrConnectWithoutUserInput[]
+    createMany?: heroCreateManyUserInputEnvelope
+    connect?: heroWhereUniqueInput | heroWhereUniqueInput[]
+  }
+
+  export type skillsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
+    createMany?: skillsCreateManyUserInputEnvelope
+    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
   }
 
   export type contactUncheckedCreateNestedManyWithoutUserInput = {
@@ -14914,60 +12449,50 @@ export namespace Prisma {
     connect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
   }
 
+  export type projectUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<projectCreateWithoutUserInput, projectUncheckedCreateWithoutUserInput> | projectCreateWithoutUserInput[] | projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: projectCreateOrConnectWithoutUserInput | projectCreateOrConnectWithoutUserInput[]
+    createMany?: projectCreateManyUserInputEnvelope
+    connect?: projectWhereUniqueInput | projectWhereUniqueInput[]
+  }
+
+  export type experienceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<experienceCreateWithoutUserInput, experienceUncheckedCreateWithoutUserInput> | experienceCreateWithoutUserInput[] | experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: experienceCreateOrConnectWithoutUserInput | experienceCreateOrConnectWithoutUserInput[]
+    createMany?: experienceCreateManyUserInputEnvelope
+    connect?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+  }
+
+  export type educationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<educationCreateWithoutUserInput, educationUncheckedCreateWithoutUserInput> | educationCreateWithoutUserInput[] | educationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: educationCreateOrConnectWithoutUserInput | educationCreateOrConnectWithoutUserInput[]
+    createMany?: educationCreateManyUserInputEnvelope
+    connect?: educationWhereUniqueInput | educationWhereUniqueInput[]
+  }
+
+  export type heroUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<heroCreateWithoutUserInput, heroUncheckedCreateWithoutUserInput> | heroCreateWithoutUserInput[] | heroUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: heroCreateOrConnectWithoutUserInput | heroCreateOrConnectWithoutUserInput[]
+    createMany?: heroCreateManyUserInputEnvelope
+    connect?: heroWhereUniqueInput | heroWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type skillsUpdateOneWithoutUserNestedInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
-    upsert?: skillsUpsertWithoutUserInput
-    disconnect?: skillsWhereInput | boolean
-    delete?: skillsWhereInput | boolean
-    connect?: skillsWhereUniqueInput
-    update?: XOR<XOR<skillsUpdateToOneWithWhereWithoutUserInput, skillsUpdateWithoutUserInput>, skillsUncheckedUpdateWithoutUserInput>
-  }
-
-  export type user_educationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput> | user_educationCreateWithoutUserInput[] | user_educationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutUserInput | user_educationCreateOrConnectWithoutUserInput[]
-    upsert?: user_educationUpsertWithWhereUniqueWithoutUserInput | user_educationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_educationCreateManyUserInputEnvelope
-    set?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    disconnect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    delete?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    update?: user_educationUpdateWithWhereUniqueWithoutUserInput | user_educationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_educationUpdateManyWithWhereWithoutUserInput | user_educationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
-  }
-
-  export type user_experienceUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    upsert?: user_experienceUpsertWithWhereUniqueWithoutUserInput | user_experienceUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    update?: user_experienceUpdateWithWhereUniqueWithoutUserInput | user_experienceUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_experienceUpdateManyWithWhereWithoutUserInput | user_experienceUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
-  }
-
-  export type user_projectUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    upsert?: user_projectUpsertWithWhereUniqueWithoutUserInput | user_projectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    update?: user_projectUpdateWithWhereUniqueWithoutUserInput | user_projectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_projectUpdateManyWithWhereWithoutUserInput | user_projectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
+  export type skillsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
+    upsert?: skillsUpsertWithWhereUniqueWithoutUserInput | skillsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: skillsCreateManyUserInputEnvelope
+    set?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    disconnect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    delete?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    update?: skillsUpdateWithWhereUniqueWithoutUserInput | skillsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: skillsUpdateManyWithWhereWithoutUserInput | skillsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: skillsScalarWhereInput | skillsScalarWhereInput[]
   }
 
   export type contactUpdateManyWithoutUserNestedInput = {
@@ -14998,6 +12523,62 @@ export namespace Prisma {
     deleteMany?: AboutScalarWhereInput | AboutScalarWhereInput[]
   }
 
+  export type projectUpdateManyWithoutUserNestedInput = {
+    create?: XOR<projectCreateWithoutUserInput, projectUncheckedCreateWithoutUserInput> | projectCreateWithoutUserInput[] | projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: projectCreateOrConnectWithoutUserInput | projectCreateOrConnectWithoutUserInput[]
+    upsert?: projectUpsertWithWhereUniqueWithoutUserInput | projectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: projectCreateManyUserInputEnvelope
+    set?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    disconnect?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    delete?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    connect?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    update?: projectUpdateWithWhereUniqueWithoutUserInput | projectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: projectUpdateManyWithWhereWithoutUserInput | projectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: projectScalarWhereInput | projectScalarWhereInput[]
+  }
+
+  export type experienceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<experienceCreateWithoutUserInput, experienceUncheckedCreateWithoutUserInput> | experienceCreateWithoutUserInput[] | experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: experienceCreateOrConnectWithoutUserInput | experienceCreateOrConnectWithoutUserInput[]
+    upsert?: experienceUpsertWithWhereUniqueWithoutUserInput | experienceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: experienceCreateManyUserInputEnvelope
+    set?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    disconnect?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    delete?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    connect?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    update?: experienceUpdateWithWhereUniqueWithoutUserInput | experienceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: experienceUpdateManyWithWhereWithoutUserInput | experienceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: experienceScalarWhereInput | experienceScalarWhereInput[]
+  }
+
+  export type educationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<educationCreateWithoutUserInput, educationUncheckedCreateWithoutUserInput> | educationCreateWithoutUserInput[] | educationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: educationCreateOrConnectWithoutUserInput | educationCreateOrConnectWithoutUserInput[]
+    upsert?: educationUpsertWithWhereUniqueWithoutUserInput | educationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: educationCreateManyUserInputEnvelope
+    set?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    disconnect?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    delete?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    connect?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    update?: educationUpdateWithWhereUniqueWithoutUserInput | educationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: educationUpdateManyWithWhereWithoutUserInput | educationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: educationScalarWhereInput | educationScalarWhereInput[]
+  }
+
+  export type heroUpdateManyWithoutUserNestedInput = {
+    create?: XOR<heroCreateWithoutUserInput, heroUncheckedCreateWithoutUserInput> | heroCreateWithoutUserInput[] | heroUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: heroCreateOrConnectWithoutUserInput | heroCreateOrConnectWithoutUserInput[]
+    upsert?: heroUpsertWithWhereUniqueWithoutUserInput | heroUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: heroCreateManyUserInputEnvelope
+    set?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    disconnect?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    delete?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    connect?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    update?: heroUpdateWithWhereUniqueWithoutUserInput | heroUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: heroUpdateManyWithWhereWithoutUserInput | heroUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: heroScalarWhereInput | heroScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -15006,56 +12587,18 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type skillsUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
-    upsert?: skillsUpsertWithoutUserInput
-    disconnect?: skillsWhereInput | boolean
-    delete?: skillsWhereInput | boolean
-    connect?: skillsWhereUniqueInput
-    update?: XOR<XOR<skillsUpdateToOneWithWhereWithoutUserInput, skillsUpdateWithoutUserInput>, skillsUncheckedUpdateWithoutUserInput>
-  }
-
-  export type user_educationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput> | user_educationCreateWithoutUserInput[] | user_educationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutUserInput | user_educationCreateOrConnectWithoutUserInput[]
-    upsert?: user_educationUpsertWithWhereUniqueWithoutUserInput | user_educationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_educationCreateManyUserInputEnvelope
-    set?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    disconnect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    delete?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    update?: user_educationUpdateWithWhereUniqueWithoutUserInput | user_educationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_educationUpdateManyWithWhereWithoutUserInput | user_educationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
-  }
-
-  export type user_experienceUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    upsert?: user_experienceUpsertWithWhereUniqueWithoutUserInput | user_experienceUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    update?: user_experienceUpdateWithWhereUniqueWithoutUserInput | user_experienceUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_experienceUpdateManyWithWhereWithoutUserInput | user_experienceUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
-  }
-
-  export type user_projectUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    upsert?: user_projectUpsertWithWhereUniqueWithoutUserInput | user_projectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    update?: user_projectUpdateWithWhereUniqueWithoutUserInput | user_projectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_projectUpdateManyWithWhereWithoutUserInput | user_projectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
+  export type skillsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
+    upsert?: skillsUpsertWithWhereUniqueWithoutUserInput | skillsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: skillsCreateManyUserInputEnvelope
+    set?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    disconnect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    delete?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+    update?: skillsUpdateWithWhereUniqueWithoutUserInput | skillsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: skillsUpdateManyWithWhereWithoutUserInput | skillsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: skillsScalarWhereInput | skillsScalarWhereInput[]
   }
 
   export type contactUncheckedUpdateManyWithoutUserNestedInput = {
@@ -15086,22 +12629,84 @@ export namespace Prisma {
     deleteMany?: AboutScalarWhereInput | AboutScalarWhereInput[]
   }
 
+  export type projectUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<projectCreateWithoutUserInput, projectUncheckedCreateWithoutUserInput> | projectCreateWithoutUserInput[] | projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: projectCreateOrConnectWithoutUserInput | projectCreateOrConnectWithoutUserInput[]
+    upsert?: projectUpsertWithWhereUniqueWithoutUserInput | projectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: projectCreateManyUserInputEnvelope
+    set?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    disconnect?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    delete?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    connect?: projectWhereUniqueInput | projectWhereUniqueInput[]
+    update?: projectUpdateWithWhereUniqueWithoutUserInput | projectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: projectUpdateManyWithWhereWithoutUserInput | projectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: projectScalarWhereInput | projectScalarWhereInput[]
+  }
+
+  export type experienceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<experienceCreateWithoutUserInput, experienceUncheckedCreateWithoutUserInput> | experienceCreateWithoutUserInput[] | experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: experienceCreateOrConnectWithoutUserInput | experienceCreateOrConnectWithoutUserInput[]
+    upsert?: experienceUpsertWithWhereUniqueWithoutUserInput | experienceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: experienceCreateManyUserInputEnvelope
+    set?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    disconnect?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    delete?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    connect?: experienceWhereUniqueInput | experienceWhereUniqueInput[]
+    update?: experienceUpdateWithWhereUniqueWithoutUserInput | experienceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: experienceUpdateManyWithWhereWithoutUserInput | experienceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: experienceScalarWhereInput | experienceScalarWhereInput[]
+  }
+
+  export type educationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<educationCreateWithoutUserInput, educationUncheckedCreateWithoutUserInput> | educationCreateWithoutUserInput[] | educationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: educationCreateOrConnectWithoutUserInput | educationCreateOrConnectWithoutUserInput[]
+    upsert?: educationUpsertWithWhereUniqueWithoutUserInput | educationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: educationCreateManyUserInputEnvelope
+    set?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    disconnect?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    delete?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    connect?: educationWhereUniqueInput | educationWhereUniqueInput[]
+    update?: educationUpdateWithWhereUniqueWithoutUserInput | educationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: educationUpdateManyWithWhereWithoutUserInput | educationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: educationScalarWhereInput | educationScalarWhereInput[]
+  }
+
+  export type heroUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<heroCreateWithoutUserInput, heroUncheckedCreateWithoutUserInput> | heroCreateWithoutUserInput[] | heroUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: heroCreateOrConnectWithoutUserInput | heroCreateOrConnectWithoutUserInput[]
+    upsert?: heroUpsertWithWhereUniqueWithoutUserInput | heroUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: heroCreateManyUserInputEnvelope
+    set?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    disconnect?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    delete?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    connect?: heroWhereUniqueInput | heroWhereUniqueInput[]
+    update?: heroUpdateWithWhereUniqueWithoutUserInput | heroUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: heroUpdateManyWithWhereWithoutUserInput | heroUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: heroScalarWhereInput | heroScalarWhereInput[]
+  }
+
+  export type userCreateNestedOneWithoutHeroInput = {
+    create?: XOR<userCreateWithoutHeroInput, userUncheckedCreateWithoutHeroInput>
+    connectOrCreate?: userCreateOrConnectWithoutHeroInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type userUpdateOneRequiredWithoutHeroNestedInput = {
+    create?: XOR<userCreateWithoutHeroInput, userUncheckedCreateWithoutHeroInput>
+    connectOrCreate?: userCreateOrConnectWithoutHeroInput
+    upsert?: userUpsertWithoutHeroInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutHeroInput, userUpdateWithoutHeroInput>, userUncheckedUpdateWithoutHeroInput>
+  }
+
   export type projectCreatetagsInput = {
     set: string[]
   }
 
-  export type user_projectCreateNestedManyWithoutProjectInput = {
-    create?: XOR<user_projectCreateWithoutProjectInput, user_projectUncheckedCreateWithoutProjectInput> | user_projectCreateWithoutProjectInput[] | user_projectUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutProjectInput | user_projectCreateOrConnectWithoutProjectInput[]
-    createMany?: user_projectCreateManyProjectInputEnvelope
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-  }
-
-  export type user_projectUncheckedCreateNestedManyWithoutProjectInput = {
-    create?: XOR<user_projectCreateWithoutProjectInput, user_projectUncheckedCreateWithoutProjectInput> | user_projectCreateWithoutProjectInput[] | user_projectUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutProjectInput | user_projectCreateOrConnectWithoutProjectInput[]
-    createMany?: user_projectCreateManyProjectInputEnvelope
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+  export type userCreateNestedOneWithoutProjectInput = {
+    create?: XOR<userCreateWithoutProjectInput, userUncheckedCreateWithoutProjectInput>
+    connectOrCreate?: userCreateOrConnectWithoutProjectInput
+    connect?: userWhereUniqueInput
   }
 
   export type projectUpdatetagsInput = {
@@ -15109,204 +12714,44 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type user_projectUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<user_projectCreateWithoutProjectInput, user_projectUncheckedCreateWithoutProjectInput> | user_projectCreateWithoutProjectInput[] | user_projectUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutProjectInput | user_projectCreateOrConnectWithoutProjectInput[]
-    upsert?: user_projectUpsertWithWhereUniqueWithoutProjectInput | user_projectUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: user_projectCreateManyProjectInputEnvelope
-    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    update?: user_projectUpdateWithWhereUniqueWithoutProjectInput | user_projectUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: user_projectUpdateManyWithWhereWithoutProjectInput | user_projectUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-  }
-
-  export type user_projectUncheckedUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<user_projectCreateWithoutProjectInput, user_projectUncheckedCreateWithoutProjectInput> | user_projectCreateWithoutProjectInput[] | user_projectUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutProjectInput | user_projectCreateOrConnectWithoutProjectInput[]
-    upsert?: user_projectUpsertWithWhereUniqueWithoutProjectInput | user_projectUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: user_projectCreateManyProjectInputEnvelope
-    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    update?: user_projectUpdateWithWhereUniqueWithoutProjectInput | user_projectUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: user_projectUpdateManyWithWhereWithoutProjectInput | user_projectUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-  }
-
-  export type projectCreateNestedOneWithoutUser_projectInput = {
-    create?: XOR<projectCreateWithoutUser_projectInput, projectUncheckedCreateWithoutUser_projectInput>
-    connectOrCreate?: projectCreateOrConnectWithoutUser_projectInput
-    connect?: projectWhereUniqueInput
-  }
-
-  export type userCreateNestedOneWithoutUser_projectInput = {
-    create?: XOR<userCreateWithoutUser_projectInput, userUncheckedCreateWithoutUser_projectInput>
-    connectOrCreate?: userCreateOrConnectWithoutUser_projectInput
+  export type userUpdateOneRequiredWithoutProjectNestedInput = {
+    create?: XOR<userCreateWithoutProjectInput, userUncheckedCreateWithoutProjectInput>
+    connectOrCreate?: userCreateOrConnectWithoutProjectInput
+    upsert?: userUpsertWithoutProjectInput
     connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutProjectInput, userUpdateWithoutProjectInput>, userUncheckedUpdateWithoutProjectInput>
   }
 
-  export type projectUpdateOneRequiredWithoutUser_projectNestedInput = {
-    create?: XOR<projectCreateWithoutUser_projectInput, projectUncheckedCreateWithoutUser_projectInput>
-    connectOrCreate?: projectCreateOrConnectWithoutUser_projectInput
-    upsert?: projectUpsertWithoutUser_projectInput
-    connect?: projectWhereUniqueInput
-    update?: XOR<XOR<projectUpdateToOneWithWhereWithoutUser_projectInput, projectUpdateWithoutUser_projectInput>, projectUncheckedUpdateWithoutUser_projectInput>
-  }
-
-  export type userUpdateOneRequiredWithoutUser_projectNestedInput = {
-    create?: XOR<userCreateWithoutUser_projectInput, userUncheckedCreateWithoutUser_projectInput>
-    connectOrCreate?: userCreateOrConnectWithoutUser_projectInput
-    upsert?: userUpsertWithoutUser_projectInput
+  export type userCreateNestedOneWithoutExperienceInput = {
+    create?: XOR<userCreateWithoutExperienceInput, userUncheckedCreateWithoutExperienceInput>
+    connectOrCreate?: userCreateOrConnectWithoutExperienceInput
     connect?: userWhereUniqueInput
-    update?: XOR<XOR<userUpdateToOneWithWhereWithoutUser_projectInput, userUpdateWithoutUser_projectInput>, userUncheckedUpdateWithoutUser_projectInput>
-  }
-
-  export type user_experienceCreateNestedManyWithoutExperienceInput = {
-    create?: XOR<user_experienceCreateWithoutExperienceInput, user_experienceUncheckedCreateWithoutExperienceInput> | user_experienceCreateWithoutExperienceInput[] | user_experienceUncheckedCreateWithoutExperienceInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutExperienceInput | user_experienceCreateOrConnectWithoutExperienceInput[]
-    createMany?: user_experienceCreateManyExperienceInputEnvelope
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-  }
-
-  export type user_experienceUncheckedCreateNestedManyWithoutExperienceInput = {
-    create?: XOR<user_experienceCreateWithoutExperienceInput, user_experienceUncheckedCreateWithoutExperienceInput> | user_experienceCreateWithoutExperienceInput[] | user_experienceUncheckedCreateWithoutExperienceInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutExperienceInput | user_experienceCreateOrConnectWithoutExperienceInput[]
-    createMany?: user_experienceCreateManyExperienceInputEnvelope
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
 
-  export type user_experienceUpdateManyWithoutExperienceNestedInput = {
-    create?: XOR<user_experienceCreateWithoutExperienceInput, user_experienceUncheckedCreateWithoutExperienceInput> | user_experienceCreateWithoutExperienceInput[] | user_experienceUncheckedCreateWithoutExperienceInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutExperienceInput | user_experienceCreateOrConnectWithoutExperienceInput[]
-    upsert?: user_experienceUpsertWithWhereUniqueWithoutExperienceInput | user_experienceUpsertWithWhereUniqueWithoutExperienceInput[]
-    createMany?: user_experienceCreateManyExperienceInputEnvelope
-    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    update?: user_experienceUpdateWithWhereUniqueWithoutExperienceInput | user_experienceUpdateWithWhereUniqueWithoutExperienceInput[]
-    updateMany?: user_experienceUpdateManyWithWhereWithoutExperienceInput | user_experienceUpdateManyWithWhereWithoutExperienceInput[]
-    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
+  export type userUpdateOneRequiredWithoutExperienceNestedInput = {
+    create?: XOR<userCreateWithoutExperienceInput, userUncheckedCreateWithoutExperienceInput>
+    connectOrCreate?: userCreateOrConnectWithoutExperienceInput
+    upsert?: userUpsertWithoutExperienceInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutExperienceInput, userUpdateWithoutExperienceInput>, userUncheckedUpdateWithoutExperienceInput>
   }
 
-  export type user_experienceUncheckedUpdateManyWithoutExperienceNestedInput = {
-    create?: XOR<user_experienceCreateWithoutExperienceInput, user_experienceUncheckedCreateWithoutExperienceInput> | user_experienceCreateWithoutExperienceInput[] | user_experienceUncheckedCreateWithoutExperienceInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutExperienceInput | user_experienceCreateOrConnectWithoutExperienceInput[]
-    upsert?: user_experienceUpsertWithWhereUniqueWithoutExperienceInput | user_experienceUpsertWithWhereUniqueWithoutExperienceInput[]
-    createMany?: user_experienceCreateManyExperienceInputEnvelope
-    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    update?: user_experienceUpdateWithWhereUniqueWithoutExperienceInput | user_experienceUpdateWithWhereUniqueWithoutExperienceInput[]
-    updateMany?: user_experienceUpdateManyWithWhereWithoutExperienceInput | user_experienceUpdateManyWithWhereWithoutExperienceInput[]
-    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
-  }
-
-  export type experienceCreateNestedOneWithoutUser_experienceInput = {
-    create?: XOR<experienceCreateWithoutUser_experienceInput, experienceUncheckedCreateWithoutUser_experienceInput>
-    connectOrCreate?: experienceCreateOrConnectWithoutUser_experienceInput
-    connect?: experienceWhereUniqueInput
-  }
-
-  export type userCreateNestedOneWithoutUser_experienceInput = {
-    create?: XOR<userCreateWithoutUser_experienceInput, userUncheckedCreateWithoutUser_experienceInput>
-    connectOrCreate?: userCreateOrConnectWithoutUser_experienceInput
+  export type userCreateNestedOneWithoutEducationInput = {
+    create?: XOR<userCreateWithoutEducationInput, userUncheckedCreateWithoutEducationInput>
+    connectOrCreate?: userCreateOrConnectWithoutEducationInput
     connect?: userWhereUniqueInput
   }
 
-  export type experienceUpdateOneRequiredWithoutUser_experienceNestedInput = {
-    create?: XOR<experienceCreateWithoutUser_experienceInput, experienceUncheckedCreateWithoutUser_experienceInput>
-    connectOrCreate?: experienceCreateOrConnectWithoutUser_experienceInput
-    upsert?: experienceUpsertWithoutUser_experienceInput
-    connect?: experienceWhereUniqueInput
-    update?: XOR<XOR<experienceUpdateToOneWithWhereWithoutUser_experienceInput, experienceUpdateWithoutUser_experienceInput>, experienceUncheckedUpdateWithoutUser_experienceInput>
-  }
-
-  export type userUpdateOneRequiredWithoutUser_experienceNestedInput = {
-    create?: XOR<userCreateWithoutUser_experienceInput, userUncheckedCreateWithoutUser_experienceInput>
-    connectOrCreate?: userCreateOrConnectWithoutUser_experienceInput
-    upsert?: userUpsertWithoutUser_experienceInput
+  export type userUpdateOneRequiredWithoutEducationNestedInput = {
+    create?: XOR<userCreateWithoutEducationInput, userUncheckedCreateWithoutEducationInput>
+    connectOrCreate?: userCreateOrConnectWithoutEducationInput
+    upsert?: userUpsertWithoutEducationInput
     connect?: userWhereUniqueInput
-    update?: XOR<XOR<userUpdateToOneWithWhereWithoutUser_experienceInput, userUpdateWithoutUser_experienceInput>, userUncheckedUpdateWithoutUser_experienceInput>
-  }
-
-  export type user_educationCreateNestedManyWithoutEducationInput = {
-    create?: XOR<user_educationCreateWithoutEducationInput, user_educationUncheckedCreateWithoutEducationInput> | user_educationCreateWithoutEducationInput[] | user_educationUncheckedCreateWithoutEducationInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutEducationInput | user_educationCreateOrConnectWithoutEducationInput[]
-    createMany?: user_educationCreateManyEducationInputEnvelope
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-  }
-
-  export type user_educationUncheckedCreateNestedManyWithoutEducationInput = {
-    create?: XOR<user_educationCreateWithoutEducationInput, user_educationUncheckedCreateWithoutEducationInput> | user_educationCreateWithoutEducationInput[] | user_educationUncheckedCreateWithoutEducationInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutEducationInput | user_educationCreateOrConnectWithoutEducationInput[]
-    createMany?: user_educationCreateManyEducationInputEnvelope
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-  }
-
-  export type user_educationUpdateManyWithoutEducationNestedInput = {
-    create?: XOR<user_educationCreateWithoutEducationInput, user_educationUncheckedCreateWithoutEducationInput> | user_educationCreateWithoutEducationInput[] | user_educationUncheckedCreateWithoutEducationInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutEducationInput | user_educationCreateOrConnectWithoutEducationInput[]
-    upsert?: user_educationUpsertWithWhereUniqueWithoutEducationInput | user_educationUpsertWithWhereUniqueWithoutEducationInput[]
-    createMany?: user_educationCreateManyEducationInputEnvelope
-    set?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    disconnect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    delete?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    update?: user_educationUpdateWithWhereUniqueWithoutEducationInput | user_educationUpdateWithWhereUniqueWithoutEducationInput[]
-    updateMany?: user_educationUpdateManyWithWhereWithoutEducationInput | user_educationUpdateManyWithWhereWithoutEducationInput[]
-    deleteMany?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
-  }
-
-  export type user_educationUncheckedUpdateManyWithoutEducationNestedInput = {
-    create?: XOR<user_educationCreateWithoutEducationInput, user_educationUncheckedCreateWithoutEducationInput> | user_educationCreateWithoutEducationInput[] | user_educationUncheckedCreateWithoutEducationInput[]
-    connectOrCreate?: user_educationCreateOrConnectWithoutEducationInput | user_educationCreateOrConnectWithoutEducationInput[]
-    upsert?: user_educationUpsertWithWhereUniqueWithoutEducationInput | user_educationUpsertWithWhereUniqueWithoutEducationInput[]
-    createMany?: user_educationCreateManyEducationInputEnvelope
-    set?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    disconnect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    delete?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
-    update?: user_educationUpdateWithWhereUniqueWithoutEducationInput | user_educationUpdateWithWhereUniqueWithoutEducationInput[]
-    updateMany?: user_educationUpdateManyWithWhereWithoutEducationInput | user_educationUpdateManyWithWhereWithoutEducationInput[]
-    deleteMany?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
-  }
-
-  export type educationCreateNestedOneWithoutUser_educationInput = {
-    create?: XOR<educationCreateWithoutUser_educationInput, educationUncheckedCreateWithoutUser_educationInput>
-    connectOrCreate?: educationCreateOrConnectWithoutUser_educationInput
-    connect?: educationWhereUniqueInput
-  }
-
-  export type userCreateNestedOneWithoutUser_educationInput = {
-    create?: XOR<userCreateWithoutUser_educationInput, userUncheckedCreateWithoutUser_educationInput>
-    connectOrCreate?: userCreateOrConnectWithoutUser_educationInput
-    connect?: userWhereUniqueInput
-  }
-
-  export type educationUpdateOneRequiredWithoutUser_educationNestedInput = {
-    create?: XOR<educationCreateWithoutUser_educationInput, educationUncheckedCreateWithoutUser_educationInput>
-    connectOrCreate?: educationCreateOrConnectWithoutUser_educationInput
-    upsert?: educationUpsertWithoutUser_educationInput
-    connect?: educationWhereUniqueInput
-    update?: XOR<XOR<educationUpdateToOneWithWhereWithoutUser_educationInput, educationUpdateWithoutUser_educationInput>, educationUncheckedUpdateWithoutUser_educationInput>
-  }
-
-  export type userUpdateOneRequiredWithoutUser_educationNestedInput = {
-    create?: XOR<userCreateWithoutUser_educationInput, userUncheckedCreateWithoutUser_educationInput>
-    connectOrCreate?: userCreateOrConnectWithoutUser_educationInput
-    upsert?: userUpsertWithoutUser_educationInput
-    connect?: userWhereUniqueInput
-    update?: XOR<XOR<userUpdateToOneWithWhereWithoutUser_educationInput, userUpdateWithoutUser_educationInput>, userUncheckedUpdateWithoutUser_educationInput>
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutEducationInput, userUpdateWithoutEducationInput>, userUncheckedUpdateWithoutEducationInput>
   }
 
   export type skillsCreatefrontendInput = {
@@ -15510,6 +12955,7 @@ export namespace Prisma {
   }
 
   export type skillsUncheckedCreateWithoutUserInput = {
+    sid?: number
     frontend?: skillsCreatefrontendInput | string[]
     style: string
     backend?: skillsCreatebackendInput | string[]
@@ -15524,57 +12970,8 @@ export namespace Prisma {
     create: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
   }
 
-  export type user_educationCreateWithoutUserInput = {
-    education: educationCreateNestedOneWithoutUser_educationInput
-  }
-
-  export type user_educationUncheckedCreateWithoutUserInput = {
-    edid: number
-  }
-
-  export type user_educationCreateOrConnectWithoutUserInput = {
-    where: user_educationWhereUniqueInput
-    create: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput>
-  }
-
-  export type user_educationCreateManyUserInputEnvelope = {
-    data: user_educationCreateManyUserInput | user_educationCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type user_experienceCreateWithoutUserInput = {
-    experience: experienceCreateNestedOneWithoutUser_experienceInput
-  }
-
-  export type user_experienceUncheckedCreateWithoutUserInput = {
-    eid: number
-  }
-
-  export type user_experienceCreateOrConnectWithoutUserInput = {
-    where: user_experienceWhereUniqueInput
-    create: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput>
-  }
-
-  export type user_experienceCreateManyUserInputEnvelope = {
-    data: user_experienceCreateManyUserInput | user_experienceCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type user_projectCreateWithoutUserInput = {
-    project: projectCreateNestedOneWithoutUser_projectInput
-  }
-
-  export type user_projectUncheckedCreateWithoutUserInput = {
-    pid: number
-  }
-
-  export type user_projectCreateOrConnectWithoutUserInput = {
-    where: user_projectWhereUniqueInput
-    create: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput>
-  }
-
-  export type user_projectCreateManyUserInputEnvelope = {
-    data: user_projectCreateManyUserInput | user_projectCreateManyUserInput[]
+  export type skillsCreateManyUserInputEnvelope = {
+    data: skillsCreateManyUserInput | skillsCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -15586,6 +12983,7 @@ export namespace Prisma {
   }
 
   export type contactUncheckedCreateWithoutUserInput = {
+    cid?: number
     email: string
     phone: string
     location: string
@@ -15609,6 +13007,7 @@ export namespace Prisma {
   }
 
   export type AboutUncheckedCreateWithoutUserInput = {
+    aid?: number
     image: string
     about: string
     style: string
@@ -15624,107 +13023,145 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type skillsUpsertWithoutUserInput = {
-    update: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
-    create: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
-    where?: skillsWhereInput
+  export type projectCreateWithoutUserInput = {
+    title: string
+    image: string
+    desc: string
+    tags?: projectCreatetagsInput | string[]
+    github: string
+    Link: string
+    style: string
   }
 
-  export type skillsUpdateToOneWithWhereWithoutUserInput = {
-    where?: skillsWhereInput
+  export type projectUncheckedCreateWithoutUserInput = {
+    pid?: number
+    title: string
+    image: string
+    desc: string
+    tags?: projectCreatetagsInput | string[]
+    github: string
+    Link: string
+    style: string
+  }
+
+  export type projectCreateOrConnectWithoutUserInput = {
+    where: projectWhereUniqueInput
+    create: XOR<projectCreateWithoutUserInput, projectUncheckedCreateWithoutUserInput>
+  }
+
+  export type projectCreateManyUserInputEnvelope = {
+    data: projectCreateManyUserInput | projectCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type experienceCreateWithoutUserInput = {
+    title: string
+    corp: string
+    style: string
+    startdate: Date | string
+    enddate: Date | string
+    desc: string
+  }
+
+  export type experienceUncheckedCreateWithoutUserInput = {
+    exid?: number
+    title: string
+    corp: string
+    style: string
+    startdate: Date | string
+    enddate: Date | string
+    desc: string
+  }
+
+  export type experienceCreateOrConnectWithoutUserInput = {
+    where: experienceWhereUniqueInput
+    create: XOR<experienceCreateWithoutUserInput, experienceUncheckedCreateWithoutUserInput>
+  }
+
+  export type experienceCreateManyUserInputEnvelope = {
+    data: experienceCreateManyUserInput | experienceCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type educationCreateWithoutUserInput = {
+    inst: string
+    degree: string
+    startdate: Date | string
+    enddate: Date | string
+    style: string
+  }
+
+  export type educationUncheckedCreateWithoutUserInput = {
+    edid?: number
+    inst: string
+    degree: string
+    startdate: Date | string
+    enddate: Date | string
+    style: string
+  }
+
+  export type educationCreateOrConnectWithoutUserInput = {
+    where: educationWhereUniqueInput
+    create: XOR<educationCreateWithoutUserInput, educationUncheckedCreateWithoutUserInput>
+  }
+
+  export type educationCreateManyUserInputEnvelope = {
+    data: educationCreateManyUserInput | educationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type heroCreateWithoutUserInput = {
+    style: string
+    hero: string
+    subhero: string
+  }
+
+  export type heroUncheckedCreateWithoutUserInput = {
+    hid?: number
+    style: string
+    hero: string
+    subhero: string
+  }
+
+  export type heroCreateOrConnectWithoutUserInput = {
+    where: heroWhereUniqueInput
+    create: XOR<heroCreateWithoutUserInput, heroUncheckedCreateWithoutUserInput>
+  }
+
+  export type heroCreateManyUserInputEnvelope = {
+    data: heroCreateManyUserInput | heroCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type skillsUpsertWithWhereUniqueWithoutUserInput = {
+    where: skillsWhereUniqueInput
+    update: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
+    create: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
+  }
+
+  export type skillsUpdateWithWhereUniqueWithoutUserInput = {
+    where: skillsWhereUniqueInput
     data: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
   }
 
-  export type skillsUpdateWithoutUserInput = {
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+  export type skillsUpdateManyWithWhereWithoutUserInput = {
+    where: skillsScalarWhereInput
+    data: XOR<skillsUpdateManyMutationInput, skillsUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type skillsUncheckedUpdateWithoutUserInput = {
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
-  }
-
-  export type user_educationUpsertWithWhereUniqueWithoutUserInput = {
-    where: user_educationWhereUniqueInput
-    update: XOR<user_educationUpdateWithoutUserInput, user_educationUncheckedUpdateWithoutUserInput>
-    create: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput>
-  }
-
-  export type user_educationUpdateWithWhereUniqueWithoutUserInput = {
-    where: user_educationWhereUniqueInput
-    data: XOR<user_educationUpdateWithoutUserInput, user_educationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type user_educationUpdateManyWithWhereWithoutUserInput = {
-    where: user_educationScalarWhereInput
-    data: XOR<user_educationUpdateManyMutationInput, user_educationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type user_educationScalarWhereInput = {
-    AND?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
-    OR?: user_educationScalarWhereInput[]
-    NOT?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
-    edid?: IntFilter<"user_education"> | number
-    uid?: IntFilter<"user_education"> | number
-  }
-
-  export type user_experienceUpsertWithWhereUniqueWithoutUserInput = {
-    where: user_experienceWhereUniqueInput
-    update: XOR<user_experienceUpdateWithoutUserInput, user_experienceUncheckedUpdateWithoutUserInput>
-    create: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput>
-  }
-
-  export type user_experienceUpdateWithWhereUniqueWithoutUserInput = {
-    where: user_experienceWhereUniqueInput
-    data: XOR<user_experienceUpdateWithoutUserInput, user_experienceUncheckedUpdateWithoutUserInput>
-  }
-
-  export type user_experienceUpdateManyWithWhereWithoutUserInput = {
-    where: user_experienceScalarWhereInput
-    data: XOR<user_experienceUpdateManyMutationInput, user_experienceUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type user_experienceScalarWhereInput = {
-    AND?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
-    OR?: user_experienceScalarWhereInput[]
-    NOT?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
-    eid?: IntFilter<"user_experience"> | number
-    uid?: IntFilter<"user_experience"> | number
-  }
-
-  export type user_projectUpsertWithWhereUniqueWithoutUserInput = {
-    where: user_projectWhereUniqueInput
-    update: XOR<user_projectUpdateWithoutUserInput, user_projectUncheckedUpdateWithoutUserInput>
-    create: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput>
-  }
-
-  export type user_projectUpdateWithWhereUniqueWithoutUserInput = {
-    where: user_projectWhereUniqueInput
-    data: XOR<user_projectUpdateWithoutUserInput, user_projectUncheckedUpdateWithoutUserInput>
-  }
-
-  export type user_projectUpdateManyWithWhereWithoutUserInput = {
-    where: user_projectScalarWhereInput
-    data: XOR<user_projectUpdateManyMutationInput, user_projectUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type user_projectScalarWhereInput = {
-    AND?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-    OR?: user_projectScalarWhereInput[]
-    NOT?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-    pid?: IntFilter<"user_project"> | number
-    uid?: IntFilter<"user_project"> | number
+  export type skillsScalarWhereInput = {
+    AND?: skillsScalarWhereInput | skillsScalarWhereInput[]
+    OR?: skillsScalarWhereInput[]
+    NOT?: skillsScalarWhereInput | skillsScalarWhereInput[]
+    sid?: IntFilter<"skills"> | number
+    uid?: IntFilter<"skills"> | number
+    frontend?: StringNullableListFilter<"skills">
+    style?: StringFilter<"skills"> | string
+    backend?: StringNullableListFilter<"skills">
+    database?: StringNullableListFilter<"skills">
+    mobile?: StringNullableListFilter<"skills">
+    other?: StringNullableListFilter<"skills">
+    languages?: StringNullableListFilter<"skills">
   }
 
   export type contactUpsertWithWhereUniqueWithoutUserInput = {
@@ -15747,6 +13184,7 @@ export namespace Prisma {
     AND?: contactScalarWhereInput | contactScalarWhereInput[]
     OR?: contactScalarWhereInput[]
     NOT?: contactScalarWhereInput | contactScalarWhereInput[]
+    cid?: IntFilter<"contact"> | number
     uid?: IntFilter<"contact"> | number
     email?: StringFilter<"contact"> | string
     phone?: StringFilter<"contact"> | string
@@ -15774,511 +13212,399 @@ export namespace Prisma {
     AND?: AboutScalarWhereInput | AboutScalarWhereInput[]
     OR?: AboutScalarWhereInput[]
     NOT?: AboutScalarWhereInput | AboutScalarWhereInput[]
+    aid?: IntFilter<"About"> | number
     uid?: IntFilter<"About"> | number
     image?: StringFilter<"About"> | string
     about?: StringFilter<"About"> | string
     style?: StringFilter<"About"> | string
   }
 
-  export type user_projectCreateWithoutProjectInput = {
-    user: userCreateNestedOneWithoutUser_projectInput
-  }
-
-  export type user_projectUncheckedCreateWithoutProjectInput = {
-    uid: number
-  }
-
-  export type user_projectCreateOrConnectWithoutProjectInput = {
-    where: user_projectWhereUniqueInput
-    create: XOR<user_projectCreateWithoutProjectInput, user_projectUncheckedCreateWithoutProjectInput>
-  }
-
-  export type user_projectCreateManyProjectInputEnvelope = {
-    data: user_projectCreateManyProjectInput | user_projectCreateManyProjectInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type user_projectUpsertWithWhereUniqueWithoutProjectInput = {
-    where: user_projectWhereUniqueInput
-    update: XOR<user_projectUpdateWithoutProjectInput, user_projectUncheckedUpdateWithoutProjectInput>
-    create: XOR<user_projectCreateWithoutProjectInput, user_projectUncheckedCreateWithoutProjectInput>
-  }
-
-  export type user_projectUpdateWithWhereUniqueWithoutProjectInput = {
-    where: user_projectWhereUniqueInput
-    data: XOR<user_projectUpdateWithoutProjectInput, user_projectUncheckedUpdateWithoutProjectInput>
-  }
-
-  export type user_projectUpdateManyWithWhereWithoutProjectInput = {
-    where: user_projectScalarWhereInput
-    data: XOR<user_projectUpdateManyMutationInput, user_projectUncheckedUpdateManyWithoutProjectInput>
-  }
-
-  export type projectCreateWithoutUser_projectInput = {
-    title: string
-    image: string
-    desc: string
-    tags?: projectCreatetagsInput | string[]
-    github: string
-    Link: string
-    style: string
-  }
-
-  export type projectUncheckedCreateWithoutUser_projectInput = {
-    pid?: number
-    title: string
-    image: string
-    desc: string
-    tags?: projectCreatetagsInput | string[]
-    github: string
-    Link: string
-    style: string
-  }
-
-  export type projectCreateOrConnectWithoutUser_projectInput = {
+  export type projectUpsertWithWhereUniqueWithoutUserInput = {
     where: projectWhereUniqueInput
-    create: XOR<projectCreateWithoutUser_projectInput, projectUncheckedCreateWithoutUser_projectInput>
+    update: XOR<projectUpdateWithoutUserInput, projectUncheckedUpdateWithoutUserInput>
+    create: XOR<projectCreateWithoutUserInput, projectUncheckedCreateWithoutUserInput>
   }
 
-  export type userCreateWithoutUser_projectInput = {
-    username: string
-    password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsCreateNestedOneWithoutUserInput
-    user_education?: user_educationCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
-    contact?: contactCreateNestedManyWithoutUserInput
-    About?: AboutCreateNestedManyWithoutUserInput
+  export type projectUpdateWithWhereUniqueWithoutUserInput = {
+    where: projectWhereUniqueInput
+    data: XOR<projectUpdateWithoutUserInput, projectUncheckedUpdateWithoutUserInput>
   }
 
-  export type userUncheckedCreateWithoutUser_projectInput = {
-    uid?: number
-    username: string
-    password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
-    user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
-    contact?: contactUncheckedCreateNestedManyWithoutUserInput
-    About?: AboutUncheckedCreateNestedManyWithoutUserInput
+  export type projectUpdateManyWithWhereWithoutUserInput = {
+    where: projectScalarWhereInput
+    data: XOR<projectUpdateManyMutationInput, projectUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type userCreateOrConnectWithoutUser_projectInput = {
-    where: userWhereUniqueInput
-    create: XOR<userCreateWithoutUser_projectInput, userUncheckedCreateWithoutUser_projectInput>
+  export type projectScalarWhereInput = {
+    AND?: projectScalarWhereInput | projectScalarWhereInput[]
+    OR?: projectScalarWhereInput[]
+    NOT?: projectScalarWhereInput | projectScalarWhereInput[]
+    pid?: IntFilter<"project"> | number
+    uid?: IntFilter<"project"> | number
+    title?: StringFilter<"project"> | string
+    image?: StringFilter<"project"> | string
+    desc?: StringFilter<"project"> | string
+    tags?: StringNullableListFilter<"project">
+    github?: StringFilter<"project"> | string
+    Link?: StringFilter<"project"> | string
+    style?: StringFilter<"project"> | string
   }
 
-  export type projectUpsertWithoutUser_projectInput = {
-    update: XOR<projectUpdateWithoutUser_projectInput, projectUncheckedUpdateWithoutUser_projectInput>
-    create: XOR<projectCreateWithoutUser_projectInput, projectUncheckedCreateWithoutUser_projectInput>
-    where?: projectWhereInput
-  }
-
-  export type projectUpdateToOneWithWhereWithoutUser_projectInput = {
-    where?: projectWhereInput
-    data: XOR<projectUpdateWithoutUser_projectInput, projectUncheckedUpdateWithoutUser_projectInput>
-  }
-
-  export type projectUpdateWithoutUser_projectInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
-    desc?: StringFieldUpdateOperationsInput | string
-    tags?: projectUpdatetagsInput | string[]
-    github?: StringFieldUpdateOperationsInput | string
-    Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type projectUncheckedUpdateWithoutUser_projectInput = {
-    pid?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
-    desc?: StringFieldUpdateOperationsInput | string
-    tags?: projectUpdatetagsInput | string[]
-    github?: StringFieldUpdateOperationsInput | string
-    Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type userUpsertWithoutUser_projectInput = {
-    update: XOR<userUpdateWithoutUser_projectInput, userUncheckedUpdateWithoutUser_projectInput>
-    create: XOR<userCreateWithoutUser_projectInput, userUncheckedCreateWithoutUser_projectInput>
-    where?: userWhereInput
-  }
-
-  export type userUpdateToOneWithWhereWithoutUser_projectInput = {
-    where?: userWhereInput
-    data: XOR<userUpdateWithoutUser_projectInput, userUncheckedUpdateWithoutUser_projectInput>
-  }
-
-  export type userUpdateWithoutUser_projectInput = {
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
-    contact?: contactUpdateManyWithoutUserNestedInput
-    About?: AboutUpdateManyWithoutUserNestedInput
-  }
-
-  export type userUncheckedUpdateWithoutUser_projectInput = {
-    uid?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
-    contact?: contactUncheckedUpdateManyWithoutUserNestedInput
-    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type user_experienceCreateWithoutExperienceInput = {
-    user: userCreateNestedOneWithoutUser_experienceInput
-  }
-
-  export type user_experienceUncheckedCreateWithoutExperienceInput = {
-    uid: number
-  }
-
-  export type user_experienceCreateOrConnectWithoutExperienceInput = {
-    where: user_experienceWhereUniqueInput
-    create: XOR<user_experienceCreateWithoutExperienceInput, user_experienceUncheckedCreateWithoutExperienceInput>
-  }
-
-  export type user_experienceCreateManyExperienceInputEnvelope = {
-    data: user_experienceCreateManyExperienceInput | user_experienceCreateManyExperienceInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type user_experienceUpsertWithWhereUniqueWithoutExperienceInput = {
-    where: user_experienceWhereUniqueInput
-    update: XOR<user_experienceUpdateWithoutExperienceInput, user_experienceUncheckedUpdateWithoutExperienceInput>
-    create: XOR<user_experienceCreateWithoutExperienceInput, user_experienceUncheckedCreateWithoutExperienceInput>
-  }
-
-  export type user_experienceUpdateWithWhereUniqueWithoutExperienceInput = {
-    where: user_experienceWhereUniqueInput
-    data: XOR<user_experienceUpdateWithoutExperienceInput, user_experienceUncheckedUpdateWithoutExperienceInput>
-  }
-
-  export type user_experienceUpdateManyWithWhereWithoutExperienceInput = {
-    where: user_experienceScalarWhereInput
-    data: XOR<user_experienceUpdateManyMutationInput, user_experienceUncheckedUpdateManyWithoutExperienceInput>
-  }
-
-  export type experienceCreateWithoutUser_experienceInput = {
-    title: string
-    corp: string
-    style: string
-    startdate: Date | string
-    enddate: Date | string
-    desc: string
-  }
-
-  export type experienceUncheckedCreateWithoutUser_experienceInput = {
-    eid?: number
-    title: string
-    corp: string
-    style: string
-    startdate: Date | string
-    enddate: Date | string
-    desc: string
-  }
-
-  export type experienceCreateOrConnectWithoutUser_experienceInput = {
+  export type experienceUpsertWithWhereUniqueWithoutUserInput = {
     where: experienceWhereUniqueInput
-    create: XOR<experienceCreateWithoutUser_experienceInput, experienceUncheckedCreateWithoutUser_experienceInput>
+    update: XOR<experienceUpdateWithoutUserInput, experienceUncheckedUpdateWithoutUserInput>
+    create: XOR<experienceCreateWithoutUserInput, experienceUncheckedCreateWithoutUserInput>
   }
 
-  export type userCreateWithoutUser_experienceInput = {
-    username: string
-    password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsCreateNestedOneWithoutUserInput
-    user_education?: user_educationCreateNestedManyWithoutUserInput
-    user_project?: user_projectCreateNestedManyWithoutUserInput
-    contact?: contactCreateNestedManyWithoutUserInput
-    About?: AboutCreateNestedManyWithoutUserInput
+  export type experienceUpdateWithWhereUniqueWithoutUserInput = {
+    where: experienceWhereUniqueInput
+    data: XOR<experienceUpdateWithoutUserInput, experienceUncheckedUpdateWithoutUserInput>
   }
 
-  export type userUncheckedCreateWithoutUser_experienceInput = {
-    uid?: number
-    username: string
-    password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
-    user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
-    contact?: contactUncheckedCreateNestedManyWithoutUserInput
-    About?: AboutUncheckedCreateNestedManyWithoutUserInput
+  export type experienceUpdateManyWithWhereWithoutUserInput = {
+    where: experienceScalarWhereInput
+    data: XOR<experienceUpdateManyMutationInput, experienceUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type userCreateOrConnectWithoutUser_experienceInput = {
-    where: userWhereUniqueInput
-    create: XOR<userCreateWithoutUser_experienceInput, userUncheckedCreateWithoutUser_experienceInput>
+  export type experienceScalarWhereInput = {
+    AND?: experienceScalarWhereInput | experienceScalarWhereInput[]
+    OR?: experienceScalarWhereInput[]
+    NOT?: experienceScalarWhereInput | experienceScalarWhereInput[]
+    exid?: IntFilter<"experience"> | number
+    title?: StringFilter<"experience"> | string
+    corp?: StringFilter<"experience"> | string
+    style?: StringFilter<"experience"> | string
+    startdate?: DateTimeFilter<"experience"> | Date | string
+    enddate?: DateTimeFilter<"experience"> | Date | string
+    desc?: StringFilter<"experience"> | string
+    uid?: IntFilter<"experience"> | number
   }
 
-  export type experienceUpsertWithoutUser_experienceInput = {
-    update: XOR<experienceUpdateWithoutUser_experienceInput, experienceUncheckedUpdateWithoutUser_experienceInput>
-    create: XOR<experienceCreateWithoutUser_experienceInput, experienceUncheckedCreateWithoutUser_experienceInput>
-    where?: experienceWhereInput
-  }
-
-  export type experienceUpdateToOneWithWhereWithoutUser_experienceInput = {
-    where?: experienceWhereInput
-    data: XOR<experienceUpdateWithoutUser_experienceInput, experienceUncheckedUpdateWithoutUser_experienceInput>
-  }
-
-  export type experienceUpdateWithoutUser_experienceInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    desc?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type experienceUncheckedUpdateWithoutUser_experienceInput = {
-    eid?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    desc?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type userUpsertWithoutUser_experienceInput = {
-    update: XOR<userUpdateWithoutUser_experienceInput, userUncheckedUpdateWithoutUser_experienceInput>
-    create: XOR<userCreateWithoutUser_experienceInput, userUncheckedCreateWithoutUser_experienceInput>
-    where?: userWhereInput
-  }
-
-  export type userUpdateToOneWithWhereWithoutUser_experienceInput = {
-    where?: userWhereInput
-    data: XOR<userUpdateWithoutUser_experienceInput, userUncheckedUpdateWithoutUser_experienceInput>
-  }
-
-  export type userUpdateWithoutUser_experienceInput = {
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
-    contact?: contactUpdateManyWithoutUserNestedInput
-    About?: AboutUpdateManyWithoutUserNestedInput
-  }
-
-  export type userUncheckedUpdateWithoutUser_experienceInput = {
-    uid?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
-    contact?: contactUncheckedUpdateManyWithoutUserNestedInput
-    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type user_educationCreateWithoutEducationInput = {
-    user: userCreateNestedOneWithoutUser_educationInput
-  }
-
-  export type user_educationUncheckedCreateWithoutEducationInput = {
-    uid: number
-  }
-
-  export type user_educationCreateOrConnectWithoutEducationInput = {
-    where: user_educationWhereUniqueInput
-    create: XOR<user_educationCreateWithoutEducationInput, user_educationUncheckedCreateWithoutEducationInput>
-  }
-
-  export type user_educationCreateManyEducationInputEnvelope = {
-    data: user_educationCreateManyEducationInput | user_educationCreateManyEducationInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type user_educationUpsertWithWhereUniqueWithoutEducationInput = {
-    where: user_educationWhereUniqueInput
-    update: XOR<user_educationUpdateWithoutEducationInput, user_educationUncheckedUpdateWithoutEducationInput>
-    create: XOR<user_educationCreateWithoutEducationInput, user_educationUncheckedCreateWithoutEducationInput>
-  }
-
-  export type user_educationUpdateWithWhereUniqueWithoutEducationInput = {
-    where: user_educationWhereUniqueInput
-    data: XOR<user_educationUpdateWithoutEducationInput, user_educationUncheckedUpdateWithoutEducationInput>
-  }
-
-  export type user_educationUpdateManyWithWhereWithoutEducationInput = {
-    where: user_educationScalarWhereInput
-    data: XOR<user_educationUpdateManyMutationInput, user_educationUncheckedUpdateManyWithoutEducationInput>
-  }
-
-  export type educationCreateWithoutUser_educationInput = {
-    inst: string
-    degree: string
-    startdate: Date | string
-    enddate: Date | string
-    style: string
-  }
-
-  export type educationUncheckedCreateWithoutUser_educationInput = {
-    edid?: number
-    inst: string
-    degree: string
-    startdate: Date | string
-    enddate: Date | string
-    style: string
-  }
-
-  export type educationCreateOrConnectWithoutUser_educationInput = {
+  export type educationUpsertWithWhereUniqueWithoutUserInput = {
     where: educationWhereUniqueInput
-    create: XOR<educationCreateWithoutUser_educationInput, educationUncheckedCreateWithoutUser_educationInput>
+    update: XOR<educationUpdateWithoutUserInput, educationUncheckedUpdateWithoutUserInput>
+    create: XOR<educationCreateWithoutUserInput, educationUncheckedCreateWithoutUserInput>
   }
 
-  export type userCreateWithoutUser_educationInput = {
+  export type educationUpdateWithWhereUniqueWithoutUserInput = {
+    where: educationWhereUniqueInput
+    data: XOR<educationUpdateWithoutUserInput, educationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type educationUpdateManyWithWhereWithoutUserInput = {
+    where: educationScalarWhereInput
+    data: XOR<educationUpdateManyMutationInput, educationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type educationScalarWhereInput = {
+    AND?: educationScalarWhereInput | educationScalarWhereInput[]
+    OR?: educationScalarWhereInput[]
+    NOT?: educationScalarWhereInput | educationScalarWhereInput[]
+    edid?: IntFilter<"education"> | number
+    inst?: StringFilter<"education"> | string
+    degree?: StringFilter<"education"> | string
+    startdate?: DateTimeFilter<"education"> | Date | string
+    enddate?: DateTimeFilter<"education"> | Date | string
+    style?: StringFilter<"education"> | string
+    uid?: IntFilter<"education"> | number
+  }
+
+  export type heroUpsertWithWhereUniqueWithoutUserInput = {
+    where: heroWhereUniqueInput
+    update: XOR<heroUpdateWithoutUserInput, heroUncheckedUpdateWithoutUserInput>
+    create: XOR<heroCreateWithoutUserInput, heroUncheckedCreateWithoutUserInput>
+  }
+
+  export type heroUpdateWithWhereUniqueWithoutUserInput = {
+    where: heroWhereUniqueInput
+    data: XOR<heroUpdateWithoutUserInput, heroUncheckedUpdateWithoutUserInput>
+  }
+
+  export type heroUpdateManyWithWhereWithoutUserInput = {
+    where: heroScalarWhereInput
+    data: XOR<heroUpdateManyMutationInput, heroUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type heroScalarWhereInput = {
+    AND?: heroScalarWhereInput | heroScalarWhereInput[]
+    OR?: heroScalarWhereInput[]
+    NOT?: heroScalarWhereInput | heroScalarWhereInput[]
+    hid?: IntFilter<"hero"> | number
+    uid?: IntFilter<"hero"> | number
+    style?: StringFilter<"hero"> | string
+    hero?: StringFilter<"hero"> | string
+    subhero?: StringFilter<"hero"> | string
+  }
+
+  export type userCreateWithoutHeroInput = {
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsCreateNestedOneWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
-    user_project?: user_projectCreateNestedManyWithoutUserInput
+    skills?: skillsCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
     About?: AboutCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
   }
 
-  export type userUncheckedCreateWithoutUser_educationInput = {
+  export type userUncheckedCreateWithoutHeroInput = {
     uid?: number
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
     About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type userCreateOrConnectWithoutUser_educationInput = {
+  export type userCreateOrConnectWithoutHeroInput = {
     where: userWhereUniqueInput
-    create: XOR<userCreateWithoutUser_educationInput, userUncheckedCreateWithoutUser_educationInput>
+    create: XOR<userCreateWithoutHeroInput, userUncheckedCreateWithoutHeroInput>
   }
 
-  export type educationUpsertWithoutUser_educationInput = {
-    update: XOR<educationUpdateWithoutUser_educationInput, educationUncheckedUpdateWithoutUser_educationInput>
-    create: XOR<educationCreateWithoutUser_educationInput, educationUncheckedCreateWithoutUser_educationInput>
-    where?: educationWhereInput
-  }
-
-  export type educationUpdateToOneWithWhereWithoutUser_educationInput = {
-    where?: educationWhereInput
-    data: XOR<educationUpdateWithoutUser_educationInput, educationUncheckedUpdateWithoutUser_educationInput>
-  }
-
-  export type educationUpdateWithoutUser_educationInput = {
-    inst?: StringFieldUpdateOperationsInput | string
-    degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type educationUncheckedUpdateWithoutUser_educationInput = {
-    edid?: IntFieldUpdateOperationsInput | number
-    inst?: StringFieldUpdateOperationsInput | string
-    degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type userUpsertWithoutUser_educationInput = {
-    update: XOR<userUpdateWithoutUser_educationInput, userUncheckedUpdateWithoutUser_educationInput>
-    create: XOR<userCreateWithoutUser_educationInput, userUncheckedCreateWithoutUser_educationInput>
+  export type userUpsertWithoutHeroInput = {
+    update: XOR<userUpdateWithoutHeroInput, userUncheckedUpdateWithoutHeroInput>
+    create: XOR<userCreateWithoutHeroInput, userUncheckedCreateWithoutHeroInput>
     where?: userWhereInput
   }
 
-  export type userUpdateToOneWithWhereWithoutUser_educationInput = {
+  export type userUpdateToOneWithWhereWithoutHeroInput = {
     where?: userWhereInput
-    data: XOR<userUpdateWithoutUser_educationInput, userUncheckedUpdateWithoutUser_educationInput>
+    data: XOR<userUpdateWithoutHeroInput, userUncheckedUpdateWithoutHeroInput>
   }
 
-  export type userUpdateWithoutUser_educationInput = {
+  export type userUpdateWithoutHeroInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUpdateOneWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    skills?: skillsUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
     About?: AboutUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
   }
 
-  export type userUncheckedUpdateWithoutUser_educationInput = {
+  export type userUncheckedUpdateWithoutHeroInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
     About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type userCreateWithoutProjectInput = {
+    username: string
+    password: string
+    skills?: skillsCreateNestedManyWithoutUserInput
+    contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutProjectInput = {
+    uid?: number
+    username: string
+    password: string
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutProjectInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutProjectInput, userUncheckedCreateWithoutProjectInput>
+  }
+
+  export type userUpsertWithoutProjectInput = {
+    update: XOR<userUpdateWithoutProjectInput, userUncheckedUpdateWithoutProjectInput>
+    create: XOR<userCreateWithoutProjectInput, userUncheckedCreateWithoutProjectInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutProjectInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutProjectInput, userUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type userUpdateWithoutProjectInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateManyWithoutUserNestedInput
+    contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutProjectInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type userCreateWithoutExperienceInput = {
+    username: string
+    password: string
+    skills?: skillsCreateNestedManyWithoutUserInput
+    contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutExperienceInput = {
+    uid?: number
+    username: string
+    password: string
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutExperienceInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutExperienceInput, userUncheckedCreateWithoutExperienceInput>
+  }
+
+  export type userUpsertWithoutExperienceInput = {
+    update: XOR<userUpdateWithoutExperienceInput, userUncheckedUpdateWithoutExperienceInput>
+    create: XOR<userCreateWithoutExperienceInput, userUncheckedCreateWithoutExperienceInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutExperienceInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutExperienceInput, userUncheckedUpdateWithoutExperienceInput>
+  }
+
+  export type userUpdateWithoutExperienceInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateManyWithoutUserNestedInput
+    contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutExperienceInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type userCreateWithoutEducationInput = {
+    username: string
+    password: string
+    skills?: skillsCreateNestedManyWithoutUserInput
+    contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutEducationInput = {
+    uid?: number
+    username: string
+    password: string
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutEducationInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutEducationInput, userUncheckedCreateWithoutEducationInput>
+  }
+
+  export type userUpsertWithoutEducationInput = {
+    update: XOR<userUpdateWithoutEducationInput, userUncheckedUpdateWithoutEducationInput>
+    create: XOR<userCreateWithoutEducationInput, userUncheckedCreateWithoutEducationInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutEducationInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutEducationInput, userUncheckedUpdateWithoutEducationInput>
+  }
+
+  export type userUpdateWithoutEducationInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateManyWithoutUserNestedInput
+    contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutEducationInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutSkillsInput = {
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    user_education?: user_educationCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
-    user_project?: user_projectCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
     About?: AboutCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutSkillsInput = {
     uid?: number
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
     About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutSkillsInput = {
@@ -16300,55 +13626,47 @@ export namespace Prisma {
   export type userUpdateWithoutSkillsInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    user_education?: user_educationUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
     About?: AboutUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutSkillsInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
     About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutContactInput = {
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsCreateNestedOneWithoutUserInput
-    user_education?: user_educationCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
-    user_project?: user_projectCreateNestedManyWithoutUserInput
+    skills?: skillsCreateNestedManyWithoutUserInput
     About?: AboutCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutContactInput = {
     uid?: number
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
-    user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
     About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutContactInput = {
@@ -16370,55 +13688,47 @@ export namespace Prisma {
   export type userUpdateWithoutContactInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    skills?: skillsUpdateManyWithoutUserNestedInput
     About?: AboutUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutContactInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
     About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutAboutInput = {
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsCreateNestedOneWithoutUserInput
-    user_education?: user_educationCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
-    user_project?: user_projectCreateNestedManyWithoutUserInput
+    skills?: skillsCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutAboutInput = {
     uid?: number
     username: string
     password: string
-    style: string
-    hero: string
-    subhero: string
-    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
-    user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutAboutInput = {
@@ -16440,43 +13750,39 @@ export namespace Prisma {
   export type userUpdateWithoutAboutInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    skills?: skillsUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutAboutInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
-    hero?: StringFieldUpdateOperationsInput | string
-    subhero?: StringFieldUpdateOperationsInput | string
-    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
-    user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type user_educationCreateManyUserInput = {
-    edid: number
-  }
-
-  export type user_experienceCreateManyUserInput = {
-    eid: number
-  }
-
-  export type user_projectCreateManyUserInput = {
-    pid: number
+  export type skillsCreateManyUserInput = {
+    sid?: number
+    frontend?: skillsCreatefrontendInput | string[]
+    style: string
+    backend?: skillsCreatebackendInput | string[]
+    database?: skillsCreatedatabaseInput | string[]
+    mobile?: skillsCreatemobileInput | string[]
+    other?: skillsCreateotherInput | string[]
+    languages?: skillsCreatelanguagesInput | string[]
   }
 
   export type contactCreateManyUserInput = {
+    cid?: number
     email: string
     phone: string
     location: string
@@ -16484,45 +13790,79 @@ export namespace Prisma {
   }
 
   export type AboutCreateManyUserInput = {
+    aid?: number
     image: string
     about: string
     style: string
   }
 
-  export type user_educationUpdateWithoutUserInput = {
-    education?: educationUpdateOneRequiredWithoutUser_educationNestedInput
+  export type projectCreateManyUserInput = {
+    pid?: number
+    title: string
+    image: string
+    desc: string
+    tags?: projectCreatetagsInput | string[]
+    github: string
+    Link: string
+    style: string
   }
 
-  export type user_educationUncheckedUpdateWithoutUserInput = {
-    edid?: IntFieldUpdateOperationsInput | number
+  export type experienceCreateManyUserInput = {
+    exid?: number
+    title: string
+    corp: string
+    style: string
+    startdate: Date | string
+    enddate: Date | string
+    desc: string
   }
 
-  export type user_educationUncheckedUpdateManyWithoutUserInput = {
-    edid?: IntFieldUpdateOperationsInput | number
+  export type educationCreateManyUserInput = {
+    edid?: number
+    inst: string
+    degree: string
+    startdate: Date | string
+    enddate: Date | string
+    style: string
   }
 
-  export type user_experienceUpdateWithoutUserInput = {
-    experience?: experienceUpdateOneRequiredWithoutUser_experienceNestedInput
+  export type heroCreateManyUserInput = {
+    hid?: number
+    style: string
+    hero: string
+    subhero: string
   }
 
-  export type user_experienceUncheckedUpdateWithoutUserInput = {
-    eid?: IntFieldUpdateOperationsInput | number
+  export type skillsUpdateWithoutUserInput = {
+    frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
+    backend?: skillsUpdatebackendInput | string[]
+    database?: skillsUpdatedatabaseInput | string[]
+    mobile?: skillsUpdatemobileInput | string[]
+    other?: skillsUpdateotherInput | string[]
+    languages?: skillsUpdatelanguagesInput | string[]
   }
 
-  export type user_experienceUncheckedUpdateManyWithoutUserInput = {
-    eid?: IntFieldUpdateOperationsInput | number
+  export type skillsUncheckedUpdateWithoutUserInput = {
+    sid?: IntFieldUpdateOperationsInput | number
+    frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
+    backend?: skillsUpdatebackendInput | string[]
+    database?: skillsUpdatedatabaseInput | string[]
+    mobile?: skillsUpdatemobileInput | string[]
+    other?: skillsUpdateotherInput | string[]
+    languages?: skillsUpdatelanguagesInput | string[]
   }
 
-  export type user_projectUpdateWithoutUserInput = {
-    project?: projectUpdateOneRequiredWithoutUser_projectNestedInput
-  }
-
-  export type user_projectUncheckedUpdateWithoutUserInput = {
-    pid?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type user_projectUncheckedUpdateManyWithoutUserInput = {
-    pid?: IntFieldUpdateOperationsInput | number
+  export type skillsUncheckedUpdateManyWithoutUserInput = {
+    sid?: IntFieldUpdateOperationsInput | number
+    frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
+    backend?: skillsUpdatebackendInput | string[]
+    database?: skillsUpdatedatabaseInput | string[]
+    mobile?: skillsUpdatemobileInput | string[]
+    other?: skillsUpdateotherInput | string[]
+    languages?: skillsUpdatelanguagesInput | string[]
   }
 
   export type contactUpdateWithoutUserInput = {
@@ -16533,6 +13873,7 @@ export namespace Prisma {
   }
 
   export type contactUncheckedUpdateWithoutUserInput = {
+    cid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
@@ -16540,6 +13881,7 @@ export namespace Prisma {
   }
 
   export type contactUncheckedUpdateManyWithoutUserInput = {
+    cid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
@@ -16553,63 +13895,124 @@ export namespace Prisma {
   }
 
   export type AboutUncheckedUpdateWithoutUserInput = {
+    aid?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     style?: StringFieldUpdateOperationsInput | string
   }
 
   export type AboutUncheckedUpdateManyWithoutUserInput = {
+    aid?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_projectCreateManyProjectInput = {
-    uid: number
+  export type projectUpdateWithoutUserInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    desc?: StringFieldUpdateOperationsInput | string
+    tags?: projectUpdatetagsInput | string[]
+    github?: StringFieldUpdateOperationsInput | string
+    Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_projectUpdateWithoutProjectInput = {
-    user?: userUpdateOneRequiredWithoutUser_projectNestedInput
+  export type projectUncheckedUpdateWithoutUserInput = {
+    pid?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    desc?: StringFieldUpdateOperationsInput | string
+    tags?: projectUpdatetagsInput | string[]
+    github?: StringFieldUpdateOperationsInput | string
+    Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_projectUncheckedUpdateWithoutProjectInput = {
-    uid?: IntFieldUpdateOperationsInput | number
+  export type projectUncheckedUpdateManyWithoutUserInput = {
+    pid?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    desc?: StringFieldUpdateOperationsInput | string
+    tags?: projectUpdatetagsInput | string[]
+    github?: StringFieldUpdateOperationsInput | string
+    Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_projectUncheckedUpdateManyWithoutProjectInput = {
-    uid?: IntFieldUpdateOperationsInput | number
+  export type experienceUpdateWithoutUserInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    desc?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_experienceCreateManyExperienceInput = {
-    uid: number
+  export type experienceUncheckedUpdateWithoutUserInput = {
+    exid?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    desc?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_experienceUpdateWithoutExperienceInput = {
-    user?: userUpdateOneRequiredWithoutUser_experienceNestedInput
+  export type experienceUncheckedUpdateManyWithoutUserInput = {
+    exid?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    desc?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_experienceUncheckedUpdateWithoutExperienceInput = {
-    uid?: IntFieldUpdateOperationsInput | number
+  export type educationUpdateWithoutUserInput = {
+    inst?: StringFieldUpdateOperationsInput | string
+    degree?: StringFieldUpdateOperationsInput | string
+    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_experienceUncheckedUpdateManyWithoutExperienceInput = {
-    uid?: IntFieldUpdateOperationsInput | number
+  export type educationUncheckedUpdateWithoutUserInput = {
+    edid?: IntFieldUpdateOperationsInput | number
+    inst?: StringFieldUpdateOperationsInput | string
+    degree?: StringFieldUpdateOperationsInput | string
+    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_educationCreateManyEducationInput = {
-    uid: number
+  export type educationUncheckedUpdateManyWithoutUserInput = {
+    edid?: IntFieldUpdateOperationsInput | number
+    inst?: StringFieldUpdateOperationsInput | string
+    degree?: StringFieldUpdateOperationsInput | string
+    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_educationUpdateWithoutEducationInput = {
-    user?: userUpdateOneRequiredWithoutUser_educationNestedInput
+  export type heroUpdateWithoutUserInput = {
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_educationUncheckedUpdateWithoutEducationInput = {
-    uid?: IntFieldUpdateOperationsInput | number
+  export type heroUncheckedUpdateWithoutUserInput = {
+    hid?: IntFieldUpdateOperationsInput | number
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
   }
 
-  export type user_educationUncheckedUpdateManyWithoutEducationInput = {
-    uid?: IntFieldUpdateOperationsInput | number
+  export type heroUncheckedUpdateManyWithoutUserInput = {
+    hid?: IntFieldUpdateOperationsInput | number
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
   }
 
 

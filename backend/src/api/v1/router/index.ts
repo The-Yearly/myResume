@@ -18,8 +18,9 @@ router.get("/getHero/:uid",async(req,res)=>{
 
 router.post("/setHero",async(req,res)=>{
     const data=req.body
-    const response=await client.user.update(
-        {where:{
+    const response=await client.hero.updateMany(
+        {
+            where:{
             uid:parseInt(data.uid)
         },
         data:{
@@ -51,7 +52,7 @@ router.get("/getAbout/:uid",async(req,res)=>{
 router.post("/setAbout",async(req,res)=>{
     const data=req.body
     console.log(data)
-    const response=await client.about.update(
+    const response=await client.about.updateMany(
         {
             where:{
                 uid:parseInt(data.uid)

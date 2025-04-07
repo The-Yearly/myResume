@@ -120,7 +120,12 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   uid: 'uid',
   username: 'username',
-  password: 'password',
+  password: 'password'
+};
+
+exports.Prisma.HeroScalarFieldEnum = {
+  hid: 'hid',
+  uid: 'uid',
   style: 'style',
   hero: 'hero',
   subhero: 'subhero'
@@ -128,6 +133,7 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.ProjectScalarFieldEnum = {
   pid: 'pid',
+  uid: 'uid',
   title: 'title',
   image: 'image',
   desc: 'desc',
@@ -137,23 +143,14 @@ exports.Prisma.ProjectScalarFieldEnum = {
   style: 'style'
 };
 
-exports.Prisma.User_projectScalarFieldEnum = {
-  pid: 'pid',
-  uid: 'uid'
-};
-
 exports.Prisma.ExperienceScalarFieldEnum = {
-  eid: 'eid',
+  exid: 'exid',
   title: 'title',
   corp: 'corp',
   style: 'style',
   startdate: 'startdate',
   enddate: 'enddate',
-  desc: 'desc'
-};
-
-exports.Prisma.User_experienceScalarFieldEnum = {
-  eid: 'eid',
+  desc: 'desc',
   uid: 'uid'
 };
 
@@ -163,15 +160,12 @@ exports.Prisma.EducationScalarFieldEnum = {
   degree: 'degree',
   startdate: 'startdate',
   enddate: 'enddate',
-  style: 'style'
-};
-
-exports.Prisma.User_educationScalarFieldEnum = {
-  edid: 'edid',
+  style: 'style',
   uid: 'uid'
 };
 
 exports.Prisma.SkillsScalarFieldEnum = {
+  sid: 'sid',
   uid: 'uid',
   frontend: 'frontend',
   style: 'style',
@@ -183,6 +177,7 @@ exports.Prisma.SkillsScalarFieldEnum = {
 };
 
 exports.Prisma.ContactScalarFieldEnum = {
+  cid: 'cid',
   uid: 'uid',
   email: 'email',
   phone: 'phone',
@@ -191,6 +186,7 @@ exports.Prisma.ContactScalarFieldEnum = {
 };
 
 exports.Prisma.AboutScalarFieldEnum = {
+  aid: 'aid',
   uid: 'uid',
   image: 'image',
   about: 'about',
@@ -210,12 +206,10 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   user: 'user',
+  hero: 'hero',
   project: 'project',
-  user_project: 'user_project',
   experience: 'experience',
-  user_experience: 'user_experience',
   education: 'education',
-  user_education: 'user_education',
   skills: 'skills',
   contact: 'contact',
   About: 'About'
