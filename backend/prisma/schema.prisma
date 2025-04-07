@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "app/generated/prisma/client"
@@ -18,12 +12,15 @@ model user {
   uid             Int               @id @default(autoincrement())
   username        String            @unique
   password        String
-  styles String[]
-  user_project    user_project[]
-  user_experience user_experience[]
+  style           String
+  hero            String
+  subhero         String
+  skills          skills?
   user_education  user_education[]
-  skills          skills[]
+  user_experience user_experience[]
+  user_project    user_project[]
   contact         contact[]
+  About           About[]
 
   @@map("User")
 }
@@ -36,6 +33,7 @@ model project {
   tags         String[]
   github       String
   Link         String
+  style        String
   user_project user_project[]
 }
 
@@ -52,6 +50,7 @@ model experience {
   eid             Int               @id @default(autoincrement())
   title           String
   corp            String
+  style           String
   startdate       DateTime
   enddate         DateTime
   desc            String
@@ -72,7 +71,8 @@ model education {
   inst           String
   degree         String
   startdate      DateTime
-  endDate        DateTime
+  enddate        DateTime
+  style          String
   user_education user_education[]
 }
 
@@ -86,27 +86,30 @@ model user_education {
 }
 
 model skills {
-  sid       Int      @default(autoincrement())
-  uid       Int      @unique
+  uid       Int      @id @unique
   frontend  String[]
+  style     String
   backend   String[]
   database  String[]
   mobile    String[]
   other     String[]
   languages String[]
   user      user     @relation(fields: [uid], references: [uid])
-
-  @@id([uid, sid])
 }
 
 model contact {
-  cid      Int    @default(autoincrement())
-  uid      Int
+  uid      Int    @id
   email    String
-  phone    Int
+  phone    String
   location String
   linkedin String
   user     user   @relation(fields: [uid], references: [uid])
+}
 
-  @@id([cid, uid])
+model About {
+  uid   Int    @id
+  image String
+  about String
+  style String
+  user  user   @relation(fields: [uid], references: [uid])
 }

@@ -1,7 +1,7 @@
 'use client'
 import { ArrowDown } from "lucide-react"
 import Link from "next/link"
-export default function Hero2(props:{content:{title:string,subtitle:string}}) {
+export default function Hero2(props:{content:{hero:string,subhero:string}}) {
     return(
         <div className="min-h-screen bg-background">
             <section className="relative h-screen flex flex-col items-center justify-center text-center px-4">
@@ -11,10 +11,10 @@ export default function Hero2(props:{content:{title:string,subtitle:string}}) {
                 <div className="mx-auto rounded-full overflow-hidden border-4 border-primary/20 w-32 h-32 mb-6">
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-                    {props.content.title}
+                    {props.content.hero}
                 </h1>
                 <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-                    {props.content.subtitle}
+                    {props.content.subhero}
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 pt-4">
                 <button className="bg-gray-800 p-3 rounded-lg text-md text-white" onClick={()=> document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}>View My Work</button>

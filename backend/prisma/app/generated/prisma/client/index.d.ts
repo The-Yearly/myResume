@@ -58,6 +58,11 @@ export type skills = $Result.DefaultSelection<Prisma.$skillsPayload>
  * 
  */
 export type contact = $Result.DefaultSelection<Prisma.$contactPayload>
+/**
+ * Model About
+ * 
+ */
+export type About = $Result.DefaultSelection<Prisma.$AboutPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -273,6 +278,16 @@ export class PrismaClient<
     * ```
     */
   get contact(): Prisma.contactDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.about`: Exposes CRUD operations for the **About** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Abouts
+    * const abouts = await prisma.about.findMany()
+    * ```
+    */
+  get about(): Prisma.AboutDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -721,7 +736,8 @@ export namespace Prisma {
     education: 'education',
     user_education: 'user_education',
     skills: 'skills',
-    contact: 'contact'
+    contact: 'contact',
+    About: 'About'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -740,7 +756,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "project" | "user_project" | "experience" | "user_experience" | "education" | "user_education" | "skills" | "contact"
+      modelProps: "user" | "project" | "user_project" | "experience" | "user_experience" | "education" | "user_education" | "skills" | "contact" | "about"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1410,6 +1426,80 @@ export namespace Prisma {
           }
         }
       }
+      About: {
+        payload: Prisma.$AboutPayload<ExtArgs>
+        fields: Prisma.AboutFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AboutFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AboutFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>
+          }
+          findFirst: {
+            args: Prisma.AboutFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AboutFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>
+          }
+          findMany: {
+            args: Prisma.AboutFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>[]
+          }
+          create: {
+            args: Prisma.AboutCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>
+          }
+          createMany: {
+            args: Prisma.AboutCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AboutCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>[]
+          }
+          delete: {
+            args: Prisma.AboutDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>
+          }
+          update: {
+            args: Prisma.AboutUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>
+          }
+          deleteMany: {
+            args: Prisma.AboutDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AboutUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AboutUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>[]
+          }
+          upsert: {
+            args: Prisma.AboutUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AboutPayload>
+          }
+          aggregate: {
+            args: Prisma.AboutAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAbout>
+          }
+          groupBy: {
+            args: Prisma.AboutGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AboutGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AboutCountArgs<ExtArgs>
+            result: $Utils.Optional<AboutCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1503,6 +1593,7 @@ export namespace Prisma {
     user_education?: user_educationOmit
     skills?: skillsOmit
     contact?: contactOmit
+    about?: AboutOmit
   }
 
   /* Types for Logging */
@@ -1597,19 +1688,19 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    user_project: number
-    user_experience: number
     user_education: number
-    skills: number
+    user_experience: number
+    user_project: number
     contact: number
+    About: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_project?: boolean | UserCountOutputTypeCountUser_projectArgs
-    user_experience?: boolean | UserCountOutputTypeCountUser_experienceArgs
     user_education?: boolean | UserCountOutputTypeCountUser_educationArgs
-    skills?: boolean | UserCountOutputTypeCountSkillsArgs
+    user_experience?: boolean | UserCountOutputTypeCountUser_experienceArgs
+    user_project?: boolean | UserCountOutputTypeCountUser_projectArgs
     contact?: boolean | UserCountOutputTypeCountContactArgs
+    About?: boolean | UserCountOutputTypeCountAboutArgs
   }
 
   // Custom InputTypes
@@ -1626,8 +1717,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUser_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_projectWhereInput
+  export type UserCountOutputTypeCountUser_educationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_educationWhereInput
   }
 
   /**
@@ -1640,15 +1731,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUser_educationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: user_educationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountSkillsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: skillsWhereInput
+  export type UserCountOutputTypeCountUser_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_projectWhereInput
   }
 
   /**
@@ -1656,6 +1740,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountContactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: contactWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAboutArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AboutWhereInput
   }
 
 
@@ -1770,62 +1861,74 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     uid: number | null
-    styles: number | null
   }
 
   export type UserSumAggregateOutputType = {
     uid: number | null
-    styles: number[]
   }
 
   export type UserMinAggregateOutputType = {
     uid: number | null
     username: string | null
     password: string | null
+    style: string | null
+    hero: string | null
+    subhero: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     uid: number | null
     username: string | null
     password: string | null
+    style: string | null
+    hero: string | null
+    subhero: string | null
   }
 
   export type UserCountAggregateOutputType = {
     uid: number
     username: number
     password: number
-    styles: number
+    style: number
+    hero: number
+    subhero: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
     uid?: true
-    styles?: true
   }
 
   export type UserSumAggregateInputType = {
     uid?: true
-    styles?: true
   }
 
   export type UserMinAggregateInputType = {
     uid?: true
     username?: true
     password?: true
+    style?: true
+    hero?: true
+    subhero?: true
   }
 
   export type UserMaxAggregateInputType = {
     uid?: true
     username?: true
     password?: true
+    style?: true
+    hero?: true
+    subhero?: true
   }
 
   export type UserCountAggregateInputType = {
     uid?: true
     username?: true
     password?: true
-    styles?: true
+    style?: true
+    hero?: true
+    subhero?: true
     _all?: true
   }
 
@@ -1919,7 +2022,9 @@ export namespace Prisma {
     uid: number
     username: string
     password: string
-    styles: number[]
+    style: string
+    hero: string
+    subhero: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1945,12 +2050,15 @@ export namespace Prisma {
     uid?: boolean
     username?: boolean
     password?: boolean
-    styles?: boolean
-    user_project?: boolean | user$user_projectArgs<ExtArgs>
-    user_experience?: boolean | user$user_experienceArgs<ExtArgs>
-    user_education?: boolean | user$user_educationArgs<ExtArgs>
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
     skills?: boolean | user$skillsArgs<ExtArgs>
+    user_education?: boolean | user$user_educationArgs<ExtArgs>
+    user_experience?: boolean | user$user_experienceArgs<ExtArgs>
+    user_project?: boolean | user$user_projectArgs<ExtArgs>
     contact?: boolean | user$contactArgs<ExtArgs>
+    About?: boolean | user$AboutArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1958,30 +2066,37 @@ export namespace Prisma {
     uid?: boolean
     username?: boolean
     password?: boolean
-    styles?: boolean
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     uid?: boolean
     username?: boolean
     password?: boolean
-    styles?: boolean
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectScalar = {
     uid?: boolean
     username?: boolean
     password?: boolean
-    styles?: boolean
+    style?: boolean
+    hero?: boolean
+    subhero?: boolean
   }
 
-  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "username" | "password" | "styles", ExtArgs["result"]["user"]>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "username" | "password" | "style" | "hero" | "subhero", ExtArgs["result"]["user"]>
   export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_project?: boolean | user$user_projectArgs<ExtArgs>
-    user_experience?: boolean | user$user_experienceArgs<ExtArgs>
-    user_education?: boolean | user$user_educationArgs<ExtArgs>
     skills?: boolean | user$skillsArgs<ExtArgs>
+    user_education?: boolean | user$user_educationArgs<ExtArgs>
+    user_experience?: boolean | user$user_experienceArgs<ExtArgs>
+    user_project?: boolean | user$user_projectArgs<ExtArgs>
     contact?: boolean | user$contactArgs<ExtArgs>
+    About?: boolean | user$AboutArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type userIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1990,17 +2105,20 @@ export namespace Prisma {
   export type $userPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "user"
     objects: {
-      user_project: Prisma.$user_projectPayload<ExtArgs>[]
-      user_experience: Prisma.$user_experiencePayload<ExtArgs>[]
+      skills: Prisma.$skillsPayload<ExtArgs> | null
       user_education: Prisma.$user_educationPayload<ExtArgs>[]
-      skills: Prisma.$skillsPayload<ExtArgs>[]
+      user_experience: Prisma.$user_experiencePayload<ExtArgs>[]
+      user_project: Prisma.$user_projectPayload<ExtArgs>[]
       contact: Prisma.$contactPayload<ExtArgs>[]
+      About: Prisma.$AboutPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       uid: number
       username: string
       password: string
-      styles: number[]
+      style: string
+      hero: string
+      subhero: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2395,11 +2513,12 @@ export namespace Prisma {
    */
   export interface Prisma__userClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user_project<T extends user$user_projectArgs<ExtArgs> = {}>(args?: Subset<T, user$user_projectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user_experience<T extends user$user_experienceArgs<ExtArgs> = {}>(args?: Subset<T, user$user_experienceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    skills<T extends user$skillsArgs<ExtArgs> = {}>(args?: Subset<T, user$skillsArgs<ExtArgs>>): Prisma__skillsClient<$Result.GetResult<Prisma.$skillsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     user_education<T extends user$user_educationArgs<ExtArgs> = {}>(args?: Subset<T, user$user_educationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_educationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    skills<T extends user$skillsArgs<ExtArgs> = {}>(args?: Subset<T, user$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$skillsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_experience<T extends user$user_experienceArgs<ExtArgs> = {}>(args?: Subset<T, user$user_experienceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_project<T extends user$user_projectArgs<ExtArgs> = {}>(args?: Subset<T, user$user_projectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contact<T extends user$contactArgs<ExtArgs> = {}>(args?: Subset<T, user$contactArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    About<T extends user$AboutArgs<ExtArgs> = {}>(args?: Subset<T, user$AboutArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2432,7 +2551,9 @@ export namespace Prisma {
     readonly uid: FieldRef<"user", 'Int'>
     readonly username: FieldRef<"user", 'String'>
     readonly password: FieldRef<"user", 'String'>
-    readonly styles: FieldRef<"user", 'Int[]'>
+    readonly style: FieldRef<"user", 'String'>
+    readonly hero: FieldRef<"user", 'String'>
+    readonly subhero: FieldRef<"user", 'String'>
   }
     
 
@@ -2821,51 +2942,22 @@ export namespace Prisma {
   }
 
   /**
-   * user.user_project
+   * user.skills
    */
-  export type user$user_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type user$skillsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the user_project
+     * Select specific fields to fetch from the skills
      */
-    select?: user_projectSelect<ExtArgs> | null
+    select?: skillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the user_project
+     * Omit specific fields from the skills
      */
-    omit?: user_projectOmit<ExtArgs> | null
+    omit?: skillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: user_projectInclude<ExtArgs> | null
-    where?: user_projectWhereInput
-    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
-    cursor?: user_projectWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: User_projectScalarFieldEnum | User_projectScalarFieldEnum[]
-  }
-
-  /**
-   * user.user_experience
-   */
-  export type user$user_experienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the user_experience
-     */
-    select?: user_experienceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the user_experience
-     */
-    omit?: user_experienceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: user_experienceInclude<ExtArgs> | null
-    where?: user_experienceWhereInput
-    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
-    cursor?: user_experienceWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: User_experienceScalarFieldEnum | User_experienceScalarFieldEnum[]
+    include?: skillsInclude<ExtArgs> | null
+    where?: skillsWhereInput
   }
 
   /**
@@ -2893,27 +2985,51 @@ export namespace Prisma {
   }
 
   /**
-   * user.skills
+   * user.user_experience
    */
-  export type user$skillsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type user$user_experienceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the skills
+     * Select specific fields to fetch from the user_experience
      */
-    select?: skillsSelect<ExtArgs> | null
+    select?: user_experienceSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the skills
+     * Omit specific fields from the user_experience
      */
-    omit?: skillsOmit<ExtArgs> | null
+    omit?: user_experienceOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: skillsInclude<ExtArgs> | null
-    where?: skillsWhereInput
-    orderBy?: skillsOrderByWithRelationInput | skillsOrderByWithRelationInput[]
-    cursor?: skillsWhereUniqueInput
+    include?: user_experienceInclude<ExtArgs> | null
+    where?: user_experienceWhereInput
+    orderBy?: user_experienceOrderByWithRelationInput | user_experienceOrderByWithRelationInput[]
+    cursor?: user_experienceWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SkillsScalarFieldEnum | SkillsScalarFieldEnum[]
+    distinct?: User_experienceScalarFieldEnum | User_experienceScalarFieldEnum[]
+  }
+
+  /**
+   * user.user_project
+   */
+  export type user$user_projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_project
+     */
+    select?: user_projectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_project
+     */
+    omit?: user_projectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_projectInclude<ExtArgs> | null
+    where?: user_projectWhereInput
+    orderBy?: user_projectOrderByWithRelationInput | user_projectOrderByWithRelationInput[]
+    cursor?: user_projectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: User_projectScalarFieldEnum | User_projectScalarFieldEnum[]
   }
 
   /**
@@ -2938,6 +3054,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+  }
+
+  /**
+   * user.About
+   */
+  export type user$AboutArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    where?: AboutWhereInput
+    orderBy?: AboutOrderByWithRelationInput | AboutOrderByWithRelationInput[]
+    cursor?: AboutWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AboutScalarFieldEnum | AboutScalarFieldEnum[]
   }
 
   /**
@@ -2986,6 +3126,7 @@ export namespace Prisma {
     desc: string | null
     github: string | null
     Link: string | null
+    style: string | null
   }
 
   export type ProjectMaxAggregateOutputType = {
@@ -2995,6 +3136,7 @@ export namespace Prisma {
     desc: string | null
     github: string | null
     Link: string | null
+    style: string | null
   }
 
   export type ProjectCountAggregateOutputType = {
@@ -3005,6 +3147,7 @@ export namespace Prisma {
     tags: number
     github: number
     Link: number
+    style: number
     _all: number
   }
 
@@ -3024,6 +3167,7 @@ export namespace Prisma {
     desc?: true
     github?: true
     Link?: true
+    style?: true
   }
 
   export type ProjectMaxAggregateInputType = {
@@ -3033,6 +3177,7 @@ export namespace Prisma {
     desc?: true
     github?: true
     Link?: true
+    style?: true
   }
 
   export type ProjectCountAggregateInputType = {
@@ -3043,6 +3188,7 @@ export namespace Prisma {
     tags?: true
     github?: true
     Link?: true
+    style?: true
     _all?: true
   }
 
@@ -3140,6 +3286,7 @@ export namespace Prisma {
     tags: string[]
     github: string
     Link: string
+    style: string
     _count: ProjectCountAggregateOutputType | null
     _avg: ProjectAvgAggregateOutputType | null
     _sum: ProjectSumAggregateOutputType | null
@@ -3169,6 +3316,7 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
+    style?: boolean
     user_project?: boolean | project$user_projectArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
@@ -3181,6 +3329,7 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
+    style?: boolean
   }, ExtArgs["result"]["project"]>
 
   export type projectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3191,6 +3340,7 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
+    style?: boolean
   }, ExtArgs["result"]["project"]>
 
   export type projectSelectScalar = {
@@ -3201,9 +3351,10 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
+    style?: boolean
   }
 
-  export type projectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "title" | "image" | "desc" | "tags" | "github" | "Link", ExtArgs["result"]["project"]>
+  export type projectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "title" | "image" | "desc" | "tags" | "github" | "Link" | "style", ExtArgs["result"]["project"]>
   export type projectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user_project?: boolean | project$user_projectArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -3224,6 +3375,7 @@ export namespace Prisma {
       tags: string[]
       github: string
       Link: string
+      style: string
     }, ExtArgs["result"]["project"]>
     composites: {}
   }
@@ -3655,6 +3807,7 @@ export namespace Prisma {
     readonly tags: FieldRef<"project", 'String[]'>
     readonly github: FieldRef<"project", 'String'>
     readonly Link: FieldRef<"project", 'String'>
+    readonly style: FieldRef<"project", 'String'>
   }
     
 
@@ -5174,6 +5327,7 @@ export namespace Prisma {
     eid: number | null
     title: string | null
     corp: string | null
+    style: string | null
     startdate: Date | null
     enddate: Date | null
     desc: string | null
@@ -5183,6 +5337,7 @@ export namespace Prisma {
     eid: number | null
     title: string | null
     corp: string | null
+    style: string | null
     startdate: Date | null
     enddate: Date | null
     desc: string | null
@@ -5192,6 +5347,7 @@ export namespace Prisma {
     eid: number
     title: number
     corp: number
+    style: number
     startdate: number
     enddate: number
     desc: number
@@ -5211,6 +5367,7 @@ export namespace Prisma {
     eid?: true
     title?: true
     corp?: true
+    style?: true
     startdate?: true
     enddate?: true
     desc?: true
@@ -5220,6 +5377,7 @@ export namespace Prisma {
     eid?: true
     title?: true
     corp?: true
+    style?: true
     startdate?: true
     enddate?: true
     desc?: true
@@ -5229,6 +5387,7 @@ export namespace Prisma {
     eid?: true
     title?: true
     corp?: true
+    style?: true
     startdate?: true
     enddate?: true
     desc?: true
@@ -5325,6 +5484,7 @@ export namespace Prisma {
     eid: number
     title: string
     corp: string
+    style: string
     startdate: Date
     enddate: Date
     desc: string
@@ -5353,6 +5513,7 @@ export namespace Prisma {
     eid?: boolean
     title?: boolean
     corp?: boolean
+    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
@@ -5364,6 +5525,7 @@ export namespace Prisma {
     eid?: boolean
     title?: boolean
     corp?: boolean
+    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
@@ -5373,6 +5535,7 @@ export namespace Prisma {
     eid?: boolean
     title?: boolean
     corp?: boolean
+    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
@@ -5382,12 +5545,13 @@ export namespace Prisma {
     eid?: boolean
     title?: boolean
     corp?: boolean
+    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
   }
 
-  export type experienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"eid" | "title" | "corp" | "startdate" | "enddate" | "desc", ExtArgs["result"]["experience"]>
+  export type experienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"eid" | "title" | "corp" | "style" | "startdate" | "enddate" | "desc", ExtArgs["result"]["experience"]>
   export type experienceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user_experience?: boolean | experience$user_experienceArgs<ExtArgs>
     _count?: boolean | ExperienceCountOutputTypeDefaultArgs<ExtArgs>
@@ -5404,6 +5568,7 @@ export namespace Prisma {
       eid: number
       title: string
       corp: string
+      style: string
       startdate: Date
       enddate: Date
       desc: string
@@ -5834,6 +5999,7 @@ export namespace Prisma {
     readonly eid: FieldRef<"experience", 'Int'>
     readonly title: FieldRef<"experience", 'String'>
     readonly corp: FieldRef<"experience", 'String'>
+    readonly style: FieldRef<"experience", 'String'>
     readonly startdate: FieldRef<"experience", 'DateTime'>
     readonly enddate: FieldRef<"experience", 'DateTime'>
     readonly desc: FieldRef<"experience", 'String'>
@@ -7357,7 +7523,8 @@ export namespace Prisma {
     inst: string | null
     degree: string | null
     startdate: Date | null
-    endDate: Date | null
+    enddate: Date | null
+    style: string | null
   }
 
   export type EducationMaxAggregateOutputType = {
@@ -7365,7 +7532,8 @@ export namespace Prisma {
     inst: string | null
     degree: string | null
     startdate: Date | null
-    endDate: Date | null
+    enddate: Date | null
+    style: string | null
   }
 
   export type EducationCountAggregateOutputType = {
@@ -7373,7 +7541,8 @@ export namespace Prisma {
     inst: number
     degree: number
     startdate: number
-    endDate: number
+    enddate: number
+    style: number
     _all: number
   }
 
@@ -7391,7 +7560,8 @@ export namespace Prisma {
     inst?: true
     degree?: true
     startdate?: true
-    endDate?: true
+    enddate?: true
+    style?: true
   }
 
   export type EducationMaxAggregateInputType = {
@@ -7399,7 +7569,8 @@ export namespace Prisma {
     inst?: true
     degree?: true
     startdate?: true
-    endDate?: true
+    enddate?: true
+    style?: true
   }
 
   export type EducationCountAggregateInputType = {
@@ -7407,7 +7578,8 @@ export namespace Prisma {
     inst?: true
     degree?: true
     startdate?: true
-    endDate?: true
+    enddate?: true
+    style?: true
     _all?: true
   }
 
@@ -7502,7 +7674,8 @@ export namespace Prisma {
     inst: string
     degree: string
     startdate: Date
-    endDate: Date
+    enddate: Date
+    style: string
     _count: EducationCountAggregateOutputType | null
     _avg: EducationAvgAggregateOutputType | null
     _sum: EducationSumAggregateOutputType | null
@@ -7529,7 +7702,8 @@ export namespace Prisma {
     inst?: boolean
     degree?: boolean
     startdate?: boolean
-    endDate?: boolean
+    enddate?: boolean
+    style?: boolean
     user_education?: boolean | education$user_educationArgs<ExtArgs>
     _count?: boolean | EducationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
@@ -7539,7 +7713,8 @@ export namespace Prisma {
     inst?: boolean
     degree?: boolean
     startdate?: boolean
-    endDate?: boolean
+    enddate?: boolean
+    style?: boolean
   }, ExtArgs["result"]["education"]>
 
   export type educationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7547,7 +7722,8 @@ export namespace Prisma {
     inst?: boolean
     degree?: boolean
     startdate?: boolean
-    endDate?: boolean
+    enddate?: boolean
+    style?: boolean
   }, ExtArgs["result"]["education"]>
 
   export type educationSelectScalar = {
@@ -7555,10 +7731,11 @@ export namespace Prisma {
     inst?: boolean
     degree?: boolean
     startdate?: boolean
-    endDate?: boolean
+    enddate?: boolean
+    style?: boolean
   }
 
-  export type educationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"edid" | "inst" | "degree" | "startdate" | "endDate", ExtArgs["result"]["education"]>
+  export type educationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"edid" | "inst" | "degree" | "startdate" | "enddate" | "style", ExtArgs["result"]["education"]>
   export type educationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user_education?: boolean | education$user_educationArgs<ExtArgs>
     _count?: boolean | EducationCountOutputTypeDefaultArgs<ExtArgs>
@@ -7576,7 +7753,8 @@ export namespace Prisma {
       inst: string
       degree: string
       startdate: Date
-      endDate: Date
+      enddate: Date
+      style: string
     }, ExtArgs["result"]["education"]>
     composites: {}
   }
@@ -8005,7 +8183,8 @@ export namespace Prisma {
     readonly inst: FieldRef<"education", 'String'>
     readonly degree: FieldRef<"education", 'String'>
     readonly startdate: FieldRef<"education", 'DateTime'>
-    readonly endDate: FieldRef<"education", 'DateTime'>
+    readonly enddate: FieldRef<"education", 'DateTime'>
+    readonly style: FieldRef<"education", 'String'>
   }
     
 
@@ -9514,29 +9693,27 @@ export namespace Prisma {
   }
 
   export type SkillsAvgAggregateOutputType = {
-    sid: number | null
     uid: number | null
   }
 
   export type SkillsSumAggregateOutputType = {
-    sid: number | null
     uid: number | null
   }
 
   export type SkillsMinAggregateOutputType = {
-    sid: number | null
     uid: number | null
+    style: string | null
   }
 
   export type SkillsMaxAggregateOutputType = {
-    sid: number | null
     uid: number | null
+    style: string | null
   }
 
   export type SkillsCountAggregateOutputType = {
-    sid: number
     uid: number
     frontend: number
+    style: number
     backend: number
     database: number
     mobile: number
@@ -9547,29 +9724,27 @@ export namespace Prisma {
 
 
   export type SkillsAvgAggregateInputType = {
-    sid?: true
     uid?: true
   }
 
   export type SkillsSumAggregateInputType = {
-    sid?: true
     uid?: true
   }
 
   export type SkillsMinAggregateInputType = {
-    sid?: true
     uid?: true
+    style?: true
   }
 
   export type SkillsMaxAggregateInputType = {
-    sid?: true
     uid?: true
+    style?: true
   }
 
   export type SkillsCountAggregateInputType = {
-    sid?: true
     uid?: true
     frontend?: true
+    style?: true
     backend?: true
     database?: true
     mobile?: true
@@ -9665,9 +9840,9 @@ export namespace Prisma {
   }
 
   export type SkillsGroupByOutputType = {
-    sid: number
     uid: number
     frontend: string[]
+    style: string
     backend: string[]
     database: string[]
     mobile: string[]
@@ -9695,9 +9870,9 @@ export namespace Prisma {
 
 
   export type skillsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    sid?: boolean
     uid?: boolean
     frontend?: boolean
+    style?: boolean
     backend?: boolean
     database?: boolean
     mobile?: boolean
@@ -9707,9 +9882,9 @@ export namespace Prisma {
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    sid?: boolean
     uid?: boolean
     frontend?: boolean
+    style?: boolean
     backend?: boolean
     database?: boolean
     mobile?: boolean
@@ -9719,9 +9894,9 @@ export namespace Prisma {
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    sid?: boolean
     uid?: boolean
     frontend?: boolean
+    style?: boolean
     backend?: boolean
     database?: boolean
     mobile?: boolean
@@ -9731,9 +9906,9 @@ export namespace Prisma {
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectScalar = {
-    sid?: boolean
     uid?: boolean
     frontend?: boolean
+    style?: boolean
     backend?: boolean
     database?: boolean
     mobile?: boolean
@@ -9741,7 +9916,7 @@ export namespace Prisma {
     languages?: boolean
   }
 
-  export type skillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sid" | "uid" | "frontend" | "backend" | "database" | "mobile" | "other" | "languages", ExtArgs["result"]["skills"]>
+  export type skillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "frontend" | "style" | "backend" | "database" | "mobile" | "other" | "languages", ExtArgs["result"]["skills"]>
   export type skillsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -9758,9 +9933,9 @@ export namespace Prisma {
       user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      sid: number
       uid: number
       frontend: string[]
+      style: string
       backend: string[]
       database: string[]
       mobile: string[]
@@ -9849,8 +10024,8 @@ export namespace Prisma {
      * // Get first 10 Skills
      * const skills = await prisma.skills.findMany({ take: 10 })
      * 
-     * // Only select the `sid`
-     * const skillsWithSidOnly = await prisma.skills.findMany({ select: { sid: true } })
+     * // Only select the `uid`
+     * const skillsWithUidOnly = await prisma.skills.findMany({ select: { uid: true } })
      * 
      */
     findMany<T extends skillsFindManyArgs>(args?: SelectSubset<T, skillsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$skillsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -9894,9 +10069,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Skills and only return the `sid`
-     * const skillsWithSidOnly = await prisma.skills.createManyAndReturn({
-     *   select: { sid: true },
+     * // Create many Skills and only return the `uid`
+     * const skillsWithUidOnly = await prisma.skills.createManyAndReturn({
+     *   select: { uid: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -9985,9 +10160,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Skills and only return the `sid`
-     * const skillsWithSidOnly = await prisma.skills.updateManyAndReturn({
-     *   select: { sid: true },
+     * // Update zero or more Skills and only return the `uid`
+     * const skillsWithUidOnly = await prisma.skills.updateManyAndReturn({
+     *   select: { uid: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10190,9 +10365,9 @@ export namespace Prisma {
    * Fields of the skills model
    */ 
   interface skillsFieldRefs {
-    readonly sid: FieldRef<"skills", 'Int'>
     readonly uid: FieldRef<"skills", 'Int'>
     readonly frontend: FieldRef<"skills", 'String[]'>
+    readonly style: FieldRef<"skills", 'String'>
     readonly backend: FieldRef<"skills", 'String[]'>
     readonly database: FieldRef<"skills", 'String[]'>
     readonly mobile: FieldRef<"skills", 'String[]'>
@@ -10625,37 +10800,30 @@ export namespace Prisma {
   }
 
   export type ContactAvgAggregateOutputType = {
-    cid: number | null
     uid: number | null
-    phone: number | null
   }
 
   export type ContactSumAggregateOutputType = {
-    cid: number | null
     uid: number | null
-    phone: number | null
   }
 
   export type ContactMinAggregateOutputType = {
-    cid: number | null
     uid: number | null
     email: string | null
-    phone: number | null
+    phone: string | null
     location: string | null
     linkedin: string | null
   }
 
   export type ContactMaxAggregateOutputType = {
-    cid: number | null
     uid: number | null
     email: string | null
-    phone: number | null
+    phone: string | null
     location: string | null
     linkedin: string | null
   }
 
   export type ContactCountAggregateOutputType = {
-    cid: number
     uid: number
     email: number
     phone: number
@@ -10666,19 +10834,14 @@ export namespace Prisma {
 
 
   export type ContactAvgAggregateInputType = {
-    cid?: true
     uid?: true
-    phone?: true
   }
 
   export type ContactSumAggregateInputType = {
-    cid?: true
     uid?: true
-    phone?: true
   }
 
   export type ContactMinAggregateInputType = {
-    cid?: true
     uid?: true
     email?: true
     phone?: true
@@ -10687,7 +10850,6 @@ export namespace Prisma {
   }
 
   export type ContactMaxAggregateInputType = {
-    cid?: true
     uid?: true
     email?: true
     phone?: true
@@ -10696,7 +10858,6 @@ export namespace Prisma {
   }
 
   export type ContactCountAggregateInputType = {
-    cid?: true
     uid?: true
     email?: true
     phone?: true
@@ -10792,10 +10953,9 @@ export namespace Prisma {
   }
 
   export type ContactGroupByOutputType = {
-    cid: number
     uid: number
     email: string
-    phone: number
+    phone: string
     location: string
     linkedin: string
     _count: ContactCountAggregateOutputType | null
@@ -10820,7 +10980,6 @@ export namespace Prisma {
 
 
   export type contactSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -10830,7 +10989,6 @@ export namespace Prisma {
   }, ExtArgs["result"]["contact"]>
 
   export type contactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -10840,7 +10998,6 @@ export namespace Prisma {
   }, ExtArgs["result"]["contact"]>
 
   export type contactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -10850,7 +11007,6 @@ export namespace Prisma {
   }, ExtArgs["result"]["contact"]>
 
   export type contactSelectScalar = {
-    cid?: boolean
     uid?: boolean
     email?: boolean
     phone?: boolean
@@ -10858,7 +11014,7 @@ export namespace Prisma {
     linkedin?: boolean
   }
 
-  export type contactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cid" | "uid" | "email" | "phone" | "location" | "linkedin", ExtArgs["result"]["contact"]>
+  export type contactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "email" | "phone" | "location" | "linkedin", ExtArgs["result"]["contact"]>
   export type contactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -10875,10 +11031,9 @@ export namespace Prisma {
       user: Prisma.$userPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      cid: number
       uid: number
       email: string
-      phone: number
+      phone: string
       location: string
       linkedin: string
     }, ExtArgs["result"]["contact"]>
@@ -10964,8 +11119,8 @@ export namespace Prisma {
      * // Get first 10 Contacts
      * const contacts = await prisma.contact.findMany({ take: 10 })
      * 
-     * // Only select the `cid`
-     * const contactWithCidOnly = await prisma.contact.findMany({ select: { cid: true } })
+     * // Only select the `uid`
+     * const contactWithUidOnly = await prisma.contact.findMany({ select: { uid: true } })
      * 
      */
     findMany<T extends contactFindManyArgs>(args?: SelectSubset<T, contactFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -11009,9 +11164,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Contacts and only return the `cid`
-     * const contactWithCidOnly = await prisma.contact.createManyAndReturn({
-     *   select: { cid: true },
+     * // Create many Contacts and only return the `uid`
+     * const contactWithUidOnly = await prisma.contact.createManyAndReturn({
+     *   select: { uid: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -11100,9 +11255,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Contacts and only return the `cid`
-     * const contactWithCidOnly = await prisma.contact.updateManyAndReturn({
-     *   select: { cid: true },
+     * // Update zero or more Contacts and only return the `uid`
+     * const contactWithUidOnly = await prisma.contact.updateManyAndReturn({
+     *   select: { uid: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11305,10 +11460,9 @@ export namespace Prisma {
    * Fields of the contact model
    */ 
   interface contactFieldRefs {
-    readonly cid: FieldRef<"contact", 'Int'>
     readonly uid: FieldRef<"contact", 'Int'>
     readonly email: FieldRef<"contact", 'String'>
-    readonly phone: FieldRef<"contact", 'Int'>
+    readonly phone: FieldRef<"contact", 'String'>
     readonly location: FieldRef<"contact", 'String'>
     readonly linkedin: FieldRef<"contact", 'String'>
   }
@@ -11726,6 +11880,1085 @@ export namespace Prisma {
 
 
   /**
+   * Model About
+   */
+
+  export type AggregateAbout = {
+    _count: AboutCountAggregateOutputType | null
+    _avg: AboutAvgAggregateOutputType | null
+    _sum: AboutSumAggregateOutputType | null
+    _min: AboutMinAggregateOutputType | null
+    _max: AboutMaxAggregateOutputType | null
+  }
+
+  export type AboutAvgAggregateOutputType = {
+    uid: number | null
+  }
+
+  export type AboutSumAggregateOutputType = {
+    uid: number | null
+  }
+
+  export type AboutMinAggregateOutputType = {
+    uid: number | null
+    image: string | null
+    about: string | null
+    style: string | null
+  }
+
+  export type AboutMaxAggregateOutputType = {
+    uid: number | null
+    image: string | null
+    about: string | null
+    style: string | null
+  }
+
+  export type AboutCountAggregateOutputType = {
+    uid: number
+    image: number
+    about: number
+    style: number
+    _all: number
+  }
+
+
+  export type AboutAvgAggregateInputType = {
+    uid?: true
+  }
+
+  export type AboutSumAggregateInputType = {
+    uid?: true
+  }
+
+  export type AboutMinAggregateInputType = {
+    uid?: true
+    image?: true
+    about?: true
+    style?: true
+  }
+
+  export type AboutMaxAggregateInputType = {
+    uid?: true
+    image?: true
+    about?: true
+    style?: true
+  }
+
+  export type AboutCountAggregateInputType = {
+    uid?: true
+    image?: true
+    about?: true
+    style?: true
+    _all?: true
+  }
+
+  export type AboutAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which About to aggregate.
+     */
+    where?: AboutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Abouts to fetch.
+     */
+    orderBy?: AboutOrderByWithRelationInput | AboutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AboutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Abouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Abouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Abouts
+    **/
+    _count?: true | AboutCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AboutAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AboutSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AboutMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AboutMaxAggregateInputType
+  }
+
+  export type GetAboutAggregateType<T extends AboutAggregateArgs> = {
+        [P in keyof T & keyof AggregateAbout]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAbout[P]>
+      : GetScalarType<T[P], AggregateAbout[P]>
+  }
+
+
+
+
+  export type AboutGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AboutWhereInput
+    orderBy?: AboutOrderByWithAggregationInput | AboutOrderByWithAggregationInput[]
+    by: AboutScalarFieldEnum[] | AboutScalarFieldEnum
+    having?: AboutScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AboutCountAggregateInputType | true
+    _avg?: AboutAvgAggregateInputType
+    _sum?: AboutSumAggregateInputType
+    _min?: AboutMinAggregateInputType
+    _max?: AboutMaxAggregateInputType
+  }
+
+  export type AboutGroupByOutputType = {
+    uid: number
+    image: string
+    about: string
+    style: string
+    _count: AboutCountAggregateOutputType | null
+    _avg: AboutAvgAggregateOutputType | null
+    _sum: AboutSumAggregateOutputType | null
+    _min: AboutMinAggregateOutputType | null
+    _max: AboutMaxAggregateOutputType | null
+  }
+
+  type GetAboutGroupByPayload<T extends AboutGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AboutGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AboutGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AboutGroupByOutputType[P]>
+            : GetScalarType<T[P], AboutGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AboutSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uid?: boolean
+    image?: boolean
+    about?: boolean
+    style?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["about"]>
+
+  export type AboutSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uid?: boolean
+    image?: boolean
+    about?: boolean
+    style?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["about"]>
+
+  export type AboutSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uid?: boolean
+    image?: boolean
+    about?: boolean
+    style?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["about"]>
+
+  export type AboutSelectScalar = {
+    uid?: boolean
+    image?: boolean
+    about?: boolean
+    style?: boolean
+  }
+
+  export type AboutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "image" | "about" | "style", ExtArgs["result"]["about"]>
+  export type AboutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type AboutIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type AboutIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+
+  export type $AboutPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "About"
+    objects: {
+      user: Prisma.$userPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      uid: number
+      image: string
+      about: string
+      style: string
+    }, ExtArgs["result"]["about"]>
+    composites: {}
+  }
+
+  type AboutGetPayload<S extends boolean | null | undefined | AboutDefaultArgs> = $Result.GetResult<Prisma.$AboutPayload, S>
+
+  type AboutCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AboutFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AboutCountAggregateInputType | true
+    }
+
+  export interface AboutDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['About'], meta: { name: 'About' } }
+    /**
+     * Find zero or one About that matches the filter.
+     * @param {AboutFindUniqueArgs} args - Arguments to find a About
+     * @example
+     * // Get one About
+     * const about = await prisma.about.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AboutFindUniqueArgs>(args: SelectSubset<T, AboutFindUniqueArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one About that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AboutFindUniqueOrThrowArgs} args - Arguments to find a About
+     * @example
+     * // Get one About
+     * const about = await prisma.about.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AboutFindUniqueOrThrowArgs>(args: SelectSubset<T, AboutFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first About that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AboutFindFirstArgs} args - Arguments to find a About
+     * @example
+     * // Get one About
+     * const about = await prisma.about.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AboutFindFirstArgs>(args?: SelectSubset<T, AboutFindFirstArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first About that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AboutFindFirstOrThrowArgs} args - Arguments to find a About
+     * @example
+     * // Get one About
+     * const about = await prisma.about.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AboutFindFirstOrThrowArgs>(args?: SelectSubset<T, AboutFindFirstOrThrowArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Abouts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AboutFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Abouts
+     * const abouts = await prisma.about.findMany()
+     * 
+     * // Get first 10 Abouts
+     * const abouts = await prisma.about.findMany({ take: 10 })
+     * 
+     * // Only select the `uid`
+     * const aboutWithUidOnly = await prisma.about.findMany({ select: { uid: true } })
+     * 
+     */
+    findMany<T extends AboutFindManyArgs>(args?: SelectSubset<T, AboutFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a About.
+     * @param {AboutCreateArgs} args - Arguments to create a About.
+     * @example
+     * // Create one About
+     * const About = await prisma.about.create({
+     *   data: {
+     *     // ... data to create a About
+     *   }
+     * })
+     * 
+     */
+    create<T extends AboutCreateArgs>(args: SelectSubset<T, AboutCreateArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Abouts.
+     * @param {AboutCreateManyArgs} args - Arguments to create many Abouts.
+     * @example
+     * // Create many Abouts
+     * const about = await prisma.about.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AboutCreateManyArgs>(args?: SelectSubset<T, AboutCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Abouts and returns the data saved in the database.
+     * @param {AboutCreateManyAndReturnArgs} args - Arguments to create many Abouts.
+     * @example
+     * // Create many Abouts
+     * const about = await prisma.about.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Abouts and only return the `uid`
+     * const aboutWithUidOnly = await prisma.about.createManyAndReturn({
+     *   select: { uid: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AboutCreateManyAndReturnArgs>(args?: SelectSubset<T, AboutCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a About.
+     * @param {AboutDeleteArgs} args - Arguments to delete one About.
+     * @example
+     * // Delete one About
+     * const About = await prisma.about.delete({
+     *   where: {
+     *     // ... filter to delete one About
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AboutDeleteArgs>(args: SelectSubset<T, AboutDeleteArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one About.
+     * @param {AboutUpdateArgs} args - Arguments to update one About.
+     * @example
+     * // Update one About
+     * const about = await prisma.about.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AboutUpdateArgs>(args: SelectSubset<T, AboutUpdateArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Abouts.
+     * @param {AboutDeleteManyArgs} args - Arguments to filter Abouts to delete.
+     * @example
+     * // Delete a few Abouts
+     * const { count } = await prisma.about.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AboutDeleteManyArgs>(args?: SelectSubset<T, AboutDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Abouts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AboutUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Abouts
+     * const about = await prisma.about.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AboutUpdateManyArgs>(args: SelectSubset<T, AboutUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Abouts and returns the data updated in the database.
+     * @param {AboutUpdateManyAndReturnArgs} args - Arguments to update many Abouts.
+     * @example
+     * // Update many Abouts
+     * const about = await prisma.about.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Abouts and only return the `uid`
+     * const aboutWithUidOnly = await prisma.about.updateManyAndReturn({
+     *   select: { uid: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AboutUpdateManyAndReturnArgs>(args: SelectSubset<T, AboutUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one About.
+     * @param {AboutUpsertArgs} args - Arguments to update or create a About.
+     * @example
+     * // Update or create a About
+     * const about = await prisma.about.upsert({
+     *   create: {
+     *     // ... data to create a About
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the About we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AboutUpsertArgs>(args: SelectSubset<T, AboutUpsertArgs<ExtArgs>>): Prisma__AboutClient<$Result.GetResult<Prisma.$AboutPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Abouts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AboutCountArgs} args - Arguments to filter Abouts to count.
+     * @example
+     * // Count the number of Abouts
+     * const count = await prisma.about.count({
+     *   where: {
+     *     // ... the filter for the Abouts we want to count
+     *   }
+     * })
+    **/
+    count<T extends AboutCountArgs>(
+      args?: Subset<T, AboutCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AboutCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a About.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AboutAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AboutAggregateArgs>(args: Subset<T, AboutAggregateArgs>): Prisma.PrismaPromise<GetAboutAggregateType<T>>
+
+    /**
+     * Group by About.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AboutGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AboutGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AboutGroupByArgs['orderBy'] }
+        : { orderBy?: AboutGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AboutGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAboutGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the About model
+   */
+  readonly fields: AboutFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for About.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AboutClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the About model
+   */ 
+  interface AboutFieldRefs {
+    readonly uid: FieldRef<"About", 'Int'>
+    readonly image: FieldRef<"About", 'String'>
+    readonly about: FieldRef<"About", 'String'>
+    readonly style: FieldRef<"About", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * About findUnique
+   */
+  export type AboutFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * Filter, which About to fetch.
+     */
+    where: AboutWhereUniqueInput
+  }
+
+  /**
+   * About findUniqueOrThrow
+   */
+  export type AboutFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * Filter, which About to fetch.
+     */
+    where: AboutWhereUniqueInput
+  }
+
+  /**
+   * About findFirst
+   */
+  export type AboutFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * Filter, which About to fetch.
+     */
+    where?: AboutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Abouts to fetch.
+     */
+    orderBy?: AboutOrderByWithRelationInput | AboutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Abouts.
+     */
+    cursor?: AboutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Abouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Abouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Abouts.
+     */
+    distinct?: AboutScalarFieldEnum | AboutScalarFieldEnum[]
+  }
+
+  /**
+   * About findFirstOrThrow
+   */
+  export type AboutFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * Filter, which About to fetch.
+     */
+    where?: AboutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Abouts to fetch.
+     */
+    orderBy?: AboutOrderByWithRelationInput | AboutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Abouts.
+     */
+    cursor?: AboutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Abouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Abouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Abouts.
+     */
+    distinct?: AboutScalarFieldEnum | AboutScalarFieldEnum[]
+  }
+
+  /**
+   * About findMany
+   */
+  export type AboutFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * Filter, which Abouts to fetch.
+     */
+    where?: AboutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Abouts to fetch.
+     */
+    orderBy?: AboutOrderByWithRelationInput | AboutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Abouts.
+     */
+    cursor?: AboutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Abouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Abouts.
+     */
+    skip?: number
+    distinct?: AboutScalarFieldEnum | AboutScalarFieldEnum[]
+  }
+
+  /**
+   * About create
+   */
+  export type AboutCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * The data needed to create a About.
+     */
+    data: XOR<AboutCreateInput, AboutUncheckedCreateInput>
+  }
+
+  /**
+   * About createMany
+   */
+  export type AboutCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Abouts.
+     */
+    data: AboutCreateManyInput | AboutCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * About createManyAndReturn
+   */
+  export type AboutCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * The data used to create many Abouts.
+     */
+    data: AboutCreateManyInput | AboutCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * About update
+   */
+  export type AboutUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * The data needed to update a About.
+     */
+    data: XOR<AboutUpdateInput, AboutUncheckedUpdateInput>
+    /**
+     * Choose, which About to update.
+     */
+    where: AboutWhereUniqueInput
+  }
+
+  /**
+   * About updateMany
+   */
+  export type AboutUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Abouts.
+     */
+    data: XOR<AboutUpdateManyMutationInput, AboutUncheckedUpdateManyInput>
+    /**
+     * Filter which Abouts to update
+     */
+    where?: AboutWhereInput
+    /**
+     * Limit how many Abouts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * About updateManyAndReturn
+   */
+  export type AboutUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * The data used to update Abouts.
+     */
+    data: XOR<AboutUpdateManyMutationInput, AboutUncheckedUpdateManyInput>
+    /**
+     * Filter which Abouts to update
+     */
+    where?: AboutWhereInput
+    /**
+     * Limit how many Abouts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * About upsert
+   */
+  export type AboutUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * The filter to search for the About to update in case it exists.
+     */
+    where: AboutWhereUniqueInput
+    /**
+     * In case the About found by the `where` argument doesn't exist, create a new About with this data.
+     */
+    create: XOR<AboutCreateInput, AboutUncheckedCreateInput>
+    /**
+     * In case the About was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AboutUpdateInput, AboutUncheckedUpdateInput>
+  }
+
+  /**
+   * About delete
+   */
+  export type AboutDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+    /**
+     * Filter which About to delete.
+     */
+    where: AboutWhereUniqueInput
+  }
+
+  /**
+   * About deleteMany
+   */
+  export type AboutDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Abouts to delete
+     */
+    where?: AboutWhereInput
+    /**
+     * Limit how many Abouts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * About without action
+   */
+  export type AboutDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the About
+     */
+    select?: AboutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the About
+     */
+    omit?: AboutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AboutInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11743,7 +12976,9 @@ export namespace Prisma {
     uid: 'uid',
     username: 'username',
     password: 'password',
-    styles: 'styles'
+    style: 'style',
+    hero: 'hero',
+    subhero: 'subhero'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -11756,7 +12991,8 @@ export namespace Prisma {
     desc: 'desc',
     tags: 'tags',
     github: 'github',
-    Link: 'Link'
+    Link: 'Link',
+    style: 'style'
   };
 
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -11774,6 +13010,7 @@ export namespace Prisma {
     eid: 'eid',
     title: 'title',
     corp: 'corp',
+    style: 'style',
     startdate: 'startdate',
     enddate: 'enddate',
     desc: 'desc'
@@ -11795,7 +13032,8 @@ export namespace Prisma {
     inst: 'inst',
     degree: 'degree',
     startdate: 'startdate',
-    endDate: 'endDate'
+    enddate: 'enddate',
+    style: 'style'
   };
 
   export type EducationScalarFieldEnum = (typeof EducationScalarFieldEnum)[keyof typeof EducationScalarFieldEnum]
@@ -11810,9 +13048,9 @@ export namespace Prisma {
 
 
   export const SkillsScalarFieldEnum: {
-    sid: 'sid',
     uid: 'uid',
     frontend: 'frontend',
+    style: 'style',
     backend: 'backend',
     database: 'database',
     mobile: 'mobile',
@@ -11824,7 +13062,6 @@ export namespace Prisma {
 
 
   export const ContactScalarFieldEnum: {
-    cid: 'cid',
     uid: 'uid',
     email: 'email',
     phone: 'phone',
@@ -11833,6 +13070,16 @@ export namespace Prisma {
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+  export const AboutScalarFieldEnum: {
+    uid: 'uid',
+    image: 'image',
+    about: 'about',
+    style: 'style'
+  };
+
+  export type AboutScalarFieldEnum = (typeof AboutScalarFieldEnum)[keyof typeof AboutScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11922,24 +13169,30 @@ export namespace Prisma {
     uid?: IntFilter<"user"> | number
     username?: StringFilter<"user"> | string
     password?: StringFilter<"user"> | string
-    styles?: IntNullableListFilter<"user">
-    user_project?: User_projectListRelationFilter
-    user_experience?: User_experienceListRelationFilter
+    style?: StringFilter<"user"> | string
+    hero?: StringFilter<"user"> | string
+    subhero?: StringFilter<"user"> | string
+    skills?: XOR<SkillsNullableScalarRelationFilter, skillsWhereInput> | null
     user_education?: User_educationListRelationFilter
-    skills?: SkillsListRelationFilter
+    user_experience?: User_experienceListRelationFilter
+    user_project?: User_projectListRelationFilter
     contact?: ContactListRelationFilter
+    About?: AboutListRelationFilter
   }
 
   export type userOrderByWithRelationInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    styles?: SortOrder
-    user_project?: user_projectOrderByRelationAggregateInput
-    user_experience?: user_experienceOrderByRelationAggregateInput
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
+    skills?: skillsOrderByWithRelationInput
     user_education?: user_educationOrderByRelationAggregateInput
-    skills?: skillsOrderByRelationAggregateInput
+    user_experience?: user_experienceOrderByRelationAggregateInput
+    user_project?: user_projectOrderByRelationAggregateInput
     contact?: contactOrderByRelationAggregateInput
+    About?: AboutOrderByRelationAggregateInput
   }
 
   export type userWhereUniqueInput = Prisma.AtLeast<{
@@ -11949,19 +13202,24 @@ export namespace Prisma {
     OR?: userWhereInput[]
     NOT?: userWhereInput | userWhereInput[]
     password?: StringFilter<"user"> | string
-    styles?: IntNullableListFilter<"user">
-    user_project?: User_projectListRelationFilter
-    user_experience?: User_experienceListRelationFilter
+    style?: StringFilter<"user"> | string
+    hero?: StringFilter<"user"> | string
+    subhero?: StringFilter<"user"> | string
+    skills?: XOR<SkillsNullableScalarRelationFilter, skillsWhereInput> | null
     user_education?: User_educationListRelationFilter
-    skills?: SkillsListRelationFilter
+    user_experience?: User_experienceListRelationFilter
+    user_project?: User_projectListRelationFilter
     contact?: ContactListRelationFilter
+    About?: AboutListRelationFilter
   }, "uid" | "username">
 
   export type userOrderByWithAggregationInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    styles?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
     _count?: userCountOrderByAggregateInput
     _avg?: userAvgOrderByAggregateInput
     _max?: userMaxOrderByAggregateInput
@@ -11976,7 +13234,9 @@ export namespace Prisma {
     uid?: IntWithAggregatesFilter<"user"> | number
     username?: StringWithAggregatesFilter<"user"> | string
     password?: StringWithAggregatesFilter<"user"> | string
-    styles?: IntNullableListFilter<"user">
+    style?: StringWithAggregatesFilter<"user"> | string
+    hero?: StringWithAggregatesFilter<"user"> | string
+    subhero?: StringWithAggregatesFilter<"user"> | string
   }
 
   export type projectWhereInput = {
@@ -11990,6 +13250,7 @@ export namespace Prisma {
     tags?: StringNullableListFilter<"project">
     github?: StringFilter<"project"> | string
     Link?: StringFilter<"project"> | string
+    style?: StringFilter<"project"> | string
     user_project?: User_projectListRelationFilter
   }
 
@@ -12001,6 +13262,7 @@ export namespace Prisma {
     tags?: SortOrder
     github?: SortOrder
     Link?: SortOrder
+    style?: SortOrder
     user_project?: user_projectOrderByRelationAggregateInput
   }
 
@@ -12015,6 +13277,7 @@ export namespace Prisma {
     tags?: StringNullableListFilter<"project">
     github?: StringFilter<"project"> | string
     Link?: StringFilter<"project"> | string
+    style?: StringFilter<"project"> | string
     user_project?: User_projectListRelationFilter
   }, "pid">
 
@@ -12026,6 +13289,7 @@ export namespace Prisma {
     tags?: SortOrder
     github?: SortOrder
     Link?: SortOrder
+    style?: SortOrder
     _count?: projectCountOrderByAggregateInput
     _avg?: projectAvgOrderByAggregateInput
     _max?: projectMaxOrderByAggregateInput
@@ -12044,6 +13308,7 @@ export namespace Prisma {
     tags?: StringNullableListFilter<"project">
     github?: StringWithAggregatesFilter<"project"> | string
     Link?: StringWithAggregatesFilter<"project"> | string
+    style?: StringWithAggregatesFilter<"project"> | string
   }
 
   export type user_projectWhereInput = {
@@ -12099,6 +13364,7 @@ export namespace Prisma {
     eid?: IntFilter<"experience"> | number
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
+    style?: StringFilter<"experience"> | string
     startdate?: DateTimeFilter<"experience"> | Date | string
     enddate?: DateTimeFilter<"experience"> | Date | string
     desc?: StringFilter<"experience"> | string
@@ -12109,6 +13375,7 @@ export namespace Prisma {
     eid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
+    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -12122,6 +13389,7 @@ export namespace Prisma {
     NOT?: experienceWhereInput | experienceWhereInput[]
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
+    style?: StringFilter<"experience"> | string
     startdate?: DateTimeFilter<"experience"> | Date | string
     enddate?: DateTimeFilter<"experience"> | Date | string
     desc?: StringFilter<"experience"> | string
@@ -12132,6 +13400,7 @@ export namespace Prisma {
     eid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
+    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -12149,6 +13418,7 @@ export namespace Prisma {
     eid?: IntWithAggregatesFilter<"experience"> | number
     title?: StringWithAggregatesFilter<"experience"> | string
     corp?: StringWithAggregatesFilter<"experience"> | string
+    style?: StringWithAggregatesFilter<"experience"> | string
     startdate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
     enddate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
     desc?: StringWithAggregatesFilter<"experience"> | string
@@ -12208,7 +13478,8 @@ export namespace Prisma {
     inst?: StringFilter<"education"> | string
     degree?: StringFilter<"education"> | string
     startdate?: DateTimeFilter<"education"> | Date | string
-    endDate?: DateTimeFilter<"education"> | Date | string
+    enddate?: DateTimeFilter<"education"> | Date | string
+    style?: StringFilter<"education"> | string
     user_education?: User_educationListRelationFilter
   }
 
@@ -12217,7 +13488,8 @@ export namespace Prisma {
     inst?: SortOrder
     degree?: SortOrder
     startdate?: SortOrder
-    endDate?: SortOrder
+    enddate?: SortOrder
+    style?: SortOrder
     user_education?: user_educationOrderByRelationAggregateInput
   }
 
@@ -12229,7 +13501,8 @@ export namespace Prisma {
     inst?: StringFilter<"education"> | string
     degree?: StringFilter<"education"> | string
     startdate?: DateTimeFilter<"education"> | Date | string
-    endDate?: DateTimeFilter<"education"> | Date | string
+    enddate?: DateTimeFilter<"education"> | Date | string
+    style?: StringFilter<"education"> | string
     user_education?: User_educationListRelationFilter
   }, "edid">
 
@@ -12238,7 +13511,8 @@ export namespace Prisma {
     inst?: SortOrder
     degree?: SortOrder
     startdate?: SortOrder
-    endDate?: SortOrder
+    enddate?: SortOrder
+    style?: SortOrder
     _count?: educationCountOrderByAggregateInput
     _avg?: educationAvgOrderByAggregateInput
     _max?: educationMaxOrderByAggregateInput
@@ -12254,7 +13528,8 @@ export namespace Prisma {
     inst?: StringWithAggregatesFilter<"education"> | string
     degree?: StringWithAggregatesFilter<"education"> | string
     startdate?: DateTimeWithAggregatesFilter<"education"> | Date | string
-    endDate?: DateTimeWithAggregatesFilter<"education"> | Date | string
+    enddate?: DateTimeWithAggregatesFilter<"education"> | Date | string
+    style?: StringWithAggregatesFilter<"education"> | string
   }
 
   export type user_educationWhereInput = {
@@ -12307,9 +13582,9 @@ export namespace Prisma {
     AND?: skillsWhereInput | skillsWhereInput[]
     OR?: skillsWhereInput[]
     NOT?: skillsWhereInput | skillsWhereInput[]
-    sid?: IntFilter<"skills"> | number
     uid?: IntFilter<"skills"> | number
     frontend?: StringNullableListFilter<"skills">
+    style?: StringFilter<"skills"> | string
     backend?: StringNullableListFilter<"skills">
     database?: StringNullableListFilter<"skills">
     mobile?: StringNullableListFilter<"skills">
@@ -12319,9 +13594,9 @@ export namespace Prisma {
   }
 
   export type skillsOrderByWithRelationInput = {
-    sid?: SortOrder
     uid?: SortOrder
     frontend?: SortOrder
+    style?: SortOrder
     backend?: SortOrder
     database?: SortOrder
     mobile?: SortOrder
@@ -12332,24 +13607,23 @@ export namespace Prisma {
 
   export type skillsWhereUniqueInput = Prisma.AtLeast<{
     uid?: number
-    uid_sid?: skillsUidSidCompoundUniqueInput
     AND?: skillsWhereInput | skillsWhereInput[]
     OR?: skillsWhereInput[]
     NOT?: skillsWhereInput | skillsWhereInput[]
-    sid?: IntFilter<"skills"> | number
     frontend?: StringNullableListFilter<"skills">
+    style?: StringFilter<"skills"> | string
     backend?: StringNullableListFilter<"skills">
     database?: StringNullableListFilter<"skills">
     mobile?: StringNullableListFilter<"skills">
     other?: StringNullableListFilter<"skills">
     languages?: StringNullableListFilter<"skills">
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "uid_sid" | "uid">
+  }, "uid" | "uid">
 
   export type skillsOrderByWithAggregationInput = {
-    sid?: SortOrder
     uid?: SortOrder
     frontend?: SortOrder
+    style?: SortOrder
     backend?: SortOrder
     database?: SortOrder
     mobile?: SortOrder
@@ -12366,9 +13640,9 @@ export namespace Prisma {
     AND?: skillsScalarWhereWithAggregatesInput | skillsScalarWhereWithAggregatesInput[]
     OR?: skillsScalarWhereWithAggregatesInput[]
     NOT?: skillsScalarWhereWithAggregatesInput | skillsScalarWhereWithAggregatesInput[]
-    sid?: IntWithAggregatesFilter<"skills"> | number
     uid?: IntWithAggregatesFilter<"skills"> | number
     frontend?: StringNullableListFilter<"skills">
+    style?: StringWithAggregatesFilter<"skills"> | string
     backend?: StringNullableListFilter<"skills">
     database?: StringNullableListFilter<"skills">
     mobile?: StringNullableListFilter<"skills">
@@ -12380,17 +13654,15 @@ export namespace Prisma {
     AND?: contactWhereInput | contactWhereInput[]
     OR?: contactWhereInput[]
     NOT?: contactWhereInput | contactWhereInput[]
-    cid?: IntFilter<"contact"> | number
     uid?: IntFilter<"contact"> | number
     email?: StringFilter<"contact"> | string
-    phone?: IntFilter<"contact"> | number
+    phone?: StringFilter<"contact"> | string
     location?: StringFilter<"contact"> | string
     linkedin?: StringFilter<"contact"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
   export type contactOrderByWithRelationInput = {
-    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -12400,21 +13672,18 @@ export namespace Prisma {
   }
 
   export type contactWhereUniqueInput = Prisma.AtLeast<{
-    cid_uid?: contactCidUidCompoundUniqueInput
+    uid?: number
     AND?: contactWhereInput | contactWhereInput[]
     OR?: contactWhereInput[]
     NOT?: contactWhereInput | contactWhereInput[]
-    cid?: IntFilter<"contact"> | number
-    uid?: IntFilter<"contact"> | number
     email?: StringFilter<"contact"> | string
-    phone?: IntFilter<"contact"> | number
+    phone?: StringFilter<"contact"> | string
     location?: StringFilter<"contact"> | string
     linkedin?: StringFilter<"contact"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "cid_uid">
+  }, "uid">
 
   export type contactOrderByWithAggregationInput = {
-    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -12431,78 +13700,147 @@ export namespace Prisma {
     AND?: contactScalarWhereWithAggregatesInput | contactScalarWhereWithAggregatesInput[]
     OR?: contactScalarWhereWithAggregatesInput[]
     NOT?: contactScalarWhereWithAggregatesInput | contactScalarWhereWithAggregatesInput[]
-    cid?: IntWithAggregatesFilter<"contact"> | number
     uid?: IntWithAggregatesFilter<"contact"> | number
     email?: StringWithAggregatesFilter<"contact"> | string
-    phone?: IntWithAggregatesFilter<"contact"> | number
+    phone?: StringWithAggregatesFilter<"contact"> | string
     location?: StringWithAggregatesFilter<"contact"> | string
     linkedin?: StringWithAggregatesFilter<"contact"> | string
+  }
+
+  export type AboutWhereInput = {
+    AND?: AboutWhereInput | AboutWhereInput[]
+    OR?: AboutWhereInput[]
+    NOT?: AboutWhereInput | AboutWhereInput[]
+    uid?: IntFilter<"About"> | number
+    image?: StringFilter<"About"> | string
+    about?: StringFilter<"About"> | string
+    style?: StringFilter<"About"> | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }
+
+  export type AboutOrderByWithRelationInput = {
+    uid?: SortOrder
+    image?: SortOrder
+    about?: SortOrder
+    style?: SortOrder
+    user?: userOrderByWithRelationInput
+  }
+
+  export type AboutWhereUniqueInput = Prisma.AtLeast<{
+    uid?: number
+    AND?: AboutWhereInput | AboutWhereInput[]
+    OR?: AboutWhereInput[]
+    NOT?: AboutWhereInput | AboutWhereInput[]
+    image?: StringFilter<"About"> | string
+    about?: StringFilter<"About"> | string
+    style?: StringFilter<"About"> | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }, "uid">
+
+  export type AboutOrderByWithAggregationInput = {
+    uid?: SortOrder
+    image?: SortOrder
+    about?: SortOrder
+    style?: SortOrder
+    _count?: AboutCountOrderByAggregateInput
+    _avg?: AboutAvgOrderByAggregateInput
+    _max?: AboutMaxOrderByAggregateInput
+    _min?: AboutMinOrderByAggregateInput
+    _sum?: AboutSumOrderByAggregateInput
+  }
+
+  export type AboutScalarWhereWithAggregatesInput = {
+    AND?: AboutScalarWhereWithAggregatesInput | AboutScalarWhereWithAggregatesInput[]
+    OR?: AboutScalarWhereWithAggregatesInput[]
+    NOT?: AboutScalarWhereWithAggregatesInput | AboutScalarWhereWithAggregatesInput[]
+    uid?: IntWithAggregatesFilter<"About"> | number
+    image?: StringWithAggregatesFilter<"About"> | string
+    about?: StringWithAggregatesFilter<"About"> | string
+    style?: StringWithAggregatesFilter<"About"> | string
   }
 
   export type userCreateInput = {
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsCreateNestedOneWithoutUserInput
     user_education?: user_educationCreateNestedManyWithoutUserInput
-    skills?: skillsCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    user_project?: user_projectCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
     uid?: number
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
     user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateOneWithoutUserNestedInput
     user_education?: user_educationUpdateManyWithoutUserNestedInput
-    skills?: skillsUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
     user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
     uid?: number
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
+    style: string
+    hero: string
+    subhero: string
   }
 
   export type userUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
   }
 
   export type userUncheckedUpdateManyInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
   }
 
   export type projectCreateInput = {
@@ -12512,6 +13850,7 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
+    style: string
     user_project?: user_projectCreateNestedManyWithoutProjectInput
   }
 
@@ -12523,6 +13862,7 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
+    style: string
     user_project?: user_projectUncheckedCreateNestedManyWithoutProjectInput
   }
 
@@ -12533,6 +13873,7 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     user_project?: user_projectUpdateManyWithoutProjectNestedInput
   }
 
@@ -12544,6 +13885,7 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     user_project?: user_projectUncheckedUpdateManyWithoutProjectNestedInput
   }
 
@@ -12555,6 +13897,7 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
+    style: string
   }
 
   export type projectUpdateManyMutationInput = {
@@ -12564,6 +13907,7 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type projectUncheckedUpdateManyInput = {
@@ -12574,6 +13918,7 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type user_projectCreateInput = {
@@ -12613,6 +13958,7 @@ export namespace Prisma {
   export type experienceCreateInput = {
     title: string
     corp: string
+    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -12623,6 +13969,7 @@ export namespace Prisma {
     eid?: number
     title: string
     corp: string
+    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -12632,6 +13979,7 @@ export namespace Prisma {
   export type experienceUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -12642,6 +13990,7 @@ export namespace Prisma {
     eid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -12652,6 +14001,7 @@ export namespace Prisma {
     eid?: number
     title: string
     corp: string
+    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -12660,6 +14010,7 @@ export namespace Prisma {
   export type experienceUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -12669,6 +14020,7 @@ export namespace Prisma {
     eid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -12712,7 +14064,8 @@ export namespace Prisma {
     inst: string
     degree: string
     startdate: Date | string
-    endDate: Date | string
+    enddate: Date | string
+    style: string
     user_education?: user_educationCreateNestedManyWithoutEducationInput
   }
 
@@ -12721,7 +14074,8 @@ export namespace Prisma {
     inst: string
     degree: string
     startdate: Date | string
-    endDate: Date | string
+    enddate: Date | string
+    style: string
     user_education?: user_educationUncheckedCreateNestedManyWithoutEducationInput
   }
 
@@ -12729,7 +14083,8 @@ export namespace Prisma {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
     user_education?: user_educationUpdateManyWithoutEducationNestedInput
   }
 
@@ -12738,7 +14093,8 @@ export namespace Prisma {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
     user_education?: user_educationUncheckedUpdateManyWithoutEducationNestedInput
   }
 
@@ -12747,14 +14103,16 @@ export namespace Prisma {
     inst: string
     degree: string
     startdate: Date | string
-    endDate: Date | string
+    enddate: Date | string
+    style: string
   }
 
   export type educationUpdateManyMutationInput = {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type educationUncheckedUpdateManyInput = {
@@ -12762,7 +14120,8 @@ export namespace Prisma {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type user_educationCreateInput = {
@@ -12800,8 +14159,8 @@ export namespace Prisma {
   }
 
   export type skillsCreateInput = {
-    sid?: number
     frontend?: skillsCreatefrontendInput | string[]
+    style: string
     backend?: skillsCreatebackendInput | string[]
     database?: skillsCreatedatabaseInput | string[]
     mobile?: skillsCreatemobileInput | string[]
@@ -12811,9 +14170,9 @@ export namespace Prisma {
   }
 
   export type skillsUncheckedCreateInput = {
-    sid?: number
     uid: number
     frontend?: skillsCreatefrontendInput | string[]
+    style: string
     backend?: skillsCreatebackendInput | string[]
     database?: skillsCreatedatabaseInput | string[]
     mobile?: skillsCreatemobileInput | string[]
@@ -12822,8 +14181,8 @@ export namespace Prisma {
   }
 
   export type skillsUpdateInput = {
-    sid?: IntFieldUpdateOperationsInput | number
     frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
     backend?: skillsUpdatebackendInput | string[]
     database?: skillsUpdatedatabaseInput | string[]
     mobile?: skillsUpdatemobileInput | string[]
@@ -12833,9 +14192,9 @@ export namespace Prisma {
   }
 
   export type skillsUncheckedUpdateInput = {
-    sid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
     backend?: skillsUpdatebackendInput | string[]
     database?: skillsUpdatedatabaseInput | string[]
     mobile?: skillsUpdatemobileInput | string[]
@@ -12844,9 +14203,9 @@ export namespace Prisma {
   }
 
   export type skillsCreateManyInput = {
-    sid?: number
     uid: number
     frontend?: skillsCreatefrontendInput | string[]
+    style: string
     backend?: skillsCreatebackendInput | string[]
     database?: skillsCreatedatabaseInput | string[]
     mobile?: skillsCreatemobileInput | string[]
@@ -12855,8 +14214,8 @@ export namespace Prisma {
   }
 
   export type skillsUpdateManyMutationInput = {
-    sid?: IntFieldUpdateOperationsInput | number
     frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
     backend?: skillsUpdatebackendInput | string[]
     database?: skillsUpdatedatabaseInput | string[]
     mobile?: skillsUpdatemobileInput | string[]
@@ -12865,9 +14224,9 @@ export namespace Prisma {
   }
 
   export type skillsUncheckedUpdateManyInput = {
-    sid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
     backend?: skillsUpdatebackendInput | string[]
     database?: skillsUpdatedatabaseInput | string[]
     mobile?: skillsUpdatemobileInput | string[]
@@ -12876,65 +14235,106 @@ export namespace Prisma {
   }
 
   export type contactCreateInput = {
-    cid?: number
     email: string
-    phone: number
+    phone: string
     location: string
     linkedin: string
     user: userCreateNestedOneWithoutContactInput
   }
 
   export type contactUncheckedCreateInput = {
-    cid?: number
     uid: number
     email: string
-    phone: number
+    phone: string
     location: string
     linkedin: string
   }
 
   export type contactUpdateInput = {
-    cid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    phone?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
     user?: userUpdateOneRequiredWithoutContactNestedInput
   }
 
   export type contactUncheckedUpdateInput = {
-    cid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    phone?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactCreateManyInput = {
-    cid?: number
     uid: number
     email: string
-    phone: number
+    phone: string
     location: string
     linkedin: string
   }
 
   export type contactUpdateManyMutationInput = {
-    cid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    phone?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactUncheckedUpdateManyInput = {
-    cid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    phone?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AboutCreateInput = {
+    image: string
+    about: string
+    style: string
+    user: userCreateNestedOneWithoutAboutInput
+  }
+
+  export type AboutUncheckedCreateInput = {
+    uid: number
+    image: string
+    about: string
+    style: string
+  }
+
+  export type AboutUpdateInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+    user?: userUpdateOneRequiredWithoutAboutNestedInput
+  }
+
+  export type AboutUncheckedUpdateInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AboutCreateManyInput = {
+    uid: number
+    image: string
+    about: string
+    style: string
+  }
+
+  export type AboutUpdateManyMutationInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AboutUncheckedUpdateManyInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -12963,24 +14363,9 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type IntNullableListFilter<$PrismaModel = never> = {
-    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    has?: number | IntFieldRefInput<$PrismaModel> | null
-    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
-    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
-  export type User_projectListRelationFilter = {
-    every?: user_projectWhereInput
-    some?: user_projectWhereInput
-    none?: user_projectWhereInput
-  }
-
-  export type User_experienceListRelationFilter = {
-    every?: user_experienceWhereInput
-    some?: user_experienceWhereInput
-    none?: user_experienceWhereInput
+  export type SkillsNullableScalarRelationFilter = {
+    is?: skillsWhereInput | null
+    isNot?: skillsWhereInput | null
   }
 
   export type User_educationListRelationFilter = {
@@ -12989,10 +14374,16 @@ export namespace Prisma {
     none?: user_educationWhereInput
   }
 
-  export type SkillsListRelationFilter = {
-    every?: skillsWhereInput
-    some?: skillsWhereInput
-    none?: skillsWhereInput
+  export type User_experienceListRelationFilter = {
+    every?: user_experienceWhereInput
+    some?: user_experienceWhereInput
+    none?: user_experienceWhereInput
+  }
+
+  export type User_projectListRelationFilter = {
+    every?: user_projectWhereInput
+    some?: user_projectWhereInput
+    none?: user_projectWhereInput
   }
 
   export type ContactListRelationFilter = {
@@ -13001,7 +14392,13 @@ export namespace Prisma {
     none?: contactWhereInput
   }
 
-  export type user_projectOrderByRelationAggregateInput = {
+  export type AboutListRelationFilter = {
+    every?: AboutWhereInput
+    some?: AboutWhereInput
+    none?: AboutWhereInput
+  }
+
+  export type user_educationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13009,11 +14406,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type user_educationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type skillsOrderByRelationAggregateInput = {
+  export type user_projectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13021,33 +14414,43 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type AboutOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type userCountOrderByAggregateInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
-    styles?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
   }
 
   export type userAvgOrderByAggregateInput = {
     uid?: SortOrder
-    styles?: SortOrder
   }
 
   export type userMaxOrderByAggregateInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
   }
 
   export type userMinOrderByAggregateInput = {
     uid?: SortOrder
     username?: SortOrder
     password?: SortOrder
+    style?: SortOrder
+    hero?: SortOrder
+    subhero?: SortOrder
   }
 
   export type userSumOrderByAggregateInput = {
     uid?: SortOrder
-    styles?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -13100,6 +14503,7 @@ export namespace Prisma {
     tags?: SortOrder
     github?: SortOrder
     Link?: SortOrder
+    style?: SortOrder
   }
 
   export type projectAvgOrderByAggregateInput = {
@@ -13113,6 +14517,7 @@ export namespace Prisma {
     desc?: SortOrder
     github?: SortOrder
     Link?: SortOrder
+    style?: SortOrder
   }
 
   export type projectMinOrderByAggregateInput = {
@@ -13122,6 +14527,7 @@ export namespace Prisma {
     desc?: SortOrder
     github?: SortOrder
     Link?: SortOrder
+    style?: SortOrder
   }
 
   export type projectSumOrderByAggregateInput = {
@@ -13183,6 +14589,7 @@ export namespace Prisma {
     eid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
+    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -13196,6 +14603,7 @@ export namespace Prisma {
     eid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
+    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -13205,6 +14613,7 @@ export namespace Prisma {
     eid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
+    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -13268,7 +14677,8 @@ export namespace Prisma {
     inst?: SortOrder
     degree?: SortOrder
     startdate?: SortOrder
-    endDate?: SortOrder
+    enddate?: SortOrder
+    style?: SortOrder
   }
 
   export type educationAvgOrderByAggregateInput = {
@@ -13280,7 +14690,8 @@ export namespace Prisma {
     inst?: SortOrder
     degree?: SortOrder
     startdate?: SortOrder
-    endDate?: SortOrder
+    enddate?: SortOrder
+    style?: SortOrder
   }
 
   export type educationMinOrderByAggregateInput = {
@@ -13288,7 +14699,8 @@ export namespace Prisma {
     inst?: SortOrder
     degree?: SortOrder
     startdate?: SortOrder
-    endDate?: SortOrder
+    enddate?: SortOrder
+    style?: SortOrder
   }
 
   export type educationSumOrderByAggregateInput = {
@@ -13330,15 +14742,10 @@ export namespace Prisma {
     uid?: SortOrder
   }
 
-  export type skillsUidSidCompoundUniqueInput = {
-    uid: number
-    sid: number
-  }
-
   export type skillsCountOrderByAggregateInput = {
-    sid?: SortOrder
     uid?: SortOrder
     frontend?: SortOrder
+    style?: SortOrder
     backend?: SortOrder
     database?: SortOrder
     mobile?: SortOrder
@@ -13347,32 +14754,24 @@ export namespace Prisma {
   }
 
   export type skillsAvgOrderByAggregateInput = {
-    sid?: SortOrder
     uid?: SortOrder
   }
 
   export type skillsMaxOrderByAggregateInput = {
-    sid?: SortOrder
     uid?: SortOrder
+    style?: SortOrder
   }
 
   export type skillsMinOrderByAggregateInput = {
-    sid?: SortOrder
     uid?: SortOrder
+    style?: SortOrder
   }
 
   export type skillsSumOrderByAggregateInput = {
-    sid?: SortOrder
     uid?: SortOrder
   }
 
-  export type contactCidUidCompoundUniqueInput = {
-    cid: number
-    uid: number
-  }
-
   export type contactCountOrderByAggregateInput = {
-    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -13381,13 +14780,10 @@ export namespace Prisma {
   }
 
   export type contactAvgOrderByAggregateInput = {
-    cid?: SortOrder
     uid?: SortOrder
-    phone?: SortOrder
   }
 
   export type contactMaxOrderByAggregateInput = {
-    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -13396,7 +14792,6 @@ export namespace Prisma {
   }
 
   export type contactMinOrderByAggregateInput = {
-    cid?: SortOrder
     uid?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -13405,27 +14800,42 @@ export namespace Prisma {
   }
 
   export type contactSumOrderByAggregateInput = {
-    cid?: SortOrder
     uid?: SortOrder
-    phone?: SortOrder
   }
 
-  export type userCreatestylesInput = {
-    set: number[]
+  export type AboutCountOrderByAggregateInput = {
+    uid?: SortOrder
+    image?: SortOrder
+    about?: SortOrder
+    style?: SortOrder
   }
 
-  export type user_projectCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+  export type AboutAvgOrderByAggregateInput = {
+    uid?: SortOrder
   }
 
-  export type user_experienceCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+  export type AboutMaxOrderByAggregateInput = {
+    uid?: SortOrder
+    image?: SortOrder
+    about?: SortOrder
+    style?: SortOrder
+  }
+
+  export type AboutMinOrderByAggregateInput = {
+    uid?: SortOrder
+    image?: SortOrder
+    about?: SortOrder
+    style?: SortOrder
+  }
+
+  export type AboutSumOrderByAggregateInput = {
+    uid?: SortOrder
+  }
+
+  export type skillsCreateNestedOneWithoutUserInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
+    connect?: skillsWhereUniqueInput
   }
 
   export type user_educationCreateNestedManyWithoutUserInput = {
@@ -13435,11 +14845,18 @@ export namespace Prisma {
     connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
   }
 
-  export type skillsCreateNestedManyWithoutUserInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
-    createMany?: skillsCreateManyUserInputEnvelope
-    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+  export type user_experienceCreateNestedManyWithoutUserInput = {
+    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
+    createMany?: user_experienceCreateManyUserInputEnvelope
+    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+  }
+
+  export type user_projectCreateNestedManyWithoutUserInput = {
+    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
+    createMany?: user_projectCreateManyUserInputEnvelope
+    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
   }
 
   export type contactCreateNestedManyWithoutUserInput = {
@@ -13449,18 +14866,17 @@ export namespace Prisma {
     connect?: contactWhereUniqueInput | contactWhereUniqueInput[]
   }
 
-  export type user_projectUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+  export type AboutCreateNestedManyWithoutUserInput = {
+    create?: XOR<AboutCreateWithoutUserInput, AboutUncheckedCreateWithoutUserInput> | AboutCreateWithoutUserInput[] | AboutUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AboutCreateOrConnectWithoutUserInput | AboutCreateOrConnectWithoutUserInput[]
+    createMany?: AboutCreateManyUserInputEnvelope
+    connect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
   }
 
-  export type user_experienceUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+  export type skillsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
+    connect?: skillsWhereUniqueInput
   }
 
   export type user_educationUncheckedCreateNestedManyWithoutUserInput = {
@@ -13470,11 +14886,18 @@ export namespace Prisma {
     connect?: user_educationWhereUniqueInput | user_educationWhereUniqueInput[]
   }
 
-  export type skillsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
-    createMany?: skillsCreateManyUserInputEnvelope
-    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
+  export type user_experienceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
+    createMany?: user_experienceCreateManyUserInputEnvelope
+    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+  }
+
+  export type user_projectUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
+    createMany?: user_projectCreateManyUserInputEnvelope
+    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
   }
 
   export type contactUncheckedCreateNestedManyWithoutUserInput = {
@@ -13484,41 +14907,25 @@ export namespace Prisma {
     connect?: contactWhereUniqueInput | contactWhereUniqueInput[]
   }
 
+  export type AboutUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AboutCreateWithoutUserInput, AboutUncheckedCreateWithoutUserInput> | AboutCreateWithoutUserInput[] | AboutUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AboutCreateOrConnectWithoutUserInput | AboutCreateOrConnectWithoutUserInput[]
+    createMany?: AboutCreateManyUserInputEnvelope
+    connect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type userUpdatestylesInput = {
-    set?: number[]
-    push?: number | number[]
-  }
-
-  export type user_projectUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    upsert?: user_projectUpsertWithWhereUniqueWithoutUserInput | user_projectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    update?: user_projectUpdateWithWhereUniqueWithoutUserInput | user_projectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_projectUpdateManyWithWhereWithoutUserInput | user_projectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-  }
-
-  export type user_experienceUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    upsert?: user_experienceUpsertWithWhereUniqueWithoutUserInput | user_experienceUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    update?: user_experienceUpdateWithWhereUniqueWithoutUserInput | user_experienceUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_experienceUpdateManyWithWhereWithoutUserInput | user_experienceUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
+  export type skillsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
+    upsert?: skillsUpsertWithoutUserInput
+    disconnect?: skillsWhereInput | boolean
+    delete?: skillsWhereInput | boolean
+    connect?: skillsWhereUniqueInput
+    update?: XOR<XOR<skillsUpdateToOneWithWhereWithoutUserInput, skillsUpdateWithoutUserInput>, skillsUncheckedUpdateWithoutUserInput>
   }
 
   export type user_educationUpdateManyWithoutUserNestedInput = {
@@ -13535,18 +14942,32 @@ export namespace Prisma {
     deleteMany?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
   }
 
-  export type skillsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
-    upsert?: skillsUpsertWithWhereUniqueWithoutUserInput | skillsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: skillsCreateManyUserInputEnvelope
-    set?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    disconnect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    delete?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    update?: skillsUpdateWithWhereUniqueWithoutUserInput | skillsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: skillsUpdateManyWithWhereWithoutUserInput | skillsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: skillsScalarWhereInput | skillsScalarWhereInput[]
+  export type user_experienceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
+    upsert?: user_experienceUpsertWithWhereUniqueWithoutUserInput | user_experienceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: user_experienceCreateManyUserInputEnvelope
+    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    update?: user_experienceUpdateWithWhereUniqueWithoutUserInput | user_experienceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: user_experienceUpdateManyWithWhereWithoutUserInput | user_experienceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
+  }
+
+  export type user_projectUpdateManyWithoutUserNestedInput = {
+    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
+    upsert?: user_projectUpsertWithWhereUniqueWithoutUserInput | user_projectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: user_projectCreateManyUserInputEnvelope
+    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    update?: user_projectUpdateWithWhereUniqueWithoutUserInput | user_projectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: user_projectUpdateManyWithWhereWithoutUserInput | user_projectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
   }
 
   export type contactUpdateManyWithoutUserNestedInput = {
@@ -13563,6 +14984,20 @@ export namespace Prisma {
     deleteMany?: contactScalarWhereInput | contactScalarWhereInput[]
   }
 
+  export type AboutUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AboutCreateWithoutUserInput, AboutUncheckedCreateWithoutUserInput> | AboutCreateWithoutUserInput[] | AboutUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AboutCreateOrConnectWithoutUserInput | AboutCreateOrConnectWithoutUserInput[]
+    upsert?: AboutUpsertWithWhereUniqueWithoutUserInput | AboutUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AboutCreateManyUserInputEnvelope
+    set?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    disconnect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    delete?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    connect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    update?: AboutUpdateWithWhereUniqueWithoutUserInput | AboutUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AboutUpdateManyWithWhereWithoutUserInput | AboutUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AboutScalarWhereInput | AboutScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -13571,32 +15006,14 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type user_projectUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
-    upsert?: user_projectUpsertWithWhereUniqueWithoutUserInput | user_projectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_projectCreateManyUserInputEnvelope
-    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
-    update?: user_projectUpdateWithWhereUniqueWithoutUserInput | user_projectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_projectUpdateManyWithWhereWithoutUserInput | user_projectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-  }
-
-  export type user_experienceUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
-    upsert?: user_experienceUpsertWithWhereUniqueWithoutUserInput | user_experienceUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: user_experienceCreateManyUserInputEnvelope
-    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
-    update?: user_experienceUpdateWithWhereUniqueWithoutUserInput | user_experienceUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: user_experienceUpdateManyWithWhereWithoutUserInput | user_experienceUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
+  export type skillsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: skillsCreateOrConnectWithoutUserInput
+    upsert?: skillsUpsertWithoutUserInput
+    disconnect?: skillsWhereInput | boolean
+    delete?: skillsWhereInput | boolean
+    connect?: skillsWhereUniqueInput
+    update?: XOR<XOR<skillsUpdateToOneWithWhereWithoutUserInput, skillsUpdateWithoutUserInput>, skillsUncheckedUpdateWithoutUserInput>
   }
 
   export type user_educationUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13613,18 +15030,32 @@ export namespace Prisma {
     deleteMany?: user_educationScalarWhereInput | user_educationScalarWhereInput[]
   }
 
-  export type skillsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
-    upsert?: skillsUpsertWithWhereUniqueWithoutUserInput | skillsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: skillsCreateManyUserInputEnvelope
-    set?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    disconnect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    delete?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    connect?: skillsWhereUniqueInput | skillsWhereUniqueInput[]
-    update?: skillsUpdateWithWhereUniqueWithoutUserInput | skillsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: skillsUpdateManyWithWhereWithoutUserInput | skillsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: skillsScalarWhereInput | skillsScalarWhereInput[]
+  export type user_experienceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput> | user_experienceCreateWithoutUserInput[] | user_experienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_experienceCreateOrConnectWithoutUserInput | user_experienceCreateOrConnectWithoutUserInput[]
+    upsert?: user_experienceUpsertWithWhereUniqueWithoutUserInput | user_experienceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: user_experienceCreateManyUserInputEnvelope
+    set?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    disconnect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    delete?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    connect?: user_experienceWhereUniqueInput | user_experienceWhereUniqueInput[]
+    update?: user_experienceUpdateWithWhereUniqueWithoutUserInput | user_experienceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: user_experienceUpdateManyWithWhereWithoutUserInput | user_experienceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
+  }
+
+  export type user_projectUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput> | user_projectCreateWithoutUserInput[] | user_projectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_projectCreateOrConnectWithoutUserInput | user_projectCreateOrConnectWithoutUserInput[]
+    upsert?: user_projectUpsertWithWhereUniqueWithoutUserInput | user_projectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: user_projectCreateManyUserInputEnvelope
+    set?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    disconnect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    delete?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    connect?: user_projectWhereUniqueInput | user_projectWhereUniqueInput[]
+    update?: user_projectUpdateWithWhereUniqueWithoutUserInput | user_projectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: user_projectUpdateManyWithWhereWithoutUserInput | user_projectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
   }
 
   export type contactUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13639,6 +15070,20 @@ export namespace Prisma {
     update?: contactUpdateWithWhereUniqueWithoutUserInput | contactUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: contactUpdateManyWithWhereWithoutUserInput | contactUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: contactScalarWhereInput | contactScalarWhereInput[]
+  }
+
+  export type AboutUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AboutCreateWithoutUserInput, AboutUncheckedCreateWithoutUserInput> | AboutCreateWithoutUserInput[] | AboutUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AboutCreateOrConnectWithoutUserInput | AboutCreateOrConnectWithoutUserInput[]
+    upsert?: AboutUpsertWithWhereUniqueWithoutUserInput | AboutUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AboutCreateManyUserInputEnvelope
+    set?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    disconnect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    delete?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    connect?: AboutWhereUniqueInput | AboutWhereUniqueInput[]
+    update?: AboutUpdateWithWhereUniqueWithoutUserInput | AboutUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AboutUpdateManyWithWhereWithoutUserInput | AboutUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AboutScalarWhereInput | AboutScalarWhereInput[]
   }
 
   export type projectCreatetagsInput = {
@@ -13946,6 +15391,20 @@ export namespace Prisma {
     update?: XOR<XOR<userUpdateToOneWithWhereWithoutContactInput, userUpdateWithoutContactInput>, userUncheckedUpdateWithoutContactInput>
   }
 
+  export type userCreateNestedOneWithoutAboutInput = {
+    create?: XOR<userCreateWithoutAboutInput, userUncheckedCreateWithoutAboutInput>
+    connectOrCreate?: userCreateOrConnectWithoutAboutInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type userUpdateOneRequiredWithoutAboutNestedInput = {
+    create?: XOR<userCreateWithoutAboutInput, userUncheckedCreateWithoutAboutInput>
+    connectOrCreate?: userCreateOrConnectWithoutAboutInput
+    upsert?: userUpsertWithoutAboutInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutAboutInput, userUpdateWithoutAboutInput>, userUncheckedUpdateWithoutAboutInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -14040,21 +15499,46 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type user_projectCreateWithoutUserInput = {
-    project: projectCreateNestedOneWithoutUser_projectInput
+  export type skillsCreateWithoutUserInput = {
+    frontend?: skillsCreatefrontendInput | string[]
+    style: string
+    backend?: skillsCreatebackendInput | string[]
+    database?: skillsCreatedatabaseInput | string[]
+    mobile?: skillsCreatemobileInput | string[]
+    other?: skillsCreateotherInput | string[]
+    languages?: skillsCreatelanguagesInput | string[]
   }
 
-  export type user_projectUncheckedCreateWithoutUserInput = {
-    pid: number
+  export type skillsUncheckedCreateWithoutUserInput = {
+    frontend?: skillsCreatefrontendInput | string[]
+    style: string
+    backend?: skillsCreatebackendInput | string[]
+    database?: skillsCreatedatabaseInput | string[]
+    mobile?: skillsCreatemobileInput | string[]
+    other?: skillsCreateotherInput | string[]
+    languages?: skillsCreatelanguagesInput | string[]
   }
 
-  export type user_projectCreateOrConnectWithoutUserInput = {
-    where: user_projectWhereUniqueInput
-    create: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput>
+  export type skillsCreateOrConnectWithoutUserInput = {
+    where: skillsWhereUniqueInput
+    create: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
   }
 
-  export type user_projectCreateManyUserInputEnvelope = {
-    data: user_projectCreateManyUserInput | user_projectCreateManyUserInput[]
+  export type user_educationCreateWithoutUserInput = {
+    education: educationCreateNestedOneWithoutUser_educationInput
+  }
+
+  export type user_educationUncheckedCreateWithoutUserInput = {
+    edid: number
+  }
+
+  export type user_educationCreateOrConnectWithoutUserInput = {
+    where: user_educationWhereUniqueInput
+    create: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput>
+  }
+
+  export type user_educationCreateManyUserInputEnvelope = {
+    data: user_educationCreateManyUserInput | user_educationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -14076,66 +15560,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type user_educationCreateWithoutUserInput = {
-    education: educationCreateNestedOneWithoutUser_educationInput
+  export type user_projectCreateWithoutUserInput = {
+    project: projectCreateNestedOneWithoutUser_projectInput
   }
 
-  export type user_educationUncheckedCreateWithoutUserInput = {
-    edid: number
+  export type user_projectUncheckedCreateWithoutUserInput = {
+    pid: number
   }
 
-  export type user_educationCreateOrConnectWithoutUserInput = {
-    where: user_educationWhereUniqueInput
-    create: XOR<user_educationCreateWithoutUserInput, user_educationUncheckedCreateWithoutUserInput>
+  export type user_projectCreateOrConnectWithoutUserInput = {
+    where: user_projectWhereUniqueInput
+    create: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput>
   }
 
-  export type user_educationCreateManyUserInputEnvelope = {
-    data: user_educationCreateManyUserInput | user_educationCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type skillsCreateWithoutUserInput = {
-    sid?: number
-    frontend?: skillsCreatefrontendInput | string[]
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
-  }
-
-  export type skillsUncheckedCreateWithoutUserInput = {
-    sid?: number
-    frontend?: skillsCreatefrontendInput | string[]
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
-  }
-
-  export type skillsCreateOrConnectWithoutUserInput = {
-    where: skillsWhereUniqueInput
-    create: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
-  }
-
-  export type skillsCreateManyUserInputEnvelope = {
-    data: skillsCreateManyUserInput | skillsCreateManyUserInput[]
+  export type user_projectCreateManyUserInputEnvelope = {
+    data: user_projectCreateManyUserInput | user_projectCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
   export type contactCreateWithoutUserInput = {
-    cid?: number
     email: string
-    phone: number
+    phone: string
     location: string
     linkedin: string
   }
 
   export type contactUncheckedCreateWithoutUserInput = {
-    cid?: number
     email: string
-    phone: number
+    phone: string
     location: string
     linkedin: string
   }
@@ -14150,52 +15602,57 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type user_projectUpsertWithWhereUniqueWithoutUserInput = {
-    where: user_projectWhereUniqueInput
-    update: XOR<user_projectUpdateWithoutUserInput, user_projectUncheckedUpdateWithoutUserInput>
-    create: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput>
+  export type AboutCreateWithoutUserInput = {
+    image: string
+    about: string
+    style: string
   }
 
-  export type user_projectUpdateWithWhereUniqueWithoutUserInput = {
-    where: user_projectWhereUniqueInput
-    data: XOR<user_projectUpdateWithoutUserInput, user_projectUncheckedUpdateWithoutUserInput>
+  export type AboutUncheckedCreateWithoutUserInput = {
+    image: string
+    about: string
+    style: string
   }
 
-  export type user_projectUpdateManyWithWhereWithoutUserInput = {
-    where: user_projectScalarWhereInput
-    data: XOR<user_projectUpdateManyMutationInput, user_projectUncheckedUpdateManyWithoutUserInput>
+  export type AboutCreateOrConnectWithoutUserInput = {
+    where: AboutWhereUniqueInput
+    create: XOR<AboutCreateWithoutUserInput, AboutUncheckedCreateWithoutUserInput>
   }
 
-  export type user_projectScalarWhereInput = {
-    AND?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-    OR?: user_projectScalarWhereInput[]
-    NOT?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
-    pid?: IntFilter<"user_project"> | number
-    uid?: IntFilter<"user_project"> | number
+  export type AboutCreateManyUserInputEnvelope = {
+    data: AboutCreateManyUserInput | AboutCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
-  export type user_experienceUpsertWithWhereUniqueWithoutUserInput = {
-    where: user_experienceWhereUniqueInput
-    update: XOR<user_experienceUpdateWithoutUserInput, user_experienceUncheckedUpdateWithoutUserInput>
-    create: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput>
+  export type skillsUpsertWithoutUserInput = {
+    update: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
+    create: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
+    where?: skillsWhereInput
   }
 
-  export type user_experienceUpdateWithWhereUniqueWithoutUserInput = {
-    where: user_experienceWhereUniqueInput
-    data: XOR<user_experienceUpdateWithoutUserInput, user_experienceUncheckedUpdateWithoutUserInput>
+  export type skillsUpdateToOneWithWhereWithoutUserInput = {
+    where?: skillsWhereInput
+    data: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
   }
 
-  export type user_experienceUpdateManyWithWhereWithoutUserInput = {
-    where: user_experienceScalarWhereInput
-    data: XOR<user_experienceUpdateManyMutationInput, user_experienceUncheckedUpdateManyWithoutUserInput>
+  export type skillsUpdateWithoutUserInput = {
+    frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
+    backend?: skillsUpdatebackendInput | string[]
+    database?: skillsUpdatedatabaseInput | string[]
+    mobile?: skillsUpdatemobileInput | string[]
+    other?: skillsUpdateotherInput | string[]
+    languages?: skillsUpdatelanguagesInput | string[]
   }
 
-  export type user_experienceScalarWhereInput = {
-    AND?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
-    OR?: user_experienceScalarWhereInput[]
-    NOT?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
-    eid?: IntFilter<"user_experience"> | number
-    uid?: IntFilter<"user_experience"> | number
+  export type skillsUncheckedUpdateWithoutUserInput = {
+    frontend?: skillsUpdatefrontendInput | string[]
+    style?: StringFieldUpdateOperationsInput | string
+    backend?: skillsUpdatebackendInput | string[]
+    database?: skillsUpdatedatabaseInput | string[]
+    mobile?: skillsUpdatemobileInput | string[]
+    other?: skillsUpdateotherInput | string[]
+    languages?: skillsUpdatelanguagesInput | string[]
   }
 
   export type user_educationUpsertWithWhereUniqueWithoutUserInput = {
@@ -14222,34 +15679,52 @@ export namespace Prisma {
     uid?: IntFilter<"user_education"> | number
   }
 
-  export type skillsUpsertWithWhereUniqueWithoutUserInput = {
-    where: skillsWhereUniqueInput
-    update: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
-    create: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput>
+  export type user_experienceUpsertWithWhereUniqueWithoutUserInput = {
+    where: user_experienceWhereUniqueInput
+    update: XOR<user_experienceUpdateWithoutUserInput, user_experienceUncheckedUpdateWithoutUserInput>
+    create: XOR<user_experienceCreateWithoutUserInput, user_experienceUncheckedCreateWithoutUserInput>
   }
 
-  export type skillsUpdateWithWhereUniqueWithoutUserInput = {
-    where: skillsWhereUniqueInput
-    data: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
+  export type user_experienceUpdateWithWhereUniqueWithoutUserInput = {
+    where: user_experienceWhereUniqueInput
+    data: XOR<user_experienceUpdateWithoutUserInput, user_experienceUncheckedUpdateWithoutUserInput>
   }
 
-  export type skillsUpdateManyWithWhereWithoutUserInput = {
-    where: skillsScalarWhereInput
-    data: XOR<skillsUpdateManyMutationInput, skillsUncheckedUpdateManyWithoutUserInput>
+  export type user_experienceUpdateManyWithWhereWithoutUserInput = {
+    where: user_experienceScalarWhereInput
+    data: XOR<user_experienceUpdateManyMutationInput, user_experienceUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type skillsScalarWhereInput = {
-    AND?: skillsScalarWhereInput | skillsScalarWhereInput[]
-    OR?: skillsScalarWhereInput[]
-    NOT?: skillsScalarWhereInput | skillsScalarWhereInput[]
-    sid?: IntFilter<"skills"> | number
-    uid?: IntFilter<"skills"> | number
-    frontend?: StringNullableListFilter<"skills">
-    backend?: StringNullableListFilter<"skills">
-    database?: StringNullableListFilter<"skills">
-    mobile?: StringNullableListFilter<"skills">
-    other?: StringNullableListFilter<"skills">
-    languages?: StringNullableListFilter<"skills">
+  export type user_experienceScalarWhereInput = {
+    AND?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
+    OR?: user_experienceScalarWhereInput[]
+    NOT?: user_experienceScalarWhereInput | user_experienceScalarWhereInput[]
+    eid?: IntFilter<"user_experience"> | number
+    uid?: IntFilter<"user_experience"> | number
+  }
+
+  export type user_projectUpsertWithWhereUniqueWithoutUserInput = {
+    where: user_projectWhereUniqueInput
+    update: XOR<user_projectUpdateWithoutUserInput, user_projectUncheckedUpdateWithoutUserInput>
+    create: XOR<user_projectCreateWithoutUserInput, user_projectUncheckedCreateWithoutUserInput>
+  }
+
+  export type user_projectUpdateWithWhereUniqueWithoutUserInput = {
+    where: user_projectWhereUniqueInput
+    data: XOR<user_projectUpdateWithoutUserInput, user_projectUncheckedUpdateWithoutUserInput>
+  }
+
+  export type user_projectUpdateManyWithWhereWithoutUserInput = {
+    where: user_projectScalarWhereInput
+    data: XOR<user_projectUpdateManyMutationInput, user_projectUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type user_projectScalarWhereInput = {
+    AND?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
+    OR?: user_projectScalarWhereInput[]
+    NOT?: user_projectScalarWhereInput | user_projectScalarWhereInput[]
+    pid?: IntFilter<"user_project"> | number
+    uid?: IntFilter<"user_project"> | number
   }
 
   export type contactUpsertWithWhereUniqueWithoutUserInput = {
@@ -14272,12 +15747,37 @@ export namespace Prisma {
     AND?: contactScalarWhereInput | contactScalarWhereInput[]
     OR?: contactScalarWhereInput[]
     NOT?: contactScalarWhereInput | contactScalarWhereInput[]
-    cid?: IntFilter<"contact"> | number
     uid?: IntFilter<"contact"> | number
     email?: StringFilter<"contact"> | string
-    phone?: IntFilter<"contact"> | number
+    phone?: StringFilter<"contact"> | string
     location?: StringFilter<"contact"> | string
     linkedin?: StringFilter<"contact"> | string
+  }
+
+  export type AboutUpsertWithWhereUniqueWithoutUserInput = {
+    where: AboutWhereUniqueInput
+    update: XOR<AboutUpdateWithoutUserInput, AboutUncheckedUpdateWithoutUserInput>
+    create: XOR<AboutCreateWithoutUserInput, AboutUncheckedCreateWithoutUserInput>
+  }
+
+  export type AboutUpdateWithWhereUniqueWithoutUserInput = {
+    where: AboutWhereUniqueInput
+    data: XOR<AboutUpdateWithoutUserInput, AboutUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AboutUpdateManyWithWhereWithoutUserInput = {
+    where: AboutScalarWhereInput
+    data: XOR<AboutUpdateManyMutationInput, AboutUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AboutScalarWhereInput = {
+    AND?: AboutScalarWhereInput | AboutScalarWhereInput[]
+    OR?: AboutScalarWhereInput[]
+    NOT?: AboutScalarWhereInput | AboutScalarWhereInput[]
+    uid?: IntFilter<"About"> | number
+    image?: StringFilter<"About"> | string
+    about?: StringFilter<"About"> | string
+    style?: StringFilter<"About"> | string
   }
 
   export type user_projectCreateWithoutProjectInput = {
@@ -14321,6 +15821,7 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
+    style: string
   }
 
   export type projectUncheckedCreateWithoutUser_projectInput = {
@@ -14331,6 +15832,7 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
+    style: string
   }
 
   export type projectCreateOrConnectWithoutUser_projectInput = {
@@ -14341,22 +15843,28 @@ export namespace Prisma {
   export type userCreateWithoutUser_projectInput = {
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsCreateNestedOneWithoutUserInput
     user_education?: user_educationCreateNestedManyWithoutUserInput
-    skills?: skillsCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutUser_projectInput = {
     uid?: number
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
     user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutUser_projectInput = {
@@ -14382,6 +15890,7 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type projectUncheckedUpdateWithoutUser_projectInput = {
@@ -14392,6 +15901,7 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type userUpsertWithoutUser_projectInput = {
@@ -14408,22 +15918,28 @@ export namespace Prisma {
   export type userUpdateWithoutUser_projectInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateOneWithoutUserNestedInput
     user_education?: user_educationUpdateManyWithoutUserNestedInput
-    skills?: skillsUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutUser_projectInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
     user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type user_experienceCreateWithoutExperienceInput = {
@@ -14463,6 +15979,7 @@ export namespace Prisma {
   export type experienceCreateWithoutUser_experienceInput = {
     title: string
     corp: string
+    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -14472,6 +15989,7 @@ export namespace Prisma {
     eid?: number
     title: string
     corp: string
+    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -14485,22 +16003,28 @@ export namespace Prisma {
   export type userCreateWithoutUser_experienceInput = {
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsCreateNestedOneWithoutUserInput
     user_education?: user_educationCreateNestedManyWithoutUserInput
-    skills?: skillsCreateNestedManyWithoutUserInput
+    user_project?: user_projectCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutUser_experienceInput = {
     uid?: number
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
     user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutUser_experienceInput = {
@@ -14522,6 +16046,7 @@ export namespace Prisma {
   export type experienceUpdateWithoutUser_experienceInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -14531,6 +16056,7 @@ export namespace Prisma {
     eid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -14550,22 +16076,28 @@ export namespace Prisma {
   export type userUpdateWithoutUser_experienceInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateOneWithoutUserNestedInput
     user_education?: user_educationUpdateManyWithoutUserNestedInput
-    skills?: skillsUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutUser_experienceInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
     user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type user_educationCreateWithoutEducationInput = {
@@ -14606,7 +16138,8 @@ export namespace Prisma {
     inst: string
     degree: string
     startdate: Date | string
-    endDate: Date | string
+    enddate: Date | string
+    style: string
   }
 
   export type educationUncheckedCreateWithoutUser_educationInput = {
@@ -14614,7 +16147,8 @@ export namespace Prisma {
     inst: string
     degree: string
     startdate: Date | string
-    endDate: Date | string
+    enddate: Date | string
+    style: string
   }
 
   export type educationCreateOrConnectWithoutUser_educationInput = {
@@ -14625,22 +16159,28 @@ export namespace Prisma {
   export type userCreateWithoutUser_educationInput = {
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsCreateNestedOneWithoutUserInput
     user_experience?: user_experienceCreateNestedManyWithoutUserInput
-    skills?: skillsCreateNestedManyWithoutUserInput
+    user_project?: user_projectCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutUser_educationInput = {
     uid?: number
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
     user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
-    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutUser_educationInput = {
@@ -14663,7 +16203,8 @@ export namespace Prisma {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type educationUncheckedUpdateWithoutUser_educationInput = {
@@ -14671,7 +16212,8 @@ export namespace Prisma {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type userUpsertWithoutUser_educationInput = {
@@ -14688,43 +16230,55 @@ export namespace Prisma {
   export type userUpdateWithoutUser_educationInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateOneWithoutUserNestedInput
     user_experience?: user_experienceUpdateManyWithoutUserNestedInput
-    skills?: skillsUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutUser_educationInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
     user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
-    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutSkillsInput = {
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
     user_education?: user_educationCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    user_project?: user_projectCreateNestedManyWithoutUserInput
     contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutSkillsInput = {
     uid?: number
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
     user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
     contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutSkillsInput = {
@@ -14746,43 +16300,55 @@ export namespace Prisma {
   export type userUpdateWithoutSkillsInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
     user_education?: user_educationUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUpdateManyWithoutUserNestedInput
     contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutSkillsInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
     user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
     contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutContactInput = {
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsCreateNestedOneWithoutUserInput
     user_education?: user_educationCreateNestedManyWithoutUserInput
-    skills?: skillsCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    user_project?: user_projectCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutContactInput = {
     uid?: number
     username: string
     password: string
-    styles?: userCreatestylesInput | number[]
-    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
-    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
     user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
-    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutContactInput = {
@@ -14804,76 +16370,123 @@ export namespace Prisma {
   export type userUpdateWithoutContactInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateOneWithoutUserNestedInput
     user_education?: user_educationUpdateManyWithoutUserNestedInput
-    skills?: skillsUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutContactInput = {
     uid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    styles?: userUpdatestylesInput | number[]
-    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
-    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
     user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
-    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type user_projectCreateManyUserInput = {
-    pid: number
+  export type userCreateWithoutAboutInput = {
+    username: string
+    password: string
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsCreateNestedOneWithoutUserInput
+    user_education?: user_educationCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceCreateNestedManyWithoutUserInput
+    user_project?: user_projectCreateNestedManyWithoutUserInput
+    contact?: contactCreateNestedManyWithoutUserInput
   }
 
-  export type user_experienceCreateManyUserInput = {
-    eid: number
+  export type userUncheckedCreateWithoutAboutInput = {
+    uid?: number
+    username: string
+    password: string
+    style: string
+    hero: string
+    subhero: string
+    skills?: skillsUncheckedCreateNestedOneWithoutUserInput
+    user_education?: user_educationUncheckedCreateNestedManyWithoutUserInput
+    user_experience?: user_experienceUncheckedCreateNestedManyWithoutUserInput
+    user_project?: user_projectUncheckedCreateNestedManyWithoutUserInput
+    contact?: contactUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutAboutInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutAboutInput, userUncheckedCreateWithoutAboutInput>
+  }
+
+  export type userUpsertWithoutAboutInput = {
+    update: XOR<userUpdateWithoutAboutInput, userUncheckedUpdateWithoutAboutInput>
+    create: XOR<userCreateWithoutAboutInput, userUncheckedCreateWithoutAboutInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutAboutInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutAboutInput, userUncheckedUpdateWithoutAboutInput>
+  }
+
+  export type userUpdateWithoutAboutInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateOneWithoutUserNestedInput
+    user_education?: user_educationUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUpdateManyWithoutUserNestedInput
+    contact?: contactUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutAboutInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+    hero?: StringFieldUpdateOperationsInput | string
+    subhero?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateOneWithoutUserNestedInput
+    user_education?: user_educationUncheckedUpdateManyWithoutUserNestedInput
+    user_experience?: user_experienceUncheckedUpdateManyWithoutUserNestedInput
+    user_project?: user_projectUncheckedUpdateManyWithoutUserNestedInput
+    contact?: contactUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type user_educationCreateManyUserInput = {
     edid: number
   }
 
-  export type skillsCreateManyUserInput = {
-    sid?: number
-    frontend?: skillsCreatefrontendInput | string[]
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
+  export type user_experienceCreateManyUserInput = {
+    eid: number
+  }
+
+  export type user_projectCreateManyUserInput = {
+    pid: number
   }
 
   export type contactCreateManyUserInput = {
-    cid?: number
     email: string
-    phone: number
+    phone: string
     location: string
     linkedin: string
   }
 
-  export type user_projectUpdateWithoutUserInput = {
-    project?: projectUpdateOneRequiredWithoutUser_projectNestedInput
-  }
-
-  export type user_projectUncheckedUpdateWithoutUserInput = {
-    pid?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type user_projectUncheckedUpdateManyWithoutUserInput = {
-    pid?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type user_experienceUpdateWithoutUserInput = {
-    experience?: experienceUpdateOneRequiredWithoutUser_experienceNestedInput
-  }
-
-  export type user_experienceUncheckedUpdateWithoutUserInput = {
-    eid?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type user_experienceUncheckedUpdateManyWithoutUserInput = {
-    eid?: IntFieldUpdateOperationsInput | number
+  export type AboutCreateManyUserInput = {
+    image: string
+    about: string
+    style: string
   }
 
   export type user_educationUpdateWithoutUserInput = {
@@ -14888,58 +16501,67 @@ export namespace Prisma {
     edid?: IntFieldUpdateOperationsInput | number
   }
 
-  export type skillsUpdateWithoutUserInput = {
-    sid?: IntFieldUpdateOperationsInput | number
-    frontend?: skillsUpdatefrontendInput | string[]
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+  export type user_experienceUpdateWithoutUserInput = {
+    experience?: experienceUpdateOneRequiredWithoutUser_experienceNestedInput
   }
 
-  export type skillsUncheckedUpdateWithoutUserInput = {
-    sid?: IntFieldUpdateOperationsInput | number
-    frontend?: skillsUpdatefrontendInput | string[]
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+  export type user_experienceUncheckedUpdateWithoutUserInput = {
+    eid?: IntFieldUpdateOperationsInput | number
   }
 
-  export type skillsUncheckedUpdateManyWithoutUserInput = {
-    sid?: IntFieldUpdateOperationsInput | number
-    frontend?: skillsUpdatefrontendInput | string[]
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+  export type user_experienceUncheckedUpdateManyWithoutUserInput = {
+    eid?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type user_projectUpdateWithoutUserInput = {
+    project?: projectUpdateOneRequiredWithoutUser_projectNestedInput
+  }
+
+  export type user_projectUncheckedUpdateWithoutUserInput = {
+    pid?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type user_projectUncheckedUpdateManyWithoutUserInput = {
+    pid?: IntFieldUpdateOperationsInput | number
   }
 
   export type contactUpdateWithoutUserInput = {
-    cid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    phone?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactUncheckedUpdateWithoutUserInput = {
-    cid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    phone?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactUncheckedUpdateManyWithoutUserInput = {
-    cid?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    phone?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AboutUpdateWithoutUserInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AboutUncheckedUpdateWithoutUserInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AboutUncheckedUpdateManyWithoutUserInput = {
+    image?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type user_projectCreateManyProjectInput = {

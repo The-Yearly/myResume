@@ -1,26 +1,49 @@
 "use client"
-
+import axios from "axios"
+import { hero } from "@/utils/types"
 import type React from "react"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { Theme } from "../../themes/styles"
+import { toast } from "react-toastify"
 export default function HeroEditor() {
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
-  const [heroData, setHeroData] = useState({
-    title:"Hello, I'm ...",
-    subtitle:"A passionate .......",
+  const [data,setData]=useState<hero|null>(null)
+  const [heroData, setHeroData] = useState<hero>({
+    uid:1,
+    hero:"Hello, I'm ...",
+    subhero:"A passionate .......",
+    style:"1"
   })
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+
+  useEffect(()=>{const fetchHero=async()=>{
+    const res=await axios.get("http://localhost:3001/api/v1/getHero/1")
+    const data=res.data.hero
+    setHeroData({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
+  }
+  fetchHero()},[])
+  
+  useEffect(()=>{const setData=async()=>{
+    if(data!=null){
+      const res=await axios.post("http://localhost:3001/api/v1/setHero",data)
+      toast(res.data.message)
+    }
+    }
+  setData()},[data])
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
     const { name, value }=e.target
-    setHeroData((prev)=>({ ...prev, [name]: value }))
+    console.log(typeof name)
+    if(name!="style"){
+      setHeroData((prev)=>({ ...prev, [name]: value }))
+    }else{
+      console.log("sss")
+      setHeroData((prev)=>({...prev,[name]:value  as keyof typeof Theme}))
+      console.log(heroData)
+    }
   }
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert("Hero section updated successfully!")
+    setData(heroData)
   }
-  const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedStyle(e.target.value as keyof typeof Theme)
-  }
-  const SelectedHero = Theme[selectedStyle]?.hero;
+  const SelectedHero = Theme[heroData.style as keyof typeof Theme]?.hero;
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -29,8 +52,9 @@ export default function HeroEditor() {
       <div>
               <label className="block text-sm font-medium text-gray-700">Select Style</label>
               <select
-                value={selectedStyle}
-                onChange={handleStyleChange}
+              name="style"
+                value={heroData.style}
+                onChange={handleChange}
                 className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
                 <option value="1">Style 1</option>
@@ -47,15 +71,15 @@ export default function HeroEditor() {
           </div>
           <div className="grid space-y-4">
             <input
-              name="title"
-              value={heroData.title}
+              name="hero"
+              value={heroData.hero}
               onChange={handleChange}
               className="rounded-md border border-gray-300 px-3 mx-5 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="Enter your hero title"
             />
             <textarea
-              name="subtitle"
-              value={heroData.subtitle}
+              name="subhero"
+              value={heroData.subhero}
               onChange={handleChange}
               className="rounded-md border mx-5 border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="Enter your hero subtitle"

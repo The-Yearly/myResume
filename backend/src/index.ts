@@ -1,5 +1,5 @@
 import express from "express"
-import { router } from "./router/v1/index";
+import { router } from "./api/v1/router/index";
 var cors = require('cors')
 const port  = 3001 
 

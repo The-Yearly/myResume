@@ -3,6 +3,7 @@ CREATE TABLE "User" (
     "uid" SERIAL NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "styles" TEXT[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("uid")
 );
@@ -54,7 +55,7 @@ CREATE TABLE "education" (
     "inst" TEXT NOT NULL,
     "degree" TEXT NOT NULL,
     "startdate" TIMESTAMP(3) NOT NULL,
-    "endDate" TIMESTAMP(3) NOT NULL,
+    "enddate" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "education_pkey" PRIMARY KEY ("edid")
 );
@@ -82,15 +83,18 @@ CREATE TABLE "skills" (
 );
 
 -- CreateTable
-CREATE TABLE "contact" (
+CREATE TABLE "bioandcontact" (
     "cid" SERIAL NOT NULL,
     "uid" INTEGER NOT NULL,
     "email" TEXT NOT NULL,
     "phone" INTEGER NOT NULL,
     "location" TEXT NOT NULL,
     "linkedin" TEXT NOT NULL,
+    "hero" TEXT NOT NULL,
+    "subhero" TEXT NOT NULL,
+    "about" TEXT NOT NULL,
 
-    CONSTRAINT "contact_pkey" PRIMARY KEY ("cid","uid")
+    CONSTRAINT "bioandcontact_pkey" PRIMARY KEY ("cid","uid")
 );
 
 -- CreateIndex
@@ -121,4 +125,4 @@ ALTER TABLE "user_education" ADD CONSTRAINT "user_education_uid_fkey" FOREIGN KE
 ALTER TABLE "skills" ADD CONSTRAINT "skills_uid_fkey" FOREIGN KEY ("uid") REFERENCES "User"("uid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "contact" ADD CONSTRAINT "contact_uid_fkey" FOREIGN KEY ("uid") REFERENCES "User"("uid") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "bioandcontact" ADD CONSTRAINT "bioandcontact_uid_fkey" FOREIGN KEY ("uid") REFERENCES "User"("uid") ON DELETE RESTRICT ON UPDATE CASCADE;

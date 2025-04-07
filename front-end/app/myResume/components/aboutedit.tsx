@@ -1,24 +1,52 @@
 "use client"
+import { about } from "@/utils/types"
 import type React from "react"
 import Image from "next/image"
 import { Theme } from "../../themes/styles"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import pfp from "@/myPhoto.jpeg"
+import axios from "axios"
+import { a } from "framer-motion/client"
+import { toast } from "react-toastify"
 export default function AboutEditor() {
-  const [about, setAbout] = useState("I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding, you can find me [your hobbies/interests].",)
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
-  const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setSelectedStyle(e.target.value as keyof typeof Theme)
+  const [about, setAbout] = useState<about>(
+    {
+      uid:1,
+      about:"I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding, you can find me [your hobbies/interests].",
+      image:"s",
+      style:"1"
+    })
+  const [data,setData]=useState<about|null>(null)
+  
+  useEffect(()=>{const fetchData=async()=>{
+    const res=await axios.get("http://localhost:3001/api/v1/getAbout/1")
+    const data=res.data.about
+    setAbout({about:data.about,image:data.image,style:data.style,uid:1})
   }
-  function handleChange(e:React.ChangeEvent<HTMLTextAreaElement>){
-    setAbout(e.target.value)
+  fetchData()},[])
+
+  useEffect(()=>{const sendData=async()=>{
+    if(data!=null){
+      const res=await axios.post("http://localhost:3001/api/v1/setAbout",data)
+      toast(res.data.message)
+    }
+  }
+  sendData()},[data])  
+  function handleChange(e:React.ChangeEvent<HTMLTextAreaElement|HTMLSelectElement>){
+    const {name,value}=e.target
+    if(name!="style"){
+      setAbout((prev)=>({...prev,[name]:value}))
+    }else{
+      setAbout((prev)=>({...prev,[name]:value as keyof typeof Theme}))
+    }
     console.log("Changing")
   }
+
   function handleSubmit(e:React.FormEvent){
     e.preventDefault()
-    alert("About section updated successfully!")
+    setData(about)
   }
-  const SelectedAbout = Theme[selectedStyle]?.about;
+  const SelectedAbout = Theme[about.style as keyof typeof Theme]?.about;
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -27,8 +55,9 @@ export default function AboutEditor() {
       <div>
               <label className="block text-sm font-medium text-gray-700">Select Style</label>
               <select
-                value={selectedStyle}
-                onChange={handleStyleChange}
+                value={about.style}
+                name="style"
+                onChange={handleChange}
                 className="mt-1 block w-full max-w-xs rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
                 <option value="1">Style 1</option>
@@ -47,8 +76,8 @@ export default function AboutEditor() {
             </div>
             <textarea
                 className= "rounded-md col-span-2 border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                name="bio"
-                value={about}
+                name="about"
+                value={about.about}
                 onChange={handleChange}
                 placeholder="Enter your bio"
                 rows={4}
@@ -66,7 +95,7 @@ export default function AboutEditor() {
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg font-medium">Preview</h2>
         </div>
-        {SelectedAbout ? <SelectedAbout content={{bio:about,image:"ss"}} />:<p>Style not found.</p>}
+        {SelectedAbout ? <SelectedAbout content={{bio:about.about,image:"ss"}} />:<p>Style not found.</p>}
       </div>
     </div>
   )
