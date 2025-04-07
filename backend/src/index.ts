@@ -6,10 +6,7 @@ const port  = 3001
 const app = express();
 
 app.use(express.json())
-app.use(cors({
-    origin: ['http://localhost:3000', 'https://myportfolio-livid-sigma.vercel.app'],
-    credentials: true
-}));
+app.use(cors());
 
 app.use('/api/v1', router)
 
