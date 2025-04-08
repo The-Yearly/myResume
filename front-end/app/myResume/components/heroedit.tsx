@@ -1,13 +1,13 @@
 "use client"
 import axios from "axios"
-import { hero } from "@/utils/types"
+import { Hero } from "@/utils/types"
 import type React from "react"
 import { useState,useEffect } from "react"
 import { Theme } from "../../themes/styles"
 import { toast } from "react-toastify"
 export default function HeroEditor() {
-  const [data,setData]=useState<hero|null>(null)
-  const [heroData, setHeroData] = useState<hero>({
+  const [data,setData]=useState<Hero|null>(null)
+  const [heroData, setHeroData] = useState<Hero>({
     uid:1,
     hero:"Hello, I'm ...",
     subhero:"A passionate .......",

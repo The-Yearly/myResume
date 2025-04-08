@@ -1,5 +1,6 @@
-import { SkillI } from "@/app/themes/style1/components/skills"
-export function Skills2(props:{skills:SkillI[]}) {
+import { Skill } from "@/utils/types"
+import { renderIcon } from "@/app/myResume/components/skillsedit"
+export function Skills2(props:{skills:Skill[]}) {
   return (
     <section id="skills" className="py-24 md:py-32 bg-slate-50 w-full">
       <div className="container px-6 mx-auto">
@@ -9,17 +10,17 @@ export function Skills2(props:{skills:SkillI[]}) {
           <p className="text-slate-600">Here are some of the technologies and tools I work with</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${props.skills.length === 1? "lg:grid-cols-1": props.skills.length===2?"lg:grid-cols-2":"lg:grid-cols-3"} gap-8`}>
           {props.skills.map((skill, index) => (
             <div
               key={index}
               className="bg-white rounded-xl shadow-sm p-8 hover:shadow-md transition-shadow border border-slate-100"
             >
               <div className="flex flex-col items-center text-center">
-                <div className="px-3 py-2 flex justify-center items-center bg-indigo-50 rounded-full mb-2">{skill.icon}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">{skill.category}</h3>
+                <div className="px-3 py-2 flex justify-center items-center bg-indigo-50 rounded-full mb-2">{renderIcon(skill.icon as string)}</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">{skill.skillname}</h3>
                 <div className="flex flex-wrap justify-center gap-2">
-                  {skill.items.map((item, itemIndex) => (
+                  {skill.skills.map((item, itemIndex) => (
                     <span key={itemIndex} className="px-3 py-1 bg-slate-100 rounded-full text-sm text-slate-700">
                       {item}
                     </span>

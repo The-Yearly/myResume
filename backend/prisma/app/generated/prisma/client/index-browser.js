@@ -139,15 +139,13 @@ exports.Prisma.ProjectScalarFieldEnum = {
   desc: 'desc',
   tags: 'tags',
   github: 'github',
-  Link: 'Link',
-  style: 'style'
+  Link: 'Link'
 };
 
 exports.Prisma.ExperienceScalarFieldEnum = {
   exid: 'exid',
   title: 'title',
   corp: 'corp',
-  style: 'style',
   startdate: 'startdate',
   enddate: 'enddate',
   desc: 'desc',
@@ -160,20 +158,15 @@ exports.Prisma.EducationScalarFieldEnum = {
   degree: 'degree',
   startdate: 'startdate',
   enddate: 'enddate',
-  style: 'style',
   uid: 'uid'
 };
 
 exports.Prisma.SkillsScalarFieldEnum = {
   sid: 'sid',
   uid: 'uid',
-  frontend: 'frontend',
-  style: 'style',
-  backend: 'backend',
-  database: 'database',
-  mobile: 'mobile',
-  other: 'other',
-  languages: 'languages'
+  skillname: 'skillname',
+  skills: 'skills',
+  icon: 'icon'
 };
 
 exports.Prisma.ContactScalarFieldEnum = {
@@ -191,6 +184,14 @@ exports.Prisma.AboutScalarFieldEnum = {
   image: 'image',
   about: 'about',
   style: 'style'
+};
+
+exports.Prisma.UserstyleScalarFieldEnum = {
+  uid: 'uid',
+  sstyle: 'sstyle',
+  pstyle: 'pstyle',
+  estyle: 'estyle',
+  exstyle: 'exstyle'
 };
 
 exports.Prisma.SortOrder = {
@@ -212,7 +213,8 @@ exports.Prisma.ModelName = {
   education: 'education',
   skills: 'skills',
   contact: 'contact',
-  About: 'About'
+  About: 'About',
+  userstyle: 'userstyle'
 };
 
 /**

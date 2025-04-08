@@ -2,15 +2,8 @@ import Image from "next/image"
 import pfp from "@/myPhoto.jpeg"
 import Link from "next/link"
 import { ExternalLink, Github } from "lucide-react"
-export interface ProjectsI{
-  title: string
-  description:string,
-  image:string
-  tags: string[]
-  github: string,
-  link:string,
-}
-export function Projects(props:{content:ProjectsI[]}) {
+import { Project } from "@/utils/types"
+export function Projects(props:{content:Project[]}) {
   return (
     <section id="projects" className="relative w-full py-16 md:py-24">
       <div className=" px-4 md:px-6">
@@ -36,13 +29,13 @@ export function Projects(props:{content:ProjectsI[]}) {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-500 mb-4">{project.description}</p>
+                <p className="text-gray-500 mb-4">{project.desc}</p>
                 <div className="flex items-center">
                 {project.tags.map((tag,index)=><div key={index} className="bg-gray-100 px-3 mr-3 rounded-md">{tag}</div>)}
                 </div>
                 <div className="flex gap-4 mt-3">
                   <button>
-                    <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                    <Link href={project.Link} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Live Demo
                     </Link>

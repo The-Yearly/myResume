@@ -53,6 +53,11 @@ export type contact = $Result.DefaultSelection<Prisma.$contactPayload>
  * 
  */
 export type About = $Result.DefaultSelection<Prisma.$AboutPayload>
+/**
+ * Model userstyle
+ * 
+ */
+export type userstyle = $Result.DefaultSelection<Prisma.$userstylePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -258,6 +263,16 @@ export class PrismaClient<
     * ```
     */
   get about(): Prisma.AboutDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userstyle`: Exposes CRUD operations for the **userstyle** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Userstyles
+    * const userstyles = await prisma.userstyle.findMany()
+    * ```
+    */
+  get userstyle(): Prisma.userstyleDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -705,7 +720,8 @@ export namespace Prisma {
     education: 'education',
     skills: 'skills',
     contact: 'contact',
-    About: 'About'
+    About: 'About',
+    userstyle: 'userstyle'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -724,7 +740,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "hero" | "project" | "experience" | "education" | "skills" | "contact" | "about"
+      modelProps: "user" | "hero" | "project" | "experience" | "education" | "skills" | "contact" | "about" | "userstyle"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1320,6 +1336,80 @@ export namespace Prisma {
           }
         }
       }
+      userstyle: {
+        payload: Prisma.$userstylePayload<ExtArgs>
+        fields: Prisma.userstyleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.userstyleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.userstyleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>
+          }
+          findFirst: {
+            args: Prisma.userstyleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.userstyleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>
+          }
+          findMany: {
+            args: Prisma.userstyleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>[]
+          }
+          create: {
+            args: Prisma.userstyleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>
+          }
+          createMany: {
+            args: Prisma.userstyleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.userstyleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>[]
+          }
+          delete: {
+            args: Prisma.userstyleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>
+          }
+          update: {
+            args: Prisma.userstyleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>
+          }
+          deleteMany: {
+            args: Prisma.userstyleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.userstyleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.userstyleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>[]
+          }
+          upsert: {
+            args: Prisma.userstyleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userstylePayload>
+          }
+          aggregate: {
+            args: Prisma.UserstyleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserstyle>
+          }
+          groupBy: {
+            args: Prisma.userstyleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserstyleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.userstyleCountArgs<ExtArgs>
+            result: $Utils.Optional<UserstyleCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1412,6 +1502,7 @@ export namespace Prisma {
     skills?: skillsOmit
     contact?: contactOmit
     about?: AboutOmit
+    userstyle?: userstyleOmit
   }
 
   /* Types for Logging */
@@ -1513,6 +1604,7 @@ export namespace Prisma {
     experience: number
     education: number
     hero: number
+    userstyle: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1523,6 +1615,7 @@ export namespace Prisma {
     experience?: boolean | UserCountOutputTypeCountExperienceArgs
     education?: boolean | UserCountOutputTypeCountEducationArgs
     hero?: boolean | UserCountOutputTypeCountHeroArgs
+    userstyle?: boolean | UserCountOutputTypeCountUserstyleArgs
   }
 
   // Custom InputTypes
@@ -1583,6 +1676,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountHeroArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: heroWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUserstyleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: userstyleWhereInput
   }
 
 
@@ -1779,6 +1879,7 @@ export namespace Prisma {
     experience?: boolean | user$experienceArgs<ExtArgs>
     education?: boolean | user$educationArgs<ExtArgs>
     hero?: boolean | user$heroArgs<ExtArgs>
+    userstyle?: boolean | user$userstyleArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1809,6 +1910,7 @@ export namespace Prisma {
     experience?: boolean | user$experienceArgs<ExtArgs>
     education?: boolean | user$educationArgs<ExtArgs>
     hero?: boolean | user$heroArgs<ExtArgs>
+    userstyle?: boolean | user$userstyleArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type userIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1824,6 +1926,7 @@ export namespace Prisma {
       experience: Prisma.$experiencePayload<ExtArgs>[]
       education: Prisma.$educationPayload<ExtArgs>[]
       hero: Prisma.$heroPayload<ExtArgs>[]
+      userstyle: Prisma.$userstylePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       uid: number
@@ -2230,6 +2333,7 @@ export namespace Prisma {
     experience<T extends user$experienceArgs<ExtArgs> = {}>(args?: Subset<T, user$experienceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$experiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     education<T extends user$educationArgs<ExtArgs> = {}>(args?: Subset<T, user$educationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$educationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     hero<T extends user$heroArgs<ExtArgs> = {}>(args?: Subset<T, user$heroArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$heroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userstyle<T extends user$userstyleArgs<ExtArgs> = {}>(args?: Subset<T, user$userstyleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2815,6 +2919,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: HeroScalarFieldEnum | HeroScalarFieldEnum[]
+  }
+
+  /**
+   * user.userstyle
+   */
+  export type user$userstyleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    where?: userstyleWhereInput
+    orderBy?: userstyleOrderByWithRelationInput | userstyleOrderByWithRelationInput[]
+    cursor?: userstyleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserstyleScalarFieldEnum | UserstyleScalarFieldEnum[]
   }
 
   /**
@@ -3962,7 +4090,6 @@ export namespace Prisma {
     desc: string | null
     github: string | null
     Link: string | null
-    style: string | null
   }
 
   export type ProjectMaxAggregateOutputType = {
@@ -3973,7 +4100,6 @@ export namespace Prisma {
     desc: string | null
     github: string | null
     Link: string | null
-    style: string | null
   }
 
   export type ProjectCountAggregateOutputType = {
@@ -3985,7 +4111,6 @@ export namespace Prisma {
     tags: number
     github: number
     Link: number
-    style: number
     _all: number
   }
 
@@ -4008,7 +4133,6 @@ export namespace Prisma {
     desc?: true
     github?: true
     Link?: true
-    style?: true
   }
 
   export type ProjectMaxAggregateInputType = {
@@ -4019,7 +4143,6 @@ export namespace Prisma {
     desc?: true
     github?: true
     Link?: true
-    style?: true
   }
 
   export type ProjectCountAggregateInputType = {
@@ -4031,7 +4154,6 @@ export namespace Prisma {
     tags?: true
     github?: true
     Link?: true
-    style?: true
     _all?: true
   }
 
@@ -4130,7 +4252,6 @@ export namespace Prisma {
     tags: string[]
     github: string
     Link: string
-    style: string
     _count: ProjectCountAggregateOutputType | null
     _avg: ProjectAvgAggregateOutputType | null
     _sum: ProjectSumAggregateOutputType | null
@@ -4161,7 +4282,6 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
-    style?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -4174,7 +4294,6 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
-    style?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -4187,7 +4306,6 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
-    style?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -4200,10 +4318,9 @@ export namespace Prisma {
     tags?: boolean
     github?: boolean
     Link?: boolean
-    style?: boolean
   }
 
-  export type projectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "uid" | "title" | "image" | "desc" | "tags" | "github" | "Link" | "style", ExtArgs["result"]["project"]>
+  export type projectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "uid" | "title" | "image" | "desc" | "tags" | "github" | "Link", ExtArgs["result"]["project"]>
   export type projectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -4228,7 +4345,6 @@ export namespace Prisma {
       tags: string[]
       github: string
       Link: string
-      style: string
     }, ExtArgs["result"]["project"]>
     composites: {}
   }
@@ -4661,7 +4777,6 @@ export namespace Prisma {
     readonly tags: FieldRef<"project", 'String[]'>
     readonly github: FieldRef<"project", 'String'>
     readonly Link: FieldRef<"project", 'String'>
-    readonly style: FieldRef<"project", 'String'>
   }
     
 
@@ -5102,7 +5217,6 @@ export namespace Prisma {
     exid: number | null
     title: string | null
     corp: string | null
-    style: string | null
     startdate: Date | null
     enddate: Date | null
     desc: string | null
@@ -5113,7 +5227,6 @@ export namespace Prisma {
     exid: number | null
     title: string | null
     corp: string | null
-    style: string | null
     startdate: Date | null
     enddate: Date | null
     desc: string | null
@@ -5124,7 +5237,6 @@ export namespace Prisma {
     exid: number
     title: number
     corp: number
-    style: number
     startdate: number
     enddate: number
     desc: number
@@ -5147,7 +5259,6 @@ export namespace Prisma {
     exid?: true
     title?: true
     corp?: true
-    style?: true
     startdate?: true
     enddate?: true
     desc?: true
@@ -5158,7 +5269,6 @@ export namespace Prisma {
     exid?: true
     title?: true
     corp?: true
-    style?: true
     startdate?: true
     enddate?: true
     desc?: true
@@ -5169,7 +5279,6 @@ export namespace Prisma {
     exid?: true
     title?: true
     corp?: true
-    style?: true
     startdate?: true
     enddate?: true
     desc?: true
@@ -5267,7 +5376,6 @@ export namespace Prisma {
     exid: number
     title: string
     corp: string
-    style: string
     startdate: Date
     enddate: Date
     desc: string
@@ -5297,7 +5405,6 @@ export namespace Prisma {
     exid?: boolean
     title?: boolean
     corp?: boolean
-    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
@@ -5309,7 +5416,6 @@ export namespace Prisma {
     exid?: boolean
     title?: boolean
     corp?: boolean
-    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
@@ -5321,7 +5427,6 @@ export namespace Prisma {
     exid?: boolean
     title?: boolean
     corp?: boolean
-    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
@@ -5333,14 +5438,13 @@ export namespace Prisma {
     exid?: boolean
     title?: boolean
     corp?: boolean
-    style?: boolean
     startdate?: boolean
     enddate?: boolean
     desc?: boolean
     uid?: boolean
   }
 
-  export type experienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"exid" | "title" | "corp" | "style" | "startdate" | "enddate" | "desc" | "uid", ExtArgs["result"]["experience"]>
+  export type experienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"exid" | "title" | "corp" | "startdate" | "enddate" | "desc" | "uid", ExtArgs["result"]["experience"]>
   export type experienceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -5360,7 +5464,6 @@ export namespace Prisma {
       exid: number
       title: string
       corp: string
-      style: string
       startdate: Date
       enddate: Date
       desc: string
@@ -5792,7 +5895,6 @@ export namespace Prisma {
     readonly exid: FieldRef<"experience", 'Int'>
     readonly title: FieldRef<"experience", 'String'>
     readonly corp: FieldRef<"experience", 'String'>
-    readonly style: FieldRef<"experience", 'String'>
     readonly startdate: FieldRef<"experience", 'DateTime'>
     readonly enddate: FieldRef<"experience", 'DateTime'>
     readonly desc: FieldRef<"experience", 'String'>
@@ -6239,7 +6341,6 @@ export namespace Prisma {
     degree: string | null
     startdate: Date | null
     enddate: Date | null
-    style: string | null
     uid: number | null
   }
 
@@ -6249,7 +6350,6 @@ export namespace Prisma {
     degree: string | null
     startdate: Date | null
     enddate: Date | null
-    style: string | null
     uid: number | null
   }
 
@@ -6259,7 +6359,6 @@ export namespace Prisma {
     degree: number
     startdate: number
     enddate: number
-    style: number
     uid: number
     _all: number
   }
@@ -6281,7 +6380,6 @@ export namespace Prisma {
     degree?: true
     startdate?: true
     enddate?: true
-    style?: true
     uid?: true
   }
 
@@ -6291,7 +6389,6 @@ export namespace Prisma {
     degree?: true
     startdate?: true
     enddate?: true
-    style?: true
     uid?: true
   }
 
@@ -6301,7 +6398,6 @@ export namespace Prisma {
     degree?: true
     startdate?: true
     enddate?: true
-    style?: true
     uid?: true
     _all?: true
   }
@@ -6398,7 +6494,6 @@ export namespace Prisma {
     degree: string
     startdate: Date
     enddate: Date
-    style: string
     uid: number
     _count: EducationCountAggregateOutputType | null
     _avg: EducationAvgAggregateOutputType | null
@@ -6427,7 +6522,6 @@ export namespace Prisma {
     degree?: boolean
     startdate?: boolean
     enddate?: boolean
-    style?: boolean
     uid?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
@@ -6438,7 +6532,6 @@ export namespace Prisma {
     degree?: boolean
     startdate?: boolean
     enddate?: boolean
-    style?: boolean
     uid?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
@@ -6449,7 +6542,6 @@ export namespace Prisma {
     degree?: boolean
     startdate?: boolean
     enddate?: boolean
-    style?: boolean
     uid?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
@@ -6460,11 +6552,10 @@ export namespace Prisma {
     degree?: boolean
     startdate?: boolean
     enddate?: boolean
-    style?: boolean
     uid?: boolean
   }
 
-  export type educationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"edid" | "inst" | "degree" | "startdate" | "enddate" | "style" | "uid", ExtArgs["result"]["education"]>
+  export type educationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"edid" | "inst" | "degree" | "startdate" | "enddate" | "uid", ExtArgs["result"]["education"]>
   export type educationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -6486,7 +6577,6 @@ export namespace Prisma {
       degree: string
       startdate: Date
       enddate: Date
-      style: string
       uid: number
     }, ExtArgs["result"]["education"]>
     composites: {}
@@ -6917,7 +7007,6 @@ export namespace Prisma {
     readonly degree: FieldRef<"education", 'String'>
     readonly startdate: FieldRef<"education", 'DateTime'>
     readonly enddate: FieldRef<"education", 'DateTime'>
-    readonly style: FieldRef<"education", 'String'>
     readonly uid: FieldRef<"education", 'Int'>
   }
     
@@ -7358,25 +7447,23 @@ export namespace Prisma {
   export type SkillsMinAggregateOutputType = {
     sid: number | null
     uid: number | null
-    style: string | null
+    skillname: string | null
+    icon: string | null
   }
 
   export type SkillsMaxAggregateOutputType = {
     sid: number | null
     uid: number | null
-    style: string | null
+    skillname: string | null
+    icon: string | null
   }
 
   export type SkillsCountAggregateOutputType = {
     sid: number
     uid: number
-    frontend: number
-    style: number
-    backend: number
-    database: number
-    mobile: number
-    other: number
-    languages: number
+    skillname: number
+    skills: number
+    icon: number
     _all: number
   }
 
@@ -7394,25 +7481,23 @@ export namespace Prisma {
   export type SkillsMinAggregateInputType = {
     sid?: true
     uid?: true
-    style?: true
+    skillname?: true
+    icon?: true
   }
 
   export type SkillsMaxAggregateInputType = {
     sid?: true
     uid?: true
-    style?: true
+    skillname?: true
+    icon?: true
   }
 
   export type SkillsCountAggregateInputType = {
     sid?: true
     uid?: true
-    frontend?: true
-    style?: true
-    backend?: true
-    database?: true
-    mobile?: true
-    other?: true
-    languages?: true
+    skillname?: true
+    skills?: true
+    icon?: true
     _all?: true
   }
 
@@ -7505,13 +7590,9 @@ export namespace Prisma {
   export type SkillsGroupByOutputType = {
     sid: number
     uid: number
-    frontend: string[]
-    style: string
-    backend: string[]
-    database: string[]
-    mobile: string[]
-    other: string[]
-    languages: string[]
+    skillname: string
+    skills: string[]
+    icon: string
     _count: SkillsCountAggregateOutputType | null
     _avg: SkillsAvgAggregateOutputType | null
     _sum: SkillsSumAggregateOutputType | null
@@ -7536,55 +7617,39 @@ export namespace Prisma {
   export type skillsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     sid?: boolean
     uid?: boolean
-    frontend?: boolean
-    style?: boolean
-    backend?: boolean
-    database?: boolean
-    mobile?: boolean
-    other?: boolean
-    languages?: boolean
+    skillname?: boolean
+    skills?: boolean
+    icon?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     sid?: boolean
     uid?: boolean
-    frontend?: boolean
-    style?: boolean
-    backend?: boolean
-    database?: boolean
-    mobile?: boolean
-    other?: boolean
-    languages?: boolean
+    skillname?: boolean
+    skills?: boolean
+    icon?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     sid?: boolean
     uid?: boolean
-    frontend?: boolean
-    style?: boolean
-    backend?: boolean
-    database?: boolean
-    mobile?: boolean
-    other?: boolean
-    languages?: boolean
+    skillname?: boolean
+    skills?: boolean
+    icon?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["skills"]>
 
   export type skillsSelectScalar = {
     sid?: boolean
     uid?: boolean
-    frontend?: boolean
-    style?: boolean
-    backend?: boolean
-    database?: boolean
-    mobile?: boolean
-    other?: boolean
-    languages?: boolean
+    skillname?: boolean
+    skills?: boolean
+    icon?: boolean
   }
 
-  export type skillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sid" | "uid" | "frontend" | "style" | "backend" | "database" | "mobile" | "other" | "languages", ExtArgs["result"]["skills"]>
+  export type skillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sid" | "uid" | "skillname" | "skills" | "icon", ExtArgs["result"]["skills"]>
   export type skillsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -7603,13 +7668,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       sid: number
       uid: number
-      frontend: string[]
-      style: string
-      backend: string[]
-      database: string[]
-      mobile: string[]
-      other: string[]
-      languages: string[]
+      skillname: string
+      skills: string[]
+      icon: string
     }, ExtArgs["result"]["skills"]>
     composites: {}
   }
@@ -8036,13 +8097,9 @@ export namespace Prisma {
   interface skillsFieldRefs {
     readonly sid: FieldRef<"skills", 'Int'>
     readonly uid: FieldRef<"skills", 'Int'>
-    readonly frontend: FieldRef<"skills", 'String[]'>
-    readonly style: FieldRef<"skills", 'String'>
-    readonly backend: FieldRef<"skills", 'String[]'>
-    readonly database: FieldRef<"skills", 'String[]'>
-    readonly mobile: FieldRef<"skills", 'String[]'>
-    readonly other: FieldRef<"skills", 'String[]'>
-    readonly languages: FieldRef<"skills", 'String[]'>
+    readonly skillname: FieldRef<"skills", 'String'>
+    readonly skills: FieldRef<"skills", 'String[]'>
+    readonly icon: FieldRef<"skills", 'String'>
   }
     
 
@@ -10663,6 +10720,1098 @@ export namespace Prisma {
 
 
   /**
+   * Model userstyle
+   */
+
+  export type AggregateUserstyle = {
+    _count: UserstyleCountAggregateOutputType | null
+    _avg: UserstyleAvgAggregateOutputType | null
+    _sum: UserstyleSumAggregateOutputType | null
+    _min: UserstyleMinAggregateOutputType | null
+    _max: UserstyleMaxAggregateOutputType | null
+  }
+
+  export type UserstyleAvgAggregateOutputType = {
+    uid: number | null
+  }
+
+  export type UserstyleSumAggregateOutputType = {
+    uid: number | null
+  }
+
+  export type UserstyleMinAggregateOutputType = {
+    uid: number | null
+    sstyle: string | null
+    pstyle: string | null
+    estyle: string | null
+    exstyle: string | null
+  }
+
+  export type UserstyleMaxAggregateOutputType = {
+    uid: number | null
+    sstyle: string | null
+    pstyle: string | null
+    estyle: string | null
+    exstyle: string | null
+  }
+
+  export type UserstyleCountAggregateOutputType = {
+    uid: number
+    sstyle: number
+    pstyle: number
+    estyle: number
+    exstyle: number
+    _all: number
+  }
+
+
+  export type UserstyleAvgAggregateInputType = {
+    uid?: true
+  }
+
+  export type UserstyleSumAggregateInputType = {
+    uid?: true
+  }
+
+  export type UserstyleMinAggregateInputType = {
+    uid?: true
+    sstyle?: true
+    pstyle?: true
+    estyle?: true
+    exstyle?: true
+  }
+
+  export type UserstyleMaxAggregateInputType = {
+    uid?: true
+    sstyle?: true
+    pstyle?: true
+    estyle?: true
+    exstyle?: true
+  }
+
+  export type UserstyleCountAggregateInputType = {
+    uid?: true
+    sstyle?: true
+    pstyle?: true
+    estyle?: true
+    exstyle?: true
+    _all?: true
+  }
+
+  export type UserstyleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which userstyle to aggregate.
+     */
+    where?: userstyleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userstyles to fetch.
+     */
+    orderBy?: userstyleOrderByWithRelationInput | userstyleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: userstyleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userstyles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userstyles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned userstyles
+    **/
+    _count?: true | UserstyleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserstyleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserstyleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserstyleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserstyleMaxAggregateInputType
+  }
+
+  export type GetUserstyleAggregateType<T extends UserstyleAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserstyle]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserstyle[P]>
+      : GetScalarType<T[P], AggregateUserstyle[P]>
+  }
+
+
+
+
+  export type userstyleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: userstyleWhereInput
+    orderBy?: userstyleOrderByWithAggregationInput | userstyleOrderByWithAggregationInput[]
+    by: UserstyleScalarFieldEnum[] | UserstyleScalarFieldEnum
+    having?: userstyleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserstyleCountAggregateInputType | true
+    _avg?: UserstyleAvgAggregateInputType
+    _sum?: UserstyleSumAggregateInputType
+    _min?: UserstyleMinAggregateInputType
+    _max?: UserstyleMaxAggregateInputType
+  }
+
+  export type UserstyleGroupByOutputType = {
+    uid: number
+    sstyle: string
+    pstyle: string
+    estyle: string
+    exstyle: string
+    _count: UserstyleCountAggregateOutputType | null
+    _avg: UserstyleAvgAggregateOutputType | null
+    _sum: UserstyleSumAggregateOutputType | null
+    _min: UserstyleMinAggregateOutputType | null
+    _max: UserstyleMaxAggregateOutputType | null
+  }
+
+  type GetUserstyleGroupByPayload<T extends userstyleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserstyleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserstyleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserstyleGroupByOutputType[P]>
+            : GetScalarType<T[P], UserstyleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type userstyleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uid?: boolean
+    sstyle?: boolean
+    pstyle?: boolean
+    estyle?: boolean
+    exstyle?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userstyle"]>
+
+  export type userstyleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uid?: boolean
+    sstyle?: boolean
+    pstyle?: boolean
+    estyle?: boolean
+    exstyle?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userstyle"]>
+
+  export type userstyleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uid?: boolean
+    sstyle?: boolean
+    pstyle?: boolean
+    estyle?: boolean
+    exstyle?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userstyle"]>
+
+  export type userstyleSelectScalar = {
+    uid?: boolean
+    sstyle?: boolean
+    pstyle?: boolean
+    estyle?: boolean
+    exstyle?: boolean
+  }
+
+  export type userstyleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"uid" | "sstyle" | "pstyle" | "estyle" | "exstyle", ExtArgs["result"]["userstyle"]>
+  export type userstyleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type userstyleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type userstyleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+
+  export type $userstylePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "userstyle"
+    objects: {
+      user: Prisma.$userPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      uid: number
+      sstyle: string
+      pstyle: string
+      estyle: string
+      exstyle: string
+    }, ExtArgs["result"]["userstyle"]>
+    composites: {}
+  }
+
+  type userstyleGetPayload<S extends boolean | null | undefined | userstyleDefaultArgs> = $Result.GetResult<Prisma.$userstylePayload, S>
+
+  type userstyleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<userstyleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserstyleCountAggregateInputType | true
+    }
+
+  export interface userstyleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['userstyle'], meta: { name: 'userstyle' } }
+    /**
+     * Find zero or one Userstyle that matches the filter.
+     * @param {userstyleFindUniqueArgs} args - Arguments to find a Userstyle
+     * @example
+     * // Get one Userstyle
+     * const userstyle = await prisma.userstyle.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends userstyleFindUniqueArgs>(args: SelectSubset<T, userstyleFindUniqueArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Userstyle that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {userstyleFindUniqueOrThrowArgs} args - Arguments to find a Userstyle
+     * @example
+     * // Get one Userstyle
+     * const userstyle = await prisma.userstyle.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends userstyleFindUniqueOrThrowArgs>(args: SelectSubset<T, userstyleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Userstyle that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userstyleFindFirstArgs} args - Arguments to find a Userstyle
+     * @example
+     * // Get one Userstyle
+     * const userstyle = await prisma.userstyle.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends userstyleFindFirstArgs>(args?: SelectSubset<T, userstyleFindFirstArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Userstyle that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userstyleFindFirstOrThrowArgs} args - Arguments to find a Userstyle
+     * @example
+     * // Get one Userstyle
+     * const userstyle = await prisma.userstyle.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends userstyleFindFirstOrThrowArgs>(args?: SelectSubset<T, userstyleFindFirstOrThrowArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Userstyles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userstyleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Userstyles
+     * const userstyles = await prisma.userstyle.findMany()
+     * 
+     * // Get first 10 Userstyles
+     * const userstyles = await prisma.userstyle.findMany({ take: 10 })
+     * 
+     * // Only select the `uid`
+     * const userstyleWithUidOnly = await prisma.userstyle.findMany({ select: { uid: true } })
+     * 
+     */
+    findMany<T extends userstyleFindManyArgs>(args?: SelectSubset<T, userstyleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Userstyle.
+     * @param {userstyleCreateArgs} args - Arguments to create a Userstyle.
+     * @example
+     * // Create one Userstyle
+     * const Userstyle = await prisma.userstyle.create({
+     *   data: {
+     *     // ... data to create a Userstyle
+     *   }
+     * })
+     * 
+     */
+    create<T extends userstyleCreateArgs>(args: SelectSubset<T, userstyleCreateArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Userstyles.
+     * @param {userstyleCreateManyArgs} args - Arguments to create many Userstyles.
+     * @example
+     * // Create many Userstyles
+     * const userstyle = await prisma.userstyle.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends userstyleCreateManyArgs>(args?: SelectSubset<T, userstyleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Userstyles and returns the data saved in the database.
+     * @param {userstyleCreateManyAndReturnArgs} args - Arguments to create many Userstyles.
+     * @example
+     * // Create many Userstyles
+     * const userstyle = await prisma.userstyle.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Userstyles and only return the `uid`
+     * const userstyleWithUidOnly = await prisma.userstyle.createManyAndReturn({
+     *   select: { uid: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends userstyleCreateManyAndReturnArgs>(args?: SelectSubset<T, userstyleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Userstyle.
+     * @param {userstyleDeleteArgs} args - Arguments to delete one Userstyle.
+     * @example
+     * // Delete one Userstyle
+     * const Userstyle = await prisma.userstyle.delete({
+     *   where: {
+     *     // ... filter to delete one Userstyle
+     *   }
+     * })
+     * 
+     */
+    delete<T extends userstyleDeleteArgs>(args: SelectSubset<T, userstyleDeleteArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Userstyle.
+     * @param {userstyleUpdateArgs} args - Arguments to update one Userstyle.
+     * @example
+     * // Update one Userstyle
+     * const userstyle = await prisma.userstyle.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends userstyleUpdateArgs>(args: SelectSubset<T, userstyleUpdateArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Userstyles.
+     * @param {userstyleDeleteManyArgs} args - Arguments to filter Userstyles to delete.
+     * @example
+     * // Delete a few Userstyles
+     * const { count } = await prisma.userstyle.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends userstyleDeleteManyArgs>(args?: SelectSubset<T, userstyleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Userstyles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userstyleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Userstyles
+     * const userstyle = await prisma.userstyle.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends userstyleUpdateManyArgs>(args: SelectSubset<T, userstyleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Userstyles and returns the data updated in the database.
+     * @param {userstyleUpdateManyAndReturnArgs} args - Arguments to update many Userstyles.
+     * @example
+     * // Update many Userstyles
+     * const userstyle = await prisma.userstyle.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Userstyles and only return the `uid`
+     * const userstyleWithUidOnly = await prisma.userstyle.updateManyAndReturn({
+     *   select: { uid: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends userstyleUpdateManyAndReturnArgs>(args: SelectSubset<T, userstyleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Userstyle.
+     * @param {userstyleUpsertArgs} args - Arguments to update or create a Userstyle.
+     * @example
+     * // Update or create a Userstyle
+     * const userstyle = await prisma.userstyle.upsert({
+     *   create: {
+     *     // ... data to create a Userstyle
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Userstyle we want to update
+     *   }
+     * })
+     */
+    upsert<T extends userstyleUpsertArgs>(args: SelectSubset<T, userstyleUpsertArgs<ExtArgs>>): Prisma__userstyleClient<$Result.GetResult<Prisma.$userstylePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Userstyles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userstyleCountArgs} args - Arguments to filter Userstyles to count.
+     * @example
+     * // Count the number of Userstyles
+     * const count = await prisma.userstyle.count({
+     *   where: {
+     *     // ... the filter for the Userstyles we want to count
+     *   }
+     * })
+    **/
+    count<T extends userstyleCountArgs>(
+      args?: Subset<T, userstyleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserstyleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Userstyle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserstyleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserstyleAggregateArgs>(args: Subset<T, UserstyleAggregateArgs>): Prisma.PrismaPromise<GetUserstyleAggregateType<T>>
+
+    /**
+     * Group by Userstyle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userstyleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends userstyleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: userstyleGroupByArgs['orderBy'] }
+        : { orderBy?: userstyleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, userstyleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserstyleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the userstyle model
+   */
+  readonly fields: userstyleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for userstyle.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__userstyleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the userstyle model
+   */ 
+  interface userstyleFieldRefs {
+    readonly uid: FieldRef<"userstyle", 'Int'>
+    readonly sstyle: FieldRef<"userstyle", 'String'>
+    readonly pstyle: FieldRef<"userstyle", 'String'>
+    readonly estyle: FieldRef<"userstyle", 'String'>
+    readonly exstyle: FieldRef<"userstyle", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * userstyle findUnique
+   */
+  export type userstyleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * Filter, which userstyle to fetch.
+     */
+    where: userstyleWhereUniqueInput
+  }
+
+  /**
+   * userstyle findUniqueOrThrow
+   */
+  export type userstyleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * Filter, which userstyle to fetch.
+     */
+    where: userstyleWhereUniqueInput
+  }
+
+  /**
+   * userstyle findFirst
+   */
+  export type userstyleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * Filter, which userstyle to fetch.
+     */
+    where?: userstyleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userstyles to fetch.
+     */
+    orderBy?: userstyleOrderByWithRelationInput | userstyleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for userstyles.
+     */
+    cursor?: userstyleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userstyles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userstyles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of userstyles.
+     */
+    distinct?: UserstyleScalarFieldEnum | UserstyleScalarFieldEnum[]
+  }
+
+  /**
+   * userstyle findFirstOrThrow
+   */
+  export type userstyleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * Filter, which userstyle to fetch.
+     */
+    where?: userstyleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userstyles to fetch.
+     */
+    orderBy?: userstyleOrderByWithRelationInput | userstyleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for userstyles.
+     */
+    cursor?: userstyleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userstyles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userstyles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of userstyles.
+     */
+    distinct?: UserstyleScalarFieldEnum | UserstyleScalarFieldEnum[]
+  }
+
+  /**
+   * userstyle findMany
+   */
+  export type userstyleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * Filter, which userstyles to fetch.
+     */
+    where?: userstyleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userstyles to fetch.
+     */
+    orderBy?: userstyleOrderByWithRelationInput | userstyleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing userstyles.
+     */
+    cursor?: userstyleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userstyles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userstyles.
+     */
+    skip?: number
+    distinct?: UserstyleScalarFieldEnum | UserstyleScalarFieldEnum[]
+  }
+
+  /**
+   * userstyle create
+   */
+  export type userstyleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a userstyle.
+     */
+    data: XOR<userstyleCreateInput, userstyleUncheckedCreateInput>
+  }
+
+  /**
+   * userstyle createMany
+   */
+  export type userstyleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many userstyles.
+     */
+    data: userstyleCreateManyInput | userstyleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * userstyle createManyAndReturn
+   */
+  export type userstyleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * The data used to create many userstyles.
+     */
+    data: userstyleCreateManyInput | userstyleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * userstyle update
+   */
+  export type userstyleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a userstyle.
+     */
+    data: XOR<userstyleUpdateInput, userstyleUncheckedUpdateInput>
+    /**
+     * Choose, which userstyle to update.
+     */
+    where: userstyleWhereUniqueInput
+  }
+
+  /**
+   * userstyle updateMany
+   */
+  export type userstyleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update userstyles.
+     */
+    data: XOR<userstyleUpdateManyMutationInput, userstyleUncheckedUpdateManyInput>
+    /**
+     * Filter which userstyles to update
+     */
+    where?: userstyleWhereInput
+    /**
+     * Limit how many userstyles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * userstyle updateManyAndReturn
+   */
+  export type userstyleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * The data used to update userstyles.
+     */
+    data: XOR<userstyleUpdateManyMutationInput, userstyleUncheckedUpdateManyInput>
+    /**
+     * Filter which userstyles to update
+     */
+    where?: userstyleWhereInput
+    /**
+     * Limit how many userstyles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * userstyle upsert
+   */
+  export type userstyleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the userstyle to update in case it exists.
+     */
+    where: userstyleWhereUniqueInput
+    /**
+     * In case the userstyle found by the `where` argument doesn't exist, create a new userstyle with this data.
+     */
+    create: XOR<userstyleCreateInput, userstyleUncheckedCreateInput>
+    /**
+     * In case the userstyle was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<userstyleUpdateInput, userstyleUncheckedUpdateInput>
+  }
+
+  /**
+   * userstyle delete
+   */
+  export type userstyleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+    /**
+     * Filter which userstyle to delete.
+     */
+    where: userstyleWhereUniqueInput
+  }
+
+  /**
+   * userstyle deleteMany
+   */
+  export type userstyleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which userstyles to delete
+     */
+    where?: userstyleWhereInput
+    /**
+     * Limit how many userstyles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * userstyle without action
+   */
+  export type userstyleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userstyle
+     */
+    select?: userstyleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userstyle
+     */
+    omit?: userstyleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userstyleInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10704,8 +11853,7 @@ export namespace Prisma {
     desc: 'desc',
     tags: 'tags',
     github: 'github',
-    Link: 'Link',
-    style: 'style'
+    Link: 'Link'
   };
 
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -10715,7 +11863,6 @@ export namespace Prisma {
     exid: 'exid',
     title: 'title',
     corp: 'corp',
-    style: 'style',
     startdate: 'startdate',
     enddate: 'enddate',
     desc: 'desc',
@@ -10731,7 +11878,6 @@ export namespace Prisma {
     degree: 'degree',
     startdate: 'startdate',
     enddate: 'enddate',
-    style: 'style',
     uid: 'uid'
   };
 
@@ -10741,13 +11887,9 @@ export namespace Prisma {
   export const SkillsScalarFieldEnum: {
     sid: 'sid',
     uid: 'uid',
-    frontend: 'frontend',
-    style: 'style',
-    backend: 'backend',
-    database: 'database',
-    mobile: 'mobile',
-    other: 'other',
-    languages: 'languages'
+    skillname: 'skillname',
+    skills: 'skills',
+    icon: 'icon'
   };
 
   export type SkillsScalarFieldEnum = (typeof SkillsScalarFieldEnum)[keyof typeof SkillsScalarFieldEnum]
@@ -10774,6 +11916,17 @@ export namespace Prisma {
   };
 
   export type AboutScalarFieldEnum = (typeof AboutScalarFieldEnum)[keyof typeof AboutScalarFieldEnum]
+
+
+  export const UserstyleScalarFieldEnum: {
+    uid: 'uid',
+    sstyle: 'sstyle',
+    pstyle: 'pstyle',
+    estyle: 'estyle',
+    exstyle: 'exstyle'
+  };
+
+  export type UserstyleScalarFieldEnum = (typeof UserstyleScalarFieldEnum)[keyof typeof UserstyleScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10870,6 +12023,7 @@ export namespace Prisma {
     experience?: ExperienceListRelationFilter
     education?: EducationListRelationFilter
     hero?: HeroListRelationFilter
+    userstyle?: UserstyleListRelationFilter
   }
 
   export type userOrderByWithRelationInput = {
@@ -10883,6 +12037,7 @@ export namespace Prisma {
     experience?: experienceOrderByRelationAggregateInput
     education?: educationOrderByRelationAggregateInput
     hero?: heroOrderByRelationAggregateInput
+    userstyle?: userstyleOrderByRelationAggregateInput
   }
 
   export type userWhereUniqueInput = Prisma.AtLeast<{
@@ -10899,6 +12054,7 @@ export namespace Prisma {
     experience?: ExperienceListRelationFilter
     education?: EducationListRelationFilter
     hero?: HeroListRelationFilter
+    userstyle?: UserstyleListRelationFilter
   }, "uid" | "username">
 
   export type userOrderByWithAggregationInput = {
@@ -10990,7 +12146,6 @@ export namespace Prisma {
     tags?: StringNullableListFilter<"project">
     github?: StringFilter<"project"> | string
     Link?: StringFilter<"project"> | string
-    style?: StringFilter<"project"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
@@ -11003,7 +12158,6 @@ export namespace Prisma {
     tags?: SortOrder
     github?: SortOrder
     Link?: SortOrder
-    style?: SortOrder
     user?: userOrderByWithRelationInput
   }
 
@@ -11019,7 +12173,6 @@ export namespace Prisma {
     tags?: StringNullableListFilter<"project">
     github?: StringFilter<"project"> | string
     Link?: StringFilter<"project"> | string
-    style?: StringFilter<"project"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "pid">
 
@@ -11032,7 +12185,6 @@ export namespace Prisma {
     tags?: SortOrder
     github?: SortOrder
     Link?: SortOrder
-    style?: SortOrder
     _count?: projectCountOrderByAggregateInput
     _avg?: projectAvgOrderByAggregateInput
     _max?: projectMaxOrderByAggregateInput
@@ -11052,7 +12204,6 @@ export namespace Prisma {
     tags?: StringNullableListFilter<"project">
     github?: StringWithAggregatesFilter<"project"> | string
     Link?: StringWithAggregatesFilter<"project"> | string
-    style?: StringWithAggregatesFilter<"project"> | string
   }
 
   export type experienceWhereInput = {
@@ -11062,7 +12213,6 @@ export namespace Prisma {
     exid?: IntFilter<"experience"> | number
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
-    style?: StringFilter<"experience"> | string
     startdate?: DateTimeFilter<"experience"> | Date | string
     enddate?: DateTimeFilter<"experience"> | Date | string
     desc?: StringFilter<"experience"> | string
@@ -11074,7 +12224,6 @@ export namespace Prisma {
     exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
-    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -11089,7 +12238,6 @@ export namespace Prisma {
     NOT?: experienceWhereInput | experienceWhereInput[]
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
-    style?: StringFilter<"experience"> | string
     startdate?: DateTimeFilter<"experience"> | Date | string
     enddate?: DateTimeFilter<"experience"> | Date | string
     desc?: StringFilter<"experience"> | string
@@ -11101,7 +12249,6 @@ export namespace Prisma {
     exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
-    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -11120,7 +12267,6 @@ export namespace Prisma {
     exid?: IntWithAggregatesFilter<"experience"> | number
     title?: StringWithAggregatesFilter<"experience"> | string
     corp?: StringWithAggregatesFilter<"experience"> | string
-    style?: StringWithAggregatesFilter<"experience"> | string
     startdate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
     enddate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
     desc?: StringWithAggregatesFilter<"experience"> | string
@@ -11136,7 +12282,6 @@ export namespace Prisma {
     degree?: StringFilter<"education"> | string
     startdate?: DateTimeFilter<"education"> | Date | string
     enddate?: DateTimeFilter<"education"> | Date | string
-    style?: StringFilter<"education"> | string
     uid?: IntFilter<"education"> | number
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
@@ -11147,7 +12292,6 @@ export namespace Prisma {
     degree?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
-    style?: SortOrder
     uid?: SortOrder
     user?: userOrderByWithRelationInput
   }
@@ -11161,7 +12305,6 @@ export namespace Prisma {
     degree?: StringFilter<"education"> | string
     startdate?: DateTimeFilter<"education"> | Date | string
     enddate?: DateTimeFilter<"education"> | Date | string
-    style?: StringFilter<"education"> | string
     uid?: IntFilter<"education"> | number
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "edid">
@@ -11172,7 +12315,6 @@ export namespace Prisma {
     degree?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
-    style?: SortOrder
     uid?: SortOrder
     _count?: educationCountOrderByAggregateInput
     _avg?: educationAvgOrderByAggregateInput
@@ -11190,7 +12332,6 @@ export namespace Prisma {
     degree?: StringWithAggregatesFilter<"education"> | string
     startdate?: DateTimeWithAggregatesFilter<"education"> | Date | string
     enddate?: DateTimeWithAggregatesFilter<"education"> | Date | string
-    style?: StringWithAggregatesFilter<"education"> | string
     uid?: IntWithAggregatesFilter<"education"> | number
   }
 
@@ -11200,26 +12341,18 @@ export namespace Prisma {
     NOT?: skillsWhereInput | skillsWhereInput[]
     sid?: IntFilter<"skills"> | number
     uid?: IntFilter<"skills"> | number
-    frontend?: StringNullableListFilter<"skills">
-    style?: StringFilter<"skills"> | string
-    backend?: StringNullableListFilter<"skills">
-    database?: StringNullableListFilter<"skills">
-    mobile?: StringNullableListFilter<"skills">
-    other?: StringNullableListFilter<"skills">
-    languages?: StringNullableListFilter<"skills">
+    skillname?: StringFilter<"skills"> | string
+    skills?: StringNullableListFilter<"skills">
+    icon?: StringFilter<"skills"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
   export type skillsOrderByWithRelationInput = {
     sid?: SortOrder
     uid?: SortOrder
-    frontend?: SortOrder
-    style?: SortOrder
-    backend?: SortOrder
-    database?: SortOrder
-    mobile?: SortOrder
-    other?: SortOrder
-    languages?: SortOrder
+    skillname?: SortOrder
+    skills?: SortOrder
+    icon?: SortOrder
     user?: userOrderByWithRelationInput
   }
 
@@ -11229,26 +12362,18 @@ export namespace Prisma {
     OR?: skillsWhereInput[]
     NOT?: skillsWhereInput | skillsWhereInput[]
     uid?: IntFilter<"skills"> | number
-    frontend?: StringNullableListFilter<"skills">
-    style?: StringFilter<"skills"> | string
-    backend?: StringNullableListFilter<"skills">
-    database?: StringNullableListFilter<"skills">
-    mobile?: StringNullableListFilter<"skills">
-    other?: StringNullableListFilter<"skills">
-    languages?: StringNullableListFilter<"skills">
+    skillname?: StringFilter<"skills"> | string
+    skills?: StringNullableListFilter<"skills">
+    icon?: StringFilter<"skills"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "sid">
 
   export type skillsOrderByWithAggregationInput = {
     sid?: SortOrder
     uid?: SortOrder
-    frontend?: SortOrder
-    style?: SortOrder
-    backend?: SortOrder
-    database?: SortOrder
-    mobile?: SortOrder
-    other?: SortOrder
-    languages?: SortOrder
+    skillname?: SortOrder
+    skills?: SortOrder
+    icon?: SortOrder
     _count?: skillsCountOrderByAggregateInput
     _avg?: skillsAvgOrderByAggregateInput
     _max?: skillsMaxOrderByAggregateInput
@@ -11262,13 +12387,9 @@ export namespace Prisma {
     NOT?: skillsScalarWhereWithAggregatesInput | skillsScalarWhereWithAggregatesInput[]
     sid?: IntWithAggregatesFilter<"skills"> | number
     uid?: IntWithAggregatesFilter<"skills"> | number
-    frontend?: StringNullableListFilter<"skills">
-    style?: StringWithAggregatesFilter<"skills"> | string
-    backend?: StringNullableListFilter<"skills">
-    database?: StringNullableListFilter<"skills">
-    mobile?: StringNullableListFilter<"skills">
-    other?: StringNullableListFilter<"skills">
-    languages?: StringNullableListFilter<"skills">
+    skillname?: StringWithAggregatesFilter<"skills"> | string
+    skills?: StringNullableListFilter<"skills">
+    icon?: StringWithAggregatesFilter<"skills"> | string
   }
 
   export type contactWhereInput = {
@@ -11390,6 +12511,63 @@ export namespace Prisma {
     style?: StringWithAggregatesFilter<"About"> | string
   }
 
+  export type userstyleWhereInput = {
+    AND?: userstyleWhereInput | userstyleWhereInput[]
+    OR?: userstyleWhereInput[]
+    NOT?: userstyleWhereInput | userstyleWhereInput[]
+    uid?: IntFilter<"userstyle"> | number
+    sstyle?: StringFilter<"userstyle"> | string
+    pstyle?: StringFilter<"userstyle"> | string
+    estyle?: StringFilter<"userstyle"> | string
+    exstyle?: StringFilter<"userstyle"> | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }
+
+  export type userstyleOrderByWithRelationInput = {
+    uid?: SortOrder
+    sstyle?: SortOrder
+    pstyle?: SortOrder
+    estyle?: SortOrder
+    exstyle?: SortOrder
+    user?: userOrderByWithRelationInput
+  }
+
+  export type userstyleWhereUniqueInput = Prisma.AtLeast<{
+    uid?: number
+    AND?: userstyleWhereInput | userstyleWhereInput[]
+    OR?: userstyleWhereInput[]
+    NOT?: userstyleWhereInput | userstyleWhereInput[]
+    sstyle?: StringFilter<"userstyle"> | string
+    pstyle?: StringFilter<"userstyle"> | string
+    estyle?: StringFilter<"userstyle"> | string
+    exstyle?: StringFilter<"userstyle"> | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }, "uid">
+
+  export type userstyleOrderByWithAggregationInput = {
+    uid?: SortOrder
+    sstyle?: SortOrder
+    pstyle?: SortOrder
+    estyle?: SortOrder
+    exstyle?: SortOrder
+    _count?: userstyleCountOrderByAggregateInput
+    _avg?: userstyleAvgOrderByAggregateInput
+    _max?: userstyleMaxOrderByAggregateInput
+    _min?: userstyleMinOrderByAggregateInput
+    _sum?: userstyleSumOrderByAggregateInput
+  }
+
+  export type userstyleScalarWhereWithAggregatesInput = {
+    AND?: userstyleScalarWhereWithAggregatesInput | userstyleScalarWhereWithAggregatesInput[]
+    OR?: userstyleScalarWhereWithAggregatesInput[]
+    NOT?: userstyleScalarWhereWithAggregatesInput | userstyleScalarWhereWithAggregatesInput[]
+    uid?: IntWithAggregatesFilter<"userstyle"> | number
+    sstyle?: StringWithAggregatesFilter<"userstyle"> | string
+    pstyle?: StringWithAggregatesFilter<"userstyle"> | string
+    estyle?: StringWithAggregatesFilter<"userstyle"> | string
+    exstyle?: StringWithAggregatesFilter<"userstyle"> | string
+  }
+
   export type userCreateInput = {
     username: string
     password: string
@@ -11400,6 +12578,7 @@ export namespace Prisma {
     experience?: experienceCreateNestedManyWithoutUserInput
     education?: educationCreateNestedManyWithoutUserInput
     hero?: heroCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
@@ -11413,6 +12592,7 @@ export namespace Prisma {
     experience?: experienceUncheckedCreateNestedManyWithoutUserInput
     education?: educationUncheckedCreateNestedManyWithoutUserInput
     hero?: heroUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userUpdateInput = {
@@ -11425,6 +12605,7 @@ export namespace Prisma {
     experience?: experienceUpdateManyWithoutUserNestedInput
     education?: educationUpdateManyWithoutUserNestedInput
     hero?: heroUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
@@ -11438,6 +12619,7 @@ export namespace Prisma {
     experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
     education?: educationUncheckedUpdateManyWithoutUserNestedInput
     hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
@@ -11516,7 +12698,6 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
-    style: string
     user: userCreateNestedOneWithoutProjectInput
   }
 
@@ -11529,7 +12710,6 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
-    style: string
   }
 
   export type projectUpdateInput = {
@@ -11539,7 +12719,6 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     user?: userUpdateOneRequiredWithoutProjectNestedInput
   }
 
@@ -11552,7 +12731,6 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type projectCreateManyInput = {
@@ -11564,7 +12742,6 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
-    style: string
   }
 
   export type projectUpdateManyMutationInput = {
@@ -11574,7 +12751,6 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type projectUncheckedUpdateManyInput = {
@@ -11586,13 +12762,11 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type experienceCreateInput = {
     title: string
     corp: string
-    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -11603,7 +12777,6 @@ export namespace Prisma {
     exid?: number
     title: string
     corp: string
-    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -11613,7 +12786,6 @@ export namespace Prisma {
   export type experienceUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -11624,7 +12796,6 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -11635,7 +12806,6 @@ export namespace Prisma {
     exid?: number
     title: string
     corp: string
-    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -11645,7 +12815,6 @@ export namespace Prisma {
   export type experienceUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -11655,7 +12824,6 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -11667,7 +12835,6 @@ export namespace Prisma {
     degree: string
     startdate: Date | string
     enddate: Date | string
-    style: string
     user: userCreateNestedOneWithoutEducationInput
   }
 
@@ -11677,7 +12844,6 @@ export namespace Prisma {
     degree: string
     startdate: Date | string
     enddate: Date | string
-    style: string
     uid: number
   }
 
@@ -11686,7 +12852,6 @@ export namespace Prisma {
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
     user?: userUpdateOneRequiredWithoutEducationNestedInput
   }
 
@@ -11696,7 +12861,6 @@ export namespace Prisma {
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
     uid?: IntFieldUpdateOperationsInput | number
   }
 
@@ -11706,7 +12870,6 @@ export namespace Prisma {
     degree: string
     startdate: Date | string
     enddate: Date | string
-    style: string
     uid: number
   }
 
@@ -11715,7 +12878,6 @@ export namespace Prisma {
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type educationUncheckedUpdateManyInput = {
@@ -11724,88 +12886,59 @@ export namespace Prisma {
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
     uid?: IntFieldUpdateOperationsInput | number
   }
 
   export type skillsCreateInput = {
-    frontend?: skillsCreatefrontendInput | string[]
-    style: string
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
+    skillname: string
+    skills?: skillsCreateskillsInput | string[]
+    icon: string
     user: userCreateNestedOneWithoutSkillsInput
   }
 
   export type skillsUncheckedCreateInput = {
     sid?: number
     uid: number
-    frontend?: skillsCreatefrontendInput | string[]
-    style: string
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
+    skillname: string
+    skills?: skillsCreateskillsInput | string[]
+    icon: string
   }
 
   export type skillsUpdateInput = {
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+    skillname?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateskillsInput | string[]
+    icon?: StringFieldUpdateOperationsInput | string
     user?: userUpdateOneRequiredWithoutSkillsNestedInput
   }
 
   export type skillsUncheckedUpdateInput = {
     sid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+    skillname?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateskillsInput | string[]
+    icon?: StringFieldUpdateOperationsInput | string
   }
 
   export type skillsCreateManyInput = {
     sid?: number
     uid: number
-    frontend?: skillsCreatefrontendInput | string[]
-    style: string
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
+    skillname: string
+    skills?: skillsCreateskillsInput | string[]
+    icon: string
   }
 
   export type skillsUpdateManyMutationInput = {
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+    skillname?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateskillsInput | string[]
+    icon?: StringFieldUpdateOperationsInput | string
   }
 
   export type skillsUncheckedUpdateManyInput = {
     sid?: IntFieldUpdateOperationsInput | number
     uid?: IntFieldUpdateOperationsInput | number
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+    skillname?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateskillsInput | string[]
+    icon?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactCreateInput = {
@@ -11919,6 +13052,61 @@ export namespace Prisma {
     style?: StringFieldUpdateOperationsInput | string
   }
 
+  export type userstyleCreateInput = {
+    sstyle: string
+    pstyle: string
+    estyle: string
+    exstyle: string
+    user: userCreateNestedOneWithoutUserstyleInput
+  }
+
+  export type userstyleUncheckedCreateInput = {
+    uid: number
+    sstyle: string
+    pstyle: string
+    estyle: string
+    exstyle: string
+  }
+
+  export type userstyleUpdateInput = {
+    sstyle?: StringFieldUpdateOperationsInput | string
+    pstyle?: StringFieldUpdateOperationsInput | string
+    estyle?: StringFieldUpdateOperationsInput | string
+    exstyle?: StringFieldUpdateOperationsInput | string
+    user?: userUpdateOneRequiredWithoutUserstyleNestedInput
+  }
+
+  export type userstyleUncheckedUpdateInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    sstyle?: StringFieldUpdateOperationsInput | string
+    pstyle?: StringFieldUpdateOperationsInput | string
+    estyle?: StringFieldUpdateOperationsInput | string
+    exstyle?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type userstyleCreateManyInput = {
+    uid: number
+    sstyle: string
+    pstyle: string
+    estyle: string
+    exstyle: string
+  }
+
+  export type userstyleUpdateManyMutationInput = {
+    sstyle?: StringFieldUpdateOperationsInput | string
+    pstyle?: StringFieldUpdateOperationsInput | string
+    estyle?: StringFieldUpdateOperationsInput | string
+    exstyle?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type userstyleUncheckedUpdateManyInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    sstyle?: StringFieldUpdateOperationsInput | string
+    pstyle?: StringFieldUpdateOperationsInput | string
+    estyle?: StringFieldUpdateOperationsInput | string
+    exstyle?: StringFieldUpdateOperationsInput | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11987,6 +13175,12 @@ export namespace Prisma {
     none?: heroWhereInput
   }
 
+  export type UserstyleListRelationFilter = {
+    every?: userstyleWhereInput
+    some?: userstyleWhereInput
+    none?: userstyleWhereInput
+  }
+
   export type skillsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -12012,6 +13206,10 @@ export namespace Prisma {
   }
 
   export type heroOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type userstyleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12131,7 +13329,6 @@ export namespace Prisma {
     tags?: SortOrder
     github?: SortOrder
     Link?: SortOrder
-    style?: SortOrder
   }
 
   export type projectAvgOrderByAggregateInput = {
@@ -12147,7 +13344,6 @@ export namespace Prisma {
     desc?: SortOrder
     github?: SortOrder
     Link?: SortOrder
-    style?: SortOrder
   }
 
   export type projectMinOrderByAggregateInput = {
@@ -12158,7 +13354,6 @@ export namespace Prisma {
     desc?: SortOrder
     github?: SortOrder
     Link?: SortOrder
-    style?: SortOrder
   }
 
   export type projectSumOrderByAggregateInput = {
@@ -12181,7 +13376,6 @@ export namespace Prisma {
     exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
-    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -12197,7 +13391,6 @@ export namespace Prisma {
     exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
-    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -12208,7 +13401,6 @@ export namespace Prisma {
     exid?: SortOrder
     title?: SortOrder
     corp?: SortOrder
-    style?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
     desc?: SortOrder
@@ -12240,7 +13432,6 @@ export namespace Prisma {
     degree?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
-    style?: SortOrder
     uid?: SortOrder
   }
 
@@ -12255,7 +13446,6 @@ export namespace Prisma {
     degree?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
-    style?: SortOrder
     uid?: SortOrder
   }
 
@@ -12265,7 +13455,6 @@ export namespace Prisma {
     degree?: SortOrder
     startdate?: SortOrder
     enddate?: SortOrder
-    style?: SortOrder
     uid?: SortOrder
   }
 
@@ -12277,13 +13466,9 @@ export namespace Prisma {
   export type skillsCountOrderByAggregateInput = {
     sid?: SortOrder
     uid?: SortOrder
-    frontend?: SortOrder
-    style?: SortOrder
-    backend?: SortOrder
-    database?: SortOrder
-    mobile?: SortOrder
-    other?: SortOrder
-    languages?: SortOrder
+    skillname?: SortOrder
+    skills?: SortOrder
+    icon?: SortOrder
   }
 
   export type skillsAvgOrderByAggregateInput = {
@@ -12294,13 +13479,15 @@ export namespace Prisma {
   export type skillsMaxOrderByAggregateInput = {
     sid?: SortOrder
     uid?: SortOrder
-    style?: SortOrder
+    skillname?: SortOrder
+    icon?: SortOrder
   }
 
   export type skillsMinOrderByAggregateInput = {
     sid?: SortOrder
     uid?: SortOrder
-    style?: SortOrder
+    skillname?: SortOrder
+    icon?: SortOrder
   }
 
   export type skillsSumOrderByAggregateInput = {
@@ -12379,6 +13566,38 @@ export namespace Prisma {
     uid?: SortOrder
   }
 
+  export type userstyleCountOrderByAggregateInput = {
+    uid?: SortOrder
+    sstyle?: SortOrder
+    pstyle?: SortOrder
+    estyle?: SortOrder
+    exstyle?: SortOrder
+  }
+
+  export type userstyleAvgOrderByAggregateInput = {
+    uid?: SortOrder
+  }
+
+  export type userstyleMaxOrderByAggregateInput = {
+    uid?: SortOrder
+    sstyle?: SortOrder
+    pstyle?: SortOrder
+    estyle?: SortOrder
+    exstyle?: SortOrder
+  }
+
+  export type userstyleMinOrderByAggregateInput = {
+    uid?: SortOrder
+    sstyle?: SortOrder
+    pstyle?: SortOrder
+    estyle?: SortOrder
+    exstyle?: SortOrder
+  }
+
+  export type userstyleSumOrderByAggregateInput = {
+    uid?: SortOrder
+  }
+
   export type skillsCreateNestedManyWithoutUserInput = {
     create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
@@ -12428,6 +13647,13 @@ export namespace Prisma {
     connect?: heroWhereUniqueInput | heroWhereUniqueInput[]
   }
 
+  export type userstyleCreateNestedManyWithoutUserInput = {
+    create?: XOR<userstyleCreateWithoutUserInput, userstyleUncheckedCreateWithoutUserInput> | userstyleCreateWithoutUserInput[] | userstyleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userstyleCreateOrConnectWithoutUserInput | userstyleCreateOrConnectWithoutUserInput[]
+    createMany?: userstyleCreateManyUserInputEnvelope
+    connect?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+  }
+
   export type skillsUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<skillsCreateWithoutUserInput, skillsUncheckedCreateWithoutUserInput> | skillsCreateWithoutUserInput[] | skillsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: skillsCreateOrConnectWithoutUserInput | skillsCreateOrConnectWithoutUserInput[]
@@ -12475,6 +13701,13 @@ export namespace Prisma {
     connectOrCreate?: heroCreateOrConnectWithoutUserInput | heroCreateOrConnectWithoutUserInput[]
     createMany?: heroCreateManyUserInputEnvelope
     connect?: heroWhereUniqueInput | heroWhereUniqueInput[]
+  }
+
+  export type userstyleUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<userstyleCreateWithoutUserInput, userstyleUncheckedCreateWithoutUserInput> | userstyleCreateWithoutUserInput[] | userstyleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userstyleCreateOrConnectWithoutUserInput | userstyleCreateOrConnectWithoutUserInput[]
+    createMany?: userstyleCreateManyUserInputEnvelope
+    connect?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12577,6 +13810,20 @@ export namespace Prisma {
     update?: heroUpdateWithWhereUniqueWithoutUserInput | heroUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: heroUpdateManyWithWhereWithoutUserInput | heroUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: heroScalarWhereInput | heroScalarWhereInput[]
+  }
+
+  export type userstyleUpdateManyWithoutUserNestedInput = {
+    create?: XOR<userstyleCreateWithoutUserInput, userstyleUncheckedCreateWithoutUserInput> | userstyleCreateWithoutUserInput[] | userstyleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userstyleCreateOrConnectWithoutUserInput | userstyleCreateOrConnectWithoutUserInput[]
+    upsert?: userstyleUpsertWithWhereUniqueWithoutUserInput | userstyleUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: userstyleCreateManyUserInputEnvelope
+    set?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    disconnect?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    delete?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    connect?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    update?: userstyleUpdateWithWhereUniqueWithoutUserInput | userstyleUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: userstyleUpdateManyWithWhereWithoutUserInput | userstyleUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: userstyleScalarWhereInput | userstyleScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -12685,6 +13932,20 @@ export namespace Prisma {
     deleteMany?: heroScalarWhereInput | heroScalarWhereInput[]
   }
 
+  export type userstyleUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<userstyleCreateWithoutUserInput, userstyleUncheckedCreateWithoutUserInput> | userstyleCreateWithoutUserInput[] | userstyleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userstyleCreateOrConnectWithoutUserInput | userstyleCreateOrConnectWithoutUserInput[]
+    upsert?: userstyleUpsertWithWhereUniqueWithoutUserInput | userstyleUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: userstyleCreateManyUserInputEnvelope
+    set?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    disconnect?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    delete?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    connect?: userstyleWhereUniqueInput | userstyleWhereUniqueInput[]
+    update?: userstyleUpdateWithWhereUniqueWithoutUserInput | userstyleUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: userstyleUpdateManyWithWhereWithoutUserInput | userstyleUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: userstyleScalarWhereInput | userstyleScalarWhereInput[]
+  }
+
   export type userCreateNestedOneWithoutHeroInput = {
     create?: XOR<userCreateWithoutHeroInput, userUncheckedCreateWithoutHeroInput>
     connectOrCreate?: userCreateOrConnectWithoutHeroInput
@@ -12754,27 +14015,7 @@ export namespace Prisma {
     update?: XOR<XOR<userUpdateToOneWithWhereWithoutEducationInput, userUpdateWithoutEducationInput>, userUncheckedUpdateWithoutEducationInput>
   }
 
-  export type skillsCreatefrontendInput = {
-    set: string[]
-  }
-
-  export type skillsCreatebackendInput = {
-    set: string[]
-  }
-
-  export type skillsCreatedatabaseInput = {
-    set: string[]
-  }
-
-  export type skillsCreatemobileInput = {
-    set: string[]
-  }
-
-  export type skillsCreateotherInput = {
-    set: string[]
-  }
-
-  export type skillsCreatelanguagesInput = {
+  export type skillsCreateskillsInput = {
     set: string[]
   }
 
@@ -12784,32 +14025,7 @@ export namespace Prisma {
     connect?: userWhereUniqueInput
   }
 
-  export type skillsUpdatefrontendInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type skillsUpdatebackendInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type skillsUpdatedatabaseInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type skillsUpdatemobileInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type skillsUpdateotherInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type skillsUpdatelanguagesInput = {
+  export type skillsUpdateskillsInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -12848,6 +14064,20 @@ export namespace Prisma {
     upsert?: userUpsertWithoutAboutInput
     connect?: userWhereUniqueInput
     update?: XOR<XOR<userUpdateToOneWithWhereWithoutAboutInput, userUpdateWithoutAboutInput>, userUncheckedUpdateWithoutAboutInput>
+  }
+
+  export type userCreateNestedOneWithoutUserstyleInput = {
+    create?: XOR<userCreateWithoutUserstyleInput, userUncheckedCreateWithoutUserstyleInput>
+    connectOrCreate?: userCreateOrConnectWithoutUserstyleInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type userUpdateOneRequiredWithoutUserstyleNestedInput = {
+    create?: XOR<userCreateWithoutUserstyleInput, userUncheckedCreateWithoutUserstyleInput>
+    connectOrCreate?: userCreateOrConnectWithoutUserstyleInput
+    upsert?: userUpsertWithoutUserstyleInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutUserstyleInput, userUpdateWithoutUserstyleInput>, userUncheckedUpdateWithoutUserstyleInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -12945,24 +14175,16 @@ export namespace Prisma {
   }
 
   export type skillsCreateWithoutUserInput = {
-    frontend?: skillsCreatefrontendInput | string[]
-    style: string
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
+    skillname: string
+    skills?: skillsCreateskillsInput | string[]
+    icon: string
   }
 
   export type skillsUncheckedCreateWithoutUserInput = {
     sid?: number
-    frontend?: skillsCreatefrontendInput | string[]
-    style: string
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
+    skillname: string
+    skills?: skillsCreateskillsInput | string[]
+    icon: string
   }
 
   export type skillsCreateOrConnectWithoutUserInput = {
@@ -13030,7 +14252,6 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
-    style: string
   }
 
   export type projectUncheckedCreateWithoutUserInput = {
@@ -13041,7 +14262,6 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
-    style: string
   }
 
   export type projectCreateOrConnectWithoutUserInput = {
@@ -13057,7 +14277,6 @@ export namespace Prisma {
   export type experienceCreateWithoutUserInput = {
     title: string
     corp: string
-    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -13067,7 +14286,6 @@ export namespace Prisma {
     exid?: number
     title: string
     corp: string
-    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -13088,7 +14306,6 @@ export namespace Prisma {
     degree: string
     startdate: Date | string
     enddate: Date | string
-    style: string
   }
 
   export type educationUncheckedCreateWithoutUserInput = {
@@ -13097,7 +14314,6 @@ export namespace Prisma {
     degree: string
     startdate: Date | string
     enddate: Date | string
-    style: string
   }
 
   export type educationCreateOrConnectWithoutUserInput = {
@@ -13133,6 +14349,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type userstyleCreateWithoutUserInput = {
+    sstyle: string
+    pstyle: string
+    estyle: string
+    exstyle: string
+  }
+
+  export type userstyleUncheckedCreateWithoutUserInput = {
+    sstyle: string
+    pstyle: string
+    estyle: string
+    exstyle: string
+  }
+
+  export type userstyleCreateOrConnectWithoutUserInput = {
+    where: userstyleWhereUniqueInput
+    create: XOR<userstyleCreateWithoutUserInput, userstyleUncheckedCreateWithoutUserInput>
+  }
+
+  export type userstyleCreateManyUserInputEnvelope = {
+    data: userstyleCreateManyUserInput | userstyleCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type skillsUpsertWithWhereUniqueWithoutUserInput = {
     where: skillsWhereUniqueInput
     update: XOR<skillsUpdateWithoutUserInput, skillsUncheckedUpdateWithoutUserInput>
@@ -13155,13 +14395,9 @@ export namespace Prisma {
     NOT?: skillsScalarWhereInput | skillsScalarWhereInput[]
     sid?: IntFilter<"skills"> | number
     uid?: IntFilter<"skills"> | number
-    frontend?: StringNullableListFilter<"skills">
-    style?: StringFilter<"skills"> | string
-    backend?: StringNullableListFilter<"skills">
-    database?: StringNullableListFilter<"skills">
-    mobile?: StringNullableListFilter<"skills">
-    other?: StringNullableListFilter<"skills">
-    languages?: StringNullableListFilter<"skills">
+    skillname?: StringFilter<"skills"> | string
+    skills?: StringNullableListFilter<"skills">
+    icon?: StringFilter<"skills"> | string
   }
 
   export type contactUpsertWithWhereUniqueWithoutUserInput = {
@@ -13247,7 +14483,6 @@ export namespace Prisma {
     tags?: StringNullableListFilter<"project">
     github?: StringFilter<"project"> | string
     Link?: StringFilter<"project"> | string
-    style?: StringFilter<"project"> | string
   }
 
   export type experienceUpsertWithWhereUniqueWithoutUserInput = {
@@ -13273,7 +14508,6 @@ export namespace Prisma {
     exid?: IntFilter<"experience"> | number
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
-    style?: StringFilter<"experience"> | string
     startdate?: DateTimeFilter<"experience"> | Date | string
     enddate?: DateTimeFilter<"experience"> | Date | string
     desc?: StringFilter<"experience"> | string
@@ -13305,7 +14539,6 @@ export namespace Prisma {
     degree?: StringFilter<"education"> | string
     startdate?: DateTimeFilter<"education"> | Date | string
     enddate?: DateTimeFilter<"education"> | Date | string
-    style?: StringFilter<"education"> | string
     uid?: IntFilter<"education"> | number
   }
 
@@ -13336,6 +14569,33 @@ export namespace Prisma {
     subhero?: StringFilter<"hero"> | string
   }
 
+  export type userstyleUpsertWithWhereUniqueWithoutUserInput = {
+    where: userstyleWhereUniqueInput
+    update: XOR<userstyleUpdateWithoutUserInput, userstyleUncheckedUpdateWithoutUserInput>
+    create: XOR<userstyleCreateWithoutUserInput, userstyleUncheckedCreateWithoutUserInput>
+  }
+
+  export type userstyleUpdateWithWhereUniqueWithoutUserInput = {
+    where: userstyleWhereUniqueInput
+    data: XOR<userstyleUpdateWithoutUserInput, userstyleUncheckedUpdateWithoutUserInput>
+  }
+
+  export type userstyleUpdateManyWithWhereWithoutUserInput = {
+    where: userstyleScalarWhereInput
+    data: XOR<userstyleUpdateManyMutationInput, userstyleUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type userstyleScalarWhereInput = {
+    AND?: userstyleScalarWhereInput | userstyleScalarWhereInput[]
+    OR?: userstyleScalarWhereInput[]
+    NOT?: userstyleScalarWhereInput | userstyleScalarWhereInput[]
+    uid?: IntFilter<"userstyle"> | number
+    sstyle?: StringFilter<"userstyle"> | string
+    pstyle?: StringFilter<"userstyle"> | string
+    estyle?: StringFilter<"userstyle"> | string
+    exstyle?: StringFilter<"userstyle"> | string
+  }
+
   export type userCreateWithoutHeroInput = {
     username: string
     password: string
@@ -13345,6 +14605,7 @@ export namespace Prisma {
     project?: projectCreateNestedManyWithoutUserInput
     experience?: experienceCreateNestedManyWithoutUserInput
     education?: educationCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutHeroInput = {
@@ -13357,6 +14618,7 @@ export namespace Prisma {
     project?: projectUncheckedCreateNestedManyWithoutUserInput
     experience?: experienceUncheckedCreateNestedManyWithoutUserInput
     education?: educationUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutHeroInput = {
@@ -13384,6 +14646,7 @@ export namespace Prisma {
     project?: projectUpdateManyWithoutUserNestedInput
     experience?: experienceUpdateManyWithoutUserNestedInput
     education?: educationUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutHeroInput = {
@@ -13396,6 +14659,7 @@ export namespace Prisma {
     project?: projectUncheckedUpdateManyWithoutUserNestedInput
     experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
     education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutProjectInput = {
@@ -13407,6 +14671,7 @@ export namespace Prisma {
     experience?: experienceCreateNestedManyWithoutUserInput
     education?: educationCreateNestedManyWithoutUserInput
     hero?: heroCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutProjectInput = {
@@ -13419,6 +14684,7 @@ export namespace Prisma {
     experience?: experienceUncheckedCreateNestedManyWithoutUserInput
     education?: educationUncheckedCreateNestedManyWithoutUserInput
     hero?: heroUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutProjectInput = {
@@ -13446,6 +14712,7 @@ export namespace Prisma {
     experience?: experienceUpdateManyWithoutUserNestedInput
     education?: educationUpdateManyWithoutUserNestedInput
     hero?: heroUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutProjectInput = {
@@ -13458,6 +14725,7 @@ export namespace Prisma {
     experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
     education?: educationUncheckedUpdateManyWithoutUserNestedInput
     hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutExperienceInput = {
@@ -13469,6 +14737,7 @@ export namespace Prisma {
     project?: projectCreateNestedManyWithoutUserInput
     education?: educationCreateNestedManyWithoutUserInput
     hero?: heroCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutExperienceInput = {
@@ -13481,6 +14750,7 @@ export namespace Prisma {
     project?: projectUncheckedCreateNestedManyWithoutUserInput
     education?: educationUncheckedCreateNestedManyWithoutUserInput
     hero?: heroUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutExperienceInput = {
@@ -13508,6 +14778,7 @@ export namespace Prisma {
     project?: projectUpdateManyWithoutUserNestedInput
     education?: educationUpdateManyWithoutUserNestedInput
     hero?: heroUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutExperienceInput = {
@@ -13520,6 +14791,7 @@ export namespace Prisma {
     project?: projectUncheckedUpdateManyWithoutUserNestedInput
     education?: educationUncheckedUpdateManyWithoutUserNestedInput
     hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutEducationInput = {
@@ -13531,6 +14803,7 @@ export namespace Prisma {
     project?: projectCreateNestedManyWithoutUserInput
     experience?: experienceCreateNestedManyWithoutUserInput
     hero?: heroCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutEducationInput = {
@@ -13543,6 +14816,7 @@ export namespace Prisma {
     project?: projectUncheckedCreateNestedManyWithoutUserInput
     experience?: experienceUncheckedCreateNestedManyWithoutUserInput
     hero?: heroUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutEducationInput = {
@@ -13570,6 +14844,7 @@ export namespace Prisma {
     project?: projectUpdateManyWithoutUserNestedInput
     experience?: experienceUpdateManyWithoutUserNestedInput
     hero?: heroUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutEducationInput = {
@@ -13582,6 +14857,7 @@ export namespace Prisma {
     project?: projectUncheckedUpdateManyWithoutUserNestedInput
     experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
     hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutSkillsInput = {
@@ -13593,6 +14869,7 @@ export namespace Prisma {
     experience?: experienceCreateNestedManyWithoutUserInput
     education?: educationCreateNestedManyWithoutUserInput
     hero?: heroCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutSkillsInput = {
@@ -13605,6 +14882,7 @@ export namespace Prisma {
     experience?: experienceUncheckedCreateNestedManyWithoutUserInput
     education?: educationUncheckedCreateNestedManyWithoutUserInput
     hero?: heroUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutSkillsInput = {
@@ -13632,6 +14910,7 @@ export namespace Prisma {
     experience?: experienceUpdateManyWithoutUserNestedInput
     education?: educationUpdateManyWithoutUserNestedInput
     hero?: heroUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutSkillsInput = {
@@ -13644,6 +14923,7 @@ export namespace Prisma {
     experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
     education?: educationUncheckedUpdateManyWithoutUserNestedInput
     hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutContactInput = {
@@ -13655,6 +14935,7 @@ export namespace Prisma {
     experience?: experienceCreateNestedManyWithoutUserInput
     education?: educationCreateNestedManyWithoutUserInput
     hero?: heroCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutContactInput = {
@@ -13667,6 +14948,7 @@ export namespace Prisma {
     experience?: experienceUncheckedCreateNestedManyWithoutUserInput
     education?: educationUncheckedCreateNestedManyWithoutUserInput
     hero?: heroUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutContactInput = {
@@ -13694,6 +14976,7 @@ export namespace Prisma {
     experience?: experienceUpdateManyWithoutUserNestedInput
     education?: educationUpdateManyWithoutUserNestedInput
     hero?: heroUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutContactInput = {
@@ -13706,6 +14989,7 @@ export namespace Prisma {
     experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
     education?: educationUncheckedUpdateManyWithoutUserNestedInput
     hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutAboutInput = {
@@ -13717,6 +15001,7 @@ export namespace Prisma {
     experience?: experienceCreateNestedManyWithoutUserInput
     education?: educationCreateNestedManyWithoutUserInput
     hero?: heroCreateNestedManyWithoutUserInput
+    userstyle?: userstyleCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutAboutInput = {
@@ -13729,6 +15014,7 @@ export namespace Prisma {
     experience?: experienceUncheckedCreateNestedManyWithoutUserInput
     education?: educationUncheckedCreateNestedManyWithoutUserInput
     hero?: heroUncheckedCreateNestedManyWithoutUserInput
+    userstyle?: userstyleUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutAboutInput = {
@@ -13756,6 +15042,7 @@ export namespace Prisma {
     experience?: experienceUpdateManyWithoutUserNestedInput
     education?: educationUpdateManyWithoutUserNestedInput
     hero?: heroUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutAboutInput = {
@@ -13768,17 +15055,80 @@ export namespace Prisma {
     experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
     education?: educationUncheckedUpdateManyWithoutUserNestedInput
     hero?: heroUncheckedUpdateManyWithoutUserNestedInput
+    userstyle?: userstyleUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type userCreateWithoutUserstyleInput = {
+    username: string
+    password: string
+    skills?: skillsCreateNestedManyWithoutUserInput
+    contact?: contactCreateNestedManyWithoutUserInput
+    About?: AboutCreateNestedManyWithoutUserInput
+    project?: projectCreateNestedManyWithoutUserInput
+    experience?: experienceCreateNestedManyWithoutUserInput
+    education?: educationCreateNestedManyWithoutUserInput
+    hero?: heroCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutUserstyleInput = {
+    uid?: number
+    username: string
+    password: string
+    skills?: skillsUncheckedCreateNestedManyWithoutUserInput
+    contact?: contactUncheckedCreateNestedManyWithoutUserInput
+    About?: AboutUncheckedCreateNestedManyWithoutUserInput
+    project?: projectUncheckedCreateNestedManyWithoutUserInput
+    experience?: experienceUncheckedCreateNestedManyWithoutUserInput
+    education?: educationUncheckedCreateNestedManyWithoutUserInput
+    hero?: heroUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutUserstyleInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutUserstyleInput, userUncheckedCreateWithoutUserstyleInput>
+  }
+
+  export type userUpsertWithoutUserstyleInput = {
+    update: XOR<userUpdateWithoutUserstyleInput, userUncheckedUpdateWithoutUserstyleInput>
+    create: XOR<userCreateWithoutUserstyleInput, userUncheckedCreateWithoutUserstyleInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutUserstyleInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutUserstyleInput, userUncheckedUpdateWithoutUserstyleInput>
+  }
+
+  export type userUpdateWithoutUserstyleInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateManyWithoutUserNestedInput
+    contact?: contactUpdateManyWithoutUserNestedInput
+    About?: AboutUpdateManyWithoutUserNestedInput
+    project?: projectUpdateManyWithoutUserNestedInput
+    experience?: experienceUpdateManyWithoutUserNestedInput
+    education?: educationUpdateManyWithoutUserNestedInput
+    hero?: heroUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutUserstyleInput = {
+    uid?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUncheckedUpdateManyWithoutUserNestedInput
+    contact?: contactUncheckedUpdateManyWithoutUserNestedInput
+    About?: AboutUncheckedUpdateManyWithoutUserNestedInput
+    project?: projectUncheckedUpdateManyWithoutUserNestedInput
+    experience?: experienceUncheckedUpdateManyWithoutUserNestedInput
+    education?: educationUncheckedUpdateManyWithoutUserNestedInput
+    hero?: heroUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type skillsCreateManyUserInput = {
     sid?: number
-    frontend?: skillsCreatefrontendInput | string[]
-    style: string
-    backend?: skillsCreatebackendInput | string[]
-    database?: skillsCreatedatabaseInput | string[]
-    mobile?: skillsCreatemobileInput | string[]
-    other?: skillsCreateotherInput | string[]
-    languages?: skillsCreatelanguagesInput | string[]
+    skillname: string
+    skills?: skillsCreateskillsInput | string[]
+    icon: string
   }
 
   export type contactCreateManyUserInput = {
@@ -13804,14 +15154,12 @@ export namespace Prisma {
     tags?: projectCreatetagsInput | string[]
     github: string
     Link: string
-    style: string
   }
 
   export type experienceCreateManyUserInput = {
     exid?: number
     title: string
     corp: string
-    style: string
     startdate: Date | string
     enddate: Date | string
     desc: string
@@ -13823,7 +15171,6 @@ export namespace Prisma {
     degree: string
     startdate: Date | string
     enddate: Date | string
-    style: string
   }
 
   export type heroCreateManyUserInput = {
@@ -13833,36 +15180,31 @@ export namespace Prisma {
     subhero: string
   }
 
+  export type userstyleCreateManyUserInput = {
+    sstyle: string
+    pstyle: string
+    estyle: string
+    exstyle: string
+  }
+
   export type skillsUpdateWithoutUserInput = {
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+    skillname?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateskillsInput | string[]
+    icon?: StringFieldUpdateOperationsInput | string
   }
 
   export type skillsUncheckedUpdateWithoutUserInput = {
     sid?: IntFieldUpdateOperationsInput | number
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+    skillname?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateskillsInput | string[]
+    icon?: StringFieldUpdateOperationsInput | string
   }
 
   export type skillsUncheckedUpdateManyWithoutUserInput = {
     sid?: IntFieldUpdateOperationsInput | number
-    frontend?: skillsUpdatefrontendInput | string[]
-    style?: StringFieldUpdateOperationsInput | string
-    backend?: skillsUpdatebackendInput | string[]
-    database?: skillsUpdatedatabaseInput | string[]
-    mobile?: skillsUpdatemobileInput | string[]
-    other?: skillsUpdateotherInput | string[]
-    languages?: skillsUpdatelanguagesInput | string[]
+    skillname?: StringFieldUpdateOperationsInput | string
+    skills?: skillsUpdateskillsInput | string[]
+    icon?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactUpdateWithoutUserInput = {
@@ -13915,7 +15257,6 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type projectUncheckedUpdateWithoutUserInput = {
@@ -13926,7 +15267,6 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type projectUncheckedUpdateManyWithoutUserInput = {
@@ -13937,13 +15277,11 @@ export namespace Prisma {
     tags?: projectUpdatetagsInput | string[]
     github?: StringFieldUpdateOperationsInput | string
     Link?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type experienceUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -13953,7 +15291,6 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -13963,7 +15300,6 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    style?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
     desc?: StringFieldUpdateOperationsInput | string
@@ -13974,7 +15310,6 @@ export namespace Prisma {
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type educationUncheckedUpdateWithoutUserInput = {
@@ -13983,7 +15318,6 @@ export namespace Prisma {
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type educationUncheckedUpdateManyWithoutUserInput = {
@@ -13992,7 +15326,6 @@ export namespace Prisma {
     degree?: StringFieldUpdateOperationsInput | string
     startdate?: DateTimeFieldUpdateOperationsInput | Date | string
     enddate?: DateTimeFieldUpdateOperationsInput | Date | string
-    style?: StringFieldUpdateOperationsInput | string
   }
 
   export type heroUpdateWithoutUserInput = {
@@ -14013,6 +15346,27 @@ export namespace Prisma {
     style?: StringFieldUpdateOperationsInput | string
     hero?: StringFieldUpdateOperationsInput | string
     subhero?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type userstyleUpdateWithoutUserInput = {
+    sstyle?: StringFieldUpdateOperationsInput | string
+    pstyle?: StringFieldUpdateOperationsInput | string
+    estyle?: StringFieldUpdateOperationsInput | string
+    exstyle?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type userstyleUncheckedUpdateWithoutUserInput = {
+    sstyle?: StringFieldUpdateOperationsInput | string
+    pstyle?: StringFieldUpdateOperationsInput | string
+    estyle?: StringFieldUpdateOperationsInput | string
+    exstyle?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type userstyleUncheckedUpdateManyWithoutUserInput = {
+    sstyle?: StringFieldUpdateOperationsInput | string
+    pstyle?: StringFieldUpdateOperationsInput | string
+    estyle?: StringFieldUpdateOperationsInput | string
+    exstyle?: StringFieldUpdateOperationsInput | string
   }
 
 

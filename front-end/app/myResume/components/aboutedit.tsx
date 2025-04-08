@@ -1,5 +1,5 @@
 "use client"
-import { about } from "@/utils/types"
+import { About } from "@/utils/types"
 import type React from "react"
 import Image from "next/image"
 import { Theme } from "../../themes/styles"
@@ -8,14 +8,14 @@ import pfp from "@/myPhoto.jpeg"
 import axios from "axios"
 import { toast } from "react-toastify"
 export default function AboutEditor() {
-  const [about, setAbout] = useState<about>(
+  const [about, setAbout] = useState<About>(
     {
       uid:1,
       about:"I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding, you can find me [your hobbies/interests].",
       image:"s",
       style:"1"
     })
-  const [data,setData]=useState<about|null>(null)
+  const [data,setData]=useState<About|null>(null)
   
   useEffect(()=>{const fetchData=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")

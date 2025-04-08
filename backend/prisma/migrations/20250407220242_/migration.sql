@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "skills" ALTER COLUMN "icon" SET NOT NULL,
+ALTER COLUMN "icon" SET DATA TYPE TEXT;

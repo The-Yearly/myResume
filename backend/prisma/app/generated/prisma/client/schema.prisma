@@ -20,6 +20,7 @@ model user {
   experience experience[]
   education  education[]
   hero       hero[]
+  userstyle  userstyle[]
 
   @@map("User")
 }
@@ -42,7 +43,6 @@ model project {
   tags   String[]
   github String
   Link   String
-  style  String
   user   user     @relation(fields: [uid], references: [uid])
 }
 
@@ -50,7 +50,6 @@ model experience {
   exid      Int      @id @default(autoincrement())
   title     String
   corp      String
-  style     String
   startdate DateTime
   enddate   DateTime
   desc      String
@@ -64,7 +63,6 @@ model education {
   degree    String
   startdate DateTime
   enddate   DateTime
-  style     String
   uid       Int
   user      user     @relation(fields: [uid], references: [uid])
 }
@@ -72,13 +70,9 @@ model education {
 model skills {
   sid       Int      @id @default(autoincrement())
   uid       Int
-  frontend  String[]
-  style     String
-  backend   String[]
-  database  String[]
-  mobile    String[]
-  other     String[]
-  languages String[]
+  skillname String
+  skills    String[]
+  icon      String
   user      user     @relation(fields: [uid], references: [uid])
 }
 
@@ -99,4 +93,13 @@ model About {
   about String
   style String
   user  user   @relation(fields: [uid], references: [uid])
+}
+
+model userstyle {
+  uid     Int    @id
+  sstyle  String
+  pstyle  String
+  estyle  String
+  exstyle String
+  user    user   @relation(fields: [uid], references: [uid])
 }

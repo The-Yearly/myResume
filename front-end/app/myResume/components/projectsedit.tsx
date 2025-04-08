@@ -1,52 +1,92 @@
 "use client"
 import pfp from "@/myPhoto.jpeg"
-import React, { useState } from "react"
+import React, { useState,useEffect } from "react"
 import Image from "next/image"
 import { Theme } from "@/app/themes/styles"
-interface Project {
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  github: string
-  link: string
-}
+import axios from "axios"
+import { Project } from "@/utils/types"
+import { toast } from "react-toastify"
+import { SelectedStyle } from "@/utils/types"
 export default function ProjectsEditor() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editIndex, setEditIndex] = useState<number | null>(null)
   const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
+  const [submitselectedStyle,setSubmitSelectedStyle]=useState<SelectedStyle|null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
+  const [deleteProject,setDeleteProject]=useState<Project|null>(null)
+  const [refresh,setRefresh]=useState(false)
   const [newProject, setNewProject] = useState<Project>({
+    pid:0,
     title: "",
-    description: "",
+    desc: "",
     image: "",
     tags: [],
     github: "",
-    link: "",
+    Link: "",
+    uid:0,
   })
   const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       setSelectedStyle(e.target.value as keyof typeof Theme)
   }
+  useEffect(()=>{const fetchStyle=async()=>{
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
+    setSelectedStyle(res.data.styles.pstyle)
+  }
+  fetchStyle()},[])
+  useEffect(()=>{const setStyle=async()=>{
+    if(submitselectedStyle!=null){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProjectStyle",submitselectedStyle)
+      toast(res.data.message)
+    }
+  }
+  setStyle()},[submitselectedStyle])
+
+  useEffect(()=>{const fetchData=async()=>{
+    if(modalOpen!=true){
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects/1")
+    setProjects(res.data.project)
+    }
+  }
+  fetchData()},[refresh])
+
+  useEffect(()=>{const sendData=async()=>{
+    if(newProject.title.length!=0){
+      if(editIndex==null){
+        console.log(newProject)
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addProject",newProject)
+          toast(res.data.message)
+        }else{
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProject",newProject)
+          toast(res.data.message)
+        }
+        setNewProject({
+          pid:0,
+          title: "",
+          desc: "",
+          image: "",
+          tags: [],
+          github: "",
+          Link: "",
+          uid:1
+        })
+        setEditIndex(null)
+        setRefresh(!refresh)  
+      }
+      
+    }
+  sendData()},[projects])
+
+  useEffect(()=>{
+    const DeleteProject=async()=>{
+      if(deleteProject!=null){
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteProject",deleteProject) 
+        toast(res.data.message)
+        setRefresh(!refresh)
+      }
+    }
+    DeleteProject()},[deleteProject])
   const SelectedProject = Theme[selectedStyle]?.projects;
-  const [projects, setProjects] = useState<Project[]>([
-    {
-      title: "Project One",
-      description:
-        "A web application that allows users to track their daily habits and set goals.",
-      image: "",
-      tags: ["React", "Node.js", "MongoDB"],
-      github: "#",
-      link: "#",
-    },
-    {
-      title: "Project Two",
-      description:
-        "An e-commerce platform with product management, cart functionality, and payment integration.",
-      image: "",
-      tags: ["Next.js", "Stripe", "Tailwind CSS"],
-      github: "#",
-      link: "#",
-    },
-  ])
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -67,36 +107,17 @@ export default function ProjectsEditor() {
       reader.readAsDataURL(file)
     }
   }
-  const handleSubmit = () => {
-    if (editIndex !== null) {
-      const updatedProjects = [...projects]
-      updatedProjects[editIndex] = newProject
-      setProjects(updatedProjects)
-    } else {
-      setProjects((prev) => [...prev, newProject])
-    }
 
-    setNewProject({
-      title: "",
-      description: "",
-      image: "",
-      tags: [],
-      github: "",
-      link: "",
-    })
-    setEditIndex(null)
-    setModalOpen(false)
-  }
-
-  const handleDelete = (index: number) => {
+  const handleDelete = (i: number) => {
     const updated = [...projects]
-    updated.splice(index, 1)
+    updated.splice(i, 1)
+    setDeleteProject(projects[i])
     setProjects(updated)
   }
 
-  const handleEdit = (index: number) => {
-    setNewProject(projects[index])
-    setEditIndex(index)
+  const handleEdit = (i: number) => {
+    setNewProject(projects[i])
+    setEditIndex(i)
     setModalOpen(true)
   }
 
@@ -105,6 +126,7 @@ export default function ProjectsEditor() {
       
        <div>
               <label className="block text-sm font-medium text-gray-700">Select Style</label>
+              <div className="flex">
               <select
                 value={selectedStyle}
                 onChange={handleStyleChange}
@@ -113,12 +135,14 @@ export default function ProjectsEditor() {
                 <option value="1">Style 1</option>
                 <option value="2">Style 2</option>
               </select>
+              <button onClick={()=>{setSubmitSelectedStyle({uid:1,pstyle:selectedStyle})}} className="ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg">Save</button>
+              </div>
             </div>
       <h2 className="text-2xl font-bold mb-4">Projects</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {projects.map((project, index) => (
-          <div key={index} className="rounded-2xl shadow-md border p-4">
+        {projects.map((project, i) => (
+          <div key={i} className="rounded-2xl shadow-md border p-4">
             <Image
               src={pfp}
               alt={project.title}
@@ -126,7 +150,7 @@ export default function ProjectsEditor() {
             />
             <div>
               <h3 className="text-lg font-semibold">{project.title}</h3>
-              <p className="text-sm text-gray-600">{project.description}</p>
+              <p className="text-sm text-gray-600">{project.desc}</p>
               <div className="flex flex-wrap gap-2 my-2">
                 {project.tags.map((tag, i) => (
                   <span
@@ -140,14 +164,14 @@ export default function ProjectsEditor() {
               <div className="flex justify-between mt-4">
                 <div className="space-x-2">
                   <button
-                    onClick={() => handleEdit(index)}
-                    className="bg-yellow-100 text-yellow-800 px-4 py-1 rounded-md hover:bg-yellow-200"
+                    onClick={() => handleEdit(i)}
+                    className="bg-sky-100 text-blue-400 border-slate-100 px-4 py-1 rounded-md hover:bg-sky-500 hover:text-white transition-all"
                   >
                     Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(index)}
-                    className="bg-red-100 text-red-600 px-4 py-1 rounded-md hover:bg-red-200"
+                    onClick={() => handleDelete(i)}
+                    className="bg-red-100 text-red-600 px-4 py-1 rounded-md hover:bg-red-200 transition-colors"
                   >
                     Delete
                   </button>
@@ -173,11 +197,12 @@ export default function ProjectsEditor() {
         onClick={() => {
           setNewProject({
             title: "",
-            description: "",
+            desc: "",
             image: "",
             tags: [],
             github: "",
-            link: "",
+            Link: "",
+            uid:1
           })
           setEditIndex(null)
           setModalOpen(true)
@@ -187,7 +212,17 @@ export default function ProjectsEditor() {
         Add Project
       </button>
       {modalOpen && (
-        <div className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center z-50">
+        <form onSubmit={(e)=>{
+          e.preventDefault()
+          if (editIndex !== null) {
+            const updatedProjects = [...projects]
+            updatedProjects[editIndex] = newProject
+            setProjects(updatedProjects)
+          }else{
+            setProjects((prev) => [...prev, newProject])
+          }
+          setModalOpen(false)
+        }} className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-full max-w-lg space-y-4">
             <h3 className="text-xl font-semibold">
               {editIndex !== null ? "Edit Project" : "New Project"}
@@ -200,13 +235,14 @@ export default function ProjectsEditor() {
               value={newProject.title}
               onChange={handleChange}
               className="w-full border p-2 rounded-md"
-            />
+             required/>
             <textarea
-              name="description"
+              name="desc"
               placeholder="Description"
-              value={newProject.description}
+              value={newProject.desc}
               onChange={handleChange}
               className="w-full border p-2 rounded-md"
+              required
             />
             <input
               type="text"
@@ -215,14 +251,16 @@ export default function ProjectsEditor() {
               value={newProject.github}
               onChange={handleChange}
               className="w-full border p-2 rounded-md"
+              required
             />
             <input
               type="text"
-              name="link"
+              name="Link"
               placeholder="Live URL"
-              value={newProject.link}
+              value={newProject.Link}
               onChange={handleChange}
               className="w-full border p-2 rounded-md"
+              required
             />
             <input
               type="text"
@@ -230,12 +268,14 @@ export default function ProjectsEditor() {
               value={newProject.tags.join(", ")}
               onChange={handleTagsChange}
               className="w-full border p-2 rounded-md"
+              required
             />
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
               className="w-full"
+              required
             />
 
             <div className="flex justify-end gap-2 pt-2">
@@ -249,14 +289,15 @@ export default function ProjectsEditor() {
                 Cancel
               </button>
               <button
-                onClick={handleSubmit}
+              type="submit"
+                
                 className="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700"
               >
                 {editIndex !== null ? "Update" : "Save"}
               </button>
             </div>
           </div>
-        </div>
+        </form>
       )}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
