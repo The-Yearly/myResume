@@ -24,6 +24,7 @@ export default function SkillsEditor(){
   const [selectedStyle, setSelectedStyle]=useState<keyof typeof Theme>("1")
   const [skills,setSkills]=useState<Skill[]>([])
   const [refresh,setRefresh]=useState(false)
+  const [gotResp,setGotResp]=useState(false)
   const [isCategoryModalOpen, setIsCategoryModalOpen]=useState(false)
   const [currentCategoryName, setCurrentCategoryName]=useState("")
   const [updatedCatgory,setUpdatedCatgory]=useState<updatedCatgory|null>(null)
@@ -49,62 +50,74 @@ export default function SkillsEditor(){
   fetchStyle()},[])
 
   useEffect(()=>{const setStyle=async()=>{
+    setGotResp(true)
     if(submitselectedStyle!=null){
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillStyle",submitselectedStyle)
       toast(res.data.message)
       setIsSkillModalOpen(false)
     }
+    setGotResp(false)
   }
   setStyle()},[submitselectedStyle])
 
   useEffect(()=>{
     const addSkills=async()=>{
+      setGotResp(true)
       if(newsSkillsList.length!=0 && currentSkillCat!=0){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addSkill",{list:newsSkillsList,sid:currentSkillCat})
         toast(res.data.message)
-        setIsCategoryModalOpen(false)
         setIsSkillModalOpen(false)
       }
+      setGotResp(false)
     }
   addSkills()
   },[newsSkillsList])
   useEffect(()=>{
     const sendupdatedCatgory=async()=>{
+      setGotResp(true)
       if(updatedCatgory!=null){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillCat",updatedCatgory)
         toast(res.data.message)
         setCurrentSkillCat(0)
         setIsCategoryModalOpen(false)
       }
+      setGotResp(false)
     }
   sendupdatedCatgory()},[updatedCatgory])
 
   useEffect(()=>{
   const fetchData=async()=>{
+    setGotResp(true)
       const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills/1")
       setSkills(res.data.skills)
+      setGotResp(false)
   }
   fetchData()},[refresh])
 
   useEffect(()=>{
     const deleteData=async()=>{
+      setGotResp(true)
       if(deleteSkill!=0){
         const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteSkill/"+deleteSkill)
         toast(res.data.message)
         setDeleteSkill(0)
     }
+    setGotResp(false)
   }
     deleteData()},[deleteSkill])
   
   
   useEffect(()=>{
     const fetchData=async()=>{
+      setGotResp(true)
       if(newSkill!=null){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addSkills",newSkill)
         toast(res.data.message)
         setSelectedSkill(null)
+        setIsCategoryModalOpen(false)
         setRefresh(!refresh)
       }
+      setGotResp(false)
     }
     fetchData()},[newSkill])
   const SelectedSkills=Theme[selectedStyle]?.skills
@@ -267,11 +280,12 @@ export default function SkillsEditor(){
             <option value="1">Style 1</option>
             <option value="2">Style 2</option>
           </select>
-          <button onClick={()=>{setSubmitSelectedStyle({uid:1,sstyle:selectedStyle})}} className="ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg">Save</button>
+          <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,sstyle:selectedStyle})}} className="ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg">Save</button>
           </div>
         </div>
         <h1 className="text-2xl font-bold text-gray-800">Manage Skills</h1>
         <button
+         disabled={gotResp}
           onClick={openNewCategoryModal}
           className="flex items-center px-4 py-2 bg-sky-400 text-white rounded hover:bg-sky-700 transition-colors">
           <Plus size={16} className="mr-2" />
@@ -289,12 +303,14 @@ export default function SkillsEditor(){
               </div>
               <div className="flex space-x-2">
                 <button
+                 disabled={gotResp}
                   onClick={()=>openEditCategoryModal(skillcat.skillname, skillcat.sid)}
                   className="p-1 text-gray-500 hover:text-gray-700"
                 >
                   <Edit size={16} />
                 </button>
                 <button
+                 disabled={gotResp}
                   onClick={()=>handleDeleteCategory(skillcat.skillname, skillcat.sid)}
                   className="p-1 text-gray-500 hover:text-red-500"
                 >
@@ -309,12 +325,14 @@ export default function SkillsEditor(){
                     <span>{skill}</span>
                     <div className="flex space-x-2">
                       <button
+                      disabled={gotResp}
                         onClick={()=>openEditSkillModal(skillcat.skillname,skill,skillcat.sid)}
                         className="p-1 text-gray-500 hover:text-gray-700"
                       >
                         <Edit size={16} />
                       </button>
                       <button
+                      disabled={gotResp}
                         onClick={()=>handleDeleteSkill(skillcat.skillname, skill,skillcat.sid)}
                         className="p-1 text-gray-500 hover:text-red-500"
                       >
@@ -330,6 +348,7 @@ export default function SkillsEditor(){
             </div>
             <div className="p-4 border-t">
               <button
+              disabled={gotResp}
                 className="flex items-center justify-center w-full px-3 py-2 border border-gray-300 text-sm rounded hover:bg-gray-100"
                 onClick={()=>openNewSkillModal(skillcat.skillname,skillcat.sid)}
               >
@@ -342,7 +361,7 @@ export default function SkillsEditor(){
       </div>
 
      {isCategoryModalOpen && (
-        <div className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center bg-opacity-40">
+        <div className="fixed inset-0 h-full z-50 backdrop-blur-sm flex items-center justify-center ">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4">{isEditingCategory ? "Edit Category" : "Add New Category"}</h2>
 
@@ -361,6 +380,7 @@ export default function SkillsEditor(){
                 <label className="block text-sm font-medium mb-1">Icon</label>
                 <div className="relative">
                   <button
+                  disabled={gotResp}
                     type="button"
                     onClick={toggleIconSelector}
                     className="w-full flex items-center justify-between border rounded px-3 py-2 bg-white hover:bg-gray-50"
@@ -388,6 +408,7 @@ export default function SkillsEditor(){
                           const IconComp=iconMap[iconName]
                           return (
                             <button
+                            disabled={gotResp}
                               key={iconName}
                               onClick={()=>selectIcon(iconName)}
                               className={`flex flex-col items-center justify-center p-2 rounded hover:bg-gray-100 ${
@@ -407,6 +428,7 @@ export default function SkillsEditor(){
 
               <div className="flex justify-end space-x-3 pt-4">
                 <button
+                disabled={gotResp}
                   type="button"
                   onClick={()=>{closeCategoryModal();setIsCategoryModalOpen(false)}}
                   className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
@@ -414,9 +436,10 @@ export default function SkillsEditor(){
                   Cancel
                 </button>
                 <button
+                
                   type="button"
                   onClick={handleSaveCategory}
-                  disabled={!currentCategoryName.trim()}
+                  disabled={!currentCategoryName.trim()&&gotResp}
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
                 >
                   Save Category
@@ -429,7 +452,7 @@ export default function SkillsEditor(){
 
 
      {isSkillModalOpen && (
-        <div className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center">
+        <div className="fixed inset-0 z-50 h-full backdrop-blur-sm flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4">{isEditingSkill ? "Edit Skill" : "Add New Skill"}</h2>
 
@@ -446,6 +469,7 @@ export default function SkillsEditor(){
 
               <div className="flex justify-end space-x-3 pt-4">
                 <button
+                disabled={gotResp}
                   type="button"
                   onClick={()=>{closeSkillModal();setIsSkillModalOpen(false)}}
                   className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
@@ -455,7 +479,7 @@ export default function SkillsEditor(){
                 <button
                   type="button"
                   onClick={handleSaveSkill}
-                  disabled={!currentSkillName.trim()}
+                  disabled={!currentSkillName.trim()&&gotResp}
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
                 >
                   Save Skill

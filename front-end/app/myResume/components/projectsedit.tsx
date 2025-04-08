@@ -7,12 +7,14 @@ import axios from "axios"
 import { Project } from "@/utils/types"
 import { toast } from "react-toastify"
 import { SelectedStyle } from "@/utils/types"
+import { tr } from "framer-motion/client"
 export default function ProjectsEditor() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editIndex, setEditIndex] = useState<number | null>(null)
   const [selectedStyle, setSelectedStyle] = useState<keyof typeof Theme>("1");
   const [submitselectedStyle,setSubmitSelectedStyle]=useState<SelectedStyle|null>(null)
   const [projects, setProjects] = useState<Project[]>([])
+  const [gotResp,setGotResp]=useState(false)
   const [deleteProject,setDeleteProject]=useState<Project|null>(null)
   const [refresh,setRefresh]=useState(false)
   const [newProject, setNewProject] = useState<Project>({
@@ -29,27 +31,35 @@ export default function ProjectsEditor() {
       setSelectedStyle(e.target.value as keyof typeof Theme)
   }
   useEffect(()=>{const fetchStyle=async()=>{
+    setGotResp(true)
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
     setSelectedStyle(res.data.styles.pstyle)
+    setGotResp(false)
   }
   fetchStyle()},[])
   useEffect(()=>{const setStyle=async()=>{
+    setGotResp(true)
     if(submitselectedStyle!=null){
+      
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProjectStyle",submitselectedStyle)
       toast(res.data.message)
     }
+    setGotResp(false)
   }
   setStyle()},[submitselectedStyle])
 
   useEffect(()=>{const fetchData=async()=>{
+    setGotResp(true)
     if(modalOpen!=true){
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects/1")
     setProjects(res.data.project)
     }
+    setGotResp(false)
   }
   fetchData()},[refresh])
 
   useEffect(()=>{const sendData=async()=>{
+    setGotResp(true)
     if(newProject.title.length!=0){
       if(editIndex==null){
         console.log(newProject)
@@ -73,16 +83,19 @@ export default function ProjectsEditor() {
         setRefresh(!refresh)  
       }
       setModalOpen(false)
+      setGotResp(false)
     }
   sendData()},[projects])
 
   useEffect(()=>{
     const DeleteProject=async()=>{
+      setGotResp(true)
       if(deleteProject!=null){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteProject",deleteProject) 
         toast(res.data.message)
         setRefresh(!refresh)
       }
+      setGotResp(false)
     }
     DeleteProject()},[deleteProject])
   const SelectedProject = Theme[selectedStyle]?.projects;
@@ -135,7 +148,7 @@ export default function ProjectsEditor() {
                 <option value="1">Style 1</option>
                 <option value="2">Style 2</option>
               </select>
-              <button onClick={()=>{setSubmitSelectedStyle({uid:1,pstyle:selectedStyle})}} className="ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg">Save</button>
+              <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,pstyle:selectedStyle})}} className="ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg">Save</button>
               </div>
             </div>
       <h2 className="text-2xl font-bold mb-4">Projects</h2>
@@ -164,12 +177,14 @@ export default function ProjectsEditor() {
               <div className="flex justify-between mt-4">
                 <div className="space-x-2">
                   <button
+                    disabled={gotResp}
                     onClick={() => handleEdit(i)}
                     className="bg-sky-100 text-blue-400 border-slate-100 px-4 py-1 rounded-md hover:bg-sky-500 hover:text-white transition-all"
                   >
                     Edit
                   </button>
                   <button
+                  disabled={gotResp}
                     onClick={() => handleDelete(i)}
                     className="bg-red-100 text-red-600 px-4 py-1 rounded-md hover:bg-red-200 transition-colors"
                   >
@@ -194,6 +209,7 @@ export default function ProjectsEditor() {
 
 
       <button
+       disabled={gotResp}
         onClick={() => {
           setNewProject({
             title: "",
@@ -221,7 +237,7 @@ export default function ProjectsEditor() {
           }else{
             setProjects((prev) => [...prev, newProject])
           }
-        }} className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center z-50">
+        }} className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center h-full justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-full max-w-lg space-y-4">
             <h3 className="text-xl font-semibold">
               {editIndex !== null ? "Edit Project" : "New Project"}
@@ -279,6 +295,7 @@ export default function ProjectsEditor() {
 
             <div className="flex justify-end gap-2 pt-2">
               <button
+              disabled={gotResp}
                 onClick={() => {
                   setModalOpen(false)
                   setEditIndex(null)
@@ -288,6 +305,7 @@ export default function ProjectsEditor() {
                 Cancel
               </button>
               <button
+              disabled={gotResp}
               type="submit"
                 
                 className="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700"
