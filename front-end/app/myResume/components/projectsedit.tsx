@@ -7,7 +7,6 @@ import axios from "axios"
 import { Project } from "@/utils/types"
 import { toast } from "react-toastify"
 import { SelectedStyle } from "@/utils/types"
-import { tr } from "framer-motion/client"
 export default function ProjectsEditor() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editIndex, setEditIndex] = useState<number | null>(null)
