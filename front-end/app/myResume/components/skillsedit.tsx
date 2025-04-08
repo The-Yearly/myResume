@@ -280,14 +280,14 @@ export default function SkillsEditor(){
             <option value="1">Style 1</option>
             <option value="2">Style 2</option>
           </select>
-          <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,sstyle:selectedStyle})}} className="ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg">Save</button>
+          <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,sstyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
           </div>
         </div>
         <h1 className="text-2xl font-bold text-gray-800">Manage Skills</h1>
         <button
          disabled={gotResp}
           onClick={openNewCategoryModal}
-          className="flex items-center px-4 py-2 bg-sky-400 text-white rounded hover:bg-sky-700 transition-colors">
+          className={`flex items-center px-4 py-2 bg-sky-400 text-white rounded hover:bg-sky-700 transition-colors ${gotResp?'cursor-wait':'cursor-pointer'}`}>
           <Plus size={16} className="mr-2" />
           Add Category
           
@@ -305,14 +305,14 @@ export default function SkillsEditor(){
                 <button
                  disabled={gotResp}
                   onClick={()=>openEditCategoryModal(skillcat.skillname, skillcat.sid)}
-                  className="p-1 text-gray-500 hover:text-gray-700"
+                  className={`p-1 text-gray-500 hover:text-gray-700 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                 >
                   <Edit size={16} />
                 </button>
                 <button
                  disabled={gotResp}
                   onClick={()=>handleDeleteCategory(skillcat.skillname, skillcat.sid)}
-                  className="p-1 text-gray-500 hover:text-red-500"
+                  className={`p-1 text-gray-500 hover:text-red-500 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                 >
                   <Trash2 size={16} />
                 </button>
@@ -327,14 +327,14 @@ export default function SkillsEditor(){
                       <button
                       disabled={gotResp}
                         onClick={()=>openEditSkillModal(skillcat.skillname,skill,skillcat.sid)}
-                        className="p-1 text-gray-500 hover:text-gray-700"
+                        className={`p-1 text-gray-500 hover:text-gray-700 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                       >
                         <Edit size={16} />
                       </button>
                       <button
                       disabled={gotResp}
                         onClick={()=>handleDeleteSkill(skillcat.skillname, skill,skillcat.sid)}
-                        className="p-1 text-gray-500 hover:text-red-500"
+                        className={`p-1 text-gray-500 hover:text-red-500 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                       >
                         <Trash2 size={16} />
                       </button>
@@ -349,7 +349,7 @@ export default function SkillsEditor(){
             <div className="p-4 border-t">
               <button
               disabled={gotResp}
-                className="flex items-center justify-center w-full px-3 py-2 border border-gray-300 text-sm rounded hover:bg-gray-100"
+                className={`flex items-center justify-center w-full px-3 py-2 border border-gray-300 text-sm rounded hover:bg-gray-100 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                 onClick={()=>openNewSkillModal(skillcat.skillname,skillcat.sid)}
               >
                 <Plus size={16} className="mr-2" />
@@ -383,7 +383,7 @@ export default function SkillsEditor(){
                   disabled={gotResp}
                     type="button"
                     onClick={toggleIconSelector}
-                    className="w-full flex items-center justify-between border rounded px-3 py-2 bg-white hover:bg-gray-50"
+                    className={`w-full flex items-center justify-between border rounded px-3 py-2 bg-white hover:bg-gray-50 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                   >
                     <div className="flex items-center">
                      {React.createElement(iconMap[selectedIcon],{ className: "h-5 w-5 mr-2" })}
@@ -412,8 +412,8 @@ export default function SkillsEditor(){
                               key={iconName}
                               onClick={()=>selectIcon(iconName)}
                               className={`flex flex-col items-center justify-center p-2 rounded hover:bg-gray-100 ${
-                                selectedIcon==iconName ? "bg-gray-100 ring-2 ring-blue-500" : ""
-                              }`}
+                                selectedIcon==iconName ? "bg-gray-100 ring-2 ring-blue-500 " : ""
+                              } ${gotResp?'cursor-wait':'cursor-pointer'}`}
                             >
                               <IconComp className="h-5 w-5 mb-1" />
                               <span className="text-xs truncate w-full text-center">{iconName}</span>
@@ -431,7 +431,7 @@ export default function SkillsEditor(){
                 disabled={gotResp}
                   type="button"
                   onClick={()=>{closeCategoryModal();setIsCategoryModalOpen(false)}}
-                  className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
+                  className={`px-4 py-2 border rounded text-gray-700 hover:bg-gray-100 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                 >
                   Cancel
                 </button>
@@ -440,7 +440,7 @@ export default function SkillsEditor(){
                   type="button"
                   onClick={handleSaveCategory}
                   disabled={!currentCategoryName.trim()&&gotResp}
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                  className={`px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                 >
                   Save Category
                 </button>
@@ -472,7 +472,7 @@ export default function SkillsEditor(){
                 disabled={gotResp}
                   type="button"
                   onClick={()=>{closeSkillModal();setIsSkillModalOpen(false)}}
-                  className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
+                  className={`px-4 py-2 border rounded text-gray-700 hover:bg-gray-100 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                 >
                   Cancel
                 </button>
@@ -480,7 +480,7 @@ export default function SkillsEditor(){
                   type="button"
                   onClick={handleSaveSkill}
                   disabled={!currentSkillName.trim()&&gotResp}
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                  className={`px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 ${gotResp?'cursor-wait':'cursor-pointer'}`}
                 >
                   Save Skill
                 </button>

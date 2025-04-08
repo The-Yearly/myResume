@@ -147,7 +147,7 @@ export default function ProjectsEditor() {
                 <option value="1">Style 1</option>
                 <option value="2">Style 2</option>
               </select>
-              <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,pstyle:selectedStyle})}} className="ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg">Save</button>
+              <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,pstyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
               </div>
             </div>
       <h2 className="text-2xl font-bold mb-4">Projects</h2>
@@ -178,14 +178,14 @@ export default function ProjectsEditor() {
                   <button
                     disabled={gotResp}
                     onClick={() => handleEdit(i)}
-                    className="bg-sky-100 text-blue-400 border-slate-100 px-4 py-1 rounded-md hover:bg-sky-500 hover:text-white transition-all"
+                    className={`bg-sky-100 text-blue-400 border-slate-100 px-4 py-1 rounded-md hover:bg-sky-500 hover:text-white transition-all ${gotResp?'cursor-wait':'cursor-pointer'}`}
                   >
                     Edit
                   </button>
                   <button
                   disabled={gotResp}
                     onClick={() => handleDelete(i)}
-                    className="bg-red-100 text-red-600 px-4 py-1 rounded-md hover:bg-red-200 transition-colors"
+                    className={`bg-red-100 text-red-600 px-4 py-1 rounded-md hover:bg-red-200 transition-colors ${gotResp?'cursor-wait':'cursor-pointer'}`}
                   >
                     Delete
                   </button>
@@ -222,7 +222,7 @@ export default function ProjectsEditor() {
           setEditIndex(null)
           setModalOpen(true)
         }}
-        className="my-4 right-10 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        className={`my-4 right-10 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${gotResp?'cursor-wait':'cursor-pointer'}`}
       >
         Add Project
       </button>
@@ -299,7 +299,7 @@ export default function ProjectsEditor() {
                   setModalOpen(false)
                   setEditIndex(null)
                 }}
-                className="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200"
+                className={`px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 ${gotResp?'cursor-wait':'cursor-pointer'}`}
               >
                 Cancel
               </button>
@@ -307,7 +307,7 @@ export default function ProjectsEditor() {
               disabled={gotResp}
               type="submit"
                 
-                className="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700"
+                className={`px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 ${gotResp?'cursor-wait':'cursor-pointer'}`}
               >
                 {editIndex !== null ? "Update" : "Save"}
               </button>
