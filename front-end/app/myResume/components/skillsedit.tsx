@@ -52,6 +52,7 @@ export default function SkillsEditor(){
     if(submitselectedStyle!=null){
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillStyle",submitselectedStyle)
       toast(res.data.message)
+      setIsSkillModalOpen(false)
     }
   }
   setStyle()},[submitselectedStyle])
@@ -61,6 +62,8 @@ export default function SkillsEditor(){
       if(newsSkillsList.length!=0 && currentSkillCat!=0){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addSkill",{list:newsSkillsList,sid:currentSkillCat})
         toast(res.data.message)
+        setIsCategoryModalOpen(false)
+        setIsSkillModalOpen(false)
       }
     }
   addSkills()
@@ -71,6 +74,7 @@ export default function SkillsEditor(){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillCat",updatedCatgory)
         toast(res.data.message)
         setCurrentSkillCat(0)
+        setIsCategoryModalOpen(false)
       }
     }
   sendupdatedCatgory()},[updatedCatgory])
@@ -132,7 +136,6 @@ export default function SkillsEditor(){
   }
 
   const closeCategoryModal=()=>{
-    setIsCategoryModalOpen(false)
     setIsEditingCategory(false)
     setCurrentCategoryName("")
     setIsIconSelectorOpen(false)
@@ -197,7 +200,6 @@ export default function SkillsEditor(){
   }
 
   const closeSkillModal=()=>{
-    setIsSkillModalOpen(false)
     setCurrentSkillName("")
     setCurrentCategory("")
     setIsEditingSkill(false)
@@ -406,7 +408,7 @@ export default function SkillsEditor(){
               <div className="flex justify-end space-x-3 pt-4">
                 <button
                   type="button"
-                  onClick={closeCategoryModal}
+                  onClick={()=>{closeCategoryModal();setIsCategoryModalOpen(false)}}
                   className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
                 >
                   Cancel
@@ -445,7 +447,7 @@ export default function SkillsEditor(){
               <div className="flex justify-end space-x-3 pt-4">
                 <button
                   type="button"
-                  onClick={closeSkillModal}
+                  onClick={()=>{closeSkillModal();setIsSkillModalOpen(false)}}
                   className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
                 >
                   Cancel

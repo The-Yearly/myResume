@@ -72,7 +72,7 @@ export default function ProjectsEditor() {
         setEditIndex(null)
         setRefresh(!refresh)  
       }
-      
+      setModalOpen(false)
     }
   sendData()},[projects])
 
@@ -221,7 +221,6 @@ export default function ProjectsEditor() {
           }else{
             setProjects((prev) => [...prev, newProject])
           }
-          setModalOpen(false)
         }} className="fixed inset-0 backdrop-blur-sm bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-full max-w-lg space-y-4">
             <h3 className="text-xl font-semibold">
