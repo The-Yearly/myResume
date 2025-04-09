@@ -28,19 +28,19 @@ export const Experience=z.object({
   exid:z.number().optional(),
   title:z.string(),
   corp:z.string(),
-  startdate:z.date(),
-  enddate:z.date().optional(),
+  startdate:z.string(),
+  enddate:z.string().nullable().optional(),
   desc:z.string(),
-  uid:z.number().optional(),
+  uid:z.number(),
 })
 
 export const Education=z.object({
   edid:z.number().optional(),
   inst:z.string(),
   degree:z.string(),
-  startdate:z.date(),
-  enddate:z.date().optional(),
-  uid:z.number().optional(),
+  startdate:z.string(),
+  enddate:z.string().nullable().optional(),
+  uid:z.number(),
 })
 
 export const Skills=z.object({

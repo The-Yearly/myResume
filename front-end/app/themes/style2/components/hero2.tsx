@@ -3,7 +3,7 @@ import { ArrowDown } from "lucide-react"
 import Link from "next/link"
 export default function Hero2(props:{content:{hero:string,subhero:string}}) {
     return(
-        <div className="min-h-screen bg-background">
+        <section id="hero" className="min-h-screen bg-background">
             <section className="relative h-screen flex flex-col items-center justify-center text-center px-4">
                 <div className="absolute inset-0 overflow-hidden z-0">
                 </div>
@@ -30,7 +30,7 @@ export default function Hero2(props:{content:{hero:string,subhero:string}}) {
                 </Link>
                 </div>
             </section>
-        </div>
+        </section>
 
 
     )

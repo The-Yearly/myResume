@@ -39,3 +39,23 @@ export interface Skill{
     skillname:string
     skills:string[]
 }
+
+export interface ExperienceI{
+    exid?:number
+    title:string
+    corp:string
+    startdate:string
+    enddate:string|null
+    desc:string
+    uid:number
+}
+
+export interface EducationI{
+    edid?:number
+    inst:string
+    degree:string
+    startdate:string
+    enddate:string|null
+    uid:number
+}
+  

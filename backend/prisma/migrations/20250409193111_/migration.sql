@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "education" ALTER COLUMN "startdate" SET DATA TYPE TEXT,
+ALTER COLUMN "enddate" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "experience" ALTER COLUMN "startdate" SET DATA TYPE TEXT,
+ALTER COLUMN "enddate" SET DATA TYPE TEXT;

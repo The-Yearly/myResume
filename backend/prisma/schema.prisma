@@ -50,8 +50,8 @@ model experience {
   exid      Int      @id @default(autoincrement())
   title     String
   corp      String
-  startdate DateTime
-  enddate   DateTime
+  startdate String
+  enddate   String?
   desc      String
   uid       Int
   user      user     @relation(fields: [uid], references: [uid])
@@ -61,8 +61,8 @@ model education {
   edid      Int      @id @default(autoincrement())
   inst      String
   degree    String
-  startdate DateTime
-  enddate   DateTime
+  startdate String
+  enddate   String?
   uid       Int
   user      user     @relation(fields: [uid], references: [uid])
 }

@@ -1,9 +1,7 @@
 'use client'
 import { Navbar} from "./themes/style1/components/navBar"
 import { Contact } from "./themes/style1/components/contact"
-import Experience from "./themes/style1/components/experience"
-import { EducationI } from "./themes/style1/components/education"
-import Education from "./themes/style1/components/education"
+import { EducationI, ExperienceI } from "@/utils/types"
 import { Project } from "@/utils/types"
 import { Skill } from "@/utils/types"
 import { Theme } from "./themes/styles"
@@ -17,6 +15,18 @@ export default function Home() {
   const [skills,setSkills]=useState<Skill[]>([])
   const [projectStyle,setProjectStyle]=useState<keyof typeof Theme>("1")
   const [skillStyle,setSkillStyle]=useState<keyof typeof Theme>("1")
+  const [educationStyle,setEducationStyle]=useState<keyof typeof Theme>("1")
+  const [expStyle,setExpStyle]=useState<keyof typeof Theme>("1")
+  const [education,setEducations]=useState<EducationI[]>([])
+  const [exp,setExp]=useState<ExperienceI[]>([])
+
+  useEffect(()=>{const getData=async()=>{
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience/1")
+    setExp(res.data.experience)
+  }
+  getData()},[])
+
+
   useEffect(()=>{const fetchData=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects/1")
     setProjects(res.data.project)
@@ -27,8 +37,12 @@ export default function Home() {
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
     setProjectStyle(res.data.styles.pstyle)
     setSkillStyle(res.data.styles.sstyle)
+    setEducationStyle(res.data.styles.estyle)
+    setExpStyle(res.data.styles.exstyle)
   }
   getStyles()},[])
+
+  
 
   useEffect(()=>{const getHero=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
@@ -56,27 +70,18 @@ export default function Home() {
     }
     fetchData()
   }, [])
+
+  useEffect(()=>{const getEd=async()=>{
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations/1")
+    setEducations(res.data.education)
+  }
+  getEd()},[])
   const SelectedHero=Theme[hero?.style as keyof typeof Theme]?.hero
   const SelectedAbout=Theme[about?.style as keyof typeof Theme]?.about
   const SelectedSkills=Theme[skillStyle]?.skills
   const SelectedProjects=Theme[projectStyle]?.projects
-
-  const exp=[
-    {
-        company: 'Tech Corp',
-        role: 'Software Engineer',
-        startDate: 'Jan 2022',
-        endDate:"July 2024",
-        description: 'Developed and maintained web applications using modern technologies.',
-      }]
-  const education: EducationI[] = [
-    {
-      institution: "University of Example",
-      degree: "Bachelor of Science",
-      startDate: "2016-09",
-      endDate: "2020-05",
-    },
-  ];
+  const SelectedEducation=Theme[educationStyle]?.education
+  const SelectedExp=Theme[expStyle]?.experience
   return (
     <>
     <Navbar/>
@@ -85,9 +90,9 @@ export default function Home() {
       {SelectedAbout?<SelectedAbout content={{bio:"I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding, you can find me [your hobbies/interests].",image:"ss"}}/>:<p>Style Not Found</p>}
       {SelectedSkills?<SelectedSkills skills={skills}/>:<p>Style Not Found</p>}
       {SelectedProjects?<SelectedProjects content={projects}/>:<p>Style Not Found</p>}
-      <div className="flex items-center">
-        <Experience experence={exp}/>
-        <Education education={education}/>
+      <div className="grid w-full grid-cols-1 lg:grid-cols-4">
+        {SelectedExp?<SelectedExp experence={exp}/>:<p>Style Not Found</p>}
+        {SelectedEducation?<SelectedEducation education={education}/>:<p>Style Not Found</p>}
       </div>
       <Contact/>
     </div>

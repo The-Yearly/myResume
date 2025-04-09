@@ -1,6 +1,6 @@
 import e, { Router } from "express";
 import { PrismaClient } from "../../../../prisma/app/generated/prisma/client";
-import { Hero,About, Project, userstyles, Skills } from "../../../utils/zod";
+import { Hero,About, Project, userstyles, Skills, Education, Experience } from "../../../utils/zod";
 export const router=Router()
 const client=new PrismaClient()
 router.get("/getHero/:uid",async(req,res)=>{
@@ -81,6 +81,9 @@ router.get("/getProjects/:id",async(req,res)=>{
     const response=await client.project.findMany({
         where:{
             uid:parseInt(uid)
+        }
+        ,orderBy:{
+            pid:"asc"
         }
     })
     res.json({project:response})
@@ -286,6 +289,222 @@ router.post("/updateSkillStyle",async(req,res)=>{
         },
         data:{
             sstyle:parsedResponse.data?.sstyle
+        }
+    })
+    if(!response){
+        res.json({message:"Sorry Failed To Update"})
+    }
+    res.json({message:"Succefully Updated"})
+})
+
+
+router.get("/getEducations/:id",async(req,res)=>{
+    const uid=req.params.id
+    const response=await client.education.findMany(
+        {where:{
+            uid:parseInt(uid)
+        },orderBy:{
+            edid:"asc"
+        }
+    }
+    )
+    res.json({education:response})
+})
+
+router.post("/addEducation",async(req,res)=>{
+    const parsedResponse=Education.safeParse(req.body)
+    console.log(parsedResponse.error?.message)
+    if(!parsedResponse.success){
+        res.json({message:"Sorry Failed To Update"})
+        return
+    }
+    const response=await client.education.create(
+        {
+            data:{
+                uid:parsedResponse.data.uid,
+                inst:parsedResponse.data.inst,
+                degree:parsedResponse.data.degree,
+                startdate:parsedResponse.data.startdate,
+                enddate:parsedResponse.data.enddate
+            }
+        }
+    )
+    console.log(response)
+    if(!response){
+        res.json({message:"Sorry Failed To Update"})
+    }
+    res.json({message:"Succefully Updated"})
+})
+
+router.post("/delEducation",async(req,res)=>{
+    console.log(req.body)
+    const response=await client.education.delete(
+        { 
+            where:{
+                edid:req.body.currentDelEducation
+            }
+        }
+    )
+    console.log(response)
+    if(!response){
+        res.json({message:"Sorry Failed To Delete"})
+    }
+    res.json({message:"Succefully Deleted"})
+})
+
+router.post("/updateEducation",async(req,res)=>{
+    console.log(req.body)
+    const parsedResponse=Education.safeParse(req.body)
+    console.log(parsedResponse.data)
+    console.log(parsedResponse)
+    if(!parsedResponse.success){
+        res.json({message:"Sorry Failed To Update"})
+        return
+    }
+    const response=await client.education.update(
+        {
+            where:{
+                edid:parsedResponse.data.edid
+            },
+            data:{
+                inst:parsedResponse.data.inst,
+                degree:parsedResponse.data.degree,
+                startdate:parsedResponse.data.startdate,
+                enddate:parsedResponse.data.enddate
+            }
+        }
+    )
+    console.log(response)
+    if(!response){
+        res.json({message:"Sorry Failed To Update"})
+    }
+    res.json({message:"Succefully Updated"})
+})
+
+
+router.post("/updateEducationStyle",async(req,res)=>{
+    console.log(req.body)    
+    const parsedResponse=userstyles.safeParse(req.body)
+    console.log(parsedResponse)
+    if(!parsedResponse){
+       res.json({message:"Sorry Failed To Update"})
+    }
+    const response=await client.userstyle.update({
+        where:{
+            uid:parsedResponse.data?.uid
+        },
+        data:{
+            estyle:parsedResponse.data?.estyle
+        }
+    })
+    if(!response){
+        res.json({message:"Sorry Failed To Update"})
+    }
+    res.json({message:"Succefully Updated"})
+})
+
+router.get("/getExperience/:uid",async(req,res)=>{
+    const uid=req.params.uid
+    const response=await client.experience.findMany({
+        where:{
+            uid:parseInt(uid)
+        },
+        orderBy:{
+            exid:"asc"
+        }
+    })
+    res.json({experience:response})
+})
+
+
+router.post("/addExperience",async(req,res)=>{
+    console.log(req.body)
+    const parsedResponse=Experience.safeParse(req.body)
+    console.log(parsedResponse.data)
+    console.log(parsedResponse)
+    if(!parsedResponse.success){
+        res.json({message:"Sorry Failed To Update"})
+        return
+    }
+    const response=await client.experience.create(
+        {
+            data:{
+               uid:parsedResponse.data.uid,
+               corp:parsedResponse.data.corp,
+               title:parsedResponse.data.title,
+               desc:parsedResponse.data.desc,
+               enddate:parsedResponse.data.enddate,
+               startdate:parsedResponse.data.startdate,
+            }
+        }
+    )
+    console.log(response)
+    if(!response){
+        res.json({message:"Sorry Failed To Update"})
+    }
+    res.json({message:"Succefully Updated"})
+})
+
+router.post("/updateExperience",async(req,res)=>{
+    console.log(req.body)
+    const parsedResponse=Experience.safeParse(req.body)
+    console.log(parsedResponse.data)
+    console.log(parsedResponse)
+    if(!parsedResponse.success){
+        res.json({message:"Sorry Failed To Update"})
+        return
+    }
+    const response=await client.experience.update(
+        {
+            where:{
+                exid:parsedResponse.data.exid
+            },
+            data:{
+                corp:parsedResponse.data.corp,
+                title:parsedResponse.data.title,
+                desc:parsedResponse.data.desc,
+                startdate:parsedResponse.data.startdate,
+                enddate:parsedResponse.data.enddate!=null?parsedResponse.data.enddate:null
+            }
+        }
+    )
+    console.log(response)
+    if(!response){
+        res.json({message:"Sorry Failed To Update"})
+    }
+    res.json({message:"Succefully Updated"})
+})
+
+
+router.post("/deleteExperience",async(req,res)=>{
+    const response=await client.experience.delete(
+        {
+            where:{
+                exid:req.body.deleteId
+            }
+        }
+    )
+    if(!response){
+        res.json({message:"Sorry Failed To Delete"})
+    }
+    res.json({message:"Succefully Deleted"})
+})
+
+
+router.post("/updateExperienceStyle",async(req,res)=>{
+    console.log(req.body)    
+    const parsedResponse=userstyles.safeParse(req.body)
+    console.log(parsedResponse)
+    if(!parsedResponse){
+       res.json({message:"Sorry Failed To Update"})
+    }
+    console.log(parsedResponse.data)
+    const response=await client.userstyle.update({
+        where:{
+            uid:parsedResponse.data?.uid
+        },
+        data:{
+            exstyle:parsedResponse.data?.exstyle
         }
     })
     if(!response){

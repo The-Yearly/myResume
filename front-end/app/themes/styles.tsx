@@ -6,17 +6,25 @@ import { Projects2 } from "./style2/components/projects2"
 import { Projects } from "./style1/components/projects"
 import { Skills } from "./style1/components/skills"
 import { Skills2 } from "./style2/components/skills2"
+import Education from "./style1/components/education"
+import Education2 from "./style2/components/education2"
+import Experience1 from "./style1/components/experience"
+import Experience2 from "./style2/components/experience2"
 export const Theme={
     "1":{
         "hero":Hero,
         "about":About,
         "projects":Projects,
-        "skills":Skills
+        "skills":Skills,
+        "education":Education,
+        "experience":Experience1,
     },
     "2":{
         "hero":Hero2,
         "about":About2,
         "projects":Projects2,
-        "skills":Skills2
+        "skills":Skills2,
+        "education":Education2,
+        "experience":Experience2
     }
 }

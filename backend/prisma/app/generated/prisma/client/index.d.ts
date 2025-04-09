@@ -5217,8 +5217,8 @@ export namespace Prisma {
     exid: number | null
     title: string | null
     corp: string | null
-    startdate: Date | null
-    enddate: Date | null
+    startdate: string | null
+    enddate: string | null
     desc: string | null
     uid: number | null
   }
@@ -5227,8 +5227,8 @@ export namespace Prisma {
     exid: number | null
     title: string | null
     corp: string | null
-    startdate: Date | null
-    enddate: Date | null
+    startdate: string | null
+    enddate: string | null
     desc: string | null
     uid: number | null
   }
@@ -5376,8 +5376,8 @@ export namespace Prisma {
     exid: number
     title: string
     corp: string
-    startdate: Date
-    enddate: Date
+    startdate: string
+    enddate: string | null
     desc: string
     uid: number
     _count: ExperienceCountAggregateOutputType | null
@@ -5464,8 +5464,8 @@ export namespace Prisma {
       exid: number
       title: string
       corp: string
-      startdate: Date
-      enddate: Date
+      startdate: string
+      enddate: string | null
       desc: string
       uid: number
     }, ExtArgs["result"]["experience"]>
@@ -5895,8 +5895,8 @@ export namespace Prisma {
     readonly exid: FieldRef<"experience", 'Int'>
     readonly title: FieldRef<"experience", 'String'>
     readonly corp: FieldRef<"experience", 'String'>
-    readonly startdate: FieldRef<"experience", 'DateTime'>
-    readonly enddate: FieldRef<"experience", 'DateTime'>
+    readonly startdate: FieldRef<"experience", 'String'>
+    readonly enddate: FieldRef<"experience", 'String'>
     readonly desc: FieldRef<"experience", 'String'>
     readonly uid: FieldRef<"experience", 'Int'>
   }
@@ -6339,8 +6339,8 @@ export namespace Prisma {
     edid: number | null
     inst: string | null
     degree: string | null
-    startdate: Date | null
-    enddate: Date | null
+    startdate: string | null
+    enddate: string | null
     uid: number | null
   }
 
@@ -6348,8 +6348,8 @@ export namespace Prisma {
     edid: number | null
     inst: string | null
     degree: string | null
-    startdate: Date | null
-    enddate: Date | null
+    startdate: string | null
+    enddate: string | null
     uid: number | null
   }
 
@@ -6492,8 +6492,8 @@ export namespace Prisma {
     edid: number
     inst: string
     degree: string
-    startdate: Date
-    enddate: Date
+    startdate: string
+    enddate: string | null
     uid: number
     _count: EducationCountAggregateOutputType | null
     _avg: EducationAvgAggregateOutputType | null
@@ -6575,8 +6575,8 @@ export namespace Prisma {
       edid: number
       inst: string
       degree: string
-      startdate: Date
-      enddate: Date
+      startdate: string
+      enddate: string | null
       uid: number
     }, ExtArgs["result"]["education"]>
     composites: {}
@@ -7005,8 +7005,8 @@ export namespace Prisma {
     readonly edid: FieldRef<"education", 'Int'>
     readonly inst: FieldRef<"education", 'String'>
     readonly degree: FieldRef<"education", 'String'>
-    readonly startdate: FieldRef<"education", 'DateTime'>
-    readonly enddate: FieldRef<"education", 'DateTime'>
+    readonly startdate: FieldRef<"education", 'String'>
+    readonly enddate: FieldRef<"education", 'String'>
     readonly uid: FieldRef<"education", 'Int'>
   }
     
@@ -11945,6 +11945,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references 
    */
@@ -11975,20 +11983,6 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -12213,8 +12207,8 @@ export namespace Prisma {
     exid?: IntFilter<"experience"> | number
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
-    startdate?: DateTimeFilter<"experience"> | Date | string
-    enddate?: DateTimeFilter<"experience"> | Date | string
+    startdate?: StringFilter<"experience"> | string
+    enddate?: StringNullableFilter<"experience"> | string | null
     desc?: StringFilter<"experience"> | string
     uid?: IntFilter<"experience"> | number
     user?: XOR<UserScalarRelationFilter, userWhereInput>
@@ -12225,7 +12219,7 @@ export namespace Prisma {
     title?: SortOrder
     corp?: SortOrder
     startdate?: SortOrder
-    enddate?: SortOrder
+    enddate?: SortOrderInput | SortOrder
     desc?: SortOrder
     uid?: SortOrder
     user?: userOrderByWithRelationInput
@@ -12238,8 +12232,8 @@ export namespace Prisma {
     NOT?: experienceWhereInput | experienceWhereInput[]
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
-    startdate?: DateTimeFilter<"experience"> | Date | string
-    enddate?: DateTimeFilter<"experience"> | Date | string
+    startdate?: StringFilter<"experience"> | string
+    enddate?: StringNullableFilter<"experience"> | string | null
     desc?: StringFilter<"experience"> | string
     uid?: IntFilter<"experience"> | number
     user?: XOR<UserScalarRelationFilter, userWhereInput>
@@ -12250,7 +12244,7 @@ export namespace Prisma {
     title?: SortOrder
     corp?: SortOrder
     startdate?: SortOrder
-    enddate?: SortOrder
+    enddate?: SortOrderInput | SortOrder
     desc?: SortOrder
     uid?: SortOrder
     _count?: experienceCountOrderByAggregateInput
@@ -12267,8 +12261,8 @@ export namespace Prisma {
     exid?: IntWithAggregatesFilter<"experience"> | number
     title?: StringWithAggregatesFilter<"experience"> | string
     corp?: StringWithAggregatesFilter<"experience"> | string
-    startdate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
-    enddate?: DateTimeWithAggregatesFilter<"experience"> | Date | string
+    startdate?: StringWithAggregatesFilter<"experience"> | string
+    enddate?: StringNullableWithAggregatesFilter<"experience"> | string | null
     desc?: StringWithAggregatesFilter<"experience"> | string
     uid?: IntWithAggregatesFilter<"experience"> | number
   }
@@ -12280,8 +12274,8 @@ export namespace Prisma {
     edid?: IntFilter<"education"> | number
     inst?: StringFilter<"education"> | string
     degree?: StringFilter<"education"> | string
-    startdate?: DateTimeFilter<"education"> | Date | string
-    enddate?: DateTimeFilter<"education"> | Date | string
+    startdate?: StringFilter<"education"> | string
+    enddate?: StringNullableFilter<"education"> | string | null
     uid?: IntFilter<"education"> | number
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
@@ -12291,7 +12285,7 @@ export namespace Prisma {
     inst?: SortOrder
     degree?: SortOrder
     startdate?: SortOrder
-    enddate?: SortOrder
+    enddate?: SortOrderInput | SortOrder
     uid?: SortOrder
     user?: userOrderByWithRelationInput
   }
@@ -12303,8 +12297,8 @@ export namespace Prisma {
     NOT?: educationWhereInput | educationWhereInput[]
     inst?: StringFilter<"education"> | string
     degree?: StringFilter<"education"> | string
-    startdate?: DateTimeFilter<"education"> | Date | string
-    enddate?: DateTimeFilter<"education"> | Date | string
+    startdate?: StringFilter<"education"> | string
+    enddate?: StringNullableFilter<"education"> | string | null
     uid?: IntFilter<"education"> | number
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "edid">
@@ -12314,7 +12308,7 @@ export namespace Prisma {
     inst?: SortOrder
     degree?: SortOrder
     startdate?: SortOrder
-    enddate?: SortOrder
+    enddate?: SortOrderInput | SortOrder
     uid?: SortOrder
     _count?: educationCountOrderByAggregateInput
     _avg?: educationAvgOrderByAggregateInput
@@ -12330,8 +12324,8 @@ export namespace Prisma {
     edid?: IntWithAggregatesFilter<"education"> | number
     inst?: StringWithAggregatesFilter<"education"> | string
     degree?: StringWithAggregatesFilter<"education"> | string
-    startdate?: DateTimeWithAggregatesFilter<"education"> | Date | string
-    enddate?: DateTimeWithAggregatesFilter<"education"> | Date | string
+    startdate?: StringWithAggregatesFilter<"education"> | string
+    enddate?: StringNullableWithAggregatesFilter<"education"> | string | null
     uid?: IntWithAggregatesFilter<"education"> | number
   }
 
@@ -12767,8 +12761,8 @@ export namespace Prisma {
   export type experienceCreateInput = {
     title: string
     corp: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     desc: string
     user: userCreateNestedOneWithoutExperienceInput
   }
@@ -12777,8 +12771,8 @@ export namespace Prisma {
     exid?: number
     title: string
     corp: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     desc: string
     uid: number
   }
@@ -12786,8 +12780,8 @@ export namespace Prisma {
   export type experienceUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     desc?: StringFieldUpdateOperationsInput | string
     user?: userUpdateOneRequiredWithoutExperienceNestedInput
   }
@@ -12796,8 +12790,8 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     desc?: StringFieldUpdateOperationsInput | string
     uid?: IntFieldUpdateOperationsInput | number
   }
@@ -12806,8 +12800,8 @@ export namespace Prisma {
     exid?: number
     title: string
     corp: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     desc: string
     uid: number
   }
@@ -12815,8 +12809,8 @@ export namespace Prisma {
   export type experienceUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     desc?: StringFieldUpdateOperationsInput | string
   }
 
@@ -12824,8 +12818,8 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     desc?: StringFieldUpdateOperationsInput | string
     uid?: IntFieldUpdateOperationsInput | number
   }
@@ -12833,8 +12827,8 @@ export namespace Prisma {
   export type educationCreateInput = {
     inst: string
     degree: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     user: userCreateNestedOneWithoutEducationInput
   }
 
@@ -12842,16 +12836,16 @@ export namespace Prisma {
     edid?: number
     inst: string
     degree: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     uid: number
   }
 
   export type educationUpdateInput = {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     user?: userUpdateOneRequiredWithoutEducationNestedInput
   }
 
@@ -12859,8 +12853,8 @@ export namespace Prisma {
     edid?: IntFieldUpdateOperationsInput | number
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     uid?: IntFieldUpdateOperationsInput | number
   }
 
@@ -12868,24 +12862,24 @@ export namespace Prisma {
     edid?: number
     inst: string
     degree: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     uid: number
   }
 
   export type educationUpdateManyMutationInput = {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type educationUncheckedUpdateManyInput = {
     edid?: IntFieldUpdateOperationsInput | number
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     uid?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13361,15 +13355,24 @@ export namespace Prisma {
     uid?: SortOrder
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type experienceCountOrderByAggregateInput = {
@@ -13412,18 +13415,22 @@ export namespace Prisma {
     uid?: SortOrder
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type educationCountOrderByAggregateInput = {
@@ -13989,8 +13996,8 @@ export namespace Prisma {
     connect?: userWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type userUpdateOneRequiredWithoutExperienceNestedInput = {
@@ -14149,29 +14156,46 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type skillsCreateWithoutUserInput = {
@@ -14277,8 +14301,8 @@ export namespace Prisma {
   export type experienceCreateWithoutUserInput = {
     title: string
     corp: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     desc: string
   }
 
@@ -14286,8 +14310,8 @@ export namespace Prisma {
     exid?: number
     title: string
     corp: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     desc: string
   }
 
@@ -14304,16 +14328,16 @@ export namespace Prisma {
   export type educationCreateWithoutUserInput = {
     inst: string
     degree: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
   }
 
   export type educationUncheckedCreateWithoutUserInput = {
     edid?: number
     inst: string
     degree: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
   }
 
   export type educationCreateOrConnectWithoutUserInput = {
@@ -14508,8 +14532,8 @@ export namespace Prisma {
     exid?: IntFilter<"experience"> | number
     title?: StringFilter<"experience"> | string
     corp?: StringFilter<"experience"> | string
-    startdate?: DateTimeFilter<"experience"> | Date | string
-    enddate?: DateTimeFilter<"experience"> | Date | string
+    startdate?: StringFilter<"experience"> | string
+    enddate?: StringNullableFilter<"experience"> | string | null
     desc?: StringFilter<"experience"> | string
     uid?: IntFilter<"experience"> | number
   }
@@ -14537,8 +14561,8 @@ export namespace Prisma {
     edid?: IntFilter<"education"> | number
     inst?: StringFilter<"education"> | string
     degree?: StringFilter<"education"> | string
-    startdate?: DateTimeFilter<"education"> | Date | string
-    enddate?: DateTimeFilter<"education"> | Date | string
+    startdate?: StringFilter<"education"> | string
+    enddate?: StringNullableFilter<"education"> | string | null
     uid?: IntFilter<"education"> | number
   }
 
@@ -15160,8 +15184,8 @@ export namespace Prisma {
     exid?: number
     title: string
     corp: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
     desc: string
   }
 
@@ -15169,8 +15193,8 @@ export namespace Prisma {
     edid?: number
     inst: string
     degree: string
-    startdate: Date | string
-    enddate: Date | string
+    startdate: string
+    enddate?: string | null
   }
 
   export type heroCreateManyUserInput = {
@@ -15282,8 +15306,8 @@ export namespace Prisma {
   export type experienceUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     desc?: StringFieldUpdateOperationsInput | string
   }
 
@@ -15291,8 +15315,8 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     desc?: StringFieldUpdateOperationsInput | string
   }
 
@@ -15300,32 +15324,32 @@ export namespace Prisma {
     exid?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     corp?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
     desc?: StringFieldUpdateOperationsInput | string
   }
 
   export type educationUpdateWithoutUserInput = {
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type educationUncheckedUpdateWithoutUserInput = {
     edid?: IntFieldUpdateOperationsInput | number
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type educationUncheckedUpdateManyWithoutUserInput = {
     edid?: IntFieldUpdateOperationsInput | number
     inst?: StringFieldUpdateOperationsInput | string
     degree?: StringFieldUpdateOperationsInput | string
-    startdate?: DateTimeFieldUpdateOperationsInput | Date | string
-    enddate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startdate?: StringFieldUpdateOperationsInput | string
+    enddate?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type heroUpdateWithoutUserInput = {
