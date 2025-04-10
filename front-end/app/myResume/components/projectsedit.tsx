@@ -9,7 +9,7 @@ import type{ Project } from "@/utils/types"
 import{ toast } from "react-toastify"
 import type{ SelectedStyle } from "@/utils/types"
 import ImageKit from "imagekit"
-
+import ProjectsEditorSkeleton from "@/app/themes/skeletons/admin/projectedit"
 export default function ProjectsEditor(){
   const [modalOpen,setModalOpen]=useState(false)
   const [editIndex,setEditIndex]=useState<number | null>(null)
@@ -19,6 +19,7 @@ export default function ProjectsEditor(){
   const [gotResp,setGotResp]=useState(false)
   const [deleteProject,setDeleteProject]=useState<Project | null>(null)
   const [refresh,setRefresh]=useState(false)
+  const [loading,setLoading]=useState(false)
   const [isUploading,setIsUploading]=useState(false)
   const [selectedFile,setSelectedFile]=useState<File | null>(null)
   const [previewImage,setPreviewImage]=useState<string | null>(null)
@@ -88,6 +89,7 @@ export default function ProjectsEditor(){
         try{
           const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects/1")
           setProjects(res.data.project)
+          setLoading(true)
        } catch(error){
           console.error("Error fetching projects:",error)
           toast.error("Failed to load projects")
@@ -162,13 +164,9 @@ export default function ProjectsEditor(){
     const tags=e.target.value.split(",").map((tag)=> tag.trim())
     setNewProject((prev)=>({...prev,tags }))
   }
-
-  // New function to handle file selection
   const handleFileSelect=(e: React.ChangeEvent<HTMLInputElement>)=>{
     const file=e.target.files?.[0] || null
     setSelectedFile(file)
-
-    // Create a preview of the selected image
     if(file){
       const reader=new FileReader()
       reader.onloadend=()=>{
@@ -177,14 +175,11 @@ export default function ProjectsEditor(){
       reader.readAsDataURL(file)
     }
   }
-
-  // New function to upload image to ImageKit
   const uploadImageToImageKit=async()=>{
     if(!selectedFile)return null
 
     setIsUploading(true)
     try{
-      // Convert file to base64
       const reader=new FileReader()
       const base64Promise=new Promise<string>((resolve)=>{
         reader.onload=()=>{
@@ -193,17 +188,12 @@ export default function ProjectsEditor(){
         }
         reader.readAsDataURL(selectedFile)
       })
-
       const base64=await base64Promise
-
-      // Upload to ImageKit
       const result=await imagekit.upload({
         file: base64,
         fileName: `project_${Date.now()}.${selectedFile.name.split(".").pop()}`,
         folder: "/projects",
       })
-
-      // Update project with the image URL
       setNewProject((prev)=>({...prev,image: result.url }))
       return result.url
     } catch(error){
@@ -233,7 +223,6 @@ export default function ProjectsEditor(){
   const handleSubmit=async(e: React.FormEvent)=>{
     e.preventDefault()
 
-    // If there's a selected file,upload it first
     if(selectedFile){
       setIsUploading(true)
       const imageUrl=await uploadImageToImageKit()
@@ -245,7 +234,6 @@ export default function ProjectsEditor(){
       }
     }
 
-    // Now submit the form with the updated project data
     if(editIndex !== null){
       const updatedProjects=[...projects]
       updatedProjects[editIndex]=newProject
@@ -254,7 +242,7 @@ export default function ProjectsEditor(){
       setProjects((prev)=> [...prev,newProject])
     }
   }
-
+  if(loading){
   return(
     <div className="p-4">
       <div>
@@ -417,12 +405,8 @@ export default function ProjectsEditor(){
               className="w-full border p-2 rounded-md"
               required
             />
-
-           {/* Image upload section */}
             <div className="space-y-4">
               <label className="block text-sm font-medium text-gray-700">Project Image</label>
-
-             {/* Image preview */}
              {(previewImage || newProject.image)&&(
                 <div className="relative w-full h-48 overflow-hidden rounded-md border border-gray-200">
                   <img
@@ -481,4 +465,7 @@ export default function ProjectsEditor(){
       </div>
     </div>
 )
+  }else{
+    return(<ProjectsEditorSkeleton/>)
+  }
 }

@@ -8,7 +8,7 @@ import { useState,useEffect,useRef } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import ImageKit from "imagekit"
-
+import AboutEditorSkeleton from "@/app/themes/skeletons/admin/abouteditor"
 export default function AboutEditor(){
   const [about,setAbout]=useState<About>({
     uid: 1,
@@ -22,7 +22,7 @@ export default function AboutEditor(){
   const [selectedFile,setSelectedFile]=useState<File | null>(null)
   const [previewImage,setPreviewImage]=useState<string | null>(null)
   const fileInputRef=useRef<HTMLInputElement>(null)
-
+  const [laoding,setLoading]=useState(true)
   const imagekit=new ImageKit({
     publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || "",
     privateKey: process.env.NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY || "",
@@ -32,9 +32,10 @@ export default function AboutEditor(){
   useEffect(()=>{
     const fetchData=async()=>{
       try {
-        const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/getAbout/1")
+        const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")
         const data=res.data.about
         setAbout({ about: data.about,image: data.image,style: data.style,uid: 1 })
+        setLoading(true)
         if(data.image && data.image!=="s"){
           setPreviewImage(data.image)
         }
@@ -50,7 +51,7 @@ export default function AboutEditor(){
     const sendData=async()=>{
       if(data!=null){
         try {
-          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/setAbout",data)
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/setAbout",data)
           toast(res.data.message)
         } catch(error){
           console.error("Error saving about data:",error)
@@ -136,7 +137,7 @@ export default function AboutEditor(){
   }
 
   const SelectedAbout=Theme[about.style as keyof typeof Theme]?.about
-
+  if(laoding){
   return(
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -214,5 +215,8 @@ export default function AboutEditor(){
         )}
       </div>
     </div>
-  )
+  )}else{
+    return(
+    <AboutEditorSkeleton/>
+  )}
 }

@@ -2,11 +2,18 @@
 import { Navbar} from "./themes/style1/components/navBar"
 import { Contact } from "./themes/style1/components/contact"
 import { EducationI, ExperienceI } from "@/utils/types"
+import { HeroSkeleton } from "./themes/skeletons/hero"
 import { Project } from "@/utils/types"
+import { AboutSkeleton } from "./themes/skeletons/resume/about"
+import { SkillsSkeleton } from "./themes/skeletons/resume/skills"
+import { EducationSkeleton } from "./themes/skeletons/resume/education"
+import { ExperienceSkeleton } from "./themes/skeletons/resume/experience"
+import { ContactSkeleton } from "./themes/skeletons/resume/contact"
 import { Skill } from "@/utils/types"
 import { Theme } from "./themes/styles"
 import { useState,useEffect } from "react"
 import axios from "axios"
+import { ProjectsSkeleton } from "./themes/skeletons/resume/projects"
 import { About,Hero } from "@/utils/types"
 export default function Home() {
   const [hero,setHero]=useState<Hero|null>(null)
@@ -19,10 +26,12 @@ export default function Home() {
   const [expStyle,setExpStyle]=useState<keyof typeof Theme>("1")
   const [education,setEducations]=useState<EducationI[]>([])
   const [exp,setExp]=useState<ExperienceI[]>([])
+  const [loading,setLoading]=useState(6)
 
   useEffect(()=>{const getData=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience/1")
     setExp(res.data.experience)
+    setLoading(loading+1)
   }
   getData()},[])
 
@@ -30,6 +39,7 @@ export default function Home() {
   useEffect(()=>{const fetchData=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects/1")
     setProjects(res.data.project)
+    setLoading(loading+1)
   }
   fetchData()},[])
   
@@ -39,6 +49,7 @@ export default function Home() {
     setSkillStyle(res.data.styles.sstyle)
     setEducationStyle(res.data.styles.estyle)
     setExpStyle(res.data.styles.exstyle)
+    setLoading(loading+1)
   }
   getStyles()},[])
 
@@ -49,6 +60,7 @@ export default function Home() {
     const data=res.data.hero
     console.log(data)
     setHero({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
+    setLoading(loading+1)
   }
   getHero()},[])
 
@@ -56,17 +68,15 @@ export default function Home() {
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")
     const data=res.data.about
     setAbout({about:data.about,image:data.image,style:data.style,uid:1})
+    setLoading(loading+1)
   }
   getAbout()},[])
   
   useEffect(() => {
     const fetchData = async () => {
-      try {
         const res = await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills/1")
         setSkills(res.data.skills)
-      } catch (error) {
-        console.error("Error fetching skills:", error)
-      }
+        setLoading(loading+1)
     }
     fetchData()
   }, [])
@@ -74,6 +84,7 @@ export default function Home() {
   useEffect(()=>{const getEd=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations/1")
     setEducations(res.data.education)
+    setLoading(loading+1)
   }
   getEd()},[])
   const SelectedHero=Theme[hero?.style as keyof typeof Theme]?.hero
@@ -82,7 +93,8 @@ export default function Home() {
   const SelectedProjects=Theme[projectStyle]?.projects
   const SelectedEducation=Theme[educationStyle]?.education
   const SelectedExp=Theme[expStyle]?.experience
-  return (
+  if(loading==7){
+  return(
     <>
     <Navbar/>
     <div className="flex flex-col justify-center items-center min-h-screen">
@@ -97,7 +109,25 @@ export default function Home() {
       <Contact/>
     </div>
     </>
-  );
-}
+  )
+  }
+  else{
+    return(
+      <>  
+        <div className="flex flex-col justify-center items-center min-h-screen">
+          <HeroSkeleton/>
+          <AboutSkeleton/>
+          <SkillsSkeleton/>
+          <ProjectsSkeleton/>
+          <div className="grid w-full grid-cols-1 lg:grid-cols-4">
+            <EducationSkeleton/>
+            <ExperienceSkeleton/>
+          </div>
+          <ContactSkeleton/>
+        </div>
+      </>
+    )
+  }
+  }
 
 

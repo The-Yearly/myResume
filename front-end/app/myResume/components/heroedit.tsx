@@ -5,8 +5,10 @@ import type React from "react"
 import { useState,useEffect } from "react"
 import { Theme } from "../../themes/styles"
 import { toast } from "react-toastify"
+import HeroEditorSkeleton from "@/app/themes/skeletons/admin/heroedit"
 export default function HeroEditor() {
   const [data,setData]=useState<Hero|null>(null)
+  const [loading,setLoading]=useState(false)
   const [heroData, setHeroData] = useState<Hero>({
     uid:1,
     hero:"Hello, I'm ...",
@@ -18,6 +20,7 @@ export default function HeroEditor() {
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
     const data=res.data.hero
     setHeroData({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
+    setLoading(true)
   }
   fetchHero()},[])
   
@@ -44,6 +47,7 @@ export default function HeroEditor() {
     setData(heroData)
   }
   const SelectedHero = Theme[heroData.style as keyof typeof Theme]?.hero;
+  if(loading){
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -102,5 +106,7 @@ export default function HeroEditor() {
       </div>
     </div>
   )
+}else{
+  return(<HeroEditorSkeleton/>)
 }
-
+}

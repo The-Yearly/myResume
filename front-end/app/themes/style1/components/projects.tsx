@@ -29,19 +29,19 @@ export function Projects(props:{content:Project[]}) {
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                 <p className="text-gray-500 mb-4">{project.desc}</p>
-                <div className="flex items-center">
-                {project.tags.map((tag,index)=><div key={index} className="bg-gray-100 px-3 mr-3 rounded-md">{tag}</div>)}
+                <div className="flex items-center flex-wrap">
+                {project.tags.map((tag,index)=><div key={index} className="bg-gray-100 px-3 mr-3 rounded-md mt-2">{tag}</div>)}
                 </div>
                 <div className="flex gap-4 mt-3">
                   <button>
                     <Link href={project.Link} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-2" />
+                      <ExternalLink className="h-4 w-4 mt-2 mr-2" />
                       Live Demo
                     </Link>
                   </button>
                   <button>
                     <Link href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4 mr-2" />
+                      <Github className="h-4 w-4 mt-2 mr-2" />
                       Code
                     </Link>
                   </button>
