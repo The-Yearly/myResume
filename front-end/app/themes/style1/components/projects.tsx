@@ -1,5 +1,4 @@
 import Image from "next/image"
-import pfp from "@/myPhoto.jpeg"
 import Link from "next/link"
 import { ExternalLink, Github } from "lucide-react"
 import { Project } from "@/utils/types"
@@ -20,7 +19,7 @@ export function Projects(props:{content:Project[]}) {
             <div key={index} className="overflow-hidden border-gray-100 border-2 ">
               <div className="relative aspect-video">
                 <Image
-                  src={pfp}
+                  src={project.image}
                   alt={project.title}
                   fill
                   className="object-cover transition-all hover:scale-105"

@@ -87,7 +87,7 @@ export default function Home() {
     <Navbar/>
     <div className="flex flex-col justify-center items-center min-h-screen">
       {SelectedHero?<SelectedHero content={{hero:hero?.hero||"Hello, I'm ...",subhero:hero?.subhero||"A passionate ......."}}/>:<p>Style Not Found</p>}
-      {SelectedAbout?<SelectedAbout content={{bio:"I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding, you can find me [your hobbies/interests].",image:"ss"}}/>:<p>Style Not Found</p>}
+      {SelectedAbout?<SelectedAbout content={{bio:about?.about||"",image:about?.image||"http://placebeard.it/250/250"}}/>:<p>Style Not Found</p>}
       {SelectedSkills?<SelectedSkills skills={skills}/>:<p>Style Not Found</p>}
       {SelectedProjects?<SelectedProjects content={projects}/>:<p>Style Not Found</p>}
       <div className="grid w-full grid-cols-1 lg:grid-cols-4">

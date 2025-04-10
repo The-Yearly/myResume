@@ -2,7 +2,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Project } from "@/utils/types"
 import { ExternalLink, Github } from "lucide-react"
-import pfp from "@/myPhoto.jpeg"
 export function Projects2(props:{content:Project[]}){ 
   return (
     <section id="projects" className="py-24 md:py-32 w-full bg-white">
@@ -18,7 +17,7 @@ export function Projects2(props:{content:Project[]}){
             <div key={index} className="group">
               <div className="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
                 <Image
-                  src={pfp}
+                  src={project.image}
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"

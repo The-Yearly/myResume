@@ -4,23 +4,23 @@ import type { About } from "@/utils/types"
 import type React from "react"
 import Image from "next/image"
 import { Theme } from "../../themes/styles"
-import { useState, useEffect, useRef } from "react"
+import { useState,useEffect,useRef } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import ImageKit from "imagekit"
 
 export default function AboutEditor(){
-  const [about, setAbout]=useState<About>({
+  const [about,setAbout]=useState<About>({
     uid: 1,
     about:
-      "I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies, I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding, you can find me [your hobbies/interests].",
+      "I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies,I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding,you can find me [your hobbies/interests].",
     image: "",
     style: "1",
   })
-  const [data, setData]=useState<About | null>(null)
-  const [isUploading, setIsUploading]=useState(false)
-  const [selectedFile, setSelectedFile]=useState<File | null>(null)
-  const [previewImage, setPreviewImage]=useState<string | null>(null)
+  const [data,setData]=useState<About | null>(null)
+  const [isUploading,setIsUploading]=useState(false)
+  const [selectedFile,setSelectedFile]=useState<File | null>(null)
+  const [previewImage,setPreviewImage]=useState<string | null>(null)
   const fileInputRef=useRef<HTMLInputElement>(null)
 
   const imagekit=new ImageKit({
@@ -34,39 +34,39 @@ export default function AboutEditor(){
       try {
         const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/getAbout/1")
         const data=res.data.about
-        setAbout({ about: data.about, image: data.image, style: data.style, uid: 1 })
+        setAbout({ about: data.about,image: data.image,style: data.style,uid: 1 })
         if(data.image && data.image!=="s"){
           setPreviewImage(data.image)
         }
       } catch(error){
-        console.error("Error fetching about data:", error)
+        console.error("Error fetching about data:",error)
         toast.error("Failed to load about data")
       }
     }
     fetchData()
-  }, [])
+  },[])
 
   useEffect(()=>{
     const sendData=async()=>{
       if(data!=null){
         try {
-          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/setAbout", data)
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/setAbout",data)
           toast(res.data.message)
         } catch(error){
-          console.error("Error saving about data:", error)
+          console.error("Error saving about data:",error)
           toast.error("Failed to save changes")
         }
       }
     }
     sendData()
-  }, [data])
+  },[data])
 
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>){
-    const { name, value }=e.target
+    const { name,value }=e.target
     if(name!="style"){
-      setAbout((prev)=>({ ...prev, [name]: value }))
+      setAbout((prev)=>({ ...prev,[name]: value }))
     } else {
-      setAbout((prev)=>({ ...prev, [name]: value as keyof typeof Theme }))
+      setAbout((prev)=>({ ...prev,[name]: value as keyof typeof Theme }))
     }
   }
 
@@ -106,7 +106,7 @@ export default function AboutEditor(){
 
       return result.url
     } catch(error){
-      console.error("Error uploading image:", error)
+      console.error("Error uploading image:",error)
       toast.error("Failed to upload image")
       return null
     } finally {
@@ -163,7 +163,7 @@ export default function AboutEditor(){
           <div className="grid grid-cols-3 gap-3 shadow-sm ">
             <div className="px-6 col-span-1 py-4 space-y-4">
               <div className="relative w-full aspect-square overflow-hidden rounded-full">
-                <Image alt="Profile" className="object-cover" src={previewImage||"https://eu.ui-avatars.com/api/?name=John+Doe&size=250"} fill />
+                <Image alt="Profile" className="object-cover" src={previewImage||"https://imgs.search.brave.com/OybWtIGSaTmsuMy37WubCkHuxtXsae6GY9U3bqW0RRo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzEyLzYwLzg5Lzg4/LzM2MF9GXzEyNjA4/OTg4NDBfcDhwRjNO/S2hjS3VzMHRzeHJC/OHE4ZG02aTVWclpJ/OWMuanBn"} fill />
               </div>
               <div className="flex flex-col space-y-2">
                 <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" className="hidden" />
@@ -208,7 +208,7 @@ export default function AboutEditor(){
           <h2 className="text-lg font-medium">Preview</h2>
         </div>
         {SelectedAbout ?(
-          <SelectedAbout content={{ bio: about.about, image: previewImage || about.image }} />
+          <SelectedAbout content={{ bio: about.about,image: previewImage || about.image }} />
         ) :(
           <p>Style not found.</p>
         )}

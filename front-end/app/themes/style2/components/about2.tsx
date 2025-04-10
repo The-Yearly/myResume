@@ -1,5 +1,4 @@
 import Image from "next/image"
-import pfp from "@/myPhoto.jpeg"
 export function About2(props:{content:{bio:string,image:string}}) {
   return (
     <section id="about" className="py-24 md:py-32 bg-white">
@@ -14,7 +13,7 @@ export function About2(props:{content:{bio:string,image:string}}) {
             <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px]">
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-slate-400 to-slate-300 rotate-6"></div>
               <div className="absolute inset-0 rounded-2xl overflow-hidden -rotate-3">
-                <Image src={pfp} alt="Profile" fill className="object-cover" />
+                <Image src={props.content.image||"https://imgs.search.brave.com/OybWtIGSaTmsuMy37WubCkHuxtXsae6GY9U3bqW0RRo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzEyLzYwLzg5Lzg4/LzM2MF9GXzEyNjA4/OTg4NDBfcDhwRjNO/S2hjS3VzMHRzeHJC/OHE4ZG02aTVWclpJ/OWMuanBn"} alt="Profile" fill className="object-cover" />
               </div>
             </div>
           </div>
