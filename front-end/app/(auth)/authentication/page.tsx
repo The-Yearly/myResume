@@ -30,7 +30,8 @@ export default function Signup() {
     toast.success(res.data.message)
     console.log(res.data)
     if (res.status===200) {
-        const creds={uid:res.data.uid,session:res.data.session}
+        const creds=await {uid:res.data.uid,session:res.data.session}
+        console.log(creds)
         Cookies.set("creds",JSON.stringify(creds))
         router.push("/myResume")
     }
