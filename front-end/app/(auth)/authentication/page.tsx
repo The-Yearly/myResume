@@ -22,7 +22,7 @@ export default function Signup() {
     if(gotcreds!=false){
       console.log("goiing to push")
       router.push("/myResume");
-      console.log("pushed")
+      console.log("pushed ")
     }
   }
   pushRoute()},[gotcreds])
