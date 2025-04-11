@@ -1,83 +1,146 @@
 import e, { Router } from "express";
 import { PrismaClient } from "../../../../prisma/app/generated/prisma/client";
-import { Hero,About, Project, userstyles, Skills, Education, Experience } from "../../../utils/zod";
+import { Hero,About, Project, userstyles, Skills, Education, Experience, User } from "../../../utils/zod";
 export const router=Router()
 const client=new PrismaClient()
-router.get("/getHero/:uid",async(req,res)=>{
-    const data=req.params.uid
-    console.log(data)
-    const response=await client.hero.findFirst(
-        {
-            where:{
-                uid:parseInt(data)
-            }
+router.post("/getHero",async(req,res)=>{
+    const session=req.body.session
+    const uid=req.body.uid
+    const sessions=await client.user.findFirst({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    res.json({hero:response})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.hero.findFirst(
+            {
+                where:{
+                    uid:uid
+                }
+            }
+        )
+        console.log(response)
+        res.json({hero:response})
+    }else{
+        res.json({message:"Sessions Dont Match"})
+    }
 })
 
 router.post("/setHero",async(req,res)=>{
-    const parsedResponse=Hero.safeParse(req.body)
-    if(!parsedResponse){
+    const parsedResponse=Hero.safeParse(req.body.hero)
+    const session=req.body.session
+    const uid=req.body.uid
+    console.log(parsedResponse.error?.message)
+    if(!parsedResponse.success){
         res.json({message:"Sorry Failed To Update"})
     }
-    const response=await client.hero.updateMany(
-        {
-            where:{
-            uid:parsedResponse.data?.uid
+    const sessions=await client.user.findFirst({
+        where:{
+            uid:uid
         },
-        data:{
-            hero:parsedResponse.data?.hero,
-            subhero:parsedResponse.data?.subhero,
-            style:parsedResponse.data?.style
+        select:{
+            sessions:true
         }
-    }
-    )
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
-    }
-    res.json({message:"Succefully Updated"})
-})
-
-router.get("/getAbout/:uid",async(req,res)=>{
-    const data=req.params.uid
-    console.log(data)
-    const response=await client.about.findFirst(
-        {
-            where:{
-                uid:parseInt(data)
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        console.log(parsedResponse.data?.hero)
+        const response=await client.hero.updateMany(
+            {
+                where:{
+                uid:uid
+            },
+            data:{
+                hero:parsedResponse.data?.hero,
+                subhero:parsedResponse.data?.subhero,
+                style:parsedResponse.data?.style
             }
         }
-    )
-    res.json({about:response})
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
+    }
+
+})
+
+router.post("/getAbout",async(req,res)=>{
+    const session=req.body.session
+    const uid=req.body.uid
+    const sessions=await client.user.findFirst({
+        where:{
+            uid:uid
+        },
+        select:{
+            sessions:true
+        }
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.about.findFirst(
+            {
+                where:{
+                    uid:uid
+                }
+            }
+        )
+        res.json({about:response})
+    }else{
+        res.json({message:"Sessions Dont Match"})
+    }
 })
 
 router.post("/setAbout",async(req,res)=>{
-    const parsedResponse=About.safeParse(req.body)
+    const session=req.body.session
+    const uid=req.body.uid
+    const parsedResponse=About.safeParse(req.body.about)
     if(!parsedResponse){
         res.json({message:"Sorry Failed To Update"})
     }
-    const response=await client.about.updateMany(
-        {
-            where:{
-                uid:parsedResponse.data?.uid
-            },
-            data:{
-                about:parsedResponse.data?.about,
-                image:parsedResponse.data?.image,
-                style:parsedResponse.data?.style,
-            }
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.about.updateMany(
+            {
+                where:{
+                    uid:uid
+                },
+                data:{
+                    about:parsedResponse.data?.about,
+                    image:parsedResponse.data?.image,
+                    style:parsedResponse.data?.style,
+                }
+            }
+        )
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
     }
-    res.json({message:"Succefully Updated"})
-})
+    else{
+        res.json({message:"Sessions Dont Match"})
+    }})
 
-router.get("/getProjects/:id",async(req,res)=>{
-    const uid=req.params.id
+router.post("/getProjects",async(req,res)=>{
+    const session=req.body.session
+    const uid=req.body.uid
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
+        }
+    })
+    if(sessions?.sessions.includes(session||"abc")){
     const response=await client.project.findMany({
         where:{
             uid:parseInt(uid)
@@ -87,428 +150,880 @@ router.get("/getProjects/:id",async(req,res)=>{
         }
     })
     res.json({project:response})
+    }else{
+        res.json({message:"Sessions Dont Match"})
+    }
 })
 
-router.get("/getStyles/:id",async(req,res)=>{
-    const uid=req.params.id
-    const response=await client.userstyle.findUnique({
+router.post("/getStyles",async(req,res)=>{
+    const uid=req.body.uid
+    console.log(uid)
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
         where:{
-            uid:parseInt(uid)
+            uid:uid
+        },select:{
+            sessions:true
         }
     })
-    res.json({styles:response})
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.userstyle.findUnique({
+            where:{
+                uid:parseInt(uid)
+            }
+        })
+        res.json({styles:response})
+    }else{
+        res.json({message:"Sessions Dont Match"})
+    }
 })
 
-router.post("/updateProjectStyle",async(req,res)=>{
-    console.log(req.body)    
-    const parsedResponse=userstyles.safeParse(req.body)
+router.post("/updateProjectStyle",async(req,res)=>{    
+    const uid=req.body.uid
+    const session=req.body.session
+    const parsedResponse=userstyles.safeParse(req.body.style)
     console.log(parsedResponse)
-    if(!parsedResponse){
-       res.json({message:"Sorry Failed To Update"})
-    }
-    const response=await client.userstyle.update({
+    const sessions=await client.user.findUnique({
         where:{
-            uid:parsedResponse.data?.uid
-        },
-        data:{
-            pstyle:parsedResponse.data?.pstyle
+            uid:uid
+        },select:{
+            sessions:true
         }
     })
-    if(!response){
+    if(sessions?.sessions.includes(session||"abc")){
+        if(!parsedResponse){
         res.json({message:"Sorry Failed To Update"})
-    }
-    res.json({message:"Succefully Updated"})
+        }
+        const response=await client.userstyle.update({
+            where:{
+                uid:uid
+            },
+            data:{
+                pstyle:parsedResponse.data?.pstyle
+            }
+        })
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
+    } 
 })
 
 router.post("/addProject",async(req,res)=>{
-    const parsedResponse=Project.safeParse(req.body)
-    console.log(parsedResponse)
+    const parsedResponse=Project.safeParse(req.body.project)
+    const uid=req.body.uid
+    const session=req.body.session
     if(!parsedResponse.success){
         res.json({message:"Sorry Failed To Update"})
         return
     }
-    const response=await client.project.create(
-        {
-            data:{
-                github:parsedResponse.data?.desc,
-                desc:parsedResponse.data?.desc,
-                image:parsedResponse.data?.image,
-                Link:parsedResponse.data.Link,
-                title:parsedResponse.data.title,
-                tags:parsedResponse.data.tags,
-                uid:parsedResponse.data.uid
-            }
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.project.create(
+            {
+                data:{
+                    github:parsedResponse.data?.desc,
+                    desc:parsedResponse.data?.desc,
+                    image:parsedResponse.data?.image,
+                    Link:parsedResponse.data.Link,
+                    title:parsedResponse.data.title,
+                    tags:parsedResponse.data.tags,
+                    uid:uid
+                }
+            }
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 router.post("/updateProject",async(req,res)=>{
-    const parsedResponse=Project.safeParse(req.body)
-    console.log(parsedResponse)
+    const parsedResponse=Project.safeParse(req.body.project)
+    const uid=req.body.uid
+    const session=req.body.session
     if(!parsedResponse.success){
         res.json({message:"Sorry Failed To Update"})
         return
     }
-    const response=await client.project.update(
-        {
-            where:{
-                pid:parsedResponse.data.pid
-            },
-            data:{
-                github:parsedResponse.data?.desc,
-                desc:parsedResponse.data?.desc,
-                image:parsedResponse.data?.image,
-                Link:parsedResponse.data.Link,
-                title:parsedResponse.data.title,
-                tags:parsedResponse.data.tags,
-            }
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.project.update(
+            {
+                where:{
+                    pid:parsedResponse.data.pid
+                },
+                data:{
+                    github:parsedResponse.data?.desc,
+                    desc:parsedResponse.data?.desc,
+                    image:parsedResponse.data?.image,
+                    Link:parsedResponse.data.Link,
+                    title:parsedResponse.data.title,
+                    tags:parsedResponse.data.tags,
+                }
+            }
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 router.post("/deleteProject",async(req,res)=>{
-    const response=await client.project.delete(
-        {
-            where:{
-                pid:req.body.pid
-            }
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    if(!response){
-        res.json({message:"Sorry Failed To Delete"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.project.delete(
+            {
+                where:{
+                    pid:req.body.del.pid
+                }
+            }
+        )
+        if(!response){
+            res.json({message:"Sorry Failed To Delete"})
+        }
+        res.json({message:"Succefully Deleted"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Deleted"})
 })
 
-router.get("/getSkills/:id",async(req,res)=>{
-    const uid=req.params.id
-    const response=await client.skills.findMany(
-        {where:{
-            uid:parseInt(uid)
-        },orderBy:{
-            sid:"asc"
+router.post("/getSkills",async(req,res)=>{
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.skills.findMany(
+            {where:{
+                uid:uid
+            },orderBy:{
+                sid:"asc"
+            }
+        }
+        )
+        res.json({skills:response})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    )
-    res.json({skills:response})
 })
 
 router.post("/addSkills",async(req,res)=>{
-    const parsedResponse=Skills.safeParse(req.body)
+    const parsedResponse=Skills.safeParse(req.body.skills)
+    const uid=req.body.uid
+    const session=req.body.session
     if(!parsedResponse.success){
         res.json({message:"Couldnt Add Skill"})
         return
     }
-    const response=await client.skills.create({
-        data:{
-            icon:parsedResponse.data?.icon,
-            uid:parsedResponse.data?.uid,
-            skills:parsedResponse.data?.skills,
-            skillname:parsedResponse.data?.skillname
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
     })
-    if(!response){
-        res.json({message:"Couldnt Add Skill"})
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.skills.create({
+            data:{
+                icon:parsedResponse.data?.icon,
+                uid:uid,
+                skills:parsedResponse.data?.skills,
+                skillname:parsedResponse.data?.skillname
+            }
+        })
+        if(!response){
+            res.json({message:"Couldnt Add Skill"})
+        }
+        res.json({message:"Skiill Has Been Added"})
     }
-    res.json({message:"Skiill Has Been Added"})
 })
 
-router.get("/deleteSkill/:id",async(req,res)=>{
-    const response=await client.skills.delete(
-        {
-            where:{
-                sid:parseInt(req.params.id)
-            }
+router.post("/deleteSkill",async(req,res)=>{
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    if(!response){
-        res.json({message:"Sorry Failed To Delete"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.skills.delete(
+            {
+                where:{
+                    sid:parseInt(req.body.del)
+                }
+            }
+        )
+        if(!response){
+            res.json({message:"Sorry Failed To Delete"})
+        }
+        res.json({message:"Succefully Deleted"})
+    }else{
+        res.json({message:"Skiill Has Been Added"})
     }
-    res.json({message:"Succefully Deleted"})
 })
 
 router.post("/updateSkillCat",async(req,res)=>{
-    const data=req.body
-    const response=await client.skills.update(
-        {
-            where:{
-                sid:data.sid
-            },
-            data:{
-                icon:req.body.icon,
-                skillname:req.body.skillname,
-            }
+    const data=req.body.skill
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    if(!response){
-        res.json({message:"Sorry Failed To Update Category"})
+    })
+    console.log(sessions)
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.skills.update(
+            {
+                where:{
+                    sid:data.sid
+                },
+                data:{
+                    icon:req.body.icon,
+                    skillname:req.body.skillname,
+                }
+            }
+        )
+        if(!response){
+            res.json({message:"Sorry Failed To Update Category"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 router.post("/addSkill",async(req,res)=>{
     const data=req.body
-    console.log(data)
-    const response=await client.skills.update(
-        {
-            where:{
-                sid:data.sid
-            },
-            data:{
-                skills:data.list,
-                
-            }
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    if(!response){
-        res.json({message:"Sorry Failed To Update Category"})
+    })
+    
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.skills.update(
+            {
+                where:{
+                    sid:data.sid
+                },
+                data:{
+                    skills:data.list,
+                    
+                }
+            }
+        )
+        if(!response){
+            res.json({message:"Sorry Failed To Update Category"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 router.post("/updateSkillStyle",async(req,res)=>{
-    console.log(req.body)    
-    const parsedResponse=userstyles.safeParse(req.body)
+    const uid=req.body.uid
+    const session=req.body.session
+    const parsedResponse=userstyles.safeParse(req.body.style)
     console.log(parsedResponse)
     if(!parsedResponse){
        res.json({message:"Sorry Failed To Update"})
     }
-    const response=await client.userstyle.update({
+    const sessions=await client.user.findUnique({
         where:{
-            uid:parsedResponse.data?.uid
-        },
-        data:{
-            sstyle:parsedResponse.data?.sstyle
+            uid:uid
+        },select:{
+            sessions:true
         }
     })
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
-    }
-    res.json({message:"Succefully Updated"})
+    console.log()
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.userstyle.update({
+            where:{
+                uid:uid
+            },
+            data:{
+                sstyle:parsedResponse.data?.sstyle
+            }
+        })
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+        }else{
+            res.json({message:"Sessions Dont Match"})
+        }
 })
 
 
-router.get("/getEducations/:id",async(req,res)=>{
-    const uid=req.params.id
-    const response=await client.education.findMany(
-        {where:{
-            uid:parseInt(uid)
-        },orderBy:{
-            edid:"asc"
+
+router.post("/getEducations",async(req,res)=>{
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
+    })
+    console.log()
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.education.findMany(
+            {where:{
+                uid:parseInt(uid)
+            },orderBy:{
+                edid:"asc"
+            }
+        }
+        )
+        res.json({education:response})
+        }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    )
-    res.json({education:response})
 })
 
 router.post("/addEducation",async(req,res)=>{
-    const parsedResponse=Education.safeParse(req.body)
+    const uid=req.body.uid
+    const session=req.body.session
+    const parsedResponse=Education.safeParse(req.body.ed)
     console.log(parsedResponse.error?.message)
     if(!parsedResponse.success){
         res.json({message:"Sorry Failed To Update"})
         return
     }
-    const response=await client.education.create(
-        {
-            data:{
-                uid:parsedResponse.data.uid,
-                inst:parsedResponse.data.inst,
-                degree:parsedResponse.data.degree,
-                startdate:parsedResponse.data.startdate,
-                enddate:parsedResponse.data.enddate
-            }
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    })
+    console.log()
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.education.create(
+            {
+                data:{
+                    uid:uid,
+                    inst:parsedResponse.data.inst,
+                    degree:parsedResponse.data.degree,
+                    startdate:parsedResponse.data.startdate,
+                    enddate:parsedResponse.data.enddate
+                }
+            }
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})   
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 router.post("/delEducation",async(req,res)=>{
-    console.log(req.body)
-    const response=await client.education.delete(
-        { 
-            where:{
-                edid:req.body.currentDelEducation
-            }
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    if(!response){
-        res.json({message:"Sorry Failed To Delete"})
+    })
+    console.log()
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.education.delete(
+            { 
+                where:{
+                    edid:req.body.del
+                }
+            }
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Delete"})
+        }
+        res.json({message:"Succefully Deleted"})
+    }else{
+         res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Deleted"})
 })
 
 router.post("/updateEducation",async(req,res)=>{
-    console.log(req.body)
-    const parsedResponse=Education.safeParse(req.body)
-    console.log(parsedResponse.data)
-    console.log(parsedResponse)
+    const parsedResponse=Education.safeParse(req.body.ed)
+    const uid=req.body.uid
+    const session=req.body.session
     if(!parsedResponse.success){
         res.json({message:"Sorry Failed To Update"})
         return
     }
-    const response=await client.education.update(
-        {
-            where:{
-                edid:parsedResponse.data.edid
-            },
-            data:{
-                inst:parsedResponse.data.inst,
-                degree:parsedResponse.data.degree,
-                startdate:parsedResponse.data.startdate,
-                enddate:parsedResponse.data.enddate
-            }
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    })
+    console.log()
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.education.update(
+            {
+                where:{
+                    edid:parsedResponse.data.edid
+                },
+                data:{
+                    inst:parsedResponse.data.inst,
+                    degree:parsedResponse.data.degree,
+                    startdate:parsedResponse.data.startdate,
+                    enddate:parsedResponse.data.enddate
+                }
+            }
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 
 router.post("/updateEducationStyle",async(req,res)=>{
-    console.log(req.body)    
-    const parsedResponse=userstyles.safeParse(req.body)
-    console.log(parsedResponse)
+    const uid=req.body.uid
+    const session=req.body.session
+    const parsedResponse=userstyles.safeParse(req.body.style)
+    console.log(req.body)
     if(!parsedResponse){
        res.json({message:"Sorry Failed To Update"})
     }
-    const response=await client.userstyle.update({
+    const sessions=await client.user.findUnique({
         where:{
-            uid:parsedResponse.data?.uid
-        },
-        data:{
-            estyle:parsedResponse.data?.estyle
+            uid:uid
+        },select:{
+            sessions:true
         }
     })
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    console.log()
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.userstyle.update({
+            where:{
+                uid:uid
+            },
+            data:{
+                estyle:parsedResponse.data?.estyle
+            }
+        })
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Sessions Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
-router.get("/getExperience/:uid",async(req,res)=>{
-    const uid=req.params.uid
-    const response=await client.experience.findMany({
+router.post("/getExperience",async(req,res)=>{
+    const uid=req.body.uid
+    const session=req.body.session
+
+    const sessions=await client.user.findUnique({
         where:{
-            uid:parseInt(uid)
-        },
-        orderBy:{
-            exid:"asc"
+            uid:uid
+        },select:{
+            sessions:true
         }
     })
-    res.json({experience:response})
+    console.log(req.body)
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.experience.findMany({
+            where:{
+                uid:parseInt(uid)
+            },
+            orderBy:{
+                exid:"asc"
+            }
+        })
+        res.json({experience:response})
+    }else{
+        res.json({message:"Session Dont Match"})
+    }
 })
 
 
 router.post("/addExperience",async(req,res)=>{
-    console.log(req.body)
-    const parsedResponse=Experience.safeParse(req.body)
-    console.log(parsedResponse.data)
-    console.log(parsedResponse)
-    if(!parsedResponse.success){
-        res.json({message:"Sorry Failed To Update"})
-        return
-    }
-    const response=await client.experience.create(
-        {
-            data:{
-               uid:parsedResponse.data.uid,
-               corp:parsedResponse.data.corp,
-               title:parsedResponse.data.title,
-               desc:parsedResponse.data.desc,
-               enddate:parsedResponse.data.enddate,
-               startdate:parsedResponse.data.startdate,
-            }
+    const parsedResponse=Experience.safeParse(req.body.exp)
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        if(!parsedResponse.success){
+            res.json({message:"Sorry Failed To Update"})
+            return
+        }
+        const response=await client.experience.create(
+            {
+                data:{
+                uid:uid,
+                corp:parsedResponse.data.corp,
+                title:parsedResponse.data.title,
+                desc:parsedResponse.data.desc,
+                enddate:parsedResponse.data.enddate,
+                startdate:parsedResponse.data.startdate,
+                }
+            }
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})}
+    else{
+        res.json({message:"Session Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 router.post("/updateExperience",async(req,res)=>{
     console.log(req.body)
-    const parsedResponse=Experience.safeParse(req.body)
-    console.log(parsedResponse.data)
-    console.log(parsedResponse)
-    if(!parsedResponse.success){
-        res.json({message:"Sorry Failed To Update"})
-        return
-    }
-    const response=await client.experience.update(
-        {
-            where:{
-                exid:parsedResponse.data.exid
-            },
-            data:{
-                corp:parsedResponse.data.corp,
-                title:parsedResponse.data.title,
-                desc:parsedResponse.data.desc,
-                startdate:parsedResponse.data.startdate,
-                enddate:parsedResponse.data.enddate!=null?parsedResponse.data.enddate:null
-            }
+    const parsedResponse=Experience.safeParse(req.body.exp)
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    console.log(response)
-    if(!response){
-        res.json({message:"Sorry Failed To Update"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        if(!parsedResponse.success){
+            res.json({message:"Sorry Failed To Update"})
+            return
+        }
+        const response=await client.experience.update(
+            {
+                where:{
+                    exid:parsedResponse.data.exid
+                },
+                data:{
+                    corp:parsedResponse.data.corp,
+                    title:parsedResponse.data.title,
+                    desc:parsedResponse.data.desc,
+                    startdate:parsedResponse.data.startdate,
+                    enddate:parsedResponse.data.enddate!=null?parsedResponse.data.enddate:null
+                }
+            }
+        )
+        console.log(response)
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }else{
+        res.json({message:"Session Dont Match"})
     }
-    res.json({message:"Succefully Updated"})
 })
 
 
 router.post("/deleteExperience",async(req,res)=>{
-    const response=await client.experience.delete(
-        {
-            where:{
-                exid:req.body.deleteId
-            }
+    const uid=req.body.uid
+    console.log(req.body)
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
         }
-    )
-    if(!response){
-        res.json({message:"Sorry Failed To Delete"})
+    })
+    if(sessions?.sessions.includes(session||"abc")){
+        const response=await client.experience.delete(
+            {
+                where:{
+                    exid:req.body.del
+                }
+            }
+        )
+        if(!response){
+            res.json({message:"Sorry Failed To Delete"})
+        }
+        res.json({message:"Succefully Deleted"})
+    }else{
+        res.json({message:"Session Dont Match"})
     }
-    res.json({message:"Succefully Deleted"})
 })
 
 
 router.post("/updateExperienceStyle",async(req,res)=>{
-    console.log(req.body)    
-    const parsedResponse=userstyles.safeParse(req.body)
-    console.log(parsedResponse)
-    if(!parsedResponse){
-       res.json({message:"Sorry Failed To Update"})
-    }
-    console.log(parsedResponse.data)
-    const response=await client.userstyle.update({
+    const parsedResponse=userstyles.safeParse(req.body.style)
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
         where:{
-            uid:parsedResponse.data?.uid
-        },
+            uid:uid
+        },select:{
+            sessions:true
+        }
+    })
+    console.log(req.body)
+    if(sessions?.sessions.includes(session||"abc")){
+        if(!parsedResponse){
+        res.json({message:"Sorry Failed To Update"})
+        }
+        console.log(parsedResponse.data)
+        const response=await client.userstyle.update({
+            where:{
+                uid:uid
+            },
+            data:{
+                exstyle:parsedResponse.data?.exstyle
+            }
+        })
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }
+    else{
+        res.json({message:"Session Dont Match"})
+    }
+})
+
+router.post("/signUp",async(req,res)=>{
+    console.log(req.body)
+    const parsedResponse=User.safeParse(req.body)
+    if(!parsedResponse.success){
+        res.status(500).json({message:"Failed To Create User"})
+        return
+    }
+    const datetime=new Date()
+    const session=parsedResponse.data?.username+String(Math.floor(Math.random()*1000))+datetime
+    let bufferObj = Buffer.from(session,"utf8");
+    let base64String = bufferObj.toString("base64");
+    const sessions=[base64String]
+    const bufferpasObj = Buffer.from(parsedResponse.data.password,"utf8");
+    const base64Pass = bufferpasObj.toString("base64");
+    try{
+        const response=await client.user.create({
+            data:{
+                username:parsedResponse.data?.username,
+                email:parsedResponse.data?.email,
+                password:base64Pass,
+                sessions:sessions
+            } 
+    })
+    await client.about.create({
         data:{
-            exstyle:parsedResponse.data?.exstyle
+            about:"I am a ....",
+            image:"https://imgs.search.brave.com/OybWtIGSaTmsuMy37WubCkHuxtXsae6GY9U3bqW0RRo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzEyLzYwLzg5Lzg4/LzM2MF9GXzEyNjA4/OTg4NDBfcDhwRjNO/S2hjS3VzMHRzeHJC/OHE4ZG02aTVWclpJ/OWMuanBn",
+            style:"1",
+            uid:response.uid
+        }
+    })
+    await client.contact.create({
+        data:{
+            email:"johndoe@gmail.com",
+            linkedin:"johndoe@linkedIn.com",
+            location:"xyzLocation",
+            phone:"+91 2255",
+            uid:response.uid
+        }
+    })
+    await client.hero.create({
+        data:{
+            hero:"I Am A ...",
+            style:"1",
+            subhero:"A Passonate ...",
+            uid:response.uid,
+        }
+    })
+
+    await client.education.create({
+        data:{
+            degree:"XYZ Institue",
+            inst:"XYZ",
+            startdate:"2007-06",
+            uid:response.uid
+        }
+    })
+
+    await client.experience.create({
+        data:{
+            corp:"ABC Institute",
+            desc:"Project Lead",
+            startdate:"2007-07",
+            title:"Project Lead",
+            uid:response.uid
+        }
+    })
+
+    await client.project.create({
+        data:{
+            uid:response.uid,
+            title:"A Calculator App",
+            desc:"A Calculator App made using ...",
+            github:"#",
+            image:"https://imgs.search.brave.com/qFUuEh8DOR-oN8lV8Ju89PCx2JaKiE8l55FZ0tvWVjc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9yZXBv/c2l0b3J5LWltYWdl/cy5naXRodWJ1c2Vy/Y29udGVudC5jb20v/ODI0NTI1MTk1L2Ez/OWFkMjk5LTg3M2Yt/NDY0Zi1iOWMwLTk2/OTllNGFlMWE4ZA",
+            Link:"#",
+            tags:["Flutter"]
+        }
+    })
+
+    await client.skills.create({
+        data:{
+            icon:"Layout",
+            skillname:"Mobile",
+            uid:response.uid,
+            skills:["flutter","react-native"]
+        }
+    })
+
+    await client.userstyle.create({
+        data:{
+            estyle:"1",
+            exstyle:"1",
+            pstyle:"1",
+            sstyle:"1",
+            uid:response.uid
         }
     })
     if(!response){
-        res.json({message:"Sorry Failed To Update"})
+        res.status(200).json({message:"Failed To Create User"})
+    }else{
+        res.status(200).json({message:"Succesfully Created User",uid:response.uid,session:base64String})
+    }        
+    }catch(e:any){
+        if(e.code === 'P2002' && e.meta?.target?.includes('username')){
+            res.status(500).json({message:"Username Already Exists"})
+        }
     }
-    res.json({message:"Succefully Updated"})
+})
+
+
+router.post("/login",async(req,res)=>{
+    console.log(req.body)
+    const parsedResponse=User.safeParse(req.body)
+    if(!parsedResponse.success){
+        res.json("Failed To Login User")
+        return
+    }
+    const datetime=new Date()
+    const session=parsedResponse.data?.username+String(Math.floor(Math.random()*1000))+datetime
+    const bufferObj = Buffer.from(session,"utf8");
+    const base64String = bufferObj.toString("base64");
+
+    
+    const log=await client.user.findFirst({
+        where:{
+            username:parsedResponse.data.username
+        },
+        select:{
+            password:true,
+            sessions:true,
+            uid:true,
+        }
+    })
+    const bufferpasObj = Buffer.from(parsedResponse.data.password,"utf8");
+    const base64Pass = bufferpasObj.toString("base64");
+    if(base64Pass==log?.password){
+        log.sessions=[...log.sessions,base64String]
+        const response=await client.user.update({
+            where:{
+                username:parsedResponse.data.username
+            },
+            data:{
+                sessions:log.sessions
+            }
+        })
+        if(!response){
+            res.status(500).json({message:"Failed To Login"})    
+        }
+        res.status(200).json({message:"Succesfully Logged In",session:base64String,uid:response.uid})
+    }
+    else{
+        res.status(500).json({message:"Incorrect Password"})
+    }
+})  
+
+router.post("/deleteSession",async(req,res)=>{
+    const session=req.body.session
+    const uid=req.body.uid
+    const sessions=await client.user.findFirst({
+        where:{
+            uid:uid
+        },
+        select:{
+            sessions:true
+        }
+    })
+    const newSessions=sessions?.sessions.filter((prev)=>prev!=session)
+    const response=await client.user.update({
+        where:{
+            uid:uid
+        },
+        data:{
+            sessions:newSessions
+        }
+    })
+    if(!response){
+        res.status(500).json({message:"Failed To LogOut"})
+    }else{
+        res.status(200).json({message:"Logged Out Succesfully"})
+    }
+    
 })

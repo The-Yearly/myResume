@@ -38,12 +38,13 @@ export default function Home() {
    }
   getCookies()},[])
 
-  useEffect(()=>{const getData=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience/1")
-    setExp(res.data.experience)
-    setLoading(loading+1)
-  }
-  getData()},[])
+  useEffect(()=>{const getEd=async()=>{
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations",{uid:logged.uid,session:logged.session})
+      setEducations(res.data.education)
+      setLoading(loading+1)
+  }}
+  getEd()},[logged])
 
 
   useEffect(()=>{const fetchData=async()=>{
@@ -66,7 +67,24 @@ export default function Home() {
   }
   getStyles()},[logged])
 
-  
+  useEffect(()=>{const getData=async()=>{
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience",{uid:logged.uid,session:logged.session})
+      setExp(res.data.experience)
+      setLoading(loading+1)
+    }
+  }
+  getData()},[logged])
+
+
+  useEffect(()=>{
+    const fetchData=async()=>{
+      if(logged.uid!=0){
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills",{uid:logged.uid,session:logged.session})
+        setSkills(res.data.skills)
+      }
+    }
+    fetchData()},[logged])
 
   useEffect(()=>{const getHero=async()=>{
     if(logged.uid!=0){
@@ -87,21 +105,7 @@ export default function Home() {
   }}
   getAbout()},[logged])
   
-  useEffect(() => {
-    const fetchData = async () => {
-        const res = await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills/1")
-        setSkills(res.data.skills)
-        setLoading(loading+1)
-    }
-    fetchData()
-  }, [])
 
-  useEffect(()=>{const getEd=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations/1")
-    setEducations(res.data.education)
-    setLoading(loading+1)
-  }
-  getEd()},[])
   const SelectedHero=Theme[hero?.style as keyof typeof Theme]?.hero
   const SelectedAbout=Theme[about?.style as keyof typeof Theme]?.about
   const SelectedSkills=Theme[skillStyle]?.skills
