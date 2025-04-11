@@ -3,7 +3,9 @@ import Link from "next/link"
 import { ExternalLink, Github } from "lucide-react"
 import { Project } from "@/utils/types"
 export function Projects(props:{content:Project[]}) {
+console.log(props.content)
   return (
+
     <section id="projects" className="relative w-full py-16 md:py-24">
       <div className=" px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -19,7 +21,7 @@ export function Projects(props:{content:Project[]}) {
             <div key={index} className="overflow-hidden border-gray-100 border-2 ">
               <div className="relative aspect-video">
                 <Image
-                  src={project.image}
+                  src={project.image||"https://imgs.search.brave.com/OybWtIGSaTmsuMy37WubCkHuxtXsae6GY9U3bqW0RRo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzEyLzYwLzg5Lzg4/LzM2MF9GXzEyNjA4/OTg4NDBfcDhwRjNO/S2hjS3VzMHRzeHJC/OHE4ZG02aTVWclpJ/OWMuanBn"}
                   alt={project.title}
                   fill
                   className="object-cover transition-all hover:scale-105"

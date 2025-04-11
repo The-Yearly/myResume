@@ -1,7 +1,6 @@
 "use client"
 import type React from "react"
 import{ useState,useEffect,useRef } from "react"
-import Image from "next/image"
 import{ Theme } from "@/app/themes/styles"
 import axios from "axios"
 import type{ Project } from "@/utils/types"
@@ -292,7 +291,7 @@ export default function ProjectsEditor(){
                   className="w-full h-full object-cover"
                 />
             ):(
-                <Image src={project.image|| "/placeholder.svg"} alt={project.title} className="w-full h-full object-cover" />
+                <img src={project.image|| "/placeholder.svg"} alt={project.title} className="w-full h-full object-cover" />
             )}
             </div>
             <div>
@@ -390,7 +389,7 @@ export default function ProjectsEditor(){
             <input
               type="text"
               name="github"
-              placeholder="GitHub URL"
+              placeholder="GitHub URL or just type /"
               value={newProject.github}
               onChange={handleChange}
               className="w-full border p-2 rounded-md"
@@ -400,7 +399,7 @@ export default function ProjectsEditor(){
             <input
               type="text"
               name="Link"
-              placeholder="Live URL"
+              placeholder="Live URL or just type /"
               value={newProject.Link}
               onChange={handleChange}
               className="w-full border p-2 rounded-md"
