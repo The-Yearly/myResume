@@ -2,7 +2,9 @@
 
 import type { About } from "@/utils/types"
 import type React from "react"
+import { Session } from "@/middleware";
 import Image from "next/image"
+import Cookies from "js-cookie";
 import { Theme } from "../../themes/styles"
 import { useState,useEffect,useRef } from "react"
 import axios from "axios"
@@ -11,9 +13,8 @@ import ImageKit from "imagekit"
 import AboutEditorSkeleton from "@/app/themes/skeletons/admin/abouteditor"
 export default function AboutEditor(){
   const [about,setAbout]=useState<About>({
-    uid: 1,
     about:
-      "I'm a passionate developer with expertise in building modern web applications. With a strong foundation in both frontend and backend technologies,I create solutions that are not only functional but also provide exceptional user experiences. My journey in technology began with [your background] and I've since worked on various projects ranging from [types of projects]. I'm constantly learning and exploring new technologies to stay at the forefront of the industry. When I'm not coding,you can find me [your hobbies/interests].",
+      "Session Dont Match My Guy",
     image: "",
     style: "1",
   })
@@ -23,35 +24,43 @@ export default function AboutEditor(){
   const [previewImage,setPreviewImage]=useState<string | null>(null)
   const fileInputRef=useRef<HTMLInputElement>(null)
   const [laoding,setLoading]=useState(true)
+  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const imagekit=new ImageKit({
     publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || "",
     privateKey: process.env.NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY || "",
     urlEndpoint: "https://ik.imagekit.io/161vmuzvb",
   })
-
+  useEffect(()=>{const getCookies=async()=>{
+       const cookie=Cookies.get("creds")
+       setLogged(JSON.parse(cookie??''))
+  }
+  getCookies()},[])
+  console.log(logged,"s")
   useEffect(()=>{
     const fetchData=async()=>{
       try {
-        const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")
+        if(logged.uid!=0){
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:logged.uid,session:logged.session})
         const data=res.data.about
-        setAbout({ about: data.about,image: data.image,style: data.style,uid: 1 })
+        setAbout({ about: data.about,image: data.image,style: data.style})
         setLoading(true)
         if(data.image && data.image!=="s"){
           setPreviewImage(data.image)
-        }
+        }}
       } catch(error){
         console.error("Error fetching about data:",error)
         toast.error("Failed to load about data")
       }
     }
     fetchData()
-  },[])
+  },[logged])
 
   useEffect(()=>{
     const sendData=async()=>{
       if(data!=null){
         try {
-          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/setAbout",data)
+          console.log(data)
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/setAbout",{about:data,uid:logged.uid,session:logged.session})
           toast(res.data.message)
         } catch(error){
           console.error("Error saving about data:",error)

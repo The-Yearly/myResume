@@ -14,8 +14,8 @@ export function Projects2(props:{content:Project[]}){
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
           {props.content.map((project, index) => (
-            <div key={index} className="group">
-              <div className="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
+            <div key={index} className="group shadow-md rounded-md">
+              <div className="relative overflow-hidden rounded-xl  aspect-[4/3] mb-6">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -46,10 +46,10 @@ export function Projects2(props:{content:Project[]}){
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{project.title}</h3>
-              <p className="text-slate-600 mb-4">{project.desc}</p>
+              <h3 className="text-xl font-bold text-slate-900 mb-2 ml-5">{project.title}</h3>
+              <p className="text-slate-600 mb-4 ml-5">{project.desc}</p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 ml-3 mb-3">
                 {project.tags.map((tag, tagIndex) => (
                   <span key={tagIndex} className="px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-sm">
                     {tag}

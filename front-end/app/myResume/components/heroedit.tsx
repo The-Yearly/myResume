@@ -6,27 +6,38 @@ import { useState,useEffect } from "react"
 import { Theme } from "../../themes/styles"
 import { toast } from "react-toastify"
 import HeroEditorSkeleton from "@/app/themes/skeletons/admin/heroedit"
+import { Session } from "@/middleware"
+import Cookies from "js-cookie"
 export default function HeroEditor() {
   const [data,setData]=useState<Hero|null>(null)
   const [loading,setLoading]=useState(false)
+  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const [heroData, setHeroData] = useState<Hero>({
-    uid:1,
     hero:"Hello, I'm ...",
     subhero:"A passionate .......",
     style:"1"
   })
 
   useEffect(()=>{const fetchHero=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
+    if(logged.uid!=0){
+    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:logged.uid,session:logged.session})
     const data=res.data.hero
-    setHeroData({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
+    setHeroData({hero:data.hero,subhero:data.subhero,style:data.style})
     setLoading(true)
+    }
   }
-  fetchHero()},[])
   
+  fetchHero()},[logged])
+  
+  useEffect(()=>{const getCookies=async()=>{
+    const cookie=Cookies.get("creds")
+    setLogged(JSON.parse(cookie??''))
+}
+getCookies()},[])
+
   useEffect(()=>{const setData=async()=>{
     if(data!=null){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/setHero",data)
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/setHero",{hero:data,uid:logged.uid,session:logged.session})
       toast(res.data.message)
     }
     }

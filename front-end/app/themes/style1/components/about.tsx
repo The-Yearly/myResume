@@ -1,6 +1,5 @@
 import Image from "next/image"
-export function About(props:{content:{bio:string,image:string}}) {
-  console.log(props,"sd")
+export function About(props:{content:{bio:string,image:string}}){
     return (
     <section id="about" className="py-16 md:py-24 mx-10">
       <div className="container md:px-6">

@@ -8,6 +8,8 @@ import { SelectedStyle } from "@/utils/types"
 import { Theme } from "@/app/themes/styles"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { Session } from "@/middleware"
+import Cookies from "js-cookie"
 export default function ExperienceEdit() {
   const [experience, setExp] = useState<ExperienceI[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,20 +21,26 @@ export default function ExperienceEdit() {
   const [refresh,setRefresh]=useState(false)
   const [isEditing,setIsEditing]=useState(false)
   const [deleteId,setDeleteId]=useState<number|null>(null)
+  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const SelectedExp=Theme[selectedStyle].experience
 
-  useEffect(()=>{const fetchStyle=async()=>{
-    setGotResp(true)
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
-    setSelectedStyle(res.data.styles.exstyle)
-    setGotResp(false)
+  useEffect(()=>{const getCookies=async()=>{
+    const cookie=Cookies.get("creds")
+    setLogged(JSON.parse(cookie??''))
   }
-  fetchStyle()},[])
+  getCookies()},[])
+
+  useEffect(()=>{const fetchStyle=async()=>{
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
+      setSelectedStyle(res.data.styles.exstyle)
+  }}
+  fetchStyle()},[logged])
 
   useEffect(()=>{const setStyle=async()=>{
     setGotResp(true)
     if(submitselectedStyle!=null){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateExperienceStyle",submitselectedStyle)
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateExperienceStyle",{style:submitselectedStyle,uid:logged.uid,session:logged.session})
       toast(res.data.message)
     }
     setGotResp(false)
@@ -42,7 +50,7 @@ export default function ExperienceEdit() {
   useEffect(()=>{ const sendEd=async()=>{
     if(deleteId!=null){ 
       setGotResp(true) 
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteExperience",{deleteId})
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteExperience",{del:deleteId,uid:logged.uid,session:logged.session})
       toast(res.data.message)
       setRefresh(!refresh)
       setGotResp(false)
@@ -51,10 +59,12 @@ export default function ExperienceEdit() {
   sendEd()},[deleteId])
 
   useEffect(()=>{const getData=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience/1")
-    setExp(res.data.experience)
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience",{uid:logged.uid,session:logged.session})
+      setExp(res.data.experience)
+    }
   }
-  getData()},[refresh])
+  getData()},[refresh,logged])
 
   useEffect(()=>{ const sendEd=async()=>{
     if(newExperience!=null){ 
@@ -62,11 +72,11 @@ export default function ExperienceEdit() {
       setGotResp(true) 
       let res
       if(!isEditing){
-        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addExperience",newExperience)
+        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addExperience",{exp:newExperience,uid:logged.uid,session:logged.session})
         setNewExperience(null)
         toast(res.data.mesage)
       }else{
-        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateExperience",newExperience)
+        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateExperience",{exp:newExperience,uid:logged.uid,session:logged.session})
         setIsEditing(false)
         setNewExperience(null)
         toast(res.data.mesage)
@@ -84,7 +94,6 @@ export default function ExperienceEdit() {
       startdate: "",
       enddate: null,
       desc:"",
-      uid:1
     })
     setIsModalOpen(true)
   }
@@ -148,7 +157,7 @@ export default function ExperienceEdit() {
                 <option value="1">Style 1</option>
                 <option value="2">Style 2</option>
               </select>
-              <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,exstyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
+              <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({exstyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
               </div>
             </div>
         <h1 className="text-2xl font-bold text-gray-800">Manage Exp</h1>

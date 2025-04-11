@@ -15,7 +15,10 @@ import { useState,useEffect } from "react"
 import axios from "axios"
 import { ProjectsSkeleton } from "./themes/skeletons/resume/projects"
 import { About,Hero } from "@/utils/types"
+import { Session } from "@/middleware"
+import Cookies from "js-cookie"
 export default function Home() {
+  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const [hero,setHero]=useState<Hero|null>(null)
   const [about,setAbout]=useState<About|null>(null)
   const [projects, setProjects] = useState<Project[]>([])
@@ -28,6 +31,13 @@ export default function Home() {
   const [exp,setExp]=useState<ExperienceI[]>([])
   const [loading,setLoading]=useState(6)
 
+    
+  useEffect(()=>{const getCookies=async()=>{
+    const cookie=Cookies.get("creds")
+    setLogged(JSON.parse(cookie??''))
+   }
+  getCookies()},[])
+
   useEffect(()=>{const getData=async()=>{
     const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience/1")
     setExp(res.data.experience)
@@ -37,40 +47,45 @@ export default function Home() {
 
 
   useEffect(()=>{const fetchData=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects/1")
-    setProjects(res.data.project)
-    setLoading(loading+1)
-  }
-  fetchData()},[])
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:logged.uid,session:logged.session})
+      setProjects(res.data.project)
+      setLoading(loading+1)
+  }}
+  fetchData()},[logged])
   
   useEffect(()=>{const getStyles=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
+    if(logged.uid!=0){
+    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
     setProjectStyle(res.data.styles.pstyle)
     setSkillStyle(res.data.styles.sstyle)
     setEducationStyle(res.data.styles.estyle)
     setExpStyle(res.data.styles.exstyle)
     setLoading(loading+1)
+    }
   }
-  getStyles()},[])
+  getStyles()},[logged])
 
   
 
   useEffect(()=>{const getHero=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero/1")
+    if(logged.uid!=0){
+    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:logged.uid,session:logged.session})
     const data=res.data.hero
-    console.log(data)
-    setHero({uid:data.uid,hero:data.hero,subhero:data.subhero,style:data.style})
+    console.log(logged.uid)
+    setHero({hero:data.hero,subhero:data.subhero,style:data.style})
     setLoading(loading+1)
-  }
-  getHero()},[])
+  }}
+  getHero()},[logged])
 
   useEffect(()=>{const getAbout=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout/1")
+    if(logged.uid!=0){
+    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:logged.uid,session:logged.session})
     const data=res.data.about
-    setAbout({about:data.about,image:data.image,style:data.style,uid:1})
+    setAbout({about:data.about,image:data.image,style:data.style})
     setLoading(loading+1)
-  }
-  getAbout()},[])
+  }}
+  getAbout()},[logged])
   
   useEffect(() => {
     const fetchData = async () => {

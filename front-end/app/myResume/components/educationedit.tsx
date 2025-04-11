@@ -8,6 +8,8 @@ import { EducationI } from "@/utils/types"
 import { Theme } from "@/app/themes/styles"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { Session } from "@/middleware"
+import Cookies from "js-cookie"
 export default function EducationEditor() {
   const [educations, setEducations]=useState<EducationI[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,27 +21,37 @@ export default function EducationEditor() {
   const [newEd,setNewEd]=useState<EducationI|null>(null)
   const [refresh,setRefresh]=useState(false)
   const [currentDelEducation,setCurrentDelEducation]=useState<number|null>(null)
+  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const SelectedEd=Theme[selectedStyle].education
   
+
+  useEffect(()=>{const getCookies=async()=>{
+    const cookie=Cookies.get("creds")
+    setLogged(JSON.parse(cookie??''))
+  }
+  getCookies()},[])
+
   useEffect(()=>{const fetchStyle=async()=>{
     setGotResp(true)
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
-    setSelectedStyle(res.data.styles.estyle)
-    setGotResp(false)
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
+      setSelectedStyle(res.data.styles.estyle)
+      setGotResp(false)
+    }
   }
-  fetchStyle()},[])
+  fetchStyle()},[logged])
 
   useEffect(()=>{const getEd=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations/1")
-    setEducations(res.data.education)
-  }
-  getEd()},[refresh])
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations",{uid:logged.uid,session:logged.session})
+      setEducations(res.data.education)
+  }}
+  getEd()},[refresh,logged])
 
   useEffect(()=>{const setStyle=async()=>{
     setGotResp(true)
     if(submitselectedStyle!=null){
-      
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateEducationStyle",submitselectedStyle)
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateEducationStyle",{style:submitselectedStyle,uid:logged.uid,session:logged.session})
       toast(res.data.message)
     }
     setGotResp(false)
@@ -52,11 +64,11 @@ export default function EducationEditor() {
       setGotResp(true) 
       let res
       if(!isEditing){
-        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addEducation",newEd)
+        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addEducation",{ed:newEd,uid:logged.uid,session:logged.session})
         setNewEd(null)
         toast(res.data.mesage)
       }else{
-        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateEducation",newEd)
+        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateEducation",{ed:newEd,uid:logged.uid,session:logged.session})
         setIsEditing(false)
         setNewEd(null)
         toast(res.data.mesage)
@@ -72,7 +84,7 @@ export default function EducationEditor() {
     if(currentDelEducation!=null){ 
       setGotResp(true) 
       console.log(currentEducation)
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/delEducation",{currentDelEducation})
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/delEducation",{del:currentDelEducation,uid:logged.uid,session:logged.session})
       toast(res.data.message)
       setRefresh(!refresh)
       setGotResp(false)
@@ -87,7 +99,7 @@ export default function EducationEditor() {
       degree: "",
       startdate: "",
       enddate: null,
-      uid:1
+  
     })
     setIsModalOpen(true)
   }
@@ -150,7 +162,7 @@ export default function EducationEditor() {
                 <option value="1">Style 1</option>
                 <option value="2">Style 2</option>
               </select>
-              <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,estyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
+              <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({estyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
               </div>
             </div>
         <button

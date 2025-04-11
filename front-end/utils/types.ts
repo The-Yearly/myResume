@@ -1,21 +1,18 @@
 import { Theme } from "@/app/themes/styles"
 
 export interface Hero{
-    uid:number
     hero:string,
     subhero:string
     style:string
 }
 
 export interface About{
-    uid:number,
     image:string,
     about:string,
     style:string
 }
 
 export interface Project{
-    uid:number,
     pid?:number
     title:string,
     image:string,
@@ -26,14 +23,12 @@ export interface Project{
 }
 
 export interface SelectedStyle{
-    uid:number,
     sstyle?:keyof typeof Theme
     pstyle?:keyof typeof Theme
     estyle?:keyof typeof Theme
     exstyle?:keyof typeof Theme
 }
 export interface Skill{
-    uid:number
     sid:number
     icon:String
     skillname:string
@@ -47,7 +42,6 @@ export interface ExperienceI{
     startdate:string
     enddate:string|null
     desc:string
-    uid:number
 }
 
 export interface EducationI{
@@ -56,6 +50,11 @@ export interface EducationI{
     degree:string
     startdate:string
     enddate:string|null
-    uid:number
+}
+
+export interface User{
+    username: string
+    password: string
+    email?:string
 }
   

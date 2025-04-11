@@ -10,7 +10,10 @@ import{ toast } from "react-toastify"
 import type{ SelectedStyle } from "@/utils/types"
 import ImageKit from "imagekit"
 import ProjectsEditorSkeleton from "@/app/themes/skeletons/admin/projectedit"
+import { Session } from "@/middleware"
+import Cookies from "js-cookie"
 export default function ProjectsEditor(){
+  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const [modalOpen,setModalOpen]=useState(false)
   const [editIndex,setEditIndex]=useState<number | null>(null)
   const [selectedStyle,setSelectedStyle]=useState<keyof typeof Theme>("1")
@@ -33,7 +36,6 @@ export default function ProjectsEditor(){
     tags: [],
     github: "",
     Link: "",
-    uid: 0,
  })
 
   const imagekit=new ImageKit({
@@ -46,12 +48,19 @@ export default function ProjectsEditor(){
     setSelectedStyle(e.target.value as keyof typeof Theme)
  }
 
+  useEffect(()=>{const getCookies=async()=>{
+    const cookie=Cookies.get("creds")
+    setLogged(JSON.parse(cookie??''))
+  }
+  getCookies()},[])
+
   useEffect(()=>{
     const fetchStyle=async()=>{
       setGotResp(true)
       try{
-        const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
-        setSelectedStyle(res.data.styles.pstyle)
+        if(logged.uid!=0){
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
+        setSelectedStyle(res.data.styles.pstyle)}
      } catch(error){
         console.error("Error fetching styles:",error)
         toast.error("Failed to load styles")
@@ -60,7 +69,7 @@ export default function ProjectsEditor(){
      }
    }
     fetchStyle()
- },[])
+ },[logged])
 
   useEffect(()=>{
     const setStyle=async()=>{
@@ -68,9 +77,7 @@ export default function ProjectsEditor(){
       if(submitselectedStyle != null){
         try{
           const res=await axios.post(
-            process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProjectStyle",
-            submitselectedStyle,
-          )
+            process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProjectStyle",{style:submitselectedStyle,uid:logged.uid,session:logged.session})
           toast(res.data.message)
        } catch(error){
           console.error("Error updating project style:",error)
@@ -85,10 +92,11 @@ export default function ProjectsEditor(){
   useEffect(()=>{
     const fetchData=async()=>{
       setGotResp(true)
-      if(modalOpen != true){
+      if(modalOpen!=true){
         try{
-          const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects/1")
-          setProjects(res.data.project)
+          if(logged.uid!=0){
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:logged.uid,session:logged.session})
+          setProjects(res.data.project)}
           setLoading(true)
        } catch(error){
           console.error("Error fetching projects:",error)
@@ -98,7 +106,7 @@ export default function ProjectsEditor(){
       setGotResp(false)
    }
     fetchData()
- },[refresh,modalOpen])
+ },[refresh,modalOpen,logged])
 
   useEffect(()=>{
     const sendData=async()=>{
@@ -106,10 +114,10 @@ export default function ProjectsEditor(){
       if(newProject.title.length != 0){
         try{
           if(editIndex == null){
-            const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addProject",newProject)
+            const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addProject",{project:newProject,uid:logged.uid,session:logged.session})
             toast(res.data.message)
          } else{
-            const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProject",newProject)
+            const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProject",{project:newProject,uid:logged.uid,session:logged.session})
             toast(res.data.message)
          }
           setNewProject({
@@ -120,7 +128,6 @@ export default function ProjectsEditor(){
             tags: [],
             github: "",
             Link: "",
-            uid: 1,
          })
           setEditIndex(null)
           setRefresh(!refresh)
@@ -138,9 +145,9 @@ export default function ProjectsEditor(){
   useEffect(()=>{
     const DeleteProject=async()=>{
       setGotResp(true)
-      if(deleteProject != null){
+      if(deleteProject!=null){
         try{
-          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteProject",deleteProject)
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteProject",{del:deleteProject,uid:logged.uid,session:logged.session})
           toast(res.data.message)
           setRefresh(!refresh)
         } catch(error){
@@ -259,7 +266,7 @@ export default function ProjectsEditor(){
           <button
             disabled={gotResp}
             onClick={()=>{
-              setSubmitSelectedStyle({uid: 1,pstyle: selectedStyle })
+              setSubmitSelectedStyle({pstyle: selectedStyle })
             }}
             className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp ? "cursor-wait" : "cursor-pointer"}`}
           >
@@ -338,7 +345,6 @@ export default function ProjectsEditor(){
             tags: [],
             github: "",
             Link: "",
-            uid: 1,
           })
           setEditIndex(null)
           setSelectedFile(null)

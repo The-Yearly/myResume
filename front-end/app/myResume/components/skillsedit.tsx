@@ -8,7 +8,8 @@ import type{ Skill } from "@/utils/types"
 import{ toast } from "react-toastify"
 export const iconMap={ Activity, AlertCircle, Anchor, Archive, ArrowRight, Award, Bookmark, BookOpen, Box, Briefcase, Calendar, Camera, ChevronRight, Clipboard, Clock, Cloud, Code, Plus, Compass, Cpu, CreditCard, Database, FileText, Film, Flag, Folder, Gift, GitBranch, Globe, Headphones, Heart, Home, Image, Key, Layers, Layout, LifeBuoy, Link, Mail, Map, MessageCircle, Monitor, Moon, Music, Package, Pencil, Phone, PieChart, Play, Printer, Radio, Save, Search, Server, Settings, Shield, ShoppingBag, ShoppingCart, Sliders, Smartphone, Star, Sun, Tag, Terminal, Truck, User, Video, Zap, Book, Brain, Coffee, Flame, Lightbulb, Languages, Mic, Network, Palette, PenTool, Shuffle, Sparkles, Wind, ClipboardList, CheckCircle2, MoveRight, HeartHandshake, Edit, Trash2 }
 export type IconName=keyof typeof iconMap
-
+import { Session } from "@/middleware"
+import Cookies from "js-cookie"
 interface updatedCatgory{
   sid:number,
   skillname:string,
@@ -42,17 +43,26 @@ export default function SkillsEditor(){
   const [currentSkillNameBeforeEdit, setCurrentSkillNameBeforeEdit]=useState("")
   const [currentSkillCat,setCurrentSkillCat]=useState(0)
   const [newsSkillsList,setNewsSkillsList]=useState<string[]>([])
-  const [submitselectedStyle,setSubmitSelectedStyle]=useState<{uid:number,sstyle:keyof typeof Theme}|null>(null)
-  useEffect(()=>{const fetchStyle=async()=>{
-    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles/1")
-    setSelectedStyle(res.data.styles.sstyle)
+  const [submitselectedStyle,setSubmitSelectedStyle]=useState<{sstyle:keyof typeof Theme}|null>(null)
+  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
+
+  useEffect(()=>{const getCookies=async()=>{
+    const cookie=Cookies.get("creds")
+    setLogged(JSON.parse(cookie??''))
   }
-  fetchStyle()},[])
+  getCookies()},[])
+  
+  useEffect(()=>{const fetchStyle=async()=>{
+    if(logged.uid!=0){
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
+      setSelectedStyle(res.data.styles.sstyle)
+  }}
+  fetchStyle()},[logged])
 
   useEffect(()=>{const setStyle=async()=>{
     setGotResp(true)
     if(submitselectedStyle!=null){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillStyle",submitselectedStyle)
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillStyle",{style:submitselectedStyle,uid:logged.uid,session:logged.session})
       toast(res.data.message)
       setIsSkillModalOpen(false)
     }
@@ -61,10 +71,11 @@ export default function SkillsEditor(){
   setStyle()},[submitselectedStyle])
 
   useEffect(()=>{
+    console.log(newsSkillsList,"s")
     const addSkills=async()=>{
       setGotResp(true)
-      if(newsSkillsList.length!=0 && currentSkillCat!=0){
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addSkill",{list:newsSkillsList,sid:currentSkillCat})
+      if(currentSkillCat!=0){
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addSkill",{list:newsSkillsList,sid:currentSkillCat,uid:logged.uid,session:logged.session})
         toast(res.data.message)
         setIsSkillModalOpen(false)
       }
@@ -72,11 +83,12 @@ export default function SkillsEditor(){
     }
   addSkills()
   },[newsSkillsList])
+
   useEffect(()=>{
     const sendupdatedCatgory=async()=>{
       setGotResp(true)
       if(updatedCatgory!=null){
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillCat",updatedCatgory)
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateSkillCat",{skill:updatedCatgory,uid:logged.uid,session:logged.session})
         toast(res.data.message)
         setCurrentSkillCat(0)
         setIsCategoryModalOpen(false)
@@ -87,18 +99,20 @@ export default function SkillsEditor(){
 
   useEffect(()=>{
   const fetchData=async()=>{
-    setGotResp(true)
-      const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills/1")
+    if(logged.uid!=0){
+      setGotResp(true)
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills",{uid:logged.uid,session:logged.session})
       setSkills(res.data.skills)
       setGotResp(false)
+    }
   }
-  fetchData()},[refresh])
+  fetchData()},[refresh,logged])
 
   useEffect(()=>{
     const deleteData=async()=>{
       setGotResp(true)
       if(deleteSkill!=0){
-        const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteSkill/"+deleteSkill)
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteSkill/",{del:deleteSkill,uid:logged.uid,session:logged.session})
         toast(res.data.message)
         setDeleteSkill(0)
     }
@@ -111,7 +125,7 @@ export default function SkillsEditor(){
     const fetchData=async()=>{
       setGotResp(true)
       if(newSkill!=null){
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addSkills",newSkill)
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addSkills",{skills:newSkill,uid:logged.uid,session:logged.session})
         toast(res.data.message)
         setSelectedSkill(null)
         setIsCategoryModalOpen(false)
@@ -170,7 +184,6 @@ export default function SkillsEditor(){
       setSkills((prev)=>[
         ...prev,
        {
-          uid: 1,
           sid: newId, 
           skillname: currentCategoryName,
           icon: selectedIcon,
@@ -178,7 +191,7 @@ export default function SkillsEditor(){
         },
       ])
      setSelectedSkill(
-     { uid: 1,
+     {
         sid: newId, 
         skillname: currentCategoryName,
         icon: selectedIcon,
@@ -249,7 +262,8 @@ export default function SkillsEditor(){
         skill.skillname==category ?{ ...skill, skills: skill.skills.filter((item)=>item!=skillName) } : skill,
       ),
     )
-    setNewsSkillsList(skills.filter((skillcat)=>skillcat.skillname==category).map((skill)=>skill.skills.filter((item)=>item!=skillName)[0]))
+    setNewsSkillsList(skills.filter((skillcat) => skillcat.skillname === category).flatMap((skill) => skill.skills.filter((item) => item !== skillName)));
+    console.log(skills.filter((skillcat) => skillcat.skillname === category).flatMap((skill) => skill.skills.filter((item) => item !== skillName)))
   }
 
   const toggleIconSelector=()=>{
@@ -280,7 +294,7 @@ export default function SkillsEditor(){
             <option value="1">Style 1</option>
             <option value="2">Style 2</option>
           </select>
-          <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({uid:1,sstyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
+          <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({sstyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
           </div>
         </div>
         <h1 className="text-2xl font-bold text-gray-800">Manage Skills</h1>
