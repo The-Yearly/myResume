@@ -180,7 +180,7 @@ router.post("/addProject",async(req,res)=>{
         const response=await client.project.create(
             {
                 data:{
-                    github:parsedResponse.data?.desc,
+                    github:parsedResponse.data.github,
                     desc:parsedResponse.data?.desc,
                     image:parsedResponse.data?.image,
                     Link:parsedResponse.data.Link,

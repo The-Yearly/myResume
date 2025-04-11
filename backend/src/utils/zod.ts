@@ -18,6 +18,7 @@ export const Hero=z.object({
 
 export const Project=z.object({
   pid:z.number().optional(),
+  github:z.string(),
   title:z.string(),
   image:z.string(),
   desc:z.string(),

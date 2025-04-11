@@ -1,5 +1,4 @@
 "use client"
-import pfp from "@/myPhoto.jpeg"
 import type React from "react"
 import{ useState,useEffect,useRef } from "react"
 import Image from "next/image"
@@ -15,6 +14,7 @@ import Cookies from "js-cookie"
 export default function ProjectsEditor(){
   const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const [modalOpen,setModalOpen]=useState(false)
+  const [isNew,setIsNew]=useState(false)
   const [editIndex,setEditIndex]=useState<number | null>(null)
   const [selectedStyle,setSelectedStyle]=useState<keyof typeof Theme>("1")
   const [submitselectedStyle,setSubmitSelectedStyle]=useState<SelectedStyle | null>(null)
@@ -22,7 +22,7 @@ export default function ProjectsEditor(){
   const [gotResp,setGotResp]=useState(false)
   const [deleteProject,setDeleteProject]=useState<Project | null>(null)
   const [refresh,setRefresh]=useState(false)
-  const [loading,setLoading]=useState(false)
+  const [loading,setLoading]=useState(true)
   const [isUploading,setIsUploading]=useState(false)
   const [selectedFile,setSelectedFile]=useState<File | null>(null)
   const [previewImage,setPreviewImage]=useState<string | null>(null)
@@ -97,7 +97,8 @@ export default function ProjectsEditor(){
           if(logged.uid!=0){
           const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:logged.uid})
           setProjects(res.data.project)}
-          setLoading(true)
+          console.log(loading)
+          setLoading(false)
        } catch(error){
           console.error("Error fetching projects:",error)
           toast.error("Failed to load projects")
@@ -113,9 +114,10 @@ export default function ProjectsEditor(){
       setGotResp(true)
       if(newProject.title.length != 0){
         try{
-          if(editIndex == null){
+          if(editIndex == null && isNew==true){
             const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addProject",{project:newProject,uid:logged.uid,session:logged.session})
             toast(res.data.message)
+            setIsNew(true)
          } else{
             const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProject",{project:newProject,uid:logged.uid,session:logged.session})
             toast(res.data.message)
@@ -245,11 +247,12 @@ export default function ProjectsEditor(){
       const updatedProjects=[...projects]
       updatedProjects[editIndex]=newProject
       setProjects(updatedProjects)
+      setIsNew(true)
     } else{
       setProjects((prev)=> [...prev,newProject])
     }
   }
-  if(loading){
+  if(!loading){
   return(
     <div className="p-4">
       <div>
@@ -288,7 +291,7 @@ export default function ProjectsEditor(){
                   className="w-full h-full object-cover"
                 />
             ):(
-                <Image src={pfp || "/placeholder.svg"} alt={project.title} className="w-full h-full object-cover" />
+                <Image src={project.image|| "/placeholder.svg"} alt={project.title} className="w-full h-full object-cover" />
             )}
             </div>
             <div>
