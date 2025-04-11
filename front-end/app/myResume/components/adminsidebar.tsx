@@ -7,6 +7,7 @@ import { useState,useEffect } from "react"
 import { Session } from "@/middleware"
 import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
+import Link from "next/link"
 interface AdminSidebarProps {
   activeTab: string
   setActiveTab: (tab: string) => void
@@ -43,7 +44,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }: AdminSidebarPr
   return (
     <div className="w-64 bg-black text-white flex flex-col h-full">
       <div className="p-4 border-b border-gray-800">
-        <h1 className="text-xl font-bold">Resume</h1>
+        <Link href={"/resume/"+logged.uid} className="text-xl font-bold">myResume</Link>
       </div>
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1">

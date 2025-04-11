@@ -1,7 +1,9 @@
 "use client"
 import { useState } from "react"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
-export function Contact() {
+import { ProfileData } from "@/utils/types"
+import { Mail, Phone, MapPin, Send ,Linkedin} from "lucide-react"
+export function Contact(props:{contact:ProfileData}) {
+  console.log(props.contact)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,7 +46,7 @@ export function Contact() {
               <Mail className="h-6 w-6 text-primary mt-0.5" />
               <div>
                 <h3 className="font-bold">Email</h3>
-                <p className="text-gray-500">your.email@example.com</p>
+                <p className="text-gray-500">{props.contact.email}</p>
               </div>
             </div>
 
@@ -52,7 +54,7 @@ export function Contact() {
               <Phone className="h-6 w-6 text-primary mt-0.5" />
               <div>
                 <h3 className="font-bold">Phone</h3>
-                <p className="text-gray-500">+1 (123) 456-7890</p>
+                <p className="text-gray-500">{props.contact.phone}</p>
               </div>
             </div>
 
@@ -60,7 +62,15 @@ export function Contact() {
               <MapPin className="h-6 w-6 text-primary mt-0.5" />
               <div>
                 <h3 className="font-bold">Location</h3>
-                <p className="text-gray-500">City, Country</p>
+                <p className="text-gray-500">{props.contact.location}</p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-4">
+              <Linkedin className="h-6 w-6 text-primary mt-0.5" />
+              <div>
+                <h3 className="font-bold">LinkedIn</h3>
+                <p className="text-gray-500">{props.contact.linkedin}</p>
               </div>
             </div>
           </div>

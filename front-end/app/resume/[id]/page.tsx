@@ -15,7 +15,13 @@ import { useState,useEffect,use } from "react"
 import axios from "axios"
 import { ProjectsSkeleton } from "../../themes/skeletons/resume/projects"
 import { About,Hero } from "@/utils/types"
+import { ProfileData } from "@/utils/types"
 export default function Home({params}:{params:Promise<{id:number}>}) {
+  const [profileData,setProfileData]=useState<ProfileData>({email:"",
+    phone:"",
+    location:"",
+    linkedin:"",
+  })
   const [hero,setHero]=useState<Hero|null>(null)
   const [about,setAbout]=useState<About|null>(null)
   const [projects, setProjects] = useState<Project[]>([])
@@ -86,6 +92,20 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
   getAbout()},[])
   
 
+  useEffect(()=> {
+    const fetchProfileData=async()=> {
+        const res=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/getContacts`,{uid:uid})
+        const data=res.data.contact[0]
+        setProfileData({
+          email:data.email || "",
+          phone:data.phone || "",
+          location:data.location || "",
+          linkedin:data.linkedin || "",
+    })
+    }
+    fetchProfileData()
+  },[])
+
   const SelectedHero=Theme[hero?.style as keyof typeof Theme]?.hero
   const SelectedAbout=Theme[about?.style as keyof typeof Theme]?.about
   const SelectedSkills=Theme[skillStyle]?.skills
@@ -105,7 +125,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
         {SelectedExp?<SelectedExp experence={exp}/>:<p>Style Not Found</p>}
         {SelectedEducation?<SelectedEducation education={education}/>:<p>Style Not Found</p>}
       </div>
-      <Contact/>
+      <Contact contact={profileData}/>
     </div>
     </>
   )
