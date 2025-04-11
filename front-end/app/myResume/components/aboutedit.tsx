@@ -40,7 +40,7 @@ export default function AboutEditor(){
     const fetchData=async()=>{
       try {
         if(logged.uid!=0){
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:logged.uid,session:logged.session})
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:logged.uid})
         const data=res.data.about
         setAbout({ about: data.about,image: data.image,style: data.style})
         setLoading(true)

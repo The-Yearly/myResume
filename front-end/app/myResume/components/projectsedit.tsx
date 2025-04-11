@@ -59,7 +59,7 @@ export default function ProjectsEditor(){
       setGotResp(true)
       try{
         if(logged.uid!=0){
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
+        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid})
         setSelectedStyle(res.data.styles.pstyle)}
      } catch(error){
         console.error("Error fetching styles:",error)
@@ -95,7 +95,7 @@ export default function ProjectsEditor(){
       if(modalOpen!=true){
         try{
           if(logged.uid!=0){
-          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:logged.uid,session:logged.session})
+          const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:logged.uid})
           setProjects(res.data.project)}
           setLoading(true)
        } catch(error){

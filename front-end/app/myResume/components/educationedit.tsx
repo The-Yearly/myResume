@@ -34,7 +34,7 @@ export default function EducationEditor() {
   useEffect(()=>{const fetchStyle=async()=>{
     setGotResp(true)
     if(logged.uid!=0){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid})
       setSelectedStyle(res.data.styles.estyle)
       setGotResp(false)
     }
@@ -43,7 +43,7 @@ export default function EducationEditor() {
 
   useEffect(()=>{const getEd=async()=>{
     if(logged.uid!=0){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations",{uid:logged.uid,session:logged.session})
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations",{uid:logged.uid})
       setEducations(res.data.education)
   }}
   getEd()},[refresh,logged])

@@ -20,7 +20,7 @@ export default function HeroEditor() {
 
   useEffect(()=>{const fetchHero=async()=>{
     if(logged.uid!=0){
-    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:logged.uid,session:logged.session})
+    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:logged.uid})
     const data=res.data.hero
     setHeroData({hero:data.hero,subhero:data.subhero,style:data.style})
     setLoading(true)

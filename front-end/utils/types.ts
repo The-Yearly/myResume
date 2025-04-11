@@ -57,4 +57,37 @@ export interface User{
     password: string
     email?:string
 }
-  
+
+
+export interface ProfileData {
+  email: string
+  phone: string
+  location: string
+  linkedin: string
+}
+
+export interface PasswordData {
+  currentPassword: string
+  newPassword: string
+  confirmPassword: string
+}
+
+
+export interface getUsers {
+    username: string,
+    uid:number
+    contact:[
+      {
+        email: string,
+        phone: string,
+        location: string,
+        linkedin: string
+      }]
+    ,
+    About:[
+      {
+        image: string,
+        about: string,
+        style: string
+      }]
+  }

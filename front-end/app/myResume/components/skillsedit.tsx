@@ -54,7 +54,7 @@ export default function SkillsEditor(){
   
   useEffect(()=>{const fetchStyle=async()=>{
     if(logged.uid!=0){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid})
       setSelectedStyle(res.data.styles.sstyle)
   }}
   fetchStyle()},[logged])
@@ -101,7 +101,7 @@ export default function SkillsEditor(){
   const fetchData=async()=>{
     if(logged.uid!=0){
       setGotResp(true)
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills",{uid:logged.uid,session:logged.session})
+      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills",{uid:logged.uid})
       setSkills(res.data.skills)
       setGotResp(false)
     }

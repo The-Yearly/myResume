@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import Link from "next/link"
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const toggleMenu = () => {
@@ -15,9 +16,9 @@ export function Navbar() {
   }
   return (
       <div className="flex fixed z-30 w-full backdrop-blur h-16 items-center justify-between border-b-1">
-        <button onClick={()=>scrollToSection("hero")} className="font-bold text-xl ml-5">
+        <Link href={"/"} className="font-bold text-xl ml-5">
           myResume
-        </button>
+        </Link>
         <button className="md:hidden" onClick={toggleMenu}>
           {isMenuOpen ? <X className="mr-5 h-6 w-6" /> : <Menu className="mr-5 h-6 w-6" />}
           <div className="sr-only">Toggle menu</div>

@@ -1,152 +1,122 @@
-'use client'
-import { Navbar} from "./themes/style1/components/navBar"
-import { Contact } from "./themes/style1/components/contact"
-import { EducationI, ExperienceI } from "@/utils/types"
-import { HeroSkeleton } from "./themes/skeletons/hero"
-import { Project } from "@/utils/types"
-import { AboutSkeleton } from "./themes/skeletons/resume/about"
-import { SkillsSkeleton } from "./themes/skeletons/resume/skills"
-import { EducationSkeleton } from "./themes/skeletons/resume/education"
-import { ExperienceSkeleton } from "./themes/skeletons/resume/experience"
-import { ContactSkeleton } from "./themes/skeletons/resume/contact"
-import { Skill } from "@/utils/types"
-import { Theme } from "./themes/styles"
-import { useState,useEffect } from "react"
+"use client"
+import { useState, useEffect } from "react"
+import { Search, Navigation } from "lucide-react"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { getUsers } from "@/utils/types"
 import axios from "axios"
-import { ProjectsSkeleton } from "./themes/skeletons/resume/projects"
-import { About,Hero } from "@/utils/types"
-import { Session } from "@/middleware"
-import Cookies from "js-cookie"
-export default function Home() {
-  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
-  const [hero,setHero]=useState<Hero|null>(null)
-  const [about,setAbout]=useState<About|null>(null)
-  const [projects, setProjects] = useState<Project[]>([])
-  const [skills,setSkills]=useState<Skill[]>([])
-  const [projectStyle,setProjectStyle]=useState<keyof typeof Theme>("1")
-  const [skillStyle,setSkillStyle]=useState<keyof typeof Theme>("1")
-  const [educationStyle,setEducationStyle]=useState<keyof typeof Theme>("1")
-  const [expStyle,setExpStyle]=useState<keyof typeof Theme>("1")
-  const [education,setEducations]=useState<EducationI[]>([])
-  const [exp,setExp]=useState<ExperienceI[]>([])
-  const [loading,setLoading]=useState(6)
+import Image from "next/image"
+import { Navbar } from "./components/navBar"
 
-    
-  useEffect(()=>{const getCookies=async()=>{
-    const cookie=Cookies.get("creds")
-    setLogged(JSON.parse(cookie??''))
-   }
-  getCookies()},[])
+export default function PeopleDirectory() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [users, setUsers] = useState<getUsers[] | null>(null)
 
-  useEffect(()=>{const getEd=async()=>{
-    if(logged.uid!=0){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations",{uid:logged.uid,session:logged.session})
-      setEducations(res.data.education)
-      setLoading(loading+1)
-  }}
-  getEd()},[logged])
-
-
-  useEffect(()=>{const fetchData=async()=>{
-    if(logged.uid!=0){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:logged.uid,session:logged.session})
-      setProjects(res.data.project)
-      setLoading(loading+1)
-  }}
-  fetchData()},[logged])
-  
-  useEffect(()=>{const getStyles=async()=>{
-    if(logged.uid!=0){
-    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:logged.uid,session:logged.session})
-    setProjectStyle(res.data.styles.pstyle)
-    setSkillStyle(res.data.styles.sstyle)
-    setEducationStyle(res.data.styles.estyle)
-    setExpStyle(res.data.styles.exstyle)
-    setLoading(loading+1)
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/getUsers`)
+      setUsers(res.data.users)
+      setIsLoading(false)
     }
+    fetchUsers()
+  }, [])
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   }
-  getStyles()},[logged])
 
-  useEffect(()=>{const getData=async()=>{
-    if(logged.uid!=0){
-      const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience",{uid:logged.uid,session:logged.session})
-      setExp(res.data.experience)
-      setLoading(loading+1)
-    }
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 },
   }
-  getData()},[logged])
 
-
-  useEffect(()=>{
-    const fetchData=async()=>{
-      if(logged.uid!=0){
-        const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills",{uid:logged.uid,session:logged.session})
-        setSkills(res.data.skills)
-      }
-    }
-    fetchData()},[logged])
-
-  useEffect(()=>{const getHero=async()=>{
-    if(logged.uid!=0){
-    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:logged.uid,session:logged.session})
-    const data=res.data.hero
-    console.log(logged.uid)
-    setHero({hero:data.hero,subhero:data.subhero,style:data.style})
-    setLoading(loading+1)
-  }}
-  getHero()},[logged])
-
-  useEffect(()=>{const getAbout=async()=>{
-    if(logged.uid!=0){
-    const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:logged.uid,session:logged.session})
-    const data=res.data.about
-    setAbout({about:data.about,image:data.image,style:data.style})
-    setLoading(loading+1)
-  }}
-  getAbout()},[logged])
-  
-
-  const SelectedHero=Theme[hero?.style as keyof typeof Theme]?.hero
-  const SelectedAbout=Theme[about?.style as keyof typeof Theme]?.about
-  const SelectedSkills=Theme[skillStyle]?.skills
-  const SelectedProjects=Theme[projectStyle]?.projects
-  const SelectedEducation=Theme[educationStyle]?.education
-  const SelectedExp=Theme[expStyle]?.experience
-  if(loading==7){
-  return(
+  return (
     <>
     <Navbar/>
-    <div className="flex flex-col justify-center items-center min-h-screen">
-      {SelectedHero?<SelectedHero content={{hero:hero?.hero||"Hello, I'm ...",subhero:hero?.subhero||"A passionate ......."}}/>:<p>Style Not Found</p>}
-      {SelectedAbout?<SelectedAbout content={{bio:about?.about||"",image:about?.image||"http://placebeard.it/250/250"}}/>:<p>Style Not Found</p>}
-      {SelectedSkills?<SelectedSkills skills={skills}/>:<p>Style Not Found</p>}
-      {SelectedProjects?<SelectedProjects content={projects}/>:<p>Style Not Found</p>}
-      <div className="grid w-full grid-cols-1 lg:grid-cols-4">
-        {SelectedExp?<SelectedExp experence={exp}/>:<p>Style Not Found</p>}
-        {SelectedEducation?<SelectedEducation education={education}/>:<p>Style Not Found</p>}
+    <div className="min-h-screen grid grid-cols-1">
+    <div className=" mx-auto px-4 py-12">
+      <div className="text-center">
+        <h1 className="text-4xl mt-5 md:text-5xl font-bold text-gray-900 mb-4">Resume Directory</h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Discover talented professionals and explore their portfolios in our interactive resume directory.
+        </p>
       </div>
-      <Contact/>
+    </div>
+    <div className="flex justify-center">
+    <div className="w-3/4  min-h-screen to-white px-6 py-10">
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {[...Array(8)].map((_, index) => (
+            <div key={index} className="bg-white rounded-2xl shadow-md overflow-hidden animate-pulse">
+              <div className="h-48 bg-gray-200"></div>
+              <div className="p-5 space-y-3">
+                <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-200 rounded w-full"></div>
+                <div className="flex space-x-2">
+                  <div className="h-6 bg-gray-200 rounded w-16"></div>
+                  <div className="h-6 bg-gray-200 rounded w-16"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : users && users.length > 0 ? (
+        <motion.div
+  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+  variants={container}
+  initial="hidden"
+  animate="show"
+>
+  {users.map((person) => (
+    <motion.div key={person.uid} variants={item}>
+      <Link href={`/resume/${person.uid}`}>
+        <div className="group relative bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-indigo-200 hover:ring-2 hover:ring-indigo-100 cursor-pointer">
+          <div className="bg-gradient-to-tr from-amber-500 to-orange-600 h-28"></div>
+
+          <div className="absolute top-10  left-1/2 transform -translate-x-1/2">
+            <Image
+              src={person.About[0]?.image || "https://imgs.search.brave.com/OybWtIGSaTmsuMy37WubCkHuxtXsae6GY9U3bqW0RRo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzEyLzYwLzg5Lzg4/LzM2MF9GXzEyNjA4/OTg4NDBfcDhwRjNO/S2hjS3VzMHRzeHJC/OHE4ZG02aTVWclpJ/OWMuanBn"}
+              alt={person.username}
+              width={100}
+              height={100}
+              className="rounded-full border-4 border-white shadow-md object-cover h-28 w-28"
+            />
+          </div>
+
+          <div className="pt-12 pb-6 px-5 text-center">
+            <h2 className="text-lg font-semibold text-gray-900 mb-1">{person.username}</h2>
+            <div className="flex justify-center items-center text-sm text-gray-500 mb-2">
+              <Navigation className="w-4 h-4 mr-1" />
+              <span>{person.contact[0]?.location || "Unknown"}</span>
+            </div>
+            <p className="text-sm text-gray-600 line-clamp-3">{person.About[0]?.about || "No description provided."}</p>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  ))}
+</motion.div>
+      ) : (
+        <div className="text-center py-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+            <Search className="h-8 w-8 text-gray-400" />
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No results found</h3>
+          <p className="text-gray-500 max-w-md mx-auto">
+            We couldn&apos;t find any people matching your search criteria.
+          </p>
+        </div>
+      )}
+    </div>
+    </div>
     </div>
     </>
   )
-  }
-  else{
-    return(
-      <>  
-        <div className="flex flex-col justify-center items-center min-h-screen">
-          <HeroSkeleton/>
-          <AboutSkeleton/>
-          <SkillsSkeleton/>
-          <ProjectsSkeleton/>
-          <div className="grid w-full grid-cols-1 lg:grid-cols-4">
-            <EducationSkeleton/>
-            <ExperienceSkeleton/>
-          </div>
-          <ContactSkeleton/>
-        </div>
-      </>
-    )
-  }
-  }
-
-
+}

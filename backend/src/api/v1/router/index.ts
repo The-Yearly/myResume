@@ -1,31 +1,19 @@
 import e, { Router } from "express";
 import { PrismaClient } from "../../../../prisma/app/generated/prisma/client";
-import { Hero,About, Project, userstyles, Skills, Education, Experience, User } from "../../../utils/zod";
+import { Hero,About, Project, userstyles, Skills, Education, Experience, User, Contact } from "../../../utils/zod";
 export const router=Router()
 const client=new PrismaClient()
 router.post("/getHero",async(req,res)=>{
-    const session=req.body.session
     const uid=req.body.uid
-    const sessions=await client.user.findFirst({
-        where:{
-            uid:uid
-        },select:{
-            sessions:true
-        }
-    })
-    if(sessions?.sessions.includes(session||"abc")){
-        const response=await client.hero.findFirst(
-            {
-                where:{
-                    uid:uid
-                }
+    const response=await client.hero.findFirst(
+        {
+            where:{
+                uid:parseInt(uid)
             }
-        )
-        console.log(response)
-        res.json({hero:response})
-    }else{
-        res.json({message:"Sessions Dont Match"})
-    }
+        }
+    )
+    console.log(response)
+    res.json({hero:response})
 })
 
 router.post("/setHero",async(req,res)=>{
@@ -70,28 +58,15 @@ router.post("/setHero",async(req,res)=>{
 })
 
 router.post("/getAbout",async(req,res)=>{
-    const session=req.body.session
     const uid=req.body.uid
-    const sessions=await client.user.findFirst({
-        where:{
-            uid:uid
-        },
-        select:{
-            sessions:true
-        }
-    })
-    if(sessions?.sessions.includes(session||"abc")){
-        const response=await client.about.findFirst(
-            {
-                where:{
-                    uid:uid
-                }
+    const response=await client.about.findFirst(
+        {
+            where:{
+                uid:parseInt(uid)
             }
-        )
-        res.json({about:response})
-    }else{
-        res.json({message:"Sessions Dont Match"})
-    }
+        }
+    )
+    res.json({about:response})
 })
 
 router.post("/setAbout",async(req,res)=>{
@@ -131,16 +106,7 @@ router.post("/setAbout",async(req,res)=>{
     }})
 
 router.post("/getProjects",async(req,res)=>{
-    const session=req.body.session
     const uid=req.body.uid
-    const sessions=await client.user.findUnique({
-        where:{
-            uid:uid
-        },select:{
-            sessions:true
-        }
-    })
-    if(sessions?.sessions.includes(session||"abc")){
     const response=await client.project.findMany({
         where:{
             uid:parseInt(uid)
@@ -150,32 +116,16 @@ router.post("/getProjects",async(req,res)=>{
         }
     })
     res.json({project:response})
-    }else{
-        res.json({message:"Sessions Dont Match"})
-    }
 })
 
 router.post("/getStyles",async(req,res)=>{
-    const uid=req.body.uid
-    console.log(uid)
-    const session=req.body.session
-    const sessions=await client.user.findUnique({
+const uid=req.body.uid
+    const response=await client.userstyle.findUnique({
         where:{
-            uid:uid
-        },select:{
-            sessions:true
+            uid:parseInt(uid)
         }
     })
-    if(sessions?.sessions.includes(session||"abc")){
-        const response=await client.userstyle.findUnique({
-            where:{
-                uid:parseInt(uid)
-            }
-        })
-        res.json({styles:response})
-    }else{
-        res.json({message:"Sessions Dont Match"})
-    }
+    res.json({styles:response})
 })
 
 router.post("/updateProjectStyle",async(req,res)=>{    
@@ -320,27 +270,15 @@ router.post("/deleteProject",async(req,res)=>{
 
 router.post("/getSkills",async(req,res)=>{
     const uid=req.body.uid
-    const session=req.body.session
-    const sessions=await client.user.findUnique({
-        where:{
-            uid:uid
-        },select:{
-            sessions:true
+    const response=await client.skills.findMany(
+        {where:{
+            uid:parseInt(uid)
+        },orderBy:{
+            sid:"asc"
         }
-    })
-    if(sessions?.sessions.includes(session||"abc")){
-        const response=await client.skills.findMany(
-            {where:{
-                uid:uid
-            },orderBy:{
-                sid:"asc"
-            }
-        }
-        )
-        res.json({skills:response})
-    }else{
-        res.json({message:"Sessions Dont Match"})
     }
+    )
+    res.json({skills:response})
 })
 
 router.post("/addSkills",async(req,res)=>{
@@ -505,28 +443,15 @@ router.post("/updateSkillStyle",async(req,res)=>{
 
 router.post("/getEducations",async(req,res)=>{
     const uid=req.body.uid
-    const session=req.body.session
-    const sessions=await client.user.findUnique({
-        where:{
-            uid:uid
-        },select:{
-            sessions:true
+    const response=await client.education.findMany(
+        {where:{
+            uid:parseInt(uid)
+        },orderBy:{
+            edid:"asc"
         }
-    })
-    console.log()
-    if(sessions?.sessions.includes(session||"abc")){
-        const response=await client.education.findMany(
-            {where:{
-                uid:parseInt(uid)
-            },orderBy:{
-                edid:"asc"
-            }
-        }
-        )
-        res.json({education:response})
-        }else{
-        res.json({message:"Sessions Dont Match"})
     }
+    )
+    res.json({education:response})
 })
 
 router.post("/addEducation",async(req,res)=>{
@@ -674,29 +599,15 @@ router.post("/updateEducationStyle",async(req,res)=>{
 
 router.post("/getExperience",async(req,res)=>{
     const uid=req.body.uid
-    const session=req.body.session
-
-    const sessions=await client.user.findUnique({
+    const response=await client.experience.findMany({
         where:{
-            uid:uid
-        },select:{
-            sessions:true
+            uid:parseInt(uid)
+        },
+        orderBy:{
+            exid:"asc"
         }
     })
-    console.log(req.body)
-    if(sessions?.sessions.includes(session||"abc")){
-        const response=await client.experience.findMany({
-            where:{
-                uid:parseInt(uid)
-            },
-            orderBy:{
-                exid:"asc"
-            }
-        })
-        res.json({experience:response})
-    }else{
-        res.json({message:"Session Dont Match"})
-    }
+    res.json({experience:response})
 })
 
 
@@ -1024,6 +935,143 @@ router.post("/deleteSession",async(req,res)=>{
         res.status(500).json({message:"Failed To LogOut"})
     }else{
         res.status(200).json({message:"Logged Out Succesfully"})
-    }
+    }   
+
     
+})
+
+router.post("/getContacts",async(req,res)=>{
+    const uid=req.body.uid
+        const response=await client.contact.findMany({
+            where:{
+                uid:parseInt(uid)
+            }
+        })
+        if(!response){
+            res.json({message:"Failed to load profile data"})
+        }
+        res.json({contact:response})
+})
+    
+
+router.post("/updateContact",async(req,res)=>{
+    const parsedResponse=Contact.safeParse(req.body.contact)
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
+        }
+    })
+    console.log(req.body)
+    if(sessions?.sessions.includes(session||"abc")){
+        if(!parsedResponse){
+        res.json({message:"Sorry Failed To Update"})
+        }
+        console.log(parsedResponse.data)
+        const response=await client.contact.updateMany({
+            where:{
+                uid:uid
+            },
+            data:{
+                email:parsedResponse.data?.email,
+                linkedin:parsedResponse.data?.linkedin,
+                phone:parsedResponse.data?.phone,
+                location:parsedResponse.data?.location,
+                
+            }
+        })
+        if(!response){
+            res.json({message:"Sorry Failed To Update"})
+        }
+        res.json({message:"Succefully Updated"})
+    }
+    else{
+        res.json({message:"Session Dont Match"})
+    }
+})
+
+
+router.post("/updatePassword",async(req,res)=>{
+    const parsedResponse=Contact.safeParse(req.body.contact)
+    const uid=req.body.uid
+    const session=req.body.session
+    const sessions=await client.user.findUnique({
+        where:{
+            uid:uid
+        },select:{
+            sessions:true
+        }
+    })
+    console.log(req.body)
+    if(sessions?.sessions.includes(session||"abc")){
+        console.log(req.body)
+        if(!parsedResponse){
+        res.json({message:"Sorry Failed To Update"})
+        }
+        console.log(parsedResponse.data)
+        const currentPassword=await client.user.findFirst({
+            where:{
+                uid:parseInt(uid)
+            },
+            select:{
+                password:true
+            }
+
+        })
+        let bufferObj = Buffer.from(req.body.pass.currentPassword,"utf8");
+        let base64Pass = bufferObj.toString("base64");
+        let buffer2Obj = Buffer.from(req.body.pass.newPassword,"utf8");
+        let base64newPass = buffer2Obj.toString("base64");
+        console.log(base64Pass==currentPassword?.password)
+        if(base64Pass==currentPassword?.password){
+            console.log("in")
+            const response=await client.user.updateMany({
+                where:{
+                    uid:uid
+                },
+                data:{
+                    password:base64newPass
+                    
+                }
+            })
+            if(!response){
+                res.json({message:"Sorry Failed To Update"})
+            }
+            res.json({message:"Succefully Updated"})
+        }else{
+            res.json({message:"Incorrect Password"})
+        }
+    }
+    else{
+        res.json({message:"Session Dont Match"})
+    }
+})
+
+
+router.get("/getUsers",async(req,res)=>{
+    const response=await client.user.findMany({
+        select:{
+            username:true,
+            uid:true,
+            contact:{
+                omit:{
+                    uid:true,
+                    cid:true
+                }
+            },
+            About:{
+                omit:{
+                    uid:true,
+                    aid:true
+                }
+            },
+        },
+        orderBy:{
+            uid:"asc"
+        }
+    })
+    res.json({users:response})
 })

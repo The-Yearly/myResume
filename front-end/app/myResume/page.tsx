@@ -9,6 +9,7 @@ import SkillsEditor from "./components/skillsedit"
 import EducationEditor from "./components/educationedit"
 import ExperienceEdit from "./components/expedit"
 import { ToastContainer } from "react-toastify"
+import Profile from "./components/profile"
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("hero")
   return (
@@ -23,6 +24,7 @@ export default function AdminPage() {
           {activeTab==="skills" && <SkillsEditor/>}
           {activeTab==="education" && <EducationEditor/>}
           {activeTab==="experience" && <ExperienceEdit/>}
+          {activeTab==="myProfile" && <Profile/>}
         </main>
       </div>
     </div>

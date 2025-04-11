@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, User, Briefcase, Code, GraduationCap, Award, LogOut } from "lucide-react"
+import { Home, User, Briefcase, Code, GraduationCap, Award, LogOut,User2Icon } from "lucide-react"
 import Cookies from "js-cookie"
 import axios, { AxiosError } from "axios"
 import { useState,useEffect } from "react"
@@ -21,6 +21,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }: AdminSidebarPr
     { id: "skills", label: "Skills", icon: <Award size={20} /> },
     { id: "education", label: "Education", icon: <GraduationCap size={20} /> },
     { id: "experience", label: "Experience", icon: <Briefcase size={20} /> },
+    { id: "myProfile", label: "myProfile", icon: <User2Icon size={20} /> },
   ]
    const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const deleteCookie=async()=>{
@@ -28,6 +29,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }: AdminSidebarPr
     const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/deleteSession",{uid:logged.uid,session:logged.session})
     toast(res.data.message)
     router.push("/authentication")
+    Cookies.remove("creds")
     }catch(e){
       const err=e as AxiosError
       console.log(err)

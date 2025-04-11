@@ -50,7 +50,6 @@ export const Skills=z.object({
 
 export const Contact=z.object({
   cid:z.number().optional(),
-  uid:z.number().optional(),
   email:z.string(),
   phone:z.string(),
   location:z.string(),
