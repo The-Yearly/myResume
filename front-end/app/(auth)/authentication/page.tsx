@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { ToastContainer,toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
@@ -13,10 +13,17 @@ export default function Signup() {
     password:"",
     email:""
   })
+  const [gotcreds,setGotCreds]=useState(false)
   const [loading,setLoading] = useState(false);
   const [showPassword,setShowPassword] = useState(false);
   const [isSignUp,setIsSignUp]=useState(false)
   const router=useRouter()
+  useEffect(()=>{const pushRoute=async()=>{
+    if(gotcreds!=false){
+      router.push("/myResume");
+    }
+  }
+  pushRoute()},[gotcreds])
   async function handleSignup(e:React.FormEvent){
     e.preventDefault();
     setLoading(true)
@@ -33,7 +40,7 @@ export default function Signup() {
       const creds = { uid: res.data.uid, session: res.data.session };
       console.log(creds);
       Cookies.set("creds", JSON.stringify(creds));
-      router.push("/myResume");
+      setGotCreds(true)
     }
   } catch (e) {
     const error = e as AxiosError<{ message: string }>;

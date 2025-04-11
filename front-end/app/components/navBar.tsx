@@ -10,7 +10,8 @@ export function Navbar() {
   
   useEffect(()=>{const getCookies=async()=>{
     const cookie=Cookies.get("creds")
-    setLogged(JSON.parse(cookie??''))
+    if(cookie!=undefined){
+    setLogged(JSON.parse(cookie??''))}
   }
   getCookies()},[])
   const toggleMenu = () => {
