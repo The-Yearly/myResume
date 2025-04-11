@@ -20,7 +20,9 @@ export default function Signup() {
   const router=useRouter()
   useEffect(()=>{const pushRoute=async()=>{
     if(gotcreds!=false){
+      console.log("goiing to push")
       router.push("/myResume");
+      console.log("pushed")
     }
   }
   pushRoute()},[gotcreds])
