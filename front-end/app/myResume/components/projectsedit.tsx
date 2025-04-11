@@ -248,12 +248,12 @@ export default function ProjectsEditor(){
       const updatedProjects=[...projects]
       updatedProjects[editIndex]=newProject
       setProjects(updatedProjects)
-      setIsNew(true)
     } else{
+      setIsNew(true)
       setProjects((prev)=> [...prev,newProject])
     }
   }
-  if(!loading){
+  if(loading==false){
   return(
     <div className="p-4">
       <div>
