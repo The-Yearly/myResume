@@ -13,7 +13,6 @@ export default function Signup() {
     password:"",
     email:""
   })
-  const [gotcreds,setGotCreds]=useState(false)
   const [loading,setLoading] = useState(false);
   const [showPassword,setShowPassword] = useState(false);
   const [isSignUp,setIsSignUp]=useState(false)
