@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ToastContainer,toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
-import { Eye,EyeClosed } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Eye,EyeClosed } from "lucide-react";;
 import { User } from "@/utils/types";
 import Cookies from "js-cookie";
 export default function Signup() {
@@ -16,7 +15,6 @@ export default function Signup() {
   const [loading,setLoading] = useState(false);
   const [showPassword,setShowPassword] = useState(false);
   const [isSignUp,setIsSignUp]=useState(false)
-  const router=useRouter()
   async function handleSignup(e:React.FormEvent){
     e.preventDefault();
     setLoading(true)
@@ -34,7 +32,7 @@ export default function Signup() {
       console.log(creds);
       Cookies.set("creds", JSON.stringify(creds));
       setTimeout(() => {
-        router.push("/myResume");
+        window.location.href = "/myResume";
       },200);
       
     }
