@@ -117,7 +117,7 @@ export default function ProjectsEditor(){
           if(editIndex == null && isNew==true){
             const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/addProject",{project:newProject,uid:logged.uid,session:logged.session})
             toast(res.data.message)
-            setIsNew(true)
+            setIsNew(false)
          } else{
             const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/updateProject",{project:newProject,uid:logged.uid,session:logged.session})
             toast(res.data.message)

@@ -222,7 +222,7 @@ router.post("/updateProject",async(req,res)=>{
                     pid:parsedResponse.data.pid
                 },
                 data:{
-                    github:parsedResponse.data?.desc,
+                    github:parsedResponse.data?.github,
                     desc:parsedResponse.data?.desc,
                     image:parsedResponse.data?.image,
                     Link:parsedResponse.data.Link,
