@@ -29,11 +29,11 @@ export default function Signup() {
     }
     toast.success(res.data.message)
     console.log(res.data)
-    if (res.status===200) {
-        const creds=await {uid:res.data.uid,session:res.data.session}
-        console.log(creds)
-        Cookies.set("creds",JSON.stringify(creds))
-        router.push("/myResume")
+    if (res.status === 200) {
+      const creds = { uid: res.data.uid, session: res.data.session };
+      console.log(creds);
+      Cookies.set("creds", JSON.stringify(creds));
+      router.push("/myResume");
     }
   } catch (e) {
     const error = e as AxiosError<{ message: string }>;
