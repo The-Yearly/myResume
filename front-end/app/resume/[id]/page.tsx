@@ -32,13 +32,20 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
   const [expStyle,setExpStyle]=useState<keyof typeof Theme>("1")
   const [education,setEducations]=useState<EducationI[]>([])
   const [exp,setExp]=useState<ExperienceI[]>([])
-  const [loading,setLoading]=useState(6)
+  const [heroloaded,setHeroLoaded]=useState(false)
+  const [aboutloaded,setAboutLoaded]=useState(false)
+  const [skillsLoaded,setSkillsLoaded]=useState(false)
+  const [projectsLoaded,setProjectsLoaded]=useState(false)
+  const [educationLoaded,setEducationLoaded]=useState(false)
+  const [experienceLoaded,setExperienceLoaded]=useState(false)
+  const [contactLoaded,setContactLoaded]=useState(false)
+  const [stylesLoaded,setStylesLoaded]=useState(false)
   const uid=use(params).id
 
   useEffect(()=>{const getEd=async()=>{
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations",{uid:uid})
       setEducations(res.data.education)
-      setLoading(loading+1)
+      setEducationLoaded(true)
   }
   getEd()},[])
 
@@ -46,7 +53,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
   useEffect(()=>{const fetchData=async()=>{
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:uid})
       setProjects(res.data.project)
-      setLoading(loading+1)
+      setProjectsLoaded(true)
   }
   fetchData()},[])
   
@@ -56,14 +63,14 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     setSkillStyle(res.data.styles.sstyle)
     setEducationStyle(res.data.styles.estyle)
     setExpStyle(res.data.styles.exstyle)
-    setLoading(loading+1)
+    setStylesLoaded(true)
   }
   getStyles()},[])
 
   useEffect(()=>{const getData=async()=>{
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience",{uid:uid})
       setExp(res.data.experience)
-      setLoading(loading+1)
+      setExperienceLoaded(true)
   }
   getData()},[])
 
@@ -72,6 +79,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     const fetchData=async()=>{
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills",{uid:uid})
         setSkills(res.data.skills)
+        setSkillsLoaded(true)
     }
     fetchData()},[])
 
@@ -79,7 +87,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:uid})
     const data=res.data.hero
     setHero({hero:data.hero,subhero:data.subhero,style:data.style})
-    setLoading(loading+1)
+    setHeroLoaded(true)
   }
   getHero()},[])
 
@@ -87,7 +95,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:uid})
     const data=res.data.about
     setAbout({about:data.about,image:data.image,style:data.style})
-    setLoading(loading+1)
+    setAboutLoaded(true)
   }
   getAbout()},[])
   
@@ -102,6 +110,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
           location:data.location || "",
           linkedin:data.linkedin || "",
     })
+    setContactLoaded(true)
     }
     fetchProfileData()
   },[])
@@ -112,7 +121,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
   const SelectedProjects=Theme[projectStyle]?.projects
   const SelectedEducation=Theme[educationStyle]?.education
   const SelectedExp=Theme[expStyle]?.experience
-  if(loading==7){
+  if(heroloaded && aboutloaded && projectsLoaded && skillsLoaded && experienceLoaded && educationLoaded && stylesLoaded &&contactLoaded){
   return(
     <>
     <Navbar/>
