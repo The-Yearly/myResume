@@ -9,30 +9,25 @@ import type { User } from "@/utils/types"
 import Cookies from "js-cookie"
 
 export default function Signup() {
-  const [data, setData] = useState<User>({
+  const [data, setData]=useState<User>({
     username: "",
     password: "",
     email: "",
   })
-  const [loading, setLoading] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [isSignUp, setIsSignUp] = useState(false)
-
-  // Validation functions
-  const validateUsername = (username: string): boolean => {
-    // Only allow alphanumeric characters and underscores
-    const usernameRegex = /^[a-zA-Z0-9_]+$/
+  const [loading, setLoading]=useState(false)
+  const [showPassword, setShowPassword]=useState(false)
+  const [isSignUp, setIsSignUp]=useState(false)
+  const validateUsername=(username: string): boolean=> {
+    const usernameRegex=/^[a-zA-Z0-9_]+$/
     return usernameRegex.test(username)
   }
 
-  const validatePassword = (password: string): boolean => {
-    return password.length >= 8
+  const validatePassword=(password: string): boolean=> {
+    return password.length >=8
   }
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault()
-
-    // Validate username and password for signup
     if (isSignUp) {
       if (!validateUsername(data.username)) {
         toast.error("Username can only contain letters, numbers, and underscores")
@@ -49,30 +44,30 @@ export default function Signup() {
     try {
       let res
       if (isSignUp) {
-        res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/signUp", data)
+        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/signUp",data)
       } else {
-        res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/login", data)
+        res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/login",data)
       }
       toast.success(res.data.message)
       console.log(res.data)
-      if (res.status === 200) {
-        const creds = { uid: res.data.uid, session: res.data.session }
+      if (res.status===200) {
+        const creds={ uid: res.data.uid, session: res.data.session }
         console.log(creds)
         Cookies.set("creds", JSON.stringify(creds))
-        setTimeout(() => {
-          window.location.href = "/myResume"
+        setTimeout(()=> {
+          window.location.href="/myResume"
         }, 200)
       }
     } catch (e) {
-      const error = e as AxiosError<{ message: string }>
+      const error=e as AxiosError<{ message: string }>
       toast.warn(error.response?.data?.message || "An unknown error occurred")
     }
     setLoading(false)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setData((prev) => ({ ...prev, [name]: value }))
+  const handleChange=(e: React.ChangeEvent<HTMLInputElement>)=> {
+    const { name, value }=e.target
+    setData((prev)=> ({ ...prev, [name]: value }))
   }
 
   return (
@@ -132,7 +127,7 @@ export default function Signup() {
               placeholder="Enter your password"
               required
             />
-            <div className="absolute right-3 top-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+            <div className="absolute right-3 top-1/2 cursor-pointer" onClick={()=> setShowPassword(!showPassword)}>
               {showPassword ? <Eye size={20} color="#555" /> : <EyeClosed size={20} color="#555" />}
             </div>
           </div>
@@ -143,7 +138,7 @@ export default function Signup() {
           >
             {loading ? (isSignUp ? "Signing Up..." : "Logging In...") : isSignUp ? "Sign Up" : "Login"}
           </button>
-          <p className="text-center mt-4 cursor-pointer text-blue-600" onClick={() => setIsSignUp(!isSignUp)}>
+          <p className="text-center mt-4 cursor-pointer text-blue-600" onClick={()=> setIsSignUp(!isSignUp)}>
             {isSignUp ? "Already have an account? Login" : "Don't have an account? Sign Up"}
           </p>
         </div>
