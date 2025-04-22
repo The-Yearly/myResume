@@ -76,7 +76,7 @@ export default function PeopleDirectory() {
 >
   {users.map((person) => (
     <motion.div key={person.uid} variants={item}>
-      <Link href={`/resume/${person.uid}`}>
+      <Link href={`/resume/${person.username}`}>
         <div className="group relative bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-indigo-200 hover:ring-2 hover:ring-indigo-100 cursor-pointer">
           <div className="bg-gradient-to-tr from-amber-500 to-orange-600 h-28"></div>
 

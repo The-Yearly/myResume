@@ -40,67 +40,82 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
   const [experienceLoaded,setExperienceLoaded]=useState(false)
   const [contactLoaded,setContactLoaded]=useState(false)
   const [stylesLoaded,setStylesLoaded]=useState(false)
-  const uid=use(params).id
+  const [uid,setUid]=useState(0)
+  const username=use(params).id
+
+  useEffect(()=>{const fetchId=async()=>{
+    const res=await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getId/"+username)
+    setUid(res.data.uid)
+  }
+  fetchId()},[])
 
   useEffect(()=>{const getEd=async()=>{
+    if(uid!=0){
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getEducations",{uid:uid})
       setEducations(res.data.education)
       setEducationLoaded(true)
-  }
-  getEd()},[])
+  }}
+  getEd()},[uid])
 
 
   useEffect(()=>{const fetchData=async()=>{
+    if(uid!=0){  
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:uid})
       setProjects(res.data.project)
       setProjectsLoaded(true)
-  }
-  fetchData()},[])
+  }}
+  fetchData()},[uid])
   
   useEffect(()=>{const getStyles=async()=>{
+    if(uid!=0){ 
     const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getStyles",{uid:uid})
     setProjectStyle(res.data.styles.pstyle)
     setSkillStyle(res.data.styles.sstyle)
     setEducationStyle(res.data.styles.estyle)
     setExpStyle(res.data.styles.exstyle)
     setStylesLoaded(true)
-  }
-  getStyles()},[])
+  }}
+  getStyles()},[uid])
 
   useEffect(()=>{const getData=async()=>{
+    if(uid!=0){
       const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getExperience",{uid:uid})
       setExp(res.data.experience)
       setExperienceLoaded(true)
-  }
-  getData()},[])
+  }}
+  getData()},[uid])
 
 
   useEffect(()=>{
     const fetchData=async()=>{
+      if(uid!=0){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getSkills",{uid:uid})
         setSkills(res.data.skills)
         setSkillsLoaded(true)
-    }
-    fetchData()},[])
+    }}
+    fetchData()},[uid])
 
   useEffect(()=>{const getHero=async()=>{
+    if(uid!=0){
     const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:uid})
     const data=res.data.hero
     setHero({hero:data.hero,subhero:data.subhero,style:data.style})
     setHeroLoaded(true)
-  }
-  getHero()},[])
+  }}
+  getHero()},[uid])
 
   useEffect(()=>{const getAbout=async()=>{
+    if(uid!=0){
     const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:uid})
     const data=res.data.about
     setAbout({about:data.about,image:data.image,style:data.style})
     setAboutLoaded(true)
-  }
-  getAbout()},[])
+  }}
+  getAbout()},[uid])
   
 
   useEffect(()=> {
+    if(uid!=0){
     const fetchProfileData=async()=> {
         const res=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/getContacts`,{uid:uid})
         const data=res.data.contact[0]
@@ -113,7 +128,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     setContactLoaded(true)
     }
     fetchProfileData()
-  },[])
+  }},[uid])
 
   const SelectedHero=Theme[hero?.style as keyof typeof Theme]?.hero
   const SelectedAbout=Theme[about?.style as keyof typeof Theme]?.about

@@ -1,6 +1,7 @@
 import e, { Router } from "express";
 import { PrismaClient } from "../../../../prisma/app/generated/prisma/client";
 import { Hero,About, Project, userstyles, Skills, Education, Experience, User, Contact } from "../../../utils/zod";
+import { resolve6 } from "dns";
 export const router=Router()
 const client=new PrismaClient()
 router.post("/getHero",async(req,res)=>{
@@ -1074,4 +1075,16 @@ router.get("/getUsers",async(req,res)=>{
         }
     })
     res.json({users:response})
+})
+
+router.get("/getId/:username",async(req,res)=>{
+    const response=await client.user.findFirst({
+        where:{
+            username:req.params.username
+        },
+        select:{
+            uid:true
+        }
+    })
+    res.json({uid:response?.uid})
 })
