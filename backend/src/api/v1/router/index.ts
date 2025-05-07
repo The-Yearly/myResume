@@ -1088,3 +1088,16 @@ router.get("/getId/:username",async(req,res)=>{
     })
     res.json({uid:response?.uid})
 })
+
+router.get("/getUser/:id",async(req,res)=>{
+    console.log(req.params.id,"hi")
+    const response=await client.user.findFirst({
+        where:{
+            uid:parseInt(req.params.id)
+        },
+        select:{
+            username:true
+        }
+    })
+    res.json({username:response?.username})
+})
