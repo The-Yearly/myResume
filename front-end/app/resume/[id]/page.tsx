@@ -141,7 +141,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     <>
     <Navbar/>
     <div className="flex flex-col justify-center items-center min-h-screen">
-      {SelectedHero?<SelectedHero content={{hero:hero?.hero||"Hello, I'm ...",subhero:hero?.subhero||"A passionate ......."}}/>:<p>Style Not Found</p>}
+      {SelectedHero?<SelectedHero content={{hero:hero?.hero||"Hello, I'm ...",subhero:hero?.subhero||"A passionate ......."}} color="bg-gray-50"/>:<p>Style Not Found</p>}
       {SelectedAbout?<SelectedAbout content={{bio:about?.about||"",image:about?.image||"http://placebeard.it/250/250"}}/>:<p>Style Not Found</p>}
       {SelectedSkills?<SelectedSkills skills={skills}/>:<p>Style Not Found</p>}
       {SelectedProjects?<SelectedProjects content={projects}/>:<p>Style Not Found</p>}

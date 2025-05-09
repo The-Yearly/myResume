@@ -1,7 +1,7 @@
 "use client"
-export function Hero(props:{content:{hero:string,subhero:string}}) {
+export function Hero(props:{content:{hero:string,subhero:string},color:string}) {
   return (
-    <section id="hero" className="z-0 py-24 md:py-32 w-full bg-gray-50">
+    <section id="hero" className={`z-0 py-24 md:py-32 w-full ${props.color}`}>
       <div className="px-4 md:px-6">
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">

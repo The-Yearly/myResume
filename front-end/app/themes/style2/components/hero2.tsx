@@ -1,9 +1,9 @@
 'use client'
 import { ArrowDown } from "lucide-react"
-import Link from "next/link"
-export default function Hero2(props:{content:{hero:string,subhero:string}}) {
+export default function Hero2(props:{content:{hero:string,subhero:string},color:string}) {
     return(
-        <section id="hero" className="min-h-screen bg-background">
+        // <section id="hero" className={`min-h-screen ${props.color}`}>
+        <section id="hero" className={`min-h-screen bg-white`}>
             <section className="relative h-screen flex flex-col items-center justify-center text-center px-4">
                 <div className="absolute inset-0 overflow-hidden z-0">
                 </div>
@@ -24,10 +24,10 @@ export default function Hero2(props:{content:{hero:string,subhero:string}}) {
                 </div>
                 </div>
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-                <Link href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
+                <button  onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })} className="text-muted-foreground hover:text-foreground transition-colors">
                     <ArrowDown className="h-8 w-8" />
                     <span className="sr-only">Scroll down</span>
-                </Link>
+                </button>
                 </div>
             </section>
         </section>

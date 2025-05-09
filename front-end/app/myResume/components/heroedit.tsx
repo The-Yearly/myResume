@@ -8,6 +8,8 @@ import { toast } from "react-toastify"
 import HeroEditorSkeleton from "@/app/themes/skeletons/admin/heroedit"
 import { Session } from "@/middleware"
 import Cookies from "js-cookie"
+import { colors } from "@/app/themes/colors"
+console.log(colors.length)
 export default function HeroEditor() {
   const [data,setData]=useState<Hero|null>(null)
   const [loading,setLoading]=useState(false)
@@ -17,7 +19,8 @@ export default function HeroEditor() {
     subhero:"A passionate .......",
     style:"1"
   })
-
+  const [selectedColor,setSelectedColor]=useState("bg-gray-50")
+  const [colorPickerModel,setColorPickerModel]=useState(false)
   useEffect(()=>{const fetchHero=async()=>{
     if(logged.uid!=0){
     const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getHero",{uid:logged.uid})
@@ -44,7 +47,6 @@ getCookies()},[])
   setData()},[data])
   const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) => {
     const { name, value }=e.target
-    console.log(typeof name)
     if(name!="style"){
       setHeroData((prev)=>({ ...prev, [name]: value }))
     }else{
@@ -64,7 +66,8 @@ getCookies()},[])
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-800">Edit Hero Section</h1>
       </div>
-      <div>
+      <div className="flex">
+              <div className="w-50">
               <label className="block text-sm font-medium text-gray-700">Select Style</label>
               <select
               name="style"
@@ -76,6 +79,23 @@ getCookies()},[])
                 <option value="2">Style 2</option>
               </select>
             </div>
+              <div className="ml-10 flex items-center justify-center">
+                <label className="text-sm  font-medium text-gray-700">Select Color</label>
+                <button className={`${selectedColor} w-4 h-4 ml-2 border-2`} onClick={()=>{setColorPickerModel(true)}}/>
+              </div>
+      </div>  
+      {colorPickerModel &&(
+        <div className="fixed inset-0 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white border-1 max-w-[50vh] max-h-[50vh] p-6 rounded-xl w-full h-full overflow-y-auto">
+                Pick A Color
+                <div className="grid grid-cols-10 md:grid-cols-16">
+                  {colors.map((color)=><button key={color} onClick={()=>{setSelectedColor(color);setColorPickerModel(false)}} className={`w-4 mt-3 h-4 ml-3 border-2 ${color}`}></button>)}
+                </div>
+            </div>
+        </div>
+      )
+      }
+
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <form onSubmit={handleSubmit}>
           <div className="px-6 py-4 border-b border-gray-200">
@@ -113,7 +133,7 @@ getCookies()},[])
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg font-medium">Preview</h2>
         </div>
-        {SelectedHero ? <SelectedHero content={heroData} /> : <p>Style not found.</p>}
+        {SelectedHero ? <SelectedHero content={heroData} color={selectedColor}/> : <p>Style not found.</p>}
       </div>
     </div>
   )
