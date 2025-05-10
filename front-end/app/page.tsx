@@ -71,7 +71,7 @@ export default function New() {
             </h1>
 
             <p className="text-lg text-white/70 max-w-xl">
-            By Students For Students
+            Build Amazing Resume In Minutes
             </p>
 
             <div className="pt-4">
