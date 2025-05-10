@@ -1,7 +1,6 @@
 "use client"
 import axios from "axios"
 import { Hero, heroColors } from "@/utils/types"
-
 import type React from "react"
 import { useState,useEffect } from "react"
 import { Theme } from "../../themes/styles"
@@ -9,13 +8,15 @@ import { toast } from "react-toastify"
 import HeroEditorSkeleton from "@/app/themes/skeletons/admin/heroedit"
 import { Session } from "@/middleware"
 import Cookies from "js-cookie"
-import { colors } from "@/app/themes/colors"
+import { colors ,bgColors} from "@/app/themes/colors"
 import { Settings,X } from "lucide-react"
 import { defaultColors } from "@/app/themes/defaultColors"
+
 export default function HeroEditor() {
   const [data,setData]=useState<Hero|null>(null)
   const [loading,setLoading]=useState(false)
   const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
+  bgColors.push("")
   const [heroData, setHeroData] = useState<Hero>({
     hero:"Hello, I'm ...",
     subhero:"A passionate .......",
