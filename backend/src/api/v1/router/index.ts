@@ -129,7 +129,7 @@ const uid=req.body.uid
     res.json({styles:response})
 })
 
-router.post("/updateProjectStyle",async(req,res)=>{    
+router.post("/updateProjectStyle",async(req,res)=>{
     const uid=req.body.uid
     const session=req.body.session
     const parsedResponse=userstyles.safeParse(req.body.style)
@@ -159,7 +159,7 @@ router.post("/updateProjectStyle",async(req,res)=>{
         res.json({message:"Succefully Updated"})
     }else{
         res.json({message:"Sessions Dont Match"})
-    } 
+    }
 })
 
 router.post("/addProject",async(req,res)=>{
@@ -342,6 +342,7 @@ router.post("/deleteSkill",async(req,res)=>{
 
 router.post("/updateSkillCat",async(req,res)=>{
     const data=req.body.skill
+    console.log(data)
     const uid=req.body.uid
     const session=req.body.session
     const sessions=await client.user.findUnique({
@@ -353,14 +354,15 @@ router.post("/updateSkillCat",async(req,res)=>{
     })
     console.log(sessions)
     if(sessions?.sessions.includes(session||"abc")){
+        console.log(data.icon)
         const response=await client.skills.update(
             {
                 where:{
                     sid:data.sid
                 },
                 data:{
-                    icon:req.body.icon,
-                    skillname:req.body.skillname,
+                    icon:data.icon,
+                    skillname:data.skillname,
                 }
             }
         )
@@ -384,7 +386,7 @@ router.post("/addSkill",async(req,res)=>{
             sessions:true
         }
     })
-    
+
     if(sessions?.sessions.includes(session||"abc")){
         const response=await client.skills.update(
             {
@@ -393,7 +395,7 @@ router.post("/addSkill",async(req,res)=>{
                 },
                 data:{
                     skills:data.list,
-                    
+
                 }
             }
         )
@@ -488,7 +490,7 @@ router.post("/addEducation",async(req,res)=>{
         if(!response){
             res.json({message:"Sorry Failed To Update"})
         }
-        res.json({message:"Succefully Updated"})   
+        res.json({message:"Succefully Updated"})
     }else{
         res.json({message:"Sessions Dont Match"})
     }
@@ -507,7 +509,7 @@ router.post("/delEducation",async(req,res)=>{
     console.log()
     if(sessions?.sessions.includes(session||"abc")){
         const response=await client.education.delete(
-            { 
+            {
                 where:{
                     edid:req.body.del
                 }
@@ -777,7 +779,7 @@ router.post("/signUp",async(req,res)=>{
                 email:parsedResponse.data?.email,
                 password:base64Pass,
                 sessions:sessions
-            } 
+            }
     })
     await client.about.create({
         data:{
@@ -858,7 +860,7 @@ router.post("/signUp",async(req,res)=>{
         res.status(200).json({message:"Failed To Create User"})
     }else{
         res.status(200).json({message:"Succesfully Created User",uid:response.uid,session:base64String})
-    }        
+    }
     }catch(e:any){
         if(e.code === 'P2002' && e.meta?.target?.includes('username')){
             res.status(500).json({message:"Username Already Exists"})
@@ -879,7 +881,7 @@ router.post("/login",async(req,res)=>{
     const bufferObj = Buffer.from(session,"utf8");
     const base64String = bufferObj.toString("base64");
 
-    
+
     const log=await client.user.findFirst({
         where:{
             username:parsedResponse.data.username
@@ -903,14 +905,14 @@ router.post("/login",async(req,res)=>{
             }
         })
         if(!response){
-            res.status(500).json({message:"Failed To Login"})    
+            res.status(500).json({message:"Failed To Login"})
         }
         res.status(200).json({message:"Succesfully Logged In",session:base64String,uid:response.uid})
     }
     else{
         res.status(500).json({message:"Incorrect Password"})
     }
-})  
+})
 
 router.post("/deleteSession",async(req,res)=>{
     const session=req.body.session
@@ -936,9 +938,9 @@ router.post("/deleteSession",async(req,res)=>{
         res.status(500).json({message:"Failed To LogOut"})
     }else{
         res.status(200).json({message:"Logged Out Succesfully"})
-    }   
+    }
 
-    
+
 })
 
 router.post("/getContacts",async(req,res)=>{
@@ -953,7 +955,7 @@ router.post("/getContacts",async(req,res)=>{
         }
         res.json({contact:response})
 })
-    
+
 
 router.post("/updateContact",async(req,res)=>{
     const parsedResponse=Contact.safeParse(req.body.contact)
@@ -981,7 +983,7 @@ router.post("/updateContact",async(req,res)=>{
                 linkedin:parsedResponse.data?.linkedin,
                 phone:parsedResponse.data?.phone,
                 location:parsedResponse.data?.location,
-                
+
             }
         })
         if(!response){
@@ -1035,7 +1037,7 @@ router.post("/updatePassword",async(req,res)=>{
                 },
                 data:{
                     password:base64newPass
-                    
+
                 }
             })
             if(!response){

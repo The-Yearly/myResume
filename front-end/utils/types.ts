@@ -91,3 +91,13 @@ export interface getUsers {
         style: string
       }]
   }
+
+export interface heroColors{
+      Background:string
+      Hero:string
+      Sub_Hero:string
+      Button_1:string
+      Button_1_Text:string
+      Button_2:string
+      Button_2_Text:string
+}

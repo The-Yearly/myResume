@@ -1,7 +1,7 @@
 'use client'
 import { Navbar } from "../../themes/style1/components/navBar"
 import { Contact } from "../../themes/style1/components/contact"
-import { EducationI, ExperienceI } from "@/utils/types"
+import { EducationI, ExperienceI, heroColors } from "@/utils/types"
 import { HeroSkeleton } from "../../themes/skeletons/resume/hero"
 import { Project } from "@/utils/types"
 import { AboutSkeleton } from "../../themes/skeletons/resume/about"
@@ -16,12 +16,14 @@ import axios from "axios"
 import { ProjectsSkeleton } from "../../themes/skeletons/resume/projects"
 import { About,Hero } from "@/utils/types"
 import { ProfileData } from "@/utils/types"
+import { defaultColors } from "@/app/themes/defaultColors"
 export default function Home({params}:{params:Promise<{id:number}>}) {
   const [profileData,setProfileData]=useState<ProfileData>({email:"",
     phone:"",
     location:"",
     linkedin:"",
   })
+  const [heroColors,setHeroColors]=useState<heroColors>(defaultColors["1"])
   const [hero,setHero]=useState<Hero|null>(null)
   const [about,setAbout]=useState<About|null>(null)
   const [projects, setProjects] = useState<Project[]>([])
@@ -101,6 +103,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     const data=res.data.hero
     setHero({hero:data.hero,subhero:data.subhero,style:data.style})
     setHeroLoaded(true)
+    setHeroColors(defaultColors[data.style as keyof typeof defaultColors])
   }}
   getHero()},[uid])
 
@@ -141,7 +144,7 @@ export default function Home({params}:{params:Promise<{id:number}>}) {
     <>
     <Navbar/>
     <div className="flex flex-col justify-center items-center min-h-screen">
-      {SelectedHero?<SelectedHero content={{hero:hero?.hero||"Hello, I'm ...",subhero:hero?.subhero||"A passionate ......."}} color="bg-gray-50"/>:<p>Style Not Found</p>}
+      {SelectedHero?<SelectedHero content={{hero:hero?.hero||"Hello, I'm ...",subhero:hero?.subhero||"A passionate ......."}} herocolors={heroColors}/>:<p>Style Not Found</p>}
       {SelectedAbout?<SelectedAbout content={{bio:about?.about||"",image:about?.image||"http://placebeard.it/250/250"}}/>:<p>Style Not Found</p>}
       {SelectedSkills?<SelectedSkills skills={skills}/>:<p>Style Not Found</p>}
       {SelectedProjects?<SelectedProjects content={projects}/>:<p>Style Not Found</p>}
