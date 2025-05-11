@@ -93,11 +93,35 @@ export interface getUsers {
   }
 
 export interface heroColors{
-      Background:string
-      Hero:string
-      Sub_Hero:string
-      Button_1:string
-      Button_1_Text:string
-      Button_2:string
-      Button_2_Text:string
+  Background:string
+  Hero:string
+  Sub_Hero:string
+  Button_1:string
+  Button_1_Text:string
+  Button_2:string
+  Button_2_Text:string
+}
+
+export interface resumeData{
+  uid:number
+  heroColors:heroColors
+  hero:Hero|null
+  about:About|null
+  projects:Project[]
+  skills:Skill[]
+  projectStyle:keyof typeof Theme
+  skillStyle:keyof typeof Theme
+  educationStyle:keyof typeof Theme
+  expStyle:keyof typeof Theme
+  education:EducationI[]
+  exp:ExperienceI[]
+  heroloaded:boolean
+  aboutloaded:boolean
+  skillsLoaded:boolean
+  projectsLoaded:boolean
+  educationLoaded:boolean
+  experienceLoaded:boolean
+  contactLoaded:boolean
+  stylesLoaded:boolean
+  profileData:ProfileData
 }
