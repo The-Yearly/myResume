@@ -23,7 +23,7 @@ export default function AboutEditor(){
   const [selectedFile,setSelectedFile]=useState<File | null>(null)
   const [previewImage,setPreviewImage]=useState<string | null>(null)
   const fileInputRef=useRef<HTMLInputElement>(null)
-  const [laoding,setLoading]=useState(true)
+  const [loading,setLoading]=useState(true)
   const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
   const imagekit=new ImageKit({
     publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || "",
@@ -35,7 +35,6 @@ export default function AboutEditor(){
        setLogged(JSON.parse(cookie??''))
   }
   getCookies()},[])
-  console.log(logged,"s")
   useEffect(()=>{
     const fetchData=async()=>{
       try {
@@ -43,7 +42,7 @@ export default function AboutEditor(){
         const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getAbout",{uid:logged.uid})
         const data=res.data.about
         setAbout({ about: data.about,image: data.image,style: data.style})
-        setLoading(true)
+        setLoading(false)
         if(data.image && data.image!=="s"){
           setPreviewImage(data.image)
         }}
@@ -146,7 +145,7 @@ export default function AboutEditor(){
   }
 
   const SelectedAbout=Theme[about.style as keyof typeof Theme]?.about
-  if(laoding){
+  if(!loading){
   return(
     <div className="space-y-6">
       <div className="flex items-center justify-between">

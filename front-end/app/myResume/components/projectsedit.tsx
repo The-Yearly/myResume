@@ -95,9 +95,8 @@ export default function ProjectsEditor(){
         try{
           if(logged.uid!=0){
           const res=await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+"/api/v1/getProjects",{uid:logged.uid})
-          setProjects(res.data.project)}
-          console.log(loading)
-          setLoading(false)
+          setProjects(res.data.project)
+          setLoading(false)}
        } catch(error){
           console.error("Error fetching projects:",error)
           toast.error("Failed to load projects")
@@ -252,7 +251,7 @@ export default function ProjectsEditor(){
       setProjects((prev)=> [...prev,newProject])
     }
   }
-  if(loading==false){
+  if(!loading){
   return(
     <div className="p-4">
       <div>
