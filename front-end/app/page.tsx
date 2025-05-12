@@ -5,6 +5,7 @@ import { FileText, Code, Briefcase, PenTool, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { TypeAnimation } from "react-type-animation"
+import Script from "next/script"
 export default function New() {
   const [mounted, setMounted] = useState(false)
 
@@ -22,6 +23,7 @@ export default function New() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black text-white">
+      <Script defer src="http://localhost:3002/script.js" data-website-id="93db8296-b832-4648-bd48-62186e3f443c"/>
       <div
         className="absolute inset-0 opacity-20"
         style={{
