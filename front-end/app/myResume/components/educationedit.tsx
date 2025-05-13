@@ -148,10 +148,8 @@ export default function EducationEditor() {
   }
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-800">Manage Education</h1>
-
-        <div>
+      <div className="grid grid-cols-2 md:grid-cols-5">
+        <div className="col-span-2 ">
               <label className="block text-sm font-medium text-gray-700">Select Style</label>
               <div className="flex">
               <select
@@ -165,14 +163,18 @@ export default function EducationEditor() {
               <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({estyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
               </div>
             </div>
-        <button
-        disabled={gotResp}
-          onClick={openNewEducationModal}
-          className={`bg-blue-600 text-white px-4 py-2 rounded flex items-center ${gotResp?'cursor-wait':'cursor-pointer'}`}
-        >
-          <Plus size={16} className="mr-2" />
-          Add Education
-        </button>
+            <h1 className="text-2xl col-span-2 md:col-span-1 flex items-center justify-center my-5 font-bold text-gray-800">Manage Education</h1>
+            <div/>
+        <div className="flex justify-end items-center">
+          <button
+          disabled={gotResp}
+            onClick={openNewEducationModal}
+            className={`bg-sky-400 text-white hover:bg-sky-700 transition-colors justify-center h-10 px-4 w-50 md:w-44  py-2 rounded flex items-center ${gotResp?'cursor-wait':'cursor-pointer'}`}
+          >
+            <Plus size={16} className="mr-2" />
+            Add Education
+          </button>
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -217,7 +219,7 @@ export default function EducationEditor() {
             <button
             disabled={gotResp}
               onClick={openNewEducationModal}
-              className={`bg-blue-600 text-white px-4 py-2 rounded flex items-center mx-auto ${gotResp?'cursor-wait':'cursor-pointer'}`}
+              className={`bg-sky-400 text-white hover:bg-sky-700 transition-colors px-4 py-2 rounded flex items-center mx-auto ${gotResp?'cursor-wait':'cursor-pointer'}`}
             >
               <Plus size={16} className="mr-2" />
               Add Your First Education Entry

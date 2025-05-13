@@ -353,7 +353,7 @@ export default function ProjectsEditor(){
           setPreviewImage(null)
           setModalOpen(true)
         }}
-        className={`my-4 right-10 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${gotResp ? "cursor-wait" : "cursor-pointer"}`}
+        className={`my-4 right-10 bg-sky-400 text-white hover:bg-sky-700 transition-colors px-4 py-2 rounded-md  ${gotResp ? "cursor-wait" : "cursor-pointer"}`}
       >
         Add Project
       </button>

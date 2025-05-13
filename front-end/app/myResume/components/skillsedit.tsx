@@ -282,8 +282,8 @@ export default function SkillsEditor(){
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
+      <div className="grid grid-cols-2 md:grid-cols-5">
+        <div className="col-span-2">
           <label className="block text-sm font-medium text-gray-700">Select Style</label>
           <div className="flex">
           <select
@@ -297,15 +297,17 @@ export default function SkillsEditor(){
           <button disabled={gotResp} onClick={()=>{setSubmitSelectedStyle({sstyle:selectedStyle})}} className={`ml-5 w-36 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white transition-colors border-slate-300 text-black shadow-lg ${gotResp?'cursor-wait':'cursor-pointer'}`}>Save</button>
           </div>
         </div>
-        <h1 className="text-2xl font-bold text-gray-800">Manage Skills</h1>
-        <button
-         disabled={gotResp}
-          onClick={openNewCategoryModal}
-          className={`flex items-center px-4 py-2 bg-sky-400 text-white rounded hover:bg-sky-700 transition-colors ${gotResp?'cursor-wait':'cursor-pointer'}`}>
-          <Plus size={16} className="mr-2" />
-          Add Category
-          
-        </button>
+        <h1 className="text-2xl col-span-2 flex items-center justify-center my-5 md:col-span-1 font-bold text-gray-800">Manage Skills</h1>
+        <div/>
+        <div className="flex items-center justify-end">
+          <button
+          disabled={gotResp}
+            onClick={openNewCategoryModal}
+            className={`flex items-center px-4 py-2 w-40 h-10 bg-sky-400 text-white rounded hover:bg-sky-700 transition-colors ${gotResp?'cursor-wait':'cursor-pointer'}`}>
+            <Plus size={16} className="mr-2" />
+            Add Category
+          </button>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {skills.map((skillcat)=>(
