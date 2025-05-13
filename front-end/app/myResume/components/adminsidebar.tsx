@@ -15,9 +15,6 @@ interface AdminSidebarProps {
 
 export default function AdminSidebar({ activeTab, setActiveTab }: AdminSidebarProps) {
   const router=useRouter()
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
   const menuItems = [
     { id: "hero", label: "Hero", icon: <Home size={20} /> },
     { id: "about", label: "About", icon: <User size={20} /> },
