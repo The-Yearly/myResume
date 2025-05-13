@@ -172,8 +172,8 @@ export default function ExperienceEdit() {
       </div>
 
       <div className="space-y-4">
-        {experience.map((education) => (
-          <div key={education.title} className="border rounded-lg shadow-sm p-6 bg-white">
+        {experience.map((education,i) => (
+          <div key={i} className="border rounded-lg shadow-sm p-6 bg-white">
             <div className="flex justify-between">
               <div>
                 <h3 className="text-xl font-bold">{education.corp}</h3>

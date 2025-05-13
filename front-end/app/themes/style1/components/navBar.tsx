@@ -16,7 +16,7 @@ export function Navbar() {
   }
   return (
       <div className="flex fixed z-30 w-full backdrop-blur h-16 items-center justify-between border-b-1">
-        <Link href={"/"} className="font-bold text-xl ml-5">
+        <Link href={"/explore"} className="font-bold text-xl ml-5">
           myResume
         </Link>
         <button className="md:hidden" onClick={toggleMenu}>

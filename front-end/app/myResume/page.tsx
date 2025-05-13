@@ -15,8 +15,7 @@ export default function AdminPage() {
   return (
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <ToastContainer/>
-      <div className="flex flex-col flex-1 overflow-hidden">
+      <div className="flex flex-col mx-5 md:mx-0 my-20 md:my-0 flex-1 overflow-hidden">
         <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
           {activeTab=== "hero" && <HeroEditor />}
           {activeTab==="about" && <AboutEditor/>}
@@ -26,6 +25,7 @@ export default function AdminPage() {
           {activeTab==="experience" && <ExperienceEdit/>}
           {activeTab==="myProfile" && <Profile/>}
         </main>
+        <ToastContainer/>
       </div>
     </div>
   )
