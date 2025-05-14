@@ -84,7 +84,8 @@ model contact {
   email    String
   phone    String
   location String
-  linkedin String
+  linkedin String @default("https://www.linkedin.com/")
+  github   String @default("https://github.com/")
   user     user   @relation(fields: [uid], references: [uid])
 }
 

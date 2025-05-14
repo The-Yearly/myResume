@@ -55,6 +55,7 @@ export const Contact=z.object({
   phone:z.string(),
   location:z.string(),
   linkedin:z.string(),
+  github:z.string(),
 })
 
 export const About=z.object({

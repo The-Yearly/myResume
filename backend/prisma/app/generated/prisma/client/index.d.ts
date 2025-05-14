@@ -8565,6 +8565,7 @@ export namespace Prisma {
     phone: string | null
     location: string | null
     linkedin: string | null
+    github: string | null
   }
 
   export type ContactMaxAggregateOutputType = {
@@ -8574,6 +8575,7 @@ export namespace Prisma {
     phone: string | null
     location: string | null
     linkedin: string | null
+    github: string | null
   }
 
   export type ContactCountAggregateOutputType = {
@@ -8583,6 +8585,7 @@ export namespace Prisma {
     phone: number
     location: number
     linkedin: number
+    github: number
     _all: number
   }
 
@@ -8604,6 +8607,7 @@ export namespace Prisma {
     phone?: true
     location?: true
     linkedin?: true
+    github?: true
   }
 
   export type ContactMaxAggregateInputType = {
@@ -8613,6 +8617,7 @@ export namespace Prisma {
     phone?: true
     location?: true
     linkedin?: true
+    github?: true
   }
 
   export type ContactCountAggregateInputType = {
@@ -8622,6 +8627,7 @@ export namespace Prisma {
     phone?: true
     location?: true
     linkedin?: true
+    github?: true
     _all?: true
   }
 
@@ -8718,6 +8724,7 @@ export namespace Prisma {
     phone: string
     location: string
     linkedin: string
+    github: string
     _count: ContactCountAggregateOutputType | null
     _avg: ContactAvgAggregateOutputType | null
     _sum: ContactSumAggregateOutputType | null
@@ -8746,6 +8753,7 @@ export namespace Prisma {
     phone?: boolean
     location?: boolean
     linkedin?: boolean
+    github?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
@@ -8756,6 +8764,7 @@ export namespace Prisma {
     phone?: boolean
     location?: boolean
     linkedin?: boolean
+    github?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
@@ -8766,6 +8775,7 @@ export namespace Prisma {
     phone?: boolean
     location?: boolean
     linkedin?: boolean
+    github?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
@@ -8776,9 +8786,10 @@ export namespace Prisma {
     phone?: boolean
     location?: boolean
     linkedin?: boolean
+    github?: boolean
   }
 
-  export type contactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cid" | "uid" | "email" | "phone" | "location" | "linkedin", ExtArgs["result"]["contact"]>
+  export type contactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cid" | "uid" | "email" | "phone" | "location" | "linkedin" | "github", ExtArgs["result"]["contact"]>
   export type contactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -8801,6 +8812,7 @@ export namespace Prisma {
       phone: string
       location: string
       linkedin: string
+      github: string
     }, ExtArgs["result"]["contact"]>
     composites: {}
   }
@@ -9231,6 +9243,7 @@ export namespace Prisma {
     readonly phone: FieldRef<"contact", 'String'>
     readonly location: FieldRef<"contact", 'String'>
     readonly linkedin: FieldRef<"contact", 'String'>
+    readonly github: FieldRef<"contact", 'String'>
   }
     
 
@@ -11925,7 +11938,8 @@ export namespace Prisma {
     email: 'email',
     phone: 'phone',
     location: 'location',
-    linkedin: 'linkedin'
+    linkedin: 'linkedin',
+    github: 'github'
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
@@ -12430,6 +12444,7 @@ export namespace Prisma {
     phone?: StringFilter<"contact"> | string
     location?: StringFilter<"contact"> | string
     linkedin?: StringFilter<"contact"> | string
+    github?: StringFilter<"contact"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
@@ -12440,6 +12455,7 @@ export namespace Prisma {
     phone?: SortOrder
     location?: SortOrder
     linkedin?: SortOrder
+    github?: SortOrder
     user?: userOrderByWithRelationInput
   }
 
@@ -12453,6 +12469,7 @@ export namespace Prisma {
     phone?: StringFilter<"contact"> | string
     location?: StringFilter<"contact"> | string
     linkedin?: StringFilter<"contact"> | string
+    github?: StringFilter<"contact"> | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "cid">
 
@@ -12463,6 +12480,7 @@ export namespace Prisma {
     phone?: SortOrder
     location?: SortOrder
     linkedin?: SortOrder
+    github?: SortOrder
     _count?: contactCountOrderByAggregateInput
     _avg?: contactAvgOrderByAggregateInput
     _max?: contactMaxOrderByAggregateInput
@@ -12480,6 +12498,7 @@ export namespace Prisma {
     phone?: StringWithAggregatesFilter<"contact"> | string
     location?: StringWithAggregatesFilter<"contact"> | string
     linkedin?: StringWithAggregatesFilter<"contact"> | string
+    github?: StringWithAggregatesFilter<"contact"> | string
   }
 
   export type AboutWhereInput = {
@@ -12987,7 +13006,8 @@ export namespace Prisma {
     email: string
     phone: string
     location: string
-    linkedin: string
+    linkedin?: string
+    github?: string
     user: userCreateNestedOneWithoutContactInput
   }
 
@@ -12997,7 +13017,8 @@ export namespace Prisma {
     email: string
     phone: string
     location: string
-    linkedin: string
+    linkedin?: string
+    github?: string
   }
 
   export type contactUpdateInput = {
@@ -13005,6 +13026,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+    github?: StringFieldUpdateOperationsInput | string
     user?: userUpdateOneRequiredWithoutContactNestedInput
   }
 
@@ -13015,6 +13037,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+    github?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactCreateManyInput = {
@@ -13023,7 +13046,8 @@ export namespace Prisma {
     email: string
     phone: string
     location: string
-    linkedin: string
+    linkedin?: string
+    github?: string
   }
 
   export type contactUpdateManyMutationInput = {
@@ -13031,6 +13055,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+    github?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactUncheckedUpdateManyInput = {
@@ -13040,6 +13065,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+    github?: StringFieldUpdateOperationsInput | string
   }
 
   export type AboutCreateInput = {
@@ -13561,6 +13587,7 @@ export namespace Prisma {
     phone?: SortOrder
     location?: SortOrder
     linkedin?: SortOrder
+    github?: SortOrder
   }
 
   export type contactAvgOrderByAggregateInput = {
@@ -13575,6 +13602,7 @@ export namespace Prisma {
     phone?: SortOrder
     location?: SortOrder
     linkedin?: SortOrder
+    github?: SortOrder
   }
 
   export type contactMinOrderByAggregateInput = {
@@ -13584,6 +13612,7 @@ export namespace Prisma {
     phone?: SortOrder
     location?: SortOrder
     linkedin?: SortOrder
+    github?: SortOrder
   }
 
   export type contactSumOrderByAggregateInput = {
@@ -14286,7 +14315,8 @@ export namespace Prisma {
     email: string
     phone: string
     location: string
-    linkedin: string
+    linkedin?: string
+    github?: string
   }
 
   export type contactUncheckedCreateWithoutUserInput = {
@@ -14294,7 +14324,8 @@ export namespace Prisma {
     email: string
     phone: string
     location: string
-    linkedin: string
+    linkedin?: string
+    github?: string
   }
 
   export type contactCreateOrConnectWithoutUserInput = {
@@ -14511,6 +14542,7 @@ export namespace Prisma {
     phone?: StringFilter<"contact"> | string
     location?: StringFilter<"contact"> | string
     linkedin?: StringFilter<"contact"> | string
+    github?: StringFilter<"contact"> | string
   }
 
   export type AboutUpsertWithWhereUniqueWithoutUserInput = {
@@ -15285,7 +15317,8 @@ export namespace Prisma {
     email: string
     phone: string
     location: string
-    linkedin: string
+    linkedin?: string
+    github?: string
   }
 
   export type AboutCreateManyUserInput = {
@@ -15361,6 +15394,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+    github?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactUncheckedUpdateWithoutUserInput = {
@@ -15369,6 +15403,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+    github?: StringFieldUpdateOperationsInput | string
   }
 
   export type contactUncheckedUpdateManyWithoutUserInput = {
@@ -15377,6 +15412,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     linkedin?: StringFieldUpdateOperationsInput | string
+    github?: StringFieldUpdateOperationsInput | string
   }
 
   export type AboutUpdateWithoutUserInput = {

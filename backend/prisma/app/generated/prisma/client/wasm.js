@@ -177,7 +177,8 @@ exports.Prisma.ContactScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   location: 'location',
-  linkedin: 'linkedin'
+  linkedin: 'linkedin',
+  github: 'github'
 };
 
 exports.Prisma.AboutScalarFieldEnum = {
