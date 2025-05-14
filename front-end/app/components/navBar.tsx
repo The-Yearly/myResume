@@ -19,7 +19,7 @@ export function Navbar() {
   }
   
   return (
-      <div className="flex fixed z-30 w-full backdrop-blur h-16 items-center justify-between border-b-1">
+      <div className="flex fixed z-30 w-full backdrop-blur h-16 items-center justify-between">
         <Link href={"/"} className="font-bold text-xl ml-5">
           myResume
         </Link>

@@ -82,6 +82,7 @@ export interface getUsers {
         phone: string,
         location: string,
         linkedin: string
+        github:string
       }]
     ,
     About:[
