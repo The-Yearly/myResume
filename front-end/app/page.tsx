@@ -23,7 +23,7 @@ export default function New() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black text-white">
-      <Script defer src="http://192.168.56.101:3002/script.js" data-website-id="93db8296-b832-4648-bd48-62186e3f443c"/>
+      <Script defer src="http://localhost:3000/script.js" data-website-id="b597a3ff-3dac-4f91-aa1b-fb74c716f966"/>
       <div
         className="absolute inset-0 opacity-20"
         style={{
