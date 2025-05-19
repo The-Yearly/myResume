@@ -1,4 +1,3 @@
-
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
@@ -7,14 +6,13 @@ const {
   makeStrictEnum,
   Public,
   getRuntime,
-  skip
-} = require('./runtime/index-browser.js')
+  skip,
+} = require("./runtime/index-browser.js");
 
+const Prisma = {};
 
-const Prisma = {}
-
-exports.Prisma = Prisma
-exports.$Enums = {}
+exports.Prisma = Prisma;
+exports.$Enums = {};
 
 /**
  * Prisma Client JS version: 6.5.0
@@ -22,35 +20,35 @@ exports.$Enums = {}
  */
 Prisma.prismaVersion = {
   client: "6.5.0",
-  engine: "173f8d54f8d52e692c7e27e72a88314ec7aeff60"
-}
+  engine: "173f8d54f8d52e692c7e27e72a88314ec7aeff60",
+};
 
 Prisma.PrismaClientKnownRequestError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientKnownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)};
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.PrismaClientUnknownRequestError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientUnknownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.PrismaClientRustPanicError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientRustPanicError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.PrismaClientInitializationError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientInitializationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.PrismaClientValidationError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.Decimal = Decimal
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
+Prisma.Decimal = Decimal;
 
 /**
  * Re-export of sql-template-tag
@@ -58,171 +56,168 @@ Prisma.Decimal = Decimal
 Prisma.sql = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`sqltag is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.empty = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`empty is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.join = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`join is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.raw = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`raw is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.validator = Public.validator
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
+Prisma.validator = Public.validator;
 
 /**
-* Extensions
-*/
+ * Extensions
+ */
 Prisma.getExtensionContext = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`Extensions.getExtensionContext is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 Prisma.defineExtension = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`Extensions.defineExtension is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`);
+};
 
 /**
  * Shorthand utilities for JSON filtering
  */
-Prisma.DbNull = objectEnumValues.instances.DbNull
-Prisma.JsonNull = objectEnumValues.instances.JsonNull
-Prisma.AnyNull = objectEnumValues.instances.AnyNull
+Prisma.DbNull = objectEnumValues.instances.DbNull;
+Prisma.JsonNull = objectEnumValues.instances.JsonNull;
+Prisma.AnyNull = objectEnumValues.instances.AnyNull;
 
 Prisma.NullTypes = {
   DbNull: objectEnumValues.classes.DbNull,
   JsonNull: objectEnumValues.classes.JsonNull,
-  AnyNull: objectEnumValues.classes.AnyNull
-}
-
-
+  AnyNull: objectEnumValues.classes.AnyNull,
+};
 
 /**
  * Enums
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
-  Serializable: 'Serializable'
+  ReadUncommitted: "ReadUncommitted",
+  ReadCommitted: "ReadCommitted",
+  RepeatableRead: "RepeatableRead",
+  Serializable: "Serializable",
 });
 
 exports.Prisma.UserScalarFieldEnum = {
-  uid: 'uid',
-  username: 'username',
-  password: 'password',
-  email: 'email',
-  sessions: 'sessions'
+  uid: "uid",
+  username: "username",
+  password: "password",
+  email: "email",
+  sessions: "sessions",
 };
 
 exports.Prisma.HeroScalarFieldEnum = {
-  hid: 'hid',
-  uid: 'uid',
-  style: 'style',
-  hero: 'hero',
-  subhero: 'subhero'
+  hid: "hid",
+  uid: "uid",
+  style: "style",
+  hero: "hero",
+  subhero: "subhero",
 };
 
 exports.Prisma.ProjectScalarFieldEnum = {
-  pid: 'pid',
-  uid: 'uid',
-  title: 'title',
-  image: 'image',
-  desc: 'desc',
-  tags: 'tags',
-  github: 'github',
-  Link: 'Link'
+  pid: "pid",
+  uid: "uid",
+  title: "title",
+  image: "image",
+  desc: "desc",
+  tags: "tags",
+  github: "github",
+  Link: "Link",
 };
 
 exports.Prisma.ExperienceScalarFieldEnum = {
-  exid: 'exid',
-  title: 'title',
-  corp: 'corp',
-  startdate: 'startdate',
-  enddate: 'enddate',
-  desc: 'desc',
-  uid: 'uid'
+  exid: "exid",
+  title: "title",
+  corp: "corp",
+  startdate: "startdate",
+  enddate: "enddate",
+  desc: "desc",
+  uid: "uid",
 };
 
 exports.Prisma.EducationScalarFieldEnum = {
-  edid: 'edid',
-  inst: 'inst',
-  degree: 'degree',
-  startdate: 'startdate',
-  enddate: 'enddate',
-  uid: 'uid'
+  edid: "edid",
+  inst: "inst",
+  degree: "degree",
+  startdate: "startdate",
+  enddate: "enddate",
+  uid: "uid",
 };
 
 exports.Prisma.SkillsScalarFieldEnum = {
-  sid: 'sid',
-  uid: 'uid',
-  skillname: 'skillname',
-  skills: 'skills',
-  icon: 'icon'
+  sid: "sid",
+  uid: "uid",
+  skillname: "skillname",
+  skills: "skills",
+  icon: "icon",
 };
 
 exports.Prisma.ContactScalarFieldEnum = {
-  cid: 'cid',
-  uid: 'uid',
-  email: 'email',
-  phone: 'phone',
-  location: 'location',
-  linkedin: 'linkedin',
-  github: 'github'
+  cid: "cid",
+  uid: "uid",
+  email: "email",
+  phone: "phone",
+  location: "location",
+  linkedin: "linkedin",
+  github: "github",
 };
 
 exports.Prisma.AboutScalarFieldEnum = {
-  aid: 'aid',
-  uid: 'uid',
-  image: 'image',
-  about: 'about',
-  style: 'style'
+  aid: "aid",
+  uid: "uid",
+  image: "image",
+  about: "about",
+  style: "style",
 };
 
 exports.Prisma.UserstyleScalarFieldEnum = {
-  uid: 'uid',
-  sstyle: 'sstyle',
-  pstyle: 'pstyle',
-  estyle: 'estyle',
-  exstyle: 'exstyle'
+  uid: "uid",
+  sstyle: "sstyle",
+  pstyle: "pstyle",
+  estyle: "estyle",
+  exstyle: "exstyle",
 };
 
 exports.Prisma.SortOrder = {
-  asc: 'asc',
-  desc: 'desc'
+  asc: "asc",
+  desc: "desc",
 };
 
 exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
+  default: "default",
+  insensitive: "insensitive",
 };
 
 exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
+  first: "first",
+  last: "last",
 };
 
-
 exports.Prisma.ModelName = {
-  user: 'user',
-  hero: 'hero',
-  project: 'project',
-  experience: 'experience',
-  education: 'education',
-  skills: 'skills',
-  contact: 'contact',
-  About: 'About',
-  userstyle: 'userstyle'
+  user: "user",
+  hero: "hero",
+  project: "project",
+  experience: "experience",
+  education: "education",
+  skills: "skills",
+  contact: "contact",
+  About: "About",
+  userstyle: "userstyle",
 };
 
 /**
@@ -232,26 +227,29 @@ class PrismaClient {
   constructor() {
     return new Proxy(this, {
       get(target, prop) {
-        let message
-        const runtime = getRuntime()
+        let message;
+        const runtime = getRuntime();
         if (runtime.isEdge) {
           message = `PrismaClient is not configured to run in ${runtime.prettyName}. In order to run Prisma Client on edge runtime, either:
 - Use Prisma Accelerate: https://pris.ly/d/accelerate
 - Use Driver Adapters: https://pris.ly/d/driver-adapters
 `;
         } else {
-          message = 'PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `' + runtime.prettyName + '`).'
+          message =
+            "PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `" +
+            runtime.prettyName +
+            "`).";
         }
-        
-        message += `
-If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`
 
-        throw new Error(message)
-      }
-    })
+        message += `
+If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`;
+
+        throw new Error(message);
+      },
+    });
   }
 }
 
-exports.PrismaClient = PrismaClient
+exports.PrismaClient = PrismaClient;
 
-Object.assign(exports, Prisma)
+Object.assign(exports, Prisma);

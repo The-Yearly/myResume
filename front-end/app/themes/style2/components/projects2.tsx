@@ -1,15 +1,19 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Project } from "@/utils/types"
-import { ExternalLink, Github } from "lucide-react"
-export function Projects2(props:{content:Project[]}){ 
+import Image from "next/image";
+import Link from "next/link";
+import { Project } from "@/utils/types";
+import { ExternalLink, Github } from "lucide-react";
+export function Projects2(props: { content: Project[] }) {
   return (
     <section id="projects" className="py-24 md:py-32 w-full bg-white">
       <div className="container px-6 mx-auto">
         <div className="max-w-3xl mx-auto mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">My Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            My Projects
+          </h2>
           <div className="w-16 h-1 mx-auto mt-4 mb-6 bg-slate-600 rounded-full"></div>
-          <p className="text-slate-600">Here are some of the projects I&apos;ve worked on</p>
+          <p className="text-slate-600">
+            Here are some of the projects I&apos;ve worked on
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
@@ -46,12 +50,17 @@ export function Projects2(props:{content:Project[]}){
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold text-slate-900 mb-2 ml-5">{project.title}</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-2 ml-5">
+                {project.title}
+              </h3>
               <p className="text-slate-600 mb-4 ml-5">{project.desc}</p>
 
               <div className="flex flex-wrap gap-2 ml-3 mb-3">
                 {project.tags.map((tag, tagIndex) => (
-                  <span key={tagIndex} className="px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-sm">
+                  <span
+                    key={tagIndex}
+                    className="px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-sm"
+                  >
                     {tag}
                   </span>
                 ))}
@@ -61,6 +70,5 @@ export function Projects2(props:{content:Project[]}){
         </div>
       </div>
     </section>
-  )
+  );
 }
-

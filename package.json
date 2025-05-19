@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "pretty-quick": "^4.1.1"
+  },
+  "dependencies": {
+    "husky": "^9.1.7"
+  }
+}

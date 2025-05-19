@@ -1,29 +1,48 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { FileText, Code, Briefcase, PenTool, ChevronRight } from "lucide-react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { TypeAnimation } from "react-type-animation"
-import Script from "next/script"
+import { useState, useEffect } from "react";
+import { FileText, Code, Briefcase, PenTool, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import Script from "next/script";
 export default function New() {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return null
+  if (!mounted) return null;
 
   const cards = [
-    { icon: <Code className="h-8 w-8" />, title: "No Code", color: "from-cyan-500 to-blue-500" ,content:"Build Stunning Online Resumes Without Writting Any Code"},
-    { icon: <PenTool className="h-8 w-8" />, title: "Top Notch Designs", color: "from-purple-500 to-pink-500",content:"Get Top Notch Designs For Free" },
-    { icon: <Briefcase className="h-8 w-8" />, title: "Free Hosting", color: "from-amber-500 to-orange-500", content:"No More Hassle On Hosting"},
-  ]
+    {
+      icon: <Code className="h-8 w-8" />,
+      title: "No Code",
+      color: "from-cyan-500 to-blue-500",
+      content: "Build Stunning Online Resumes Without Writting Any Code",
+    },
+    {
+      icon: <PenTool className="h-8 w-8" />,
+      title: "Top Notch Designs",
+      color: "from-purple-500 to-pink-500",
+      content: "Get Top Notch Designs For Free",
+    },
+    {
+      icon: <Briefcase className="h-8 w-8" />,
+      title: "Free Hosting",
+      color: "from-amber-500 to-orange-500",
+      content: "No More Hassle On Hosting",
+    },
+  ];
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black text-white">
-      <Script defer src="http://localhost:3000/script.js" data-website-id="b597a3ff-3dac-4f91-aa1b-fb74c716f966"/>
+      <Script
+        defer
+        src="http://localhost:3000/script.js"
+        data-website-id="b597a3ff-3dac-4f91-aa1b-fb74c716f966"
+      />
       <div
         className="absolute inset-0 opacity-20"
         style={{
@@ -62,7 +81,14 @@ export default function New() {
               Get
               <div className="h-14 sm:h-16 md:h-20">
                 <TypeAnimation
-                  sequence={["Awesome Resumes",2000,"Top Notch Designs", 2000,"Free Hosting",2000]}
+                  sequence={[
+                    "Awesome Resumes",
+                    2000,
+                    "Top Notch Designs",
+                    2000,
+                    "Free Hosting",
+                    2000,
+                  ]}
                   wrapper="span"
                   speed={50}
                   repeat={Infinity}
@@ -73,14 +99,12 @@ export default function New() {
             </h1>
 
             <p className="text-lg text-white/70 max-w-xl">
-            Build Amazing Resume In Minutes
+              Build Amazing Resume In Minutes
             </p>
 
             <div className="pt-4">
               <Link href="/explore">
-                <button    
-                  className="flex bg-gradient-to-r h-12 items-center from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white border-0 rounded-full px-8 group"
-                >
+                <button className="flex bg-gradient-to-r h-12 items-center from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white border-0 rounded-full px-8 group">
                   <span>Explore Resumes</span>
                   <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
@@ -105,12 +129,12 @@ export default function New() {
               >
                 <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 h-full">
                   <div className="flex items-start gap-4">
-                    <div className="bg-white/10 p-3 rounded-lg">{card.icon}</div>
+                    <div className="bg-white/10 p-3 rounded-lg">
+                      {card.icon}
+                    </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">{card.title}</h3>
-                      <p className="text-white/60 text-sm">
-                        {card.content}
-                      </p>
+                      <p className="text-white/60 text-sm">{card.content}</p>
                     </div>
                   </div>
                 </div>
@@ -118,8 +142,7 @@ export default function New() {
             ))}
           </motion.div>
         </div>
-          
       </div>
     </div>
-  )
+  );
 }

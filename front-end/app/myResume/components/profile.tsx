@@ -1,130 +1,150 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState,useEffect } from "react"
-import { toast } from "react-toastify"
-import axios from "axios"
-import { Loader2,Save,Lock,Mail,Phone,MapPin,Linkedin } from "lucide-react"
-import { ProfileData,PasswordData } from "@/utils/types"
-import { Session } from "@/middleware"
-import Cookies from "js-cookie"
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import {
+  Loader2,
+  Save,
+  Lock,
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+} from "lucide-react";
+import { ProfileData, PasswordData } from "@/utils/types";
+import { Session } from "@/middleware";
+import Cookies from "js-cookie";
 export default function Profile() {
-  const [isLoading,setIsLoading]=useState(false)
-  const [logged,setLogged]=useState<Session>({session:"dd",uid:0})
-  const [isPasswordLoading,setIsPasswordLoading]=useState(false)
-  const [profileData,setProfileData]=useState<ProfileData>({
-    email:"",
-    phone:"",
-    location:"",
-    linkedin:"",
-  })
-  useEffect(()=>{const getCookies=async()=>{
-    const cookie=Cookies.get("creds")
-    setLogged(JSON.parse(cookie??''))
-  }
-  getCookies()},[])
+  const [isLoading, setIsLoading] = useState(false);
+  const [logged, setLogged] = useState<Session>({ session: "dd", uid: 0 });
+  const [isPasswordLoading, setIsPasswordLoading] = useState(false);
+  const [profileData, setProfileData] = useState<ProfileData>({
+    email: "",
+    phone: "",
+    location: "",
+    linkedin: "",
+  });
+  useEffect(() => {
+    const getCookies = async () => {
+      const cookie = Cookies.get("creds");
+      setLogged(JSON.parse(cookie ?? ""));
+    };
+    getCookies();
+  }, []);
 
-  const [passwordData,setPasswordData]=useState<PasswordData>({
-    currentPassword:"",
-    newPassword:"",
-    confirmPassword:"",
-  })
+  const [passwordData, setPasswordData] = useState<PasswordData>({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
-  const [passwordErrors,setPasswordErrors]=useState({
-    currentPassword:"",
-    newPassword:"",
-    confirmPassword:"",
-  })
+  const [passwordErrors, setPasswordErrors] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
-  useEffect(()=> {
-    const fetchProfileData=async()=> {
-        if(logged.uid!=0){
-        setIsLoading(true)
-        const res=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/getContacts`,{uid:logged.uid})
-        if(res.data.mesage){
-            toast.warn(res.data.mesage)
-        }else{
-        const data=res.data.contact[0]
-        setProfileData({
-          email:data.email || "",
-          phone:data.phone || "",
-          location:data.location || "",
-          linkedin:data.linkedin || "",
-        })
-        setIsLoading(false)}
-    }}
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      if (logged.uid != 0) {
+        setIsLoading(true);
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/getContacts`,
+          { uid: logged.uid },
+        );
+        if (res.data.mesage) {
+          toast.warn(res.data.mesage);
+        } else {
+          const data = res.data.contact[0];
+          setProfileData({
+            email: data.email || "",
+            phone: data.phone || "",
+            location: data.location || "",
+            linkedin: data.linkedin || "",
+          });
+          setIsLoading(false);
+        }
+      }
+    };
 
-    fetchProfileData()
-  },[logged])
+    fetchProfileData();
+  }, [logged]);
 
-  const handleProfileChange=(e:React.ChangeEvent<HTMLInputElement>)=> {
-    const {name,value}=e.target
-    setProfileData((prev)=> ({ ...prev,[name]:value }))
-  }
+  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setProfileData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handlePasswordChange=(e:React.ChangeEvent<HTMLInputElement>)=> {
-    const {name,value}=e.target
-    setPasswordData((prev)=> ({ ...prev,[name]:value }))
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPasswordData((prev) => ({ ...prev, [name]: value }));
     if (passwordErrors[name as keyof typeof passwordErrors]) {
-      setPasswordErrors((prev)=> ({ ...prev,[name]:"" }))
+      setPasswordErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  }
+  };
 
-  const validatePassword=()=> {
-    let isValid=true
-    const errors={ ...passwordErrors }
+  const validatePassword = () => {
+    let isValid = true;
+    const errors = { ...passwordErrors };
 
     if (!passwordData.currentPassword) {
-      errors.currentPassword="Current password is required"
-      isValid=false
+      errors.currentPassword = "Current password is required";
+      isValid = false;
     }
 
     if (!passwordData.newPassword) {
-      errors.newPassword="New password is required"
-      isValid=false
-    } else if (passwordData.newPassword.length<8) {
-      errors.newPassword="Password must be at least 8 characters"
-      isValid=false
+      errors.newPassword = "New password is required";
+      isValid = false;
+    } else if (passwordData.newPassword.length < 8) {
+      errors.newPassword = "Password must be at least 8 characters";
+      isValid = false;
     }
 
     if (!passwordData.confirmPassword) {
-      errors.confirmPassword="Please confirm your new password"
-      isValid=false
-    } else if (passwordData.newPassword!==passwordData.confirmPassword) {
-      errors.confirmPassword="Passwords do not match"
-      isValid=false
+      errors.confirmPassword = "Please confirm your new password";
+      isValid = false;
+    } else if (passwordData.newPassword !== passwordData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+      isValid = false;
     }
 
-    setPasswordErrors(errors)
-    return isValid
-  }
+    setPasswordErrors(errors);
+    return isValid;
+  };
 
-  const handleProfileSubmit=async(e:React.FormEvent)=> {
-    e.preventDefault()
-    setIsLoading(true)
-    const res=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/updateContact`,{contact:profileData,uid:logged.uid,session:logged.session})
-    toast(res.data.message)
-    setIsLoading(false)
-  }
+  const handleProfileSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/updateContact`,
+      { contact: profileData, uid: logged.uid, session: logged.session },
+    );
+    toast(res.data.message);
+    setIsLoading(false);
+  };
 
-  const handlePasswordSubmit=async(e:React.FormEvent)=> {
-    e.preventDefault()
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
     if (!validatePassword()) {
-      return
+      return;
     }
-      setIsPasswordLoading(true)
-      const res=await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/updatePassword`,{pass:passwordData,uid:logged.uid,session:logged.session})
-      toast(res.data.message)
-      setPasswordData({
-        currentPassword:"",
-        newPassword:"",
-        confirmPassword:"",
-      })
-      setIsPasswordLoading(false)
-    
-  }
+    setIsPasswordLoading(true);
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/updatePassword`,
+      { pass: passwordData, uid: logged.uid, session: logged.session },
+    );
+    toast(res.data.message);
+    setPasswordData({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    });
+    setIsPasswordLoading(false);
+  };
 
   return (
     <div className="space-y-8">
@@ -137,13 +157,18 @@ export default function Profile() {
           <form onSubmit={handleProfileSubmit}>
             <div className="px-6 py-4 border-b border-gray-200">
               <h2 className="text-lg font-medium">Personal Information</h2>
-              <p className="text-sm text-gray-500">Update your contact information</p>
+              <p className="text-sm text-gray-500">
+                Update your contact information
+              </p>
             </div>
 
             <div className="p-6 space-y-6">
               <div className="space-y-4">
                 <div className="relative">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Email Address
                   </label>
                   <div className="relative rounded-md shadow-sm">
@@ -164,7 +189,10 @@ export default function Profile() {
                 </div>
 
                 <div className="relative">
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Phone Number
                   </label>
                   <div className="relative rounded-md shadow-sm">
@@ -184,7 +212,10 @@ export default function Profile() {
                 </div>
 
                 <div className="relative">
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Location
                   </label>
                   <div className="relative rounded-md shadow-sm">
@@ -204,7 +235,10 @@ export default function Profile() {
                 </div>
 
                 <div className="relative">
-                  <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="linkedin"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     LinkedIn URL
                   </label>
                   <div className="relative rounded-md shadow-sm">
@@ -236,7 +270,7 @@ export default function Profile() {
                     <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
                     Saving...
                   </>
-                ) :(
+                ) : (
                   <>
                     <Save className="-ml-1 mr-2 h-4 w-4" />
                     Save Changes
@@ -256,7 +290,10 @@ export default function Profile() {
             <div className="p-6 space-y-6">
               <div className="space-y-4">
                 <div className="relative">
-                  <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="currentPassword"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Current Password
                   </label>
                   <div className="relative rounded-md shadow-sm">
@@ -270,18 +307,25 @@ export default function Profile() {
                       value={passwordData.currentPassword}
                       onChange={handlePasswordChange}
                       className={`block w-full pl-10 pr-3 py-2 rounded-md border ${
-                        passwordErrors.currentPassword ? "border-red-300" :"border-gray-300"
+                        passwordErrors.currentPassword
+                          ? "border-red-300"
+                          : "border-gray-300"
                       } focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                       placeholder="••••••••"
                     />
                   </div>
                   {passwordErrors.currentPassword && (
-                    <p className="mt-1 text-sm text-red-600">{passwordErrors.currentPassword}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {passwordErrors.currentPassword}
+                    </p>
                   )}
                 </div>
 
                 <div className="relative">
-                  <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="newPassword"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     New Password
                   </label>
                   <div className="relative rounded-md shadow-sm">
@@ -295,18 +339,25 @@ export default function Profile() {
                       value={passwordData.newPassword}
                       onChange={handlePasswordChange}
                       className={`block w-full pl-10 pr-3 py-2 rounded-md border ${
-                        passwordErrors.newPassword ? "border-red-300" :"border-gray-300"
+                        passwordErrors.newPassword
+                          ? "border-red-300"
+                          : "border-gray-300"
                       } focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                       placeholder="••••••••"
                     />
                   </div>
                   {passwordErrors.newPassword && (
-                    <p className="mt-1 text-sm text-red-600">{passwordErrors.newPassword}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {passwordErrors.newPassword}
+                    </p>
                   )}
                 </div>
 
                 <div className="relative">
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Confirm New Password
                   </label>
                   <div className="relative rounded-md shadow-sm">
@@ -320,19 +371,25 @@ export default function Profile() {
                       value={passwordData.confirmPassword}
                       onChange={handlePasswordChange}
                       className={`block w-full pl-10 pr-3 py-2 rounded-md border ${
-                        passwordErrors.confirmPassword ? "border-red-300" :"border-gray-300"
+                        passwordErrors.confirmPassword
+                          ? "border-red-300"
+                          : "border-gray-300"
                       } focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                       placeholder="••••••••"
                     />
                   </div>
                   {passwordErrors.confirmPassword && (
-                    <p className="mt-1 text-sm text-red-600">{passwordErrors.confirmPassword}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {passwordErrors.confirmPassword}
+                    </p>
                   )}
                 </div>
               </div>
 
               <div className="bg-gray-50 -mx-6 px-6 py-3 rounded-md">
-                <h3 className="text-sm font-medium text-gray-700 mb-2">Password Requirements:</h3>
+                <h3 className="text-sm font-medium text-gray-700 mb-2">
+                  Password Requirements:
+                </h3>
                 <ul className="text-xs text-gray-500 list-disc pl-5 space-y-1">
                   <li>Minimum 8 characters long</li>
                   <li>Include at least one uppercase letter</li>
@@ -353,7 +410,7 @@ export default function Profile() {
                     <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
                     Updating...
                   </>
-                ) :(
+                ) : (
                   <>
                     <Lock className="-ml-1 mr-2 h-4 w-4" />
                     Update Password
@@ -365,5 +422,5 @@ export default function Profile() {
         </div>
       </div>
     </div>
-  )
+  );
 }

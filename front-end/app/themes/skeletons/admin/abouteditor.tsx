@@ -1,4 +1,4 @@
-"use client"
+"use client";
 export default function AboutEditorSkeleton() {
   return (
     <div className="space-y-6 animate-pulse">
@@ -47,5 +47,5 @@ export default function AboutEditorSkeleton() {
         </div>
       </div>
     </div>
-  )
+  );
 }

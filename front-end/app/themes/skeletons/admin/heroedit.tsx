@@ -1,4 +1,4 @@
-"use client"
+"use client";
 export default function HeroEditorSkeleton() {
   return (
     <div className="space-y-6 animate-pulse">
@@ -34,5 +34,5 @@ export default function HeroEditorSkeleton() {
         </div>
       </div>
     </div>
-  )
+  );
 }

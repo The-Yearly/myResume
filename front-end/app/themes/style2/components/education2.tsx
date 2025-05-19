@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { BookOpen, Calendar } from "lucide-react"
-import { EducationI } from "@/utils/types"
+import { BookOpen, Calendar } from "lucide-react";
+import { EducationI } from "@/utils/types";
 export default function Education2(props: { education: EducationI[] }) {
   return (
     <div className="col-span-2 w-3/4 mx-auto p-6">
@@ -21,17 +21,28 @@ export default function Education2(props: { education: EducationI[] }) {
                 <div>
                   <div className="flex items-center gap-2">
                     <BookOpen className="h-5 w-5 text-gray-500" />
-                    <h3 className="text-xl font-bold text-gray-800">{education.inst}</h3>
+                    <h3 className="text-xl font-bold text-gray-800">
+                      {education.inst}
+                    </h3>
                   </div>
-                  <p className="text-gray-700 font-medium mt-2">{education.degree}</p>
+                  <p className="text-gray-700 font-medium mt-2">
+                    {education.degree}
+                  </p>
                 </div>
 
                 <div className="bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-600 flex items-center gap-1 whitespace-nowrap">
                   <Calendar className="h-3.5 w-3.5" />
                   <span>
-                    {new Date(education.startdate).toLocaleDateString("en-US", { year: "numeric", month: "short" })} -
+                    {new Date(education.startdate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                    })}{" "}
+                    -
                     {education.enddate
-                      ? new Date(education.enddate).toLocaleDateString("en-US", { year: "numeric", month: "short" })
+                      ? new Date(education.enddate).toLocaleDateString(
+                          "en-US",
+                          { year: "numeric", month: "short" },
+                        )
                       : " Present"}
                   </span>
                 </div>
@@ -44,5 +55,5 @@ export default function Education2(props: { education: EducationI[] }) {
         ))}
       </div>
     </div>
-  )
+  );
 }

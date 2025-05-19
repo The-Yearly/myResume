@@ -1,4 +1,4 @@
-"use client"
+"use client";
 export default function ProjectsEditorSkeleton() {
   return (
     <div className="p-4 space-y-6 animate-pulse">
@@ -43,5 +43,5 @@ export default function ProjectsEditorSkeleton() {
         </div>
       </div>
     </div>
-  )
+  );
 }

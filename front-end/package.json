@@ -37,5 +37,10 @@
     "eslint-config-next": "15.2.4",
     "tailwindcss": "^4.1.6",
     "typescript": "^5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

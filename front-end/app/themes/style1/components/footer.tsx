@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Github, Linkedin, Twitter } from "lucide-react"
+import Link from "next/link";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -9,21 +9,32 @@ export function Footer() {
           © {new Date().getFullYear()} Your Name. All rights reserved.
         </p>
         <div className="flex items-center gap-4">
-          <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://github.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Github className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
             <div className="sr-only">GitHub</div>
           </Link>
-          <Link href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Linkedin className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
             <span className="sr-only">LinkedIn</span>
           </Link>
-          <Link href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://twitter.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
             <span className="sr-only">Twitter</span>
           </Link>
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
