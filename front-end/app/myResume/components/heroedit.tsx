@@ -25,6 +25,8 @@ export default function HeroEditor() {
   const [heroColors, setHeroColors] = useState<heroColors>(
     defaultColors[heroData.style as keyof typeof defaultColors],
   );
+
+  
   useEffect(() => {
     setHeroColors(defaultColors[heroData.style as keyof typeof defaultColors]);
   }, [heroData.style]);
@@ -92,6 +94,12 @@ export default function HeroEditor() {
     e.preventDefault();
     setData(heroData);
   };
+
+  // const openColorPickerFor = (para:string) => {
+  //   setCustomize(para as keyof heroColors)
+  //   console.log("JHe")
+  //   setColorPickerModel(true)
+  // }
   const SelectedHero = Theme[heroData.style as keyof typeof Theme]?.hero;
   if (loading) {
     return (
@@ -169,6 +177,7 @@ export default function HeroEditor() {
             <h2 className="text-lg font-medium ml-1">Preview</h2>
           </div>
           {SelectedHero ? (
+            // <SelectedHero content={heroData} edit={openColorPickerFor} herocolors={heroColors} />
             <SelectedHero content={heroData} herocolors={heroColors} />
           ) : (
             <p>Style not found.</p>

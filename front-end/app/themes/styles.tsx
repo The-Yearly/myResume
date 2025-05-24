@@ -10,6 +10,7 @@ import Education from "./style1/components/education";
 import Education2 from "./style2/components/education2";
 import Experience1 from "./style1/components/experience";
 import Experience2 from "./style2/components/experience2";
+import { Hero1Preview } from "./style1/components/preview/hero1";
 export const Theme = {
   "1": {
     hero: Hero,
@@ -18,6 +19,7 @@ export const Theme = {
     skills: Skills,
     education: Education,
     experience: Experience1,
+    heropreview: Hero1Preview,
   },
   "2": {
     hero: Hero2,
@@ -26,5 +28,6 @@ export const Theme = {
     skills: Skills2,
     education: Education2,
     experience: Experience2,
+    heropreview: Hero1Preview,
   },
 };
