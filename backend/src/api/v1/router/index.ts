@@ -854,13 +854,11 @@ router.post("/signUp", async (req, res) => {
     if (!response) {
       res.status(200).json({ message: "Failed To Create User" });
     } else {
-      res
-        .status(200)
-        .json({
-          message: "Succesfully Created User",
-          uid: response.uid,
-          session: base64String,
-        });
+      res.status(200).json({
+        message: "Succesfully Created User",
+        uid: response.uid,
+        session: base64String,
+      });
     }
   } catch (e: any) {
     if (e.code === "P2002" && e.meta?.target?.includes("username")) {
@@ -909,13 +907,11 @@ router.post("/login", async (req, res) => {
     if (!response) {
       res.status(500).json({ message: "Failed To Login" });
     }
-    res
-      .status(200)
-      .json({
-        message: "Succesfully Logged In",
-        session: base64String,
-        uid: response.uid,
-      });
+    res.status(200).json({
+      message: "Succesfully Logged In",
+      session: base64String,
+      uid: response.uid,
+    });
   } else {
     res.status(500).json({ message: "Incorrect Password" });
   }
