@@ -147,23 +147,6 @@ npm run dev
 
 The application will now be running locally.
 
----
-
-## 📸 Screenshots
-
-> Add screenshots here
-
-```
-Home Page
-
-Resume Editor
-
-Community Page
-
-Profile
-```
-
----
 
 ## 🎯 Roadmap
 
